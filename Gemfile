@@ -44,4 +44,5 @@ gem "activeadmin"
 group :test do
   gem "factory_girl_rails"
   gem "forgery"
+  gem "shoulda-matchers"
 end

@@ -6,19 +6,15 @@ class Event < ActiveRecord::Base
 
   has_many :invitees, :through => :invitations, :source => :user
 
-  def make_user_token email
-    require 'digest/md5'
-    # TODO salt the below digest
-    Digest::MD5.hexdigest("#{id}-#{email}")
-  end
-
+  # Returns the invitation
   def invite email
-      user = User.where{email==my{email}}.first
-      unless user
-        user = User.create! :email => email, :password => make_user_token(email)
+      # Squeel notation does not work!
+      # See https://github.com/ernie/squeel/issues/93
+      unless u = User.where(:email => email).first
+        u = User.create! :email => email, :password => SecureRandom.hex(16)
       end
-      self.invitees << user
-
+      self.invitees << u
+      self.invitations.where{user_id==my{u.id}}.first
   end
 
 end

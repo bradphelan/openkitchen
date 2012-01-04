@@ -1,6 +1,13 @@
 Gobbq::Application.routes.draw do
   resources :events
 
+  resources :invitations do
+    collection do
+      get :token
+    end
+  end
+
+
   devise_for :users
 
   # The priority is based upon order of creation:
