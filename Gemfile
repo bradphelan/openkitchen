@@ -36,3 +36,12 @@ gem "devise"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"
+gem "squeel"
+
+gem "heroku"
+gem "activeadmin"
+
+group :test do
+  gem "factory_girl_rails"
+  gem "forgery"
+end
