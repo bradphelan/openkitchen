@@ -1,0 +1,45 @@
+%h1 Edit Event
+
+= semantic_form_for @event do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default])}
+    = f.input :timezone, :as => :time_zone
+  = f.buttons
+
+
+= semantic_form_for :invite, :url => invite_event_path(@event) do |f|
+  = f.inputs do
+    = f.input :email, :as => :email, :input_html => { :value => "" }
+  = f.buttons
+
+
+%h2 Guests
+%ul
+  - @event.invitations.each do |invitation|
+    %li=invitation.user.email
+
+%h2 Things To Bring
+= semantic_form_for Resource.new :event => @event do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :quantity
+    = f.input :units
+    = f.input :event_id, :as => :hidden, :label => false
+  = f.buttons do
+    = f.commit_button :label => "Create Item"
+
+
+- @event.resources.each do |resource|
+  %p
+    - if @invitation
+      = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation) do |f|
+        = f.inputs do 
+          = f.input :quantity, :label=>"#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}", :hint => "How much you will bring"
+          = f.input :resource_id, :as => :hidden, :label => false
+          = f.input :invitation_id, :as => :hidden, :label => false
+        = f.buttons do
+          = f.commit_button :label => "Bring it!", :button_html => {:class => "event_bring_button"}
+          = link_to "Who is bringing this?", resource, :class=>"btn"
+    - else
+      %p="#{resource.name} #{resource.quantity_produced}/#{resource.quantity} <i>#{resource.units}</i>"

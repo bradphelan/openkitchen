@@ -1,0 +1,7 @@
+%h1 Welcome to your events
+%h2 Create Event
+= link_to "New Event", new_event_url 
+%ul
+  - @events.each do |event|
+    %li
+      =link_to event.name, edit_event_path(event.id)

@@ -11,12 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104210003) do
+ActiveRecord::Schema.define(:version => 20120107215330) do
 
   create_table "events", :force => true do |t|
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.datetime "datetime"
+    t.string   "timezone"
   end
 
   create_table "invitations", :force => true do |t|
@@ -25,6 +28,23 @@ ActiveRecord::Schema.define(:version => 20120104210003) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
+  end
+
+  create_table "resource_producers", :force => true do |t|
+    t.integer  "invitation_id"
+    t.integer  "resource_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resources", :force => true do |t|
+    t.string   "name"
+    t.integer  "quantity"
+    t.string   "units"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

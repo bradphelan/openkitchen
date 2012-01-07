@@ -14,7 +14,13 @@ group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
+  gem "bootstrap-sass"
 end
+
+gem 'formtastic', '~> 2.0.2'
+gem 'formtastic-bootstrap'
+
+gem "cancan"
 
 
 
@@ -39,10 +45,12 @@ gem "jquery-rails"
 gem "squeel"
 
 gem "heroku"
-gem "activeadmin"
+#gem "activeadmin"
 
 group :test do
   gem "factory_girl_rails"
   gem "forgery"
   gem "shoulda-matchers"
 end
+
+gem 'tabulous'

@@ -1,4 +1,8 @@
 Gobbq::Application.routes.draw do
+  resources :resource_producers
+
+  resources :resources
+
   resources :events
 
   resources :invitations do
@@ -7,6 +11,13 @@ Gobbq::Application.routes.draw do
     end
   end
 
+  resources :events do
+    member do
+      post :invite, :controller => :events, :action => :invite
+    end
+  end
+
+  root :to => 'events#index'
 
   devise_for :users
 

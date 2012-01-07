@@ -8,6 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :events_as_owner, :class_name => "Event", :inverse_of => :owner, :foreign_key => :owner_id
-  has_many :events_as_guest, :class_name => "Event", :inverse_of => :guests
+  has_many :events_as_guest, :through => :invitations, :source => :event
+  has_many :invitations
+
+  # TODO make this a configurable property
+  def time_zone
+    "Melbourne"
+  end
 
 end

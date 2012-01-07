@@ -6,6 +6,13 @@ class Event < ActiveRecord::Base
 
   has_many :invitees, :through => :invitations, :source => :user
 
+  has_many :resources
+
+  def datetime
+    self[:datetime] || Time.now
+  end
+
+
   # Returns the invitation
   def invite email
       # Squeel notation does not work!
@@ -15,6 +22,19 @@ class Event < ActiveRecord::Base
       end
       self.invitees << u
       self.invitations.where{user_id==my{u.id}}.first
+  end
+
+
+  def format_date
+    datetime.try(:strftime, Date::DATE_FORMATS[:default])
+  end
+
+  def number_of_half_hour_intervals_since_midnight
+    datetime.seconds_since_midnight / 60 / 30
+  end
+
+  def time
+    datetime.to_time
   end
 
 end

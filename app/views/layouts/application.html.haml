@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title Gobbq
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .container
+      .span8
+        =link_to "Events", events_path
+      .content
+        = yield

@@ -18,4 +18,5 @@ class Invitation < ActiveRecord::Base
   before_create do
     self.token = Invitation.generate_unique_token
   end
+
 end

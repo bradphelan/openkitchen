@@ -1,0 +1,6 @@
+%h1="Who is bringing #{@resource.name} [#{@resource.quantity} #{@resource.units}]"
+%ul
+  - @resource.resource_producers.each do |rp|
+    %li
+      %h3=rp.invitation.user.email
+      %p="#{rp.quantity} #{@resource.units}"
