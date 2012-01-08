@@ -17,7 +17,12 @@
 %h2 Guests
 %ul
   - @event.invitations.each do |invitation|
-    %li=invitation.user.email
+    %li
+      %b.label.notice(style = "margin-right: 2em")
+        = invitation.user.email
+      %i
+        =token_invitations_url(:id => invitation.token)
+
 
 %h2 Things To Bring
 = semantic_form_for Resource.new :event => @event do |f|
