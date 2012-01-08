@@ -54,3 +54,7 @@ group :test do
 end
 
 gem 'tabulous'
+
+group :production do
+  gem "pg"
+end
