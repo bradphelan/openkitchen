@@ -47,4 +47,4 @@
           = f.commit_button :label => "Bring it!", :button_html => {:class => "event_bring_button"}
           = link_to "Who is bringing this?", resource, :class=>"btn"
     - else
-      %p="#{resource.name} #{resource.quantity_produced}/#{resource.quantity} <i>#{resource.units}</i>"
+      %p="#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}"
