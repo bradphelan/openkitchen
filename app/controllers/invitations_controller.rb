@@ -1,6 +1,8 @@
 class InvitationsController < ApplicationController
   respond_to :html
 
+  skip_before_filter :authenticate_user!
+
   def token
     @invitation = Invitation.where{token==my{params[:id]}}.first
     unless @invitation
