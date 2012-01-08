@@ -20,9 +20,7 @@ class Event < ActiveRecord::Base
       unless u = User.where(:email => email).first
         u = User.create! :email => email, :password => SecureRandom.hex(16)
       end
-      Invitation.create!(:event => self, :user=> u)
-      # Below causes infinte loop
-      #self.invitees << u
+      self.invitees << u
 
       invitation = self.invitations.where{user_id==my{u.id}}.first
   end

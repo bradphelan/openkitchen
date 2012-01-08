@@ -8,11 +8,11 @@ class Invitation < ActiveRecord::Base
 
   def self.generate_unique_token
 
-    token = generate_token
-    while where{token==my{token}}.count > 0
-      token = generate_token
+    t= generate_token
+    while where{token==my{t}}.count > 0
+      t= generate_token
     end
-    token
+    t
   end
 
   before_create do
