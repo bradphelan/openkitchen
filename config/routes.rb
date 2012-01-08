@@ -7,7 +7,7 @@ Gobbq::Application.routes.draw do
 
   resources :invitations do
     collection do
-      get :token
+      get 'token/:id', :action => :token
     end
   end
 

@@ -21,7 +21,8 @@ class Event < ActiveRecord::Base
         u = User.create! :email => email, :password => SecureRandom.hex(16)
       end
       self.invitees << u
-      self.invitations.where{user_id==my{u.id}}.first
+
+      invitation = self.invitations.where{user_id==my{u.id}}.first
   end
 
 
