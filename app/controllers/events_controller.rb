@@ -17,7 +17,6 @@ class EventsController < ApplicationController
   def invite
     @event = Event.find params[:id]
     @invitation = @event.invite params[:invite][:email]
-    Rails.logger.info token_invitations_url(:id => @invitation.token)
     redirect_to edit_event_path(@event)
   end
 
