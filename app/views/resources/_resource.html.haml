@@ -1,9 +1,20 @@
 .resource{:id=>"resource_#{resource.id}"}
-  = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true do |f|
-    = f.inputs do 
-      = f.input :quantity, :label=>"#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}", :hint => "How much you will bring"
-      = f.input :resource_id, :as => :hidden, :label => false
-      = f.input :invitation_id, :as => :hidden, :label => false
-    = f.buttons do
-      = f.commit_button :label => "Bring it!", :button_html => {:class => "event_bring_button"}
-      = link_to "Who is bringing this?", resource, :class=>"btn"
+  = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true, :form_html => { :class => "form-stacked" } do |f|
+    .row
+      .span3
+        = f.inputs do 
+          = f.input :quantity, :as => :hidden, :label=>"#{resource.name}"
+          = f.input :resource_id, :as => :hidden, :label => false
+          = f.input :invitation_id, :as => :hidden, :label => false
+      .span4
+        = f.inputs do 
+          = f.commit_button :label => "- 5", :button_html => {:class => "btn danger resource_quantity_button"}
+          = f.commit_button :label => "- 1", :button_html => {:class => "btn danger resource_quantity_button"}
+          = f.commit_button :label => "+ 1", :button_html => {:class => "btn success resource_quantity_button"}
+          = f.commit_button :label => "+ 5", :button_html => {:class => "btn success resource_quantity_button"}
+          %p
+            = link_to "Who else is bringing some?", resource
+      .span4
+        %p="You have pledged #{resource.quantity_produced_by @invitation}"
+        %p="Total pledged #{resource.quantity_produced}"
+        %p="Amount still to be pledged #{resource.quantity_remaining_to_be_allocated}"

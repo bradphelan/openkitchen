@@ -8,14 +8,33 @@ class ResourceProducersController < ApplicationController
       resource_id==my{params[:resource_producer][:resource_id]}
     }.first
 
-    if @resource_producer
-      @resource_producer.quantity = params[:resource_producer][:quantity]
-      @resource_producer.save!
-    else
-      @resource_producer = ResourceProducer.create params[:resource_producer]
+    case params[:commit]
+    when "+ 5"
+      delta = 5
+    when "+ 1"
+      delta = 1
+    when "- 1"
+      delta = -1
+    when "- 5"
+      delta = -5
     end
 
+    unless @resource_producer
+      @resource_producer = ResourceProducer.create params[:resource_producer]
+    end
+    @invitation = @resource_producer.invitation
     @resource = @resource_producer.resource
+
+    if @resource.quantity_remaining_to_be_allocated - delta >= 0 || delta < 0
+
+      @resource_producer.quantity ||= 0
+      @resource_producer.quantity += delta
+      puts @resource_producer.quantity
+      # TODO move to model
+      @resource_producer.quantity = [0, @resource_producer.quantity].max
+      @resource_producer.save!
+    end
+
     render "resources/resource"
   end
 end

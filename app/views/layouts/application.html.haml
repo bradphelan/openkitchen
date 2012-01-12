@@ -14,6 +14,6 @@
             %li=link_to "Events", events_path
             %li=link_to current_user.email, edit_user_registration_path
 
-    .container(style="padding-top:40px")
+    .container-fluid(style="padding-top:40px")
       .content
         = yield
