@@ -33,6 +33,11 @@ class ResourceProducersController < ApplicationController
       # TODO move to model
       @resource_producer.quantity = [0, @resource_producer.quantity].max
       @resource_producer.save!
+
+      # This needs to be reloaded because
+      # @resource.quantity_remaining_to_be_allocated gets
+      # cached
+      @resource.reload
     end
 
     render "resources/resource"
