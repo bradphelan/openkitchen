@@ -1,4 +1,7 @@
 class ResourceProducersController < ApplicationController
+
+  respond_to :html, :js
+
   def create
     @resource_producer = ResourceProducer.where{
       invitation_id==my{params[:resource_producer][:invitation_id]} && 
@@ -12,6 +15,7 @@ class ResourceProducersController < ApplicationController
       @resource_producer = ResourceProducer.create params[:resource_producer]
     end
 
-    redirect_to :back
+    @resource = @resource_producer.resource
+    render "resources/resource"
   end
 end

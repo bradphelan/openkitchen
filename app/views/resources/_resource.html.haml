@@ -1,0 +1,9 @@
+.resource{:id=>"resource_#{resource.id}"}
+  = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true do |f|
+    = f.inputs do 
+      = f.input :quantity, :label=>"#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}", :hint => "How much you will bring"
+      = f.input :resource_id, :as => :hidden, :label => false
+      = f.input :invitation_id, :as => :hidden, :label => false
+    = f.buttons do
+      = f.commit_button :label => "Bring it!", :button_html => {:class => "event_bring_button"}
+      = link_to "Who is bringing this?", resource, :class=>"btn"

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  respond_to :html, :js
   def index
     @events = Set.new(current_user.events_as_owner.all) + Set.new(current_user.events_as_guest.all)
     render :index
