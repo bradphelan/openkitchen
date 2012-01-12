@@ -1,5 +1,5 @@
 .resource{:id=>"resource_#{resource.id}"}
-  = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true, :form_html => { :class => "form-stacked" } do |f|
+  = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true, :html => { :class => "new_resource" , :id => "new_resource_#{resource.id}"} do |f|
     .row
       .span3
         = f.inputs do 
