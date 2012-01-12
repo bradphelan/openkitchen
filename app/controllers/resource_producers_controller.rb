@@ -40,6 +40,6 @@ class ResourceProducersController < ApplicationController
       @resource.reload
     end
 
-    render "resources/resource"
+    render "resources/resource", :layout => false
   end
 end
