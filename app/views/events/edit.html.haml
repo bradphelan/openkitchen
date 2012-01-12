@@ -25,12 +25,10 @@
 
 
 %h2 Things To Bring
-= semantic_form_for Resource.new :event => @event do |f|
+= semantic_form_for :new_resource, :url => resources_path do |f|
   = f.inputs do
-    = f.input :name
-    = f.input :quantity
-    = f.input :units
-    = f.input :event_id, :as => :hidden, :label => false
+    = f.input :suggest_something, :input_html => { :value => "", :placeholder=>"10 bread sticks" }
+    = f.input :event_id, :as => :hidden, :label => false, :input_html => {:value => @event.id }
   = f.buttons do
     = f.commit_button :label => "Create Item"
 

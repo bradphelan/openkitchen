@@ -8,13 +8,14 @@
           = f.input :invitation_id, :as => :hidden, :label => false
       .span4
         = f.inputs do 
-          = f.commit_button :label => "- 5", :button_html => {:class => "btn danger resource_quantity_button"}
-          = f.commit_button :label => "- 1", :button_html => {:class => "btn danger resource_quantity_button"}
-          = f.commit_button :label => "+ 1", :button_html => {:class => "btn success resource_quantity_button"}
-          = f.commit_button :label => "+ 5", :button_html => {:class => "btn success resource_quantity_button"}
-          %p
-            = link_to "Who else is bringing some?", resource
+          = f.commit_button :label => "- 5", :button_html => {:class => "btn danger down resource_quantity_button"}
+          = f.commit_button :label => "- 1", :button_html => {:class => "btn danger down resource_quantity_button"}
+          - if resource.quantity_remaining_to_be_allocated >= 1
+            = f.commit_button :label => "+ 1", :button_html => {:class => "btn success up resource_quantity_button"}
+          - if resource.quantity_remaining_to_be_allocated >= 5
+            = f.commit_button :label => "+ 5", :button_html => {:class => "btn success up resource_quantity_button"}
       .span4
         %p="You have pledged #{resource.quantity_produced_by @invitation}"
-        %p="Total pledged #{resource.quantity_produced}"
+        %p
+          = link_to "Total pledged #{resource.quantity_produced}", resource
         %p="Amount still to be pledged #{resource.quantity_remaining_to_be_allocated}"
