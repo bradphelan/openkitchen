@@ -11,8 +11,9 @@
         .container
           =link_to "BBQInvite", root_path, :class=>"brand"
           %ul.nav
-            %li=link_to "Events", events_path
-            %li=link_to current_user.email, edit_user_registration_path
+            -if user_signed_in?
+              %li=link_to "Events", events_path
+              %li=link_to current_user.email, edit_user_registration_path
 
     .container-fluid(style="padding-top:40px")
       .content
