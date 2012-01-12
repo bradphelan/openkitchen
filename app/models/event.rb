@@ -12,6 +12,12 @@ class Event < ActiveRecord::Base
     self[:datetime] || Time.now
   end
 
+  # Owner should be implicityly
+  # invited
+  after_create do
+    invite owner.email
+  end
+
 
   # Returns the invitation
   def invite email
