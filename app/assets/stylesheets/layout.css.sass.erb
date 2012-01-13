@@ -4,7 +4,7 @@ $baseline: 22px
 $total-cols: 6                   
 $col-width: 4em                    
 $gutter-width: 1em                 
-$side-gutter-width: $gutter-width 
+$side-gutter-width: 0em
 
 @import 'compass-bootstrap/compass_bootstrap'
 @import 'susy/susy'
@@ -12,9 +12,15 @@ $side-gutter-width: $gutter-width
 label
   padding-bottom: 5px
 
+html
+  body
+    background-image: url(<%= asset_path 'fitwaby.png' %>)
+    background-repeat: repeat
+    background-attachment: scroll
+
 #page
   +container
   .content
-    margin-left: 5px
-    margin-right: 5px
     +columns(6)
+    margin-right: 0px !important
+    margin-left: 0px !important
