@@ -16,13 +16,15 @@ group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
-  gem "bootstrap-sass"
 end
 
 gem 'formtastic', '~> 2.0.2'
 gem 'formtastic-bootstrap'
 
 gem "cancan"
+gem "compass", '0.12.alpha.4'
+gem "compass-bootstrap"
+gem "compass-susy-plugin", :require => "susy"
 
 
 
