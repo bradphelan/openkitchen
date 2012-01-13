@@ -1,0 +1,18 @@
+-# Parameters
+-#  
+-#  _form       - formtastic form object
+-#  _quantity   - value
+-#  _resource   - resource object
+-#  _invitation - inivation object
+- if _quantity < 0
+  - if _resource.quantity_produced_by(_invitation) + _quantity >= 0
+    - disabled = nil
+  - else
+    - disabled = "disabled"
+  = _form.commit_button :label => "- #{-_quantity}", :button_html => {:disabled => disabled, :class => "btn danger down resource_quantity_button #{disabled}"}
+- else
+  - if _resource.quantity_remaining_to_be_allocated - _quantity >= 0
+    - disabled = nil 
+  - else
+    - disabled = "disabled"
+  = _form.commit_button :label => "+ #{_quantity}", :button_html => {:disabled => disabled, :class => "btn success up resource_quantity_button #{disabled}"}

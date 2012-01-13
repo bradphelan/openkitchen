@@ -34,8 +34,7 @@
 
 
 - @event.resources.each do |resource|
-  %p
-    - if @invitation
-      = render :partial => "resources/resource", :locals => { resource: resource }
-    - else
-      %p="#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}"
+  - if @invitation
+    = render :partial => "resources/resource", :locals => { resource: resource }
+  - else
+    %p="#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}"
