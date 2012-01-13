@@ -40,6 +40,10 @@ class ResourceProducersController < ApplicationController
       @resource.reload
     end
 
-    render "resources/resource", :layout => false
+    respond_to do |format|
+      format.js do |format|
+        render "resources/resource", :layout => false, :content_type => 'text/javascript'
+      end
+    end
   end
 end
