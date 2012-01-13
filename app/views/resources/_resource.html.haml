@@ -1,13 +1,18 @@
 .resource{:id=>"resource_#{resource.id}"}
   = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true, :html => { :class => "new_resource" , :id => "new_resource_#{resource.id}"} do |f|
-    %h3=resource.name
     .pledge_summary
-      %p="You have pledged #{resource.quantity_produced_by @invitation}"
-      %p
-        = link_to "Total pledged #{resource.quantity_produced}", resource
-      %p="Amount still to be pledged #{resource.quantity_remaining_to_be_allocated}"
+      %h3=resource.name
+      .amounts
+        %p="You #{resource.quantity_produced_by @invitation}"
+        %p
+          = link_to "Total #{resource.quantity_produced}", resource
+        %p="Missing #{resource.quantity_remaining_to_be_allocated}"
       = f.inputs do 
         = f.input :resource_id, :as => :hidden, :label => false
         = f.input :invitation_id, :as => :hidden, :label => false
         - [-5, -1, 1, 5].each do |quantity|
           = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: quantity , _form: f , _invitation: @invitation}
+        %p
+          %small
+            %i Change your pledge
+
