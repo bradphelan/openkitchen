@@ -1,3 +1,32 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import compass/css3
+
+
+$eoa-blue: rgb(0,148,204)
+
+.event_box
+  h2
+    margin-left: 0.5em
+  border: 5px $eoa-blue solid
+  +box-shadow
+
+  
+  +border-radius(5px)
+  margin-bottom: 25px
+  padding-bottom: 0px
+
+.things_to_bring
+  @extend .event_box
+
+.guests
+  @extend .event_box
+
+.invitation
+  @extend .event_box
+
+.edit_event
+  @extend .event_box

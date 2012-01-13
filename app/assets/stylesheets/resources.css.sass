@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import compass/css3
+@import events
 
 .pledge_summary
   h3
@@ -14,8 +15,7 @@
     padding-left: 0.5em
     padding-right: 0.5em
 
-  border: 1px blue solid
-  +border-radius(5px)
+  @extend .event_box
   padding: 5px
 
 .resource
