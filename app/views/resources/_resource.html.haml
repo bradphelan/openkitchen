@@ -8,10 +8,8 @@
           = f.input :invitation_id, :as => :hidden, :label => false
       .span4
         = f.inputs do 
-          = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: -5 , _form: f , _invitation: @invitation}
-          = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: -1 , _form: f , _invitation: @invitation}
-          = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: 1  , _form: f , _invitation: @invitation}
-          = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: 5  , _form: f , _invitation: @invitation}
+          - [-5, -1, 1, 5].each do |quantity|
+            = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: quantity , _form: f , _invitation: @invitation}
       .span4
         %p="You have pledged #{resource.quantity_produced_by @invitation}"
         %p
