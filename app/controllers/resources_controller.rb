@@ -1,5 +1,10 @@
 class ResourcesController < ApplicationController
+
+  check_authorization
+
   def create
+
+    authorize! :create, Resource
 
     new_resource = params[:new_resource]
     if new_resource[:suggest_something]
@@ -21,5 +26,6 @@ class ResourcesController < ApplicationController
 
   def show
     @resource = Resource.find params[:id]
+    authorize! :show, @resource
   end
 end

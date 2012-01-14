@@ -2,7 +2,10 @@ class ResourceProducersController < ApplicationController
 
   respond_to :html, :js
 
+  check_authorization
+
   def create
+
     @resource_producer = ResourceProducer.where{
       invitation_id==my{params[:resource_producer][:invitation_id]} && 
       resource_id==my{params[:resource_producer][:resource_id]}
@@ -22,6 +25,9 @@ class ResourceProducersController < ApplicationController
     unless @resource_producer
       @resource_producer = ResourceProducer.create params[:resource_producer]
     end
+
+    authorize! :create, @resource_producer
+
     @invitation = @resource_producer.invitation
     @resource = @resource_producer.resource
 
@@ -29,7 +35,6 @@ class ResourceProducersController < ApplicationController
 
       @resource_producer.quantity ||= 0
       @resource_producer.quantity += delta
-      puts @resource_producer.quantity
       # TODO move to model
       @resource_producer.quantity = [0, @resource_producer.quantity].max
       @resource_producer.save!

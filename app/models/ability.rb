@@ -27,10 +27,31 @@ class Ability
 
     # Can read an event I have been invited to
     can :read, Event do |event|
-      event.invitations.where{user_id==my{user.id}}.count > 0
+      event.owner_id == user.id || event.invitations.where{user_id==my{user.id}}.count > 0
     end
 
+    # TODO this needs to check if the user is registered
+    # with a locked down new password
+    can :create, Event
+
     # Can edit an event I am the host for
-    can :edit, Event, :owner_id => user.id
+    can [:update, :read, :destroy, :read], Event, :owner_id => user.id
+
+    # Can create a resource for the event I own
+    can [:create], Resource do |resource|
+      resource.event.owner_id = user.id
+    end
+
+    # Can create a resource for the event I am invited to
+    can [:show], Resource do |resource|
+      resource.event.invitations.where{user_id==my{user.id}}.count > 0
+    end
+
+    # Can create a resource producter for a resource whose event I am invited to
+    can [:create], ResourceProducer do |resource_producer|
+      resource_producer.invitation.user_id == user.id &&
+        resource_producer.resource.event.invitations.where{user_id==my{user.id}}.count > 0
+    end
+
   end
 end

@@ -1,9 +1,12 @@
 class EventsController < ApplicationController
   respond_to :html, :js
 
-  authorize_resource
+  load_and_authorize_resource :except => [:index, :create, :edit ]
+
+  check_authorization
 
   def index
+    authorize! :index, Event
     @events = Set.new(current_user.events_as_owner.all) + Set.new(current_user.events_as_guest.all)
     render :index
   end
@@ -13,18 +16,10 @@ class EventsController < ApplicationController
     @event = Event.new :owner => current_user, :datetime => Time.zone.now
   end
 
-  def edit
-    @event = Event.find params[:id]
-    @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
-  end
-
-  def invite
-    @event = Event.find params[:id]
-    @invitation = @event.invite params[:invite][:email]
-    redirect_to edit_event_path(@event)
-  end
-
   def create
+
+    authorize! :create, Event
+
     @event = current_user.events_as_owner.create params[:event]
     if @event.valid?
       redirect_to events_path
@@ -32,5 +27,26 @@ class EventsController < ApplicationController
       render :new
     end
   end
+
+  def update
+    @event.update_attributes params[:event]
+    redirect_to edit_event_path
+  end
+
+  def edit
+    @event = Event.find params[:id]
+    authorize! :read, @event
+    @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
+  end
+
+  def show
+    render :edit
+  end
+
+  def invite
+    @invitation = @event.invite params[:invite][:email]
+    redirect_to edit_event_path(@event)
+  end
+
 
 end
