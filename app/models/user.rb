@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   has_many :events_as_guest, :through => :invitations, :source => :event
   has_many :invitations
 
+  def name
+    email
+  end
+
   # TODO make this a configurable property
   def time_zone
     "Melbourne"
