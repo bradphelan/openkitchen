@@ -24,5 +24,10 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+
+    # Can read an event I have been invited to
+    can :read, Event do |event|
+      event.invitations.where{user_id==my{user.id}}.count > 0
+    end
   end
 end
