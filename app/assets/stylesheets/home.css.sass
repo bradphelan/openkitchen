@@ -8,12 +8,10 @@ $psi_width: 600px
 
 #please_sign_in
   @extend .event_box
-  position: absolute
   top: 50%
-  left: 50%
-  margin-top: - $psi_height/2
-  margin-left: - $psi_width/2
-  width: $psi_width
+  margin-top: $psi_height/2
+  @media screen and (max-width: 640px)
+    margin-top: 0
   height: $psi_height
   overflow: auto 
   text-align: center
