@@ -1,46 +1,15 @@
-%h1 Edit Event
-
-.edit_event
-  = semantic_form_for @event, :html => { class: "form-stacked" } do |f|
-    = f.inputs do
-      = f.input :name, :input_html => { :disabled => ( cannot? :edit, @event ) }
-      = f.input :owner, :input_html => { :disabled => ( cannot? :edit, @event ) }
-      = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]), :disabled => (cannot? :edit, @event)}
-      = f.input :timezone, :as => :time_zone, :input_html => { :disabled => ( cannot? :edit, @event ) }
-    -if can? :edit, @event
-      = f.buttons
-
-
-.invitation
-  = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked" } do |f|
-    = f.inputs do
-      = f.input :email, :as => :email, :input_html => { :value => "" }
-    = f.buttons do
-      = f.commit_button :label => "Invite a guest"
-
-
-
-.guests
-  %h2 Guests
-  %ul
-    - @event.invitations.each do |invitation|
-      %p
-        %small
-          = link_to invitation.user.email, token_invitations_url(:id => invitation.token)
-
-
-.things_to_bring
-  %h2 Things To Bring
-  = semantic_form_for :new_resource, :url => resources_path , :html => { class: "form-stacked" } do |f|
-    = f.inputs do
-      = f.input :suggest_something, :input_html => { :value => "", :placeholder=>"10 bread sticks" }
-      = f.input :event_id, :as => :hidden, :label => false, :input_html => {:value => @event.id }
-    = f.buttons do
-      = f.commit_button :label => "Create Item"
-
-
-- @event.resources.each do |resource|
-  - if @invitation
-    = render :partial => "resources/resource", :locals => { resource: resource }
+.event_title_box
+  - if @event.owner == current_user
+    %h1="You are hosting `#{@event.name}`"
   - else
-    %p="#{resource.name} #{resource.quantity_produced}/#{resource.quantity} #{resource.units}"
+    %h1="You are invited to `#{@event.name}`"
+      
+
+= render :partial => 'edit', :locals => { _event: @event }
+
+= render :partial => 'invitation', :locals => { _event: @event }
+
+= render :partial => 'guests', :locals => { _event: @event }
+
+= render :partial => 'things_to_bring', :locals => { _event: @event }
+

@@ -1,0 +1,12 @@
+
+- @event = _event
+
+.edit_event
+  = semantic_form_for @event, :html => { class: "form-stacked" } do |f|
+    = f.inputs do
+      = f.input :name, :input_html => { :disabled => ( cannot? :edit, @event ) }
+      = f.input :owner, :input_html => { :disabled => ( cannot? :edit, @event ) }
+      = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]), :disabled => (cannot? :edit, @event)}
+      = f.input :timezone, :as => :time_zone, :input_html => { :disabled => ( cannot? :edit, @event ) }
+    -if can? :edit, @event
+      = f.buttons

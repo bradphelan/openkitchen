@@ -1,0 +1,10 @@
+
+- @event = _event
+
+.guests
+  %h2 Guests
+  %ul
+    - @event.invitations.each do |invitation|
+      %p
+        %small
+          = link_to invitation.user.email, token_invitations_url(:id => invitation.token)
