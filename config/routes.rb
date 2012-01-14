@@ -17,7 +17,9 @@ Gobbq::Application.routes.draw do
     end
   end
 
-  root :to => 'events#index'
+  match "home" => "home#show"
+
+  root :to => 'home#show'
 
   devise_for :users
 

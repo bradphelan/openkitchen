@@ -1,0 +1,19 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$psi_height:200px 
+$psi_width: 600px
+
+@import events
+
+#please_sign_in
+  @extend .event_box
+  position: absolute
+  top: 50%
+  left: 50%
+  margin-top: - $psi_height/2
+  margin-left: - $psi_width/2
+  width: $psi_width
+  height: $psi_height
+  overflow: auto 
+  text-align: center
