@@ -29,5 +29,8 @@ class Ability
     can :read, Event do |event|
       event.invitations.where{user_id==my{user.id}}.count > 0
     end
+
+    # Can edit an event I am the host for
+    can :edit, Event, :owner_id => user.id
   end
 end
