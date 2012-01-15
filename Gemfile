@@ -1,3 +1,4 @@
+
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
@@ -26,6 +27,7 @@ gem "cancan"
 gem "compass", '0.12.alpha.4'
 gem "compass-bootstrap"
 gem "compass-susy-plugin", :require => "susy"
+gem "bluecloth" # markdown filter for haml
 
 
 
