@@ -47,6 +47,9 @@ class Ability
       resource.event.invitations.where{user_id==my{user.id}}.count > 0
     end
 
+    # Can update an invitation if the user owns it
+    can [:show, :update], Invitation, :user_id => user.id
+
     # Can create a resource producter for a resource whose event I am invited to
     can [:create], ResourceProducer do |resource_producer|
       resource_producer.invitation.user_id == user.id &&

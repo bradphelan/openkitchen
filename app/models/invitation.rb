@@ -1,6 +1,46 @@
 class Invitation < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
+  has_many :resource_producers, :dependent => :destroy
+
+  attr_accessible :status
+
+  STATUSES = %w(
+    pending
+    maybe
+    accepted
+    rejected
+  )
+
+  after_save do
+    # If the invitation is rejected we delete all
+    # the things we are bringing
+    if rejected?
+      resource_producers.destroy_all
+    end
+  end
+
+  def pending?
+    status == "pending"
+  end
+
+  def maybe?
+    status == "maybe"
+  end
+
+  def accepted?
+    status == "accepted"
+  end
+
+  def rejected?
+    status == "rejected"
+  end
+
+
+  validate :status, :inclusion => {
+    :in => STATUSES
+  }
+
 
   # Nothing is default setable
   attr_accessible 

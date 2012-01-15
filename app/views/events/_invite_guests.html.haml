@@ -2,7 +2,7 @@
 - @event = _event
 
 - if can? :edit, @event
-  .invitation
+  .invite_guests
     = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked" } do |f|
       = f.inputs do
         = f.input :email, :as => :email, :input_html => { :value => "" }

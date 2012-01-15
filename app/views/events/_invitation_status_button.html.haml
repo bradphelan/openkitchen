@@ -1,0 +1,8 @@
+-# _invitation
+-# _label
+-# _status
+
+= semantic_form_for _invitation, :html => { class: "form-stacked" } do |f|
+  = f.buttons do
+    = f.input :status, :as => :hidden, :label => false, :input_html => { :value => _status }
+    = f.commit_button :label => _label
