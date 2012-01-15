@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   respond_to :html, :js
 
-  load_and_authorize_resource :except => [:index, :create, :edit ]
+  load_and_authorize_resource :except => [:index, :create, :edit]
 
   check_authorization
 

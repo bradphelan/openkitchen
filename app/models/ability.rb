@@ -35,7 +35,7 @@ class Ability
     can :create, Event
 
     # Can edit an event I am the host for
-    can [:update, :read, :destroy, :read], Event, :owner_id => user.id
+    can [:invite, :update, :read, :destroy, :read], Event, :owner_id => user.id
 
     # Can create a resource for the event I own
     can [:create], Resource do |resource|
