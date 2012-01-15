@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
   # Does not need authorisation
   check_authorization :except => :token
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :token
 
   def update
     @invitation = Invitation.find params[:id] 
