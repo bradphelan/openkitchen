@@ -2,6 +2,9 @@ class Invitation < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
 
+  # Nothing is default setable
+  attr_accessible 
+
   def self.generate_token
     SecureRandom.hex(32)
   end

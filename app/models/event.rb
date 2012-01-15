@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
 
   has_many :resources
 
+  attr_accessible  :name, :datetime, :timezone
+
   def datetime
     self[:datetime] || Time.now
   end

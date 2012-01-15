@@ -8,7 +8,9 @@ class ResourcesController < ApplicationController
 
     new_resource = params[:new_resource]
     if new_resource[:suggest_something]
-      @resource = Resource.new :event_id => params[:new_resource][:event_id]
+      @resource = Resource.new do |r|
+        r.event_id = params[:new_resource][:event_id]
+      end
       match = new_resource[:suggest_something].match(/(\d+)\s*(.*)/)
       if match
         @resource.quantity = match[1].to_i

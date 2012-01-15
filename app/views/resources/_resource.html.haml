@@ -1,5 +1,8 @@
 .resource{:id=>"resource_#{resource.id}"}
-  = semantic_form_for ResourceProducer.new(:resource => resource, :invitation => @invitation), :remote => true, :html => { :class => "new_resource" , :id => "new_resource_#{resource.id}"} do |f|
+  - resource_producer = ResourceProducer.new
+  - resource_producer.resource = resource
+  - resource_producer.invitation = @invitation
+  = semantic_form_for resource_producer, :remote => true, :html => { :class => "new_resource" , :id => "new_resource_#{resource.id}"} do |f|
     .pledge_summary
       %h3
         = link_to "#{resource.quantity_produced}", resource

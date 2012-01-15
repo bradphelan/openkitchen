@@ -2,6 +2,8 @@ class Resource < ActiveRecord::Base
   belongs_to :event
   has_many :resource_producers
 
+  attr_accessible :name, :quantity, :units
+
   def quantity
     self[:quantity] || 0
   end

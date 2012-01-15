@@ -23,7 +23,10 @@ class ResourceProducersController < ApplicationController
     end
 
     unless @resource_producer
-      @resource_producer = ResourceProducer.create params[:resource_producer]
+      @resource_producer = ResourceProducer.create do |r|
+       r.invitation = Invitation.find(params[:resource_producer][:invitation_id])
+       r.resource = Resource.find(params[:resource_producer][:resource_id])
+      end
     end
 
     authorize! :create, @resource_producer
