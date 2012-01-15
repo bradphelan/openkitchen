@@ -8,10 +8,10 @@
         Hosted by **#{@event.owner.email}**
         on **#{@event.format_date}**
 
-    - if @invitation.pending? or @invitation.maybe? or @invitation.rejected?
-      = render :partial => "invitation_status_button", :locals => { _invitation: @invitation, _label: "I'm coming!", _status: "accepted" }
-    - if @invitation.accepted?
-      = render :partial => "invitation_status_button", :locals => { _invitation: @invitation, _label: "Sorry. I'm not coming.", _status: "rejected" }
+  - if @invitation.pending? or @invitation.maybe? or @invitation.rejected?
+    = render :partial => "invitation_status_button", :locals => { _invitation: @invitation, _label: "I'm coming!", _status: "accepted" }
+  - if @invitation.accepted?
+    = render :partial => "invitation_status_button", :locals => { _invitation: @invitation, _label: "Sorry. I'm not coming.", _status: "rejected" }
 
 
 = render :partial => 'edit', :locals => { _event: @event }
