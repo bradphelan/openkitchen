@@ -4,10 +4,13 @@
 
 .event_box
   %h2 Current Events
-  %ul
+  %ul.unstyled
     - @events.each do |event|
       %li
         =link_to event.name, edit_event_path(event.id)
+        %p
+          hosted by
+          %b=event.owner.email
 
 
 
