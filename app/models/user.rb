@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_many :events_as_owner, :class_name => "Event", :inverse_of => :owner, :foreign_key => :owner_id
+  has_many :events_as_owner, :class_name => "Event", :inverse_of => :owner, :foreign_key => :owner_id, :dependent => :destroy
   has_many :events_as_guest, :through => :invitations, :source => :event
-  has_many :invitations
+
+  has_many :invitations, :dependent => :destroy
 
   def name
     email

@@ -1,6 +1,6 @@
 class Resource < ActiveRecord::Base
   belongs_to :event
-  has_many :resource_producers
+  has_many :resource_producers, :dependent => :destroy
 
   attr_accessible :name, :quantity, :units
 

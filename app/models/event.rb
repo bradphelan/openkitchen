@@ -2,11 +2,11 @@ class Event < ActiveRecord::Base
 
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id
 
-  has_many :invitations
+  has_many :invitations, :dependent => :destroy
 
   has_many :invitees, :through => :invitations, :source => :user
 
-  has_many :resources
+  has_many :resources, :dependent => :destroy
 
   attr_accessible  :name, :datetime, :timezone
 
