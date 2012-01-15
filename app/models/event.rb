@@ -17,7 +17,9 @@ class Event < ActiveRecord::Base
   # Owner should be implicityly
   # invited
   after_create do
-    invite owner.email
+    invitation = invite owner.email
+    invitation.status = "accepted"
+    invitation.save!
   end
 
 
