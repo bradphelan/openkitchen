@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   end
 
   def invite
-    @invitation = @event.invite params[:invite][:email]
+    @invitation = @event.invite params[:invite][:email], request.host_with_port
     redirect_to edit_event_path(@event)
   end
 

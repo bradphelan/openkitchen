@@ -4,3 +4,6 @@
 $(document).ready =>
 	$(".delete_guest_button input").twipsy
 		live: true
+
+	$(".send_invitation_button input").twipsy
+		live: true

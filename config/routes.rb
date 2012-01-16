@@ -9,6 +9,9 @@ Gobbq::Application.routes.draw do
     collection do
       get 'token/:id', :action => :token, :as => :token
     end
+    member do
+      post 'mail', :action => :mail, :as => :mail
+    end
   end
 
   resources :events do

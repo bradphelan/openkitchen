@@ -24,15 +24,23 @@ class Event < ActiveRecord::Base
 
 
   # Returns the invitation
-  def invite email
+  def invite email, host
+
       # Squeel notation does not work!
       # See https://github.com/ernie/squeel/issues/93
       unless u = User.where(:email => email).first
         u = User.create! :email => email, :password => SecureRandom.hex(16)
       end
-      self.invitees << u
 
       invitation = self.invitations.where{user_id==my{u.id}}.first
+
+      # Don't invite twice
+      unless invitation
+        self.invitees << u
+        invitation = self.invitations.where{user_id==my{u.id}}.first
+        InviteMailer.invite_email(invitation, host).deliver
+      end
+
   end
 
 

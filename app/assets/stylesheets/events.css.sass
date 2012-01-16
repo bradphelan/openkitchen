@@ -84,6 +84,11 @@ form.delete_guest_button
     @extend .btn.danger
     margin-right: 0px
 
+form.send_invitation_button
+  @extend form.delete_guest_button
+  input
+    @extend .btn.info
+
 span.delete_guest_button_disabled
   @extend .btn
   @extend .delete_guest_button_common

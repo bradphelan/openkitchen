@@ -1,0 +1,8 @@
+:markdown
+  # You are invited to a BBQ
+
+  #{@host.email} has invited you to a BBQ.
+
+  #{@invitation.event.name}
+
+= link_to "Goto invitation", token_invitations_url(:id => @invitation.token, :host => @hostname)
