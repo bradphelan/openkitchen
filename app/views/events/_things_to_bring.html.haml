@@ -3,13 +3,11 @@
 -if can?(:edit, @event) 
 
   .things_to_bring
-    %h2 Things To Bring
     = semantic_form_for :new_resource, :url => resources_path , :html => { class: "form-stacked" } do |f|
       = f.inputs do
-        = f.input :suggest_something, :input_html => { :value => "", :placeholder=>"10 bread sticks" }
+        = f.input :suggest_something, :label => false, :input_html => { :value => "", :placeholder=>"10 bread sticks" }
         = f.input :event_id, :as => :hidden, :label => false, :input_html => {:value => @event.id }
-      = f.buttons do
-        = f.commit_button :label => "Create Item"
+        = f.commit_button :label => "Submit something for any guest to bring."
 
 - if @invitation.accepted?
   - @event.resources.each do |resource|
