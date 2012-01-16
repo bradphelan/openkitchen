@@ -50,6 +50,10 @@ class Ability
     # Can update an invitation if the user owns it
     can [:show, :update], Invitation, :user_id => user.id
 
+    can [:mail, :destroy], Invitation do |invitation|
+      invitation.event.owner.id == user.id
+    end
+
     # Can create a resource producter for a resource whose event I am invited to
     can [:create], ResourceProducer do |resource_producer|
       resource_producer.invitation.user_id == user.id &&

@@ -15,6 +15,11 @@ class InvitationsController < ApplicationController
     redirect_to edit_event_path(@invitation.event)
   end
 
+  def destroy
+    @invitation.destroy
+    respond_with @invitation, :location => edit_event_path(@invitation.event)
+  end
+
   def token
     @invitation = Invitation.where{token==my{params[:id]}}.first
     unless @invitation

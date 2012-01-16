@@ -57,3 +57,34 @@ input
 select
   +columns(12)
 
+// Stop bootstrap fucking with button_to. It should by
+// default be inline
+form.button_to
+  display: inline
+  float: none
+  div
+    input
+      display: inline
+      float: none
+      @extend .btn
+
+@import "compass/reset/utilities"
+
+.delete_guest_button_common
+  padding: 0.5em
+
+form.delete_guest_button
+  display: inline
+  float: none
+  margin-right: 5px
+  input
+    display: inline
+    float: none
+    @extend .delete_guest_button_common
+    @extend .btn.danger
+    margin-right: 0px
+
+span.delete_guest_button_disabled
+  @extend .btn
+  @extend .delete_guest_button_common
+  margin-right: 5px

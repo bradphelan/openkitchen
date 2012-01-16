@@ -3,8 +3,14 @@
 
 .guests
   %h2 Guests
-  %ul
+  %ul.unstyled
     - @event.invitations.each do |invitation|
-      %p
-        %small
-          = link_to invitation.user.email, token_invitations_url(:id => invitation.token)
+      %li
+        - if can?(:destroy, invitation)
+          - unless invitation.user.id == @event.owner.id
+            = form_for invitation, :method => :delete, :html => {:class => "delete_guest_button"}  do |f|
+              = f.hidden_field :id, :value => invitation.id
+              = f.submit "X", :confirm => "Are you sure? All items being brought by the guest will be removed", :title => "Remove guest!"
+          - else
+            %span.delete_guest_button_disabled.disabled.info X
+        = mail_to invitation.user.email, invitation.user.email
