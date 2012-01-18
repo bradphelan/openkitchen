@@ -9,7 +9,7 @@
         of
         ="#{resource.quantity} #{resource.name}"
       .amounts
-        %p="You are bringing #{resource.quantity_produced_by @invitation}"
+        %p="I will bring #{resource.quantity_produced_by @invitation}"
       = f.inputs do 
         = f.input :resource_id, :as => :hidden, :label => false
         = f.input :invitation_id, :as => :hidden, :label => false

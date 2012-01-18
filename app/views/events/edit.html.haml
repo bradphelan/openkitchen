@@ -1,6 +1,11 @@
 .event_title_box
+  %p
+    = image_tag "bbq.jpeg"
+    = image_tag "shapes-icon.jpeg"
+    = image_tag "jim_beam.jpeg"
   - if @event.owner == current_user
-    %h1="You are hosting `#{@event.name}`"
+    %h1
+      ="You are hosting `#{@event.name}`"
   - else
     %h1="You are invited to `#{@event.name}`"
     %p

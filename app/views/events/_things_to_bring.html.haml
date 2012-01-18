@@ -7,7 +7,8 @@
       = f.inputs do
         = f.input :suggest_something, :label => false, :input_html => { :value => "", :placeholder=>"10 bread sticks" }
         = f.input :event_id, :as => :hidden, :label => false, :input_html => {:value => @event.id }
-        = f.commit_button :label => "Submit something for any guest to bring."
+      = f.buttons do
+        = f.commit_button :label => "I need ..."
 
 - if @invitation.accepted?
   - @event.resources.each do |resource|
