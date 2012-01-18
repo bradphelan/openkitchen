@@ -63,5 +63,9 @@ module Gobbq
       Devise::PasswordsController.layout "devise"        
     end
 
+    initializer :add_jquery_ui_asset_base, :group => :all, :after => :append_assets_path do
+     config.assets.paths.unshift Rails.root.join("vendor", "jquery-ui", "css", "custom-theme").to_s
+    end
+
   end
 end
