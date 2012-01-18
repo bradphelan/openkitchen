@@ -8,6 +8,8 @@ gem 'rails', '3.1.3'
 
 group :test, :development do
   gem 'sqlite3'
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
 
 

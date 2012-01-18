@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title BBQInvite
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    <meta name="viewport" content="width=320"> 
+
+  %body
+    .topbar(data-scrollspy="scrollspy")
+      .topbar-inner
+        .container
+          =link_to "BBQInvite", root_path, :class=>"brand"
+          %ul.nav
+            -if user_signed_in?
+              %li=link_to "Events", events_path
+              %li=link_to "Sign out", destroy_user_session_path, :method => :delete
+            -else
+              %li=link_to "Sign in", new_user_session_path
+    
+
+    #page(style="padding-top:40px")
+      .content
+        = render :partial=> 'common/flashes'
+        .devise
+          = yield

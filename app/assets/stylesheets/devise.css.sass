@@ -1,0 +1,47 @@
+@import compass-bootstrap/compass_bootstrap
+@import events
+
+.devise
+  @extend .event_box
+
+  h2
+    margin-bottom: 1.5em
+
+  a
+    padding-left: 20px
+    padding-bottom: 2em
+
+  br
+    margin: 1em
+
+  form.user_edit, form.user_new
+    @extend .form-stacked
+
+
+    label
+      float: none !important
+      display: block
+      text-align: left !important
+
+    input
+      float: none !important
+      display: block
+      text-align: left !important
+      margin-bottom: 1em
+
+    input[type='checkbox']
+      clear: none
+      display: inline
+      margin-top: 1.5em
+
+    label[for='user_remember_me']
+      display: inline
+      margin-left: 1em
+
+    input[type='submit']
+      margin-top: 1em
+      @extend .btn
+
+
+    div
+      display: block
