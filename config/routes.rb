@@ -24,7 +24,7 @@ Gobbq::Application.routes.draw do
 
   root :to => 'home#show'
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

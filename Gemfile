@@ -67,3 +67,6 @@ gem 'tabulous'
 group :production do
   gem "pg"
 end
+
+
+gem "omniauth-facebook"
