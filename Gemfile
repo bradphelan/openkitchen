@@ -48,6 +48,7 @@ gem "bluecloth" # markdown filter for haml
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem "capybara", :group => [:development, :test]
 gem "devise"
+gem "koala"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"

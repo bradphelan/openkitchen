@@ -20,8 +20,12 @@ class User < ActiveRecord::Base
     require 'pp'
     
     data = access_token.extra.raw_info
+    token = access_token.credentials.token
 
-    pp data
+    # -- facebook experiment. Kool it works !!
+    @graph = Koala::Facebook::API.new(token)
+    friends = @graph.get_connections("me", "friends")
+    pp friends
 
 
     if user = User.where(:email => data.email).first
