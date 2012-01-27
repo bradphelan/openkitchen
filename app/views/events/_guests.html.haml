@@ -1,20 +1,21 @@
 
 - @event = _event
 
-.guests
-  %h2 Guests
-  %ul.unstyled
-    - @event.invitations.each do |invitation|
-      %li
+%ul.unstyled
+  - @event.invitations.each do |invitation|
+    %li
+      .guest_buttons
         - if can?(:destroy, invitation)
           - unless invitation.user.id == @event.owner.id
-            = form_for invitation, :method => :delete, :html => {:class => "delete_guest_button"}  do |f|
+            = form_for invitation, :method => :delete, :html => {:class => "delete"}  do |f|
               = f.hidden_field :id, :value => invitation.id
               = f.submit "X", :confirm => "Are you sure? All items being brought by the guest will be removed", :title => "Remove guest!"
           - else
-            %span.delete_guest_button_disabled.disabled.info X
+            = form_for :invitation, :html => {:class => "delete" }  do |f|
+              = f.submit "X", :title => "Can't remove  yourself!", :disabled => "disabled" 
+
         - if can? :edit, @invitation.event
-          = form_for invitation, :url => mail_invitation_url(invitation), :method => :post, :html => {:class => "send_invitation_button"}  do |f|
+          = form_for invitation, :url => mail_invitation_url(invitation), :method => :post, :html => {:class => "invite"}  do |f|
             = f.hidden_field :id, :value => invitation.id
             = f.submit ">", :confirm => "Are you sure? Another email will be sent to the guest!", :title => "Send invite again!"
-        = mail_to invitation.user.email, invitation.user.email
+      = mail_to invitation.user.email, invitation.user.email

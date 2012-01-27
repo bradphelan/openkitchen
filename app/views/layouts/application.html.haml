@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title BBQInvite
+    %title Open Kitchen
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -11,13 +11,13 @@
     .topbar(data-scrollspy="scrollspy")
       .topbar-inner
         .container
-          =link_to "BBQInvite", root_path, :class=>"brand"
+          =link_to "Open Kitchen", root_path, :class=>"brand"
           %ul.nav
             -if user_signed_in?
               %li=link_to "Events", events_path
               %li=link_to "Account", edit_user_registration_path
             -else
-              %li=link_to "Sign in", new_user_session_path
+              %li.btn.info=link_to "Authenticate", new_user_session_path
     
 
     #page(style="padding-top:40px")

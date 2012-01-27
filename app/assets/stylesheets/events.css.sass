@@ -14,12 +14,16 @@ $olive: rgba(79,	124,	93, 0.8)
   background: none !important
 
 .event_box
+  margin-top: 0.5em
   padding: 0.5em
-  h2
-    margin-left: 0.5em
   border: 2px $olive solid
   background-color: $white-50
   +box-shadow
+
+  h2
+    padding: 0.5em
+    margin-bottom: 1.5em
+    @extend .label
   
   +border-radius(5px)
   margin-bottom: 25px
@@ -28,14 +32,24 @@ $olive: rgba(79,	124,	93, 0.8)
 .things_to_bring
   @extend .event_box
 
+.gray-form
+  background-color: $grayLight
+  padding: 0.5em
+  +border-radius(5px)
+  label
+    @extend h2
+    margin-bottom: 0.5em
+
 .guests
   @extend .event_box
+  form.invite-guest
+    @extend .gray-form
 
-.invite_guests
-  @extend .event_box
-
+  
 .edit_event
   @extend .event_box
+  form
+    @extend .gray-form
 
 .cant_come_button
   @extend .btn
@@ -51,6 +65,7 @@ $olive: rgba(79,	124,	93, 0.8)
     color: rgb(117,72,7)
     padding-top: 0.5em
 
+// Make the form inputs span the page
 @import 'susy/susy'
 input
   +columns(12)
@@ -68,28 +83,19 @@ form.button_to
       float: none
       @extend .btn
 
-@import "compass/reset/utilities"
-
-.delete_guest_button_common
-  padding: 0.5em
-
-form.delete_guest_button
-  display: inline
-  float: none
-  margin-right: 5px
-  input
+// Adding and removing guests
+.guest_buttons
+  display: inline-block
+  form
     display: inline
     float: none
-    @extend .delete_guest_button_common
-    @extend .btn.danger
-    margin-right: 0px
-
-form.send_invitation_button
-  @extend form.delete_guest_button
-  input
-    @extend .btn.info
-
-span.delete_guest_button_disabled
-  @extend .btn
-  @extend .delete_guest_button_common
-  margin-right: 5px
+    input
+      display: inline
+      float: none
+      margin-right: 5px
+      margin-top: 5px
+      margin-bottom: 5px
+    &.invite input
+      @extend .btn.info
+    &.delete input
+      @extend .btn.danger
