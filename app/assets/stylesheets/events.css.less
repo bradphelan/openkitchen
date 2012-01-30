@@ -2,9 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$eoa-blue: rgb(0, 148, 204);
-$white-50: rgba(255, 255, 255, 0.9);
-$olive: rgba(79, 124, 93, 0.8);
+@white-50: rgba(255, 255, 255, 0.9);
+@olive: rgba(79, 124, 93, 0.8);
 
 .actions {
   background: none !important; }
@@ -12,8 +11,8 @@ $olive: rgba(79, 124, 93, 0.8);
 .event_box {
   margin-top: 0.5em;
   padding: 0.5em;
-  border: 2px $olive solid;
-  background-color: $white-50;
+  border: 2px @olive solid;
+  background-color: @white-50;
   @include box-shadow;
   h2 {
     padding: 0.5em;
@@ -27,7 +26,7 @@ $olive: rgba(79, 124, 93, 0.8);
   @extend .event_box; }
 
 .gray-form {
-  background-color: $grayLight;
+  background-color: @grayLight;
   padding: 0.5em;
   @include border-radius(5px);
   label {
