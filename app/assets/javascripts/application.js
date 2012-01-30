@@ -7,5 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require bootstrap-twipsy
+//= require twitter/bootstrap
 //= require_tree .

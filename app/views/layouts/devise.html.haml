@@ -1,17 +1,17 @@
 !!!
 %html
   %head
-    %title BBQInvite
+    %title Open Kitchen
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
     <meta name="viewport" content="width=320"> 
 
   %body
-    .topbar(data-scrollspy="scrollspy")
-      .topbar-inner
+    .navbar.navbar-fixed-top(data-scrollspy="scrollspy")
+      .navbar-inner
         .container
-          =link_to "BBQInvite", root_path, :class=>"brand"
+          =link_to "Open Kitchen", root_path, :class=>"brand"
           %ul.nav
             -if user_signed_in?
               %li=link_to "Events", events_path
@@ -23,7 +23,9 @@
     
 
     #page(style="padding-top:40px")
-      .content
+      .container
+        .row
+          .content.span8.offset4
         = render :partial=> 'common/flashes'
         .devise
           = yield

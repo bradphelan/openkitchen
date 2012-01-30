@@ -1,0 +1,17 @@
+
+#ui-datepicker-div {
+  background-color: white;
+  padding: 5px;
+  .ui-datepicker-prev {
+    @extend .ui-datepicker-prev-next; }
+  @include border-radius(5px);
+  @include box-shadow;
+  .ui-datepicker-prev, .ui-datepicker-next {
+    @extend .btn.primary;
+    float: left;
+    padding: 5px;
+    @include border-radius(5px); }
+  .ui-datepicker-next {
+    float: right; }
+  .ui-datepicker-title {
+    clear: left; } }

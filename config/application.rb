@@ -48,9 +48,8 @@ module Gobbq
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.sass.load_paths << Compass::Frameworks['compass-bootstrap'].stylesheets_directory
-    config.sass.load_paths << Compass::Frameworks['susy'].stylesheets_directory
-    
+#     config.sass.load_paths << Compass::Frameworks['compass-bootstrap'].stylesheets_directory
+#     config.sass.load_paths << Compass::Frameworks['susy'].stylesheets_directory
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
@@ -63,9 +62,9 @@ module Gobbq
       Devise::PasswordsController.layout "devise"        
     end
 
-    initializer :add_jquery_ui_asset_base, :group => :all, :after => :append_assets_path do
-     config.assets.paths.unshift Rails.root.join("vendor", "jquery-ui", "css", "custom-theme").to_s
-    end
+    config.less.paths << File.join(Rails.root, 'app', 'assets', 'frameworks')
+    config.app_generators.stylesheet_engine :less
+    config.less.compress = false
 
   end
 end

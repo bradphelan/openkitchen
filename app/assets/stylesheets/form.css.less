@@ -1,0 +1,17 @@
+// Fixes for formtastic
+
+form {
+  @extend .nice;
+  li.input {
+    label {
+      background-color: none;
+      background: none;
+      color: black; } }
+  li.button {
+    @include reset-box-model;
+    background: none;
+    &:hover {
+      background: none; }
+    input {
+      @extend .button;
+      @extend .nice; } } }
