@@ -10,9 +10,8 @@
         ="#{resource.quantity} #{resource.name}"
       .amounts
         %p="I will bring #{resource.quantity_produced_by @invitation}"
-      = f.inputs do 
-        = f.input :resource_id, :as => :hidden, :label => false
-        = f.input :invitation_id, :as => :hidden, :label => false
-        - [-5, -1, 1, 5].each do |quantity|
-          = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: quantity , _form: f , _invitation: @invitation}
+      = f.input :resource_id, :as => :hidden, :label => false
+      = f.input :invitation_id, :as => :hidden, :label => false
+      - [-5, -1, 1, 5].each do |quantity|
+        = render :partial => "resources/pledge_button" , :locals => { _resource: resource , _quantity: quantity , _form: f , _invitation: @invitation}
 

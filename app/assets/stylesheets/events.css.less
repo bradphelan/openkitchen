@@ -62,31 +62,26 @@ input.resource_quantity_button {
 }
 
 
+@import "openkitchen/semantic-icon";
+
 // Adding and removing guests
 .guest_buttons {
   display: inline-block;
   form {
     display: inline;
     float: none;
-    input {
+    input[type="submit"] {
       display: inline;
       float: none;
-    }
-  }
-}
-
-@import "openkitchen/semantic-icon";
-
-.guest_buttons {
-  input[type="submit"] {
-    .icon;
-    width: 16px !important;
-    height: 16px !important;
-    &.email {
-      .icon-envelope;
-    }
-    &.remove {
-      .icon-fire;
+      width: 16px !important;
+      height: 16px !important;
+      .icon;
+      &.email {
+        .icon-envelope;
+      }
+      &.remove {
+        .icon-fire;
+      }
     }
   }
 }

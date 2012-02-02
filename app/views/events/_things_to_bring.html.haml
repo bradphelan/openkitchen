@@ -1,3 +1,4 @@
+%h2 Manage Catering
 - @event = _event
 
 -if can?(:edit, @event) 
@@ -5,10 +6,10 @@
   .things_to_bring
     = semantic_form_for :new_resource, :url => resources_path , :html => { class: "form-stacked" } do |f|
       = f.inputs do
-        = f.input :suggest_something, :label => false, :input_html => { :value => "", :placeholder=>"10 bread sticks" }
+        = f.input :suggest_something, :label => "Need something?", :input_html => { :value => "", :placeholder=>"10 bread sticks" }
         = f.input :event_id, :as => :hidden, :label => false, :input_html => {:value => @event.id }
       = f.buttons do
-        = f.commit_button :label => "I need ..."
+        = f.commit_button :label => "add it"
 
 - if @invitation.accepted?
   - @event.resources.each do |resource|
