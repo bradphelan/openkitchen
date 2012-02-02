@@ -4,18 +4,16 @@
 
 
 $(document).ready =>
-	$(".resource_quantity_button.up").twipsy
+	$(".resource_quantity_button.up").tooltip
 		title: -> "Increase your pledge"
-		live: true
-		delayOut: 50
-		animate: false
+		delay: 50
+		animation: false
 
-	$(".resource_quantity_button.down").twipsy
+	$(".resource_quantity_button.down").tooltip
 		title: -> "Decrease your pledge"
-		live: true
-		delayOut: 50
-		animate: false
+		delay: 50
+		animation: false
 
 	# Handle a bug removing the twipsy on AJAX calls
 	$("body").on "click", ".resource_quantity_button", =>
-    $('.twipsy').remove()
+    $('.tooltip').remove()
