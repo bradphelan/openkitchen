@@ -17,54 +17,34 @@
   h2 {
     padding: 0.5em;
     margin-bottom: 1.5em;
-    @extend .label; }
+    }
   @include border-radius(5px);
   margin-bottom: 25px;
   padding-bottom: 0px; }
 
 .things_to_bring {
-  @extend .event_box; }
-
-.gray-form {
-  background-color: @grayLight;
-  padding: 0.5em;
-  @include border-radius(5px);
-  label {
-    @extend h2;
-    margin-bottom: 0.5em; } }
+}
 
 .guests {
-  @extend .event_box;
   form.invite-guest {
-    @extend .gray-form; } }
+    } }
 
 .edit_event {
-  @extend .event_box;
   form {
-    @extend .gray-form; } }
+    } }
 
 .cant_come_button {
-  @extend .btn; }
+}
 
 .can_come_button {
-  @extend .btn; }
+}
 
 .event_title_box {
   margin-top: 0.5em;
-  @extend .event_box;
   h1 {
     text-align: center;
     color: rgb(117, 72, 7);
     padding-top: 0.5em; } }
-
-// Make the form inputs span the page
-@import "susy/susy";
-
-input {
-  @include columns(12); }
-
-select {
-  @include columns(12); }
 
 // Stop bootstrap fucking with button_to. It should by
 // default be inline
@@ -75,7 +55,12 @@ form.button_to {
     input {
       display: inline;
       float: none;
-      @extend .btn; } } }
+      } } }
+
+input.resource_quantity_button {
+  width: 10% !important;
+}
+
 
 // Adding and removing guests
 .guest_buttons {
@@ -86,10 +71,22 @@ form.button_to {
     input {
       display: inline;
       float: none;
-      margin-right: 5px;
-      margin-top: 5px;
-      margin-bottom: 5px; }
-    &.invite input {
-      @extend .btn.info; }
-    &.delete input {
-      @extend .btn.danger; } } }
+    }
+  }
+}
+
+@import "openkitchen/semantic-icon";
+
+.guest_buttons {
+  input[type="submit"] {
+    .icon;
+    width: 16px !important;
+    height: 16px !important;
+    &.email {
+      .icon-envelope;
+    }
+    &.remove {
+      .icon-fire;
+    }
+  }
+}

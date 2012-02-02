@@ -1,17 +1,21 @@
 
+@import "twitter/bootstrap";
+@import "twitter/bootstrap/sprites";
 #ui-datepicker-div {
+  .well;
   background-color: white;
   padding: 5px;
-  .ui-datepicker-prev {
-    @extend .ui-datepicker-prev-next; }
-  @include border-radius(5px);
-  @include box-shadow;
   .ui-datepicker-prev, .ui-datepicker-next {
-    @extend .btn.primary;
+    .btn;
     float: left;
-    padding: 5px;
-    @include border-radius(5px); }
+    margin-bottom: 5px; }
+  .ui-datepicker-prev {
+    .icon-backward;
+  }
+
   .ui-datepicker-next {
+    .icon-forward;
     float: right; }
   .ui-datepicker-title {
+    .label;
     clear: left; } }
