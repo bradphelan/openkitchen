@@ -8,7 +8,13 @@ class Event < ActiveRecord::Base
 
   has_many :resources, :dependent => :destroy
 
-  attr_accessible  :name, :datetime, :timezone
+  attr_accessible  :name, :datetime, :timezone, :street, :city, :country
+
+  acts_as_gmappable
+
+  def gmaps4rails_address
+  "#{self.street}, #{self.city}, #{self.country}" 
+  end
 
   def datetime
     self[:datetime] || Time.now

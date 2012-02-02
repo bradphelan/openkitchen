@@ -1,0 +1,17 @@
+-# Parameters
+-#
+-#  mapping_data - Google maps for rails mapping data
+
+
+
+#google_map.modal.hide
+  .modal-header 
+    %a.close(data-dismiss="modal") close
+    %h3 Map
+  .modal-body
+    = gmaps("markers" => {"data" => @mapping_data}, "map_options" => {"processing" => "json", "auto_adjust" => true, "auto_zoom" => false, "zoom" => 13})
+
+= gmaps("markers" => {"data" => @mapping_data}, "map_options" => {:id => "small_map", :container_class=> "small_map_container", "processing" => "json", "auto_adjust" => true, "auto_zoom" => false, "zoom" => 13, "maxZoom" => 13, "minZoom" => 13,  "draggable" => false, "mapTypeControl" => false, "disableDoubleClickZoom" => true, "disableDefaultUI" => true})
+
+%a.btn(data-toggle="modal" data-target="#google_map") large map ...
+

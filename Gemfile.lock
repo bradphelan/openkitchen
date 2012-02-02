@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/apneadiving/Google-Maps-for-Rails.git
+  revision: 75fc25d55f79415145c8a945cc7b4aa0f7c7a7d8
+  specs:
+    gmaps4rails (1.4.4)
+      json
+
+GIT
   remote: https://github.com/cgunther/formtastic-bootstrap.git
   revision: f1acce518d9729e5233b85f41f91c2f06f1af215
   branch: 2.0
@@ -239,6 +246,7 @@ DEPENDENCIES
   forgery
   formtastic!
   formtastic-bootstrap!
+  gmaps4rails!
   haml (>= 3.0.0)
   haml-rails
   heroku

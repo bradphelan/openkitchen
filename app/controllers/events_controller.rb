@@ -37,6 +37,7 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
     authorize! :read, @event
     @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
+    @mapping_data = [@event].to_gmaps4rails
   end
 
   def show

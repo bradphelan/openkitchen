@@ -5,22 +5,24 @@
 @white-50: rgba(255, 255, 255, 0.9);
 @olive: rgba(79, 124, 93, 0.8);
 
+
+// Google MAPS configuration
+
+@import "twitter/bootstrap";
+@small_map_width: @gridColumnWidth * 3;
+@small_map_height: 480 / 640 * @small_map_width;
+#small_map{
+  width: @small_map_width;
+  height: @small_map_height
+}
+
+.small_map_container {
+  padding-bottom: 1em;
+}
+
+
 .actions {
   background: none !important; }
-
-.event_box {
-  margin-top: 0.5em;
-  padding: 0.5em;
-  border: 2px @olive solid;
-  background-color: @white-50;
-  @include box-shadow;
-  h2 {
-    padding: 0.5em;
-    margin-bottom: 1.5em;
-    }
-  @include border-radius(5px);
-  margin-bottom: 25px;
-  padding-bottom: 0px; }
 
 .things_to_bring {
 }
