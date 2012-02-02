@@ -62,6 +62,9 @@ module Gobbq
       Devise::PasswordsController.layout "devise"        
     end
 
+    # Needed for heroku
+    config.assets.initialize_on_precompile = false
+
     if config.respond_to? :less
       config.app_generators.stylesheet_engine :less
       config.less.paths << File.join(Rails.root, 'app', 'assets', 'frameworks')
