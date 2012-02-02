@@ -65,6 +65,7 @@ module Gobbq
     if config.respond_to? :less
       config.app_generators.stylesheet_engine :less
       config.less.paths << File.join(Rails.root, 'app', 'assets', 'frameworks')
+      config.less.paths << File.join(Rails.root, 'app', 'assets', 'stylesheets', 'frameworks')
       config.less.compress = false
     end
 
