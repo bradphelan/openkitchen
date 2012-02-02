@@ -1,0 +1,22 @@
+@import "twitter/bootstrap/mixins";
+@import "twitter/bootstrap/sprites";
+
+// This is a class that enables you to add icons
+// to any objects via mixin. ie
+// input[type="submit"] {
+//    .icon;
+//    .icon-fire;
+// }
+
+
+.icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: text-top;
+  background-image: asset-url("twitter/bootstrap/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+
+  .ie7-restore-right-whitespace();
+}
