@@ -8,14 +8,6 @@ GIT
       rails (>= 3.1.0)
 
 GIT
-  remote: https://github.com/endoscient/less-rails-bootstrap.git
-  revision: 63c931ce7e56e0077c0fe9f1bc2947c8ac6855cc
-  branch: 2.0-wip
-  specs:
-    less-rails-bootstrap (1.4.3)
-      less-rails (~> 2.1.0)
-
-GIT
   remote: https://github.com/justinfrench/formtastic.git
   revision: 7d62ee32210c7f2f32563adfe2a5aef3e32ae684
   specs:
@@ -125,9 +117,11 @@ GEM
     less (2.0.9)
       commonjs (~> 0.2.0)
       therubyracer (~> 0.9.9)
-    less-rails (2.1.3)
+    less-rails (2.1.5)
       actionpack (>= 3.1)
       less (~> 2.0.7)
+    less-rails-bootstrap (2.0.2)
+      less-rails (~> 2.1.0)
     libv8 (3.3.10.4)
     mail (2.4.1)
       i18n (>= 0.4.0)
@@ -251,7 +245,7 @@ DEPENDENCIES
   hpricot
   jquery-rails
   koala
-  less-rails-bootstrap!
+  less-rails-bootstrap
   omniauth-facebook
   pg
   rails (~> 3.2.0)

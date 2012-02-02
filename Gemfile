@@ -18,7 +18,7 @@ end
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'less-rails-bootstrap', :git => 'https://github.com/endoscient/less-rails-bootstrap.git', :branch => "2.0-wip"
+  gem 'less-rails-bootstrap'
 end
 
 #gem 'sass-rails',   '~> 3.1.5'
