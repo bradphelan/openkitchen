@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-    require 'pp'
     
     data = access_token.extra.raw_info
     token = access_token.credentials.token
@@ -25,7 +24,6 @@ class User < ActiveRecord::Base
     # -- facebook experiment. Kool it works !!
     @graph = Koala::Facebook::API.new(token)
     friends = @graph.get_connections("me", "friends")
-    pp friends
 
 
     if user = User.where(:email => data.email).first
