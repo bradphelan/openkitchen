@@ -72,11 +72,26 @@ input.resource_quantity_button {
   form {
     display: inline;
     float: none;
+
+    &:first-child {
+      input[type="submit"] {
+        margin-left: 0px;
+      }
+    }
+
+    &:last-child {
+      input[type="submit"] {
+        margin-right: 16px;
+      }
+    }
+
     input[type="submit"] {
       display: inline;
       float: none;
       width: 16px !important;
       height: 16px !important;
+      margin-left: 8px;
+      margin-right: 8px;
       .icon;
       &.email {
         .icon-envelope;

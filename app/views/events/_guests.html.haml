@@ -8,7 +8,7 @@
     %li
       .guest_buttons
         - if can? :destroy, invitation
-          - disabled = invitation.user.id == @event.owner.id ? nil : "disabled"
+          - disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
           = form_for invitation, :method => :delete, :html => {:class => "delete"}  do |f|
             = f.hidden_field :id, :value => invitation.id
             = f.submit "", :disabled => disabled, :confirm => "Are you sure? All items being brought by the guest will be removed", :title => "Remove guest!", :class => "remove"
