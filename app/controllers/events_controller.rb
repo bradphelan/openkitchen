@@ -29,6 +29,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    @event.gmaps = false
     @event.update_attributes params[:event]
     redirect_to edit_event_path
   end
@@ -38,6 +39,7 @@ class EventsController < ApplicationController
     authorize! :read, @event
     @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
     @mapping_data = [@event].to_gmaps4rails
+    pp @mapping_data
   end
 
   def show

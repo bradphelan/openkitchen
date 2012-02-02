@@ -3,19 +3,16 @@
 - if can? :edit, @event
   .edit_event
     %h2 Details
-    .row
-      .span4
-        = semantic_form_for @event, :html => { class: "form-stacked edit" } do |f|
-          = f.inputs do
-            = f.input :name, :input_html => { :disabled => ( cannot? :edit, @event ) }
-            = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]), :disabled => (cannot? :edit, @event)}
-            = f.input :timezone, :as => :time_zone, :input_html => { :disabled => ( cannot? :edit, @event ) }
-            = f.input :street, :as => :string, :input_html => { :disabled => ( cannot? :edit, @event ) }
-            = f.input :city, :as => :string, :input_html => { :disabled => ( cannot? :edit, @event ) }
-            = f.input :country, :as => :string, :input_html => { :disabled => ( cannot? :edit, @event ) }
-            
-          -if can? :edit, @event
-            = f.buttons
-      .span3
+    = semantic_form_for @event, :html => { class: "form-stacked edit" } do |f|
+      = f.inputs do
+        = f.input :name, :input_html => { :disabled => ( cannot? :edit, @event ) }
+        = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]), :disabled => (cannot? :edit, @event)}
+        = f.input :timezone, :as => :time_zone, :input_html => { :disabled => ( cannot? :edit, @event ) }
+        = f.input :street, :as => :string, :input_html => { :disabled => ( cannot? :edit, @event ) }
+        = f.input :city, :as => :string, :input_html => { :disabled => ( cannot? :edit, @event ) }
+        = f.input :country, :as => :string, :input_html => { :disabled => ( cannot? :edit, @event ) }
         = render :partial => "map", :locals => { :mapping_data => @mapping_data }
+        
+      -if can? :edit, @event
+        = f.buttons
 

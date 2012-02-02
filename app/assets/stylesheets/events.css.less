@@ -9,11 +9,12 @@
 // Google MAPS configuration
 
 @import "twitter/bootstrap";
-@small_map_width: @gridColumnWidth * 3;
+@import "twitter/bootstrap/responsive";
+@small_map_width: @gridColumnWidth * 8;
 @small_map_height: 480 / 640 * @small_map_width;
 #small_map{
-  width: @small_map_width;
-  height: @small_map_height
+  width: auto;
+  height: @small_map_height;
 }
 
 .small_map_container {

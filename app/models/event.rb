@@ -16,6 +16,10 @@ class Event < ActiveRecord::Base
   "#{self.street}, #{self.city}, #{self.country}" 
   end
 
+  def google_maps_link
+    "http://maps.google.com/maps?q=#{gmaps4rails_address.gsub /\s/, '+'}"
+  end
+
   def datetime
     self[:datetime] || Time.now
   end
