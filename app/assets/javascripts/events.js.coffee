@@ -18,6 +18,10 @@ $(document).ready =>
     Gmaps.map.adjustMapToBounds()
     console.log 'done'
 
+  $("#event_description_editor a.show").popover
+    title: "HTML"
+    content: "Update event to refresh"
+
   $('.markdown_popover').popover
     html: true
     title: "Markdown"

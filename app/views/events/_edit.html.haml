@@ -21,10 +21,17 @@
           = f.buttons
       .span3
         - if can? :edit, @event
-          = f.input :description, :as => :text, :hint => link_to("Edit with markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", :class => "markdown_popover")
+          %ul.tabs.nav.nav-tabs#event_description_editor
+            %li.active
+              %a(href="#description_edit" data-toggle="pill") edit
+            %li
+              %a.show(href="#description_show" data-toggle="pill") show
+          .tab-content
+            #description_edit.tab-pane.active
+              = f.input :description, :as => :text, :hint => link_to("Edit with markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", :class => "markdown_popover")
+            #description_show.tab-pane
+              = sanitize @event.description_unsanitzed_html
         - else
-          -# santize method strips any scary XSS tricks from the 
-          -# markdown generated HTML
           = sanitize @event.description_unsanitzed_html
     .row
       .span7
