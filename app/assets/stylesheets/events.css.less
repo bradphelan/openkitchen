@@ -33,8 +33,14 @@
     } }
 
 .edit_event {
-  form {
-    } }
+  // These are not really disabled but they are
+  // not editable
+  input[disabled="disabled"] {
+    background-color: white;
+    color: black;
+  }
+
+}
 
 .cant_come_button {
 }
