@@ -12,8 +12,8 @@ class Event < ActiveRecord::Base
 
   acts_as_gmappable
 
-  def description_sanitzed_html
-    sanitize BlueCloth.new(@event.description).to_html
+  def description_unsanitzed_html
+    BlueCloth.new(description).to_html
   end
 
   def gmaps4rails_address
