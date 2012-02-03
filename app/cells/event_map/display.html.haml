@@ -1,0 +1,12 @@
+#google_map.modal.hide
+
+  .modal-header 
+    %a.close(data-dismiss="modal") close
+    %h3 Map
+  .modal-body
+    = render :partial => 'gmaps4rails/gmaps4rails', :locals => { :options => @big_options.with_indifferent_access, :enable_css => false, :enable_js => true }
+
+= render :partial => 'gmaps4rails/gmaps4rails', :locals => { :options => @small_options.with_indifferent_access, :enable_css => false, :enable_js => true}
+
+%a.btn(data-toggle="modal" data-target="#google_map") large map ...
+

@@ -20,7 +20,7 @@
           = render :partial => "map", :locals => { :mapping_data => @mapping_data }
       .span3
         - if can? :edit, @event
-          = f.input :description, :as => :text, :hint => link_to("uses markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", :class => "markdown_popover")
+          = f.input :description, :as => :text, :hint => link_to("Edit with markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", :class => "markdown_popover")
         - else
           -# santize method strips any scary XSS tricks from the 
           -# markdown generated HTML
