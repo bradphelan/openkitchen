@@ -1,19 +1,32 @@
 - @event = _event
+- disabled = { :disabled => ( cannot? :edit, @event ) }
 
 .edit_event
   %h2 Details
   = semantic_form_for @event do |f|
-    = f.inputs do
-      - disabled = { :disabled => ( cannot? :edit, @event ) }
-      = f.input :name, :input_html => disabled
-      = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]) }.merge(disabled)
-      = f.input :timezone, :as => :time_zone, :input_html => disabled
-      = f.input :street, :as => :string, :input_html => disabled
-      = f.input :city, :as => :string, :input_html => disabled
-      = f.input :country, :as => :string, :input_html => disabled
-      
-    -if can? :edit, @event
-      = f.buttons
-    -if @event.latitude and @event.longitude
-      = render :partial => "map", :locals => { :mapping_data => @mapping_data }
+    .row
+      .span4
+        = f.inputs do
+          = f.input :name, :input_html => disabled
+          = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]) }.merge(disabled)
+          = f.input :timezone, :as => :time_zone, :input_html => disabled
+          = f.input :street, :as => :string, :input_html => disabled
+          = f.input :city, :as => :string, :input_html => disabled
+          = f.input :country, :as => :string, :input_html => disabled
+          
+        -if can? :edit, @event
+          = f.buttons
+        -if @event.latitude and @event.longitude
+          = render :partial => "map", :locals => { :mapping_data => @mapping_data }
+      .span3
+        - if can? :edit, @event
+          = f.input :description, :as => :text, :hint => link_to("uses markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", :class => "markdown_popover")
+        - else
+          -# santize method strips any scary XSS tricks from the 
+          -# markdown generated HTML
+          = @event.description_sanitzed_html
+
+
+
+          
 
