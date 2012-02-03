@@ -16,6 +16,15 @@ class User < ActiveRecord::Base
     email
   end
 
+  # Return all my friends, ( being those who I have invited at least once to a party)
+  def friends
+    User.joins{events_as_guest}.where{events_as_guest.owner_id==my{id}}.where{users.id != my{id}}
+  end
+
+  def friends_emails
+    friends.map &:email
+  end
+
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     
     data = access_token.extra.raw_info

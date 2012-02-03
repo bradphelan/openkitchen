@@ -6,6 +6,6 @@
 - if can? :edit, @event
   = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked invite-guest" } do |f|
     = f.inputs do
-      = f.input :email, :label => 'email',  :as => :email, :input_html => { :value => "", :placeholder => "email address" }
+      = f.input :email, :label => 'email',  :as => :email, :input_html => { :value => "", :placeholder => "email address", "data-provide" => "typeahead", "data-source"=> current_user.friends_emails.to_json, :autocomplete => 'off' }
     = f.buttons do
       = f.commit_button :label => "Send!"
