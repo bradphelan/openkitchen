@@ -8,9 +8,13 @@ class Event < ActiveRecord::Base
 
   has_many :resources, :dependent => :destroy
 
-  attr_accessible  :name, :datetime, :timezone, :street, :city, :country
+  attr_accessible  :name, :datetime, :timezone, :street, :city, :country, :description
 
   acts_as_gmappable
+
+  def description_sanitzed_html
+    sanitize BlueCloth.new(@event.description).to_html
+  end
 
   def gmaps4rails_address
   "#{self.street}, #{self.city}, #{self.country}" 

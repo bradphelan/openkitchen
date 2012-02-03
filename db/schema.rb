@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202090045) do
+ActiveRecord::Schema.define(:version => 20120203092042) do
 
   create_table "events", :force => true do |t|
     t.integer   "owner_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120202090045) do
     t.float     "latitude"
     t.float     "longitude"
     t.boolean   "gmaps"
+    t.text      "description"
   end
 
   create_table "invitations", :force => true do |t|
