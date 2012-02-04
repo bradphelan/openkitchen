@@ -72,5 +72,7 @@ module Gobbq
       config.less.compress = false
     end
 
+    config.action_mailer.default_url_options = {:host => "openkitchen.at"}
+
   end
 end
