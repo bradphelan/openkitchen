@@ -1,6 +1,13 @@
 .event_box
   %h1 Welcome to your events
-  = link_to "Create New Event", new_event_url 
+  - if can? :create, Event
+    = link_to "Create New Event", new_event_url 
+  - else
+    %a.popover-trigger(href="#" 
+      data-title="Event Creation Disabled" 
+      data-content='Please complete registration to create events') 
+      Create new event
+
 
 .event_box
   %h2 Current Events
