@@ -11,7 +11,7 @@
     .navbar.navbar-fixed-top(data-scrollspy="scrollspy")
       .navbar-inner
         .container
-          =link_to "Open Kitchen", root_path, :class=>"brand"
+          =link_to "", root_path, :class=>"brand"
           %ul.nav
             -if user_signed_in?
               %li=link_to "Events", events_path
@@ -22,7 +22,7 @@
               
     
 
-    #page(style="padding-top:40px")
+    #page
       .container
         .row
           .content.span8.offset4
