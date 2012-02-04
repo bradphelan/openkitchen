@@ -72,7 +72,11 @@ module Gobbq
       config.less.compress = false
     end
 
-    config.action_mailer.default_url_options = {:host => "openkitchen.at"}
+    if Rails.env == "production"
+      config.action_mailer.default_url_options = {:host => "openkitchenapp.herokuapp.com"}
+    else
+      config.action_mailer.default_url_options = {:host => "localhost:3000"}
+    end
 
   end
 end
