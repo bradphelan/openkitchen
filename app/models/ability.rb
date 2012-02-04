@@ -30,9 +30,9 @@ class Ability
       event.owner_id == user.id || event.invitations.where{user_id==my{user.id}}.count > 0
     end
 
-    # TODO this needs to check if the user is registered
-    # with a locked down new password
-    can :create, Event
+    if user.registration_completed?
+      can :create, Event
+    end
 
     # Can edit an event I am the host for
     can [:invite, :update, :read, :destroy, :read], Event, :owner_id => user.id
@@ -50,6 +50,7 @@ class Ability
     # Can update an invitation if the user owns it
     can [:show, :update], Invitation, :user_id => user.id
 
+    # Can mail or destroy an invitation if the user is the event owner
     can [:mail, :destroy], Invitation do |invitation|
       invitation.event.owner.id == user.id
     end
@@ -59,6 +60,9 @@ class Ability
       resource_producer.invitation.user_id == user.id &&
         resource_producer.resource.event.invitations.where{user_id==my{user.id}}.count > 0
     end
+
+    # Can complete registration for self
+    can [:register], User, :id => user.id
 
   end
 end

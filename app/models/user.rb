@@ -47,4 +47,8 @@ class User < ActiveRecord::Base
     "Melbourne"
   end
 
+  def registration_completed?
+    not registration_completed_at.nil?
+  end
+
 end
