@@ -1,9 +1,20 @@
-- unless flash[:notice].blank?
-  .alert-message.info
-    = content_tag :div, flash[:notice]
-- unless flash[:error].blank?
-  .alert-message.error
-    = content_tag :div, flash[:error]
-- unless flash[:alert].blank?
-  .alert-message.warning
-    = content_tag :div, flash[:alert]
+.flash
+  - unless flash[:info].blank?
+    .alert.alert-block.alert-info.fade.in
+      %a.close(data-dismiss="alert") &times;
+      = content_tag :div, flash[:info]
+
+  - unless flash[:notice].blank?
+    .alert.alert-block.alert-success.fade.in
+      %a.close(data-dismiss="alert") &times;
+      = content_tag :div, flash[:notice]
+
+  - unless flash[:error].blank?
+    .alert.alert-block.alert-error.fade.in
+      %a.close(data-dismiss="alert") &times;
+      = content_tag :div, flash[:error]
+
+  - unless flash[:alert].blank?
+    .alert.alert-block.alert-error.fade.in
+      %a.close(data-dismiss="alert") &times;
+      = content_tag :div, flash[:alert]
