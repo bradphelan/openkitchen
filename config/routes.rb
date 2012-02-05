@@ -26,7 +26,10 @@ Gobbq::Application.routes.draw do
   match "home" => "home#show"
 
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", 
+    :passwords => "passwords"
+  }
+  
 
   # Complete the registration
   match "/users/register", :method => :post, :controller => :users, :action => :register
