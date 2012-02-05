@@ -1,0 +1,8 @@
+Copyright Brad Phelan 2012
+--------------------------
+
+You may not copy, or distribute this code without express permission of the
+author.
+
+Dependent Gems referenced in the Gemfile are licensed 
+according to thier individual licenses.
