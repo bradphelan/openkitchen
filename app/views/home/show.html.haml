@@ -2,7 +2,8 @@
   .row
     .span12
       .teaser
-        = image_tag "front_image_block_teaser.jpg"
+        %a(data-toggle="modal" data-target="#teaser-wrapper" href="#")
+          = image_tag "front_image_block_teaser.jpg"
 
 
   -# Note all the below columns are made the same height
@@ -44,4 +45,12 @@
       .well.clearfix
         :markdown
           put sponser info here ...
+
+
+  #teaser-wrapper.modal.hide.fade(data-video=@video)
+    .modal-body
+    .modal-footer
+      #fb-root
+      %script{:src => "http://connect.facebook.net/en_US/all.js#appId=128707317209423&xfbml=1"}
+      %fb:like{:colorscheme => "dark", :font => "", :href => "www.openkitchen.at", :send => "false", :show_faces => "true", :width => "450"}
 
