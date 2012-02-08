@@ -32,11 +32,11 @@ end
 
 shared_steps "login" do |email, password|
 
-  When "I goto the the home page" do
+  When "I visit the home page" do
     page.visit homepage
   end
 
-  When "I go to click sign up " do
+  When "I go to click 'sign in'" do
     click_on 'Sign in'
   end
   
@@ -46,6 +46,9 @@ shared_steps "login" do |email, password|
       fill_in 'Password'              , :with => password
       click_on 'Sign in'
     end
+  end
+  
+  Then "I should be logged in" do
     page.should have_content 'Signed in successfully'
   end
 end
