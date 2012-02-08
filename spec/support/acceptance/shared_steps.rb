@@ -21,7 +21,7 @@ shared_steps "sign up" do |email, password|
   end
 
   Then "I should be signed up" do
-    page.should have_content 'You have signed up successfully'
+    page.should have_content 'You have completed registration'
   end
 
   And "I should be fully registered" do
