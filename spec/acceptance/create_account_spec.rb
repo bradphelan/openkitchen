@@ -136,3 +136,50 @@ feature "Creating an event" do
 
 end
 
+feature "Inviting somebody to an event" do
+  background do
+    @password = "xxxxxx"
+    @owner = Factory :registered_user, :password => @password
+    @event = Factory :event, :owner => @owner, :name => "Party GAGA"
+    @guest_email = "joe@bigdumbjoe.com"
+  end
+
+  Steps do
+    include_steps "login", @owner.email, @password
+
+    Given "I am editing an event I own" do
+      visit edit_event_path(@event)
+    end
+
+    And "fill in an email address of a guest to invite and click send" do
+      within "form.invite-guest" do
+        fill_in "email", :with => @guest_email
+        click_on "Send!"
+      end
+    end
+
+    When "the guest looks in thier email" do
+      @email = open_last_email
+    end
+
+    Then "they shall find an email delivered to themselves" do
+      @email.should be_delivered_to @guest_email
+    end
+
+    When "I follow the invite link in the email" do
+      visit_in_email "Goto invitation"
+    end
+
+    Then "I should be on the page for the event" do
+      page.should have_content "You are invited to"
+      page.find_field("Name").value.should == "Party GAGA"
+    end
+
+    And "I should not be fully registered" do
+      page.should have_selector "#complete_registration"
+    end
+
+
+  end
+
+end

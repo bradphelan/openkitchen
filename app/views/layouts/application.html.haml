@@ -27,9 +27,8 @@
 
     #page
       .container
-        .row
-          .content.span12
-            = render :partial=> 'common/flashes'
-            = yield
+        .content
+          = render :partial=> 'common/flashes'
+          = yield
   %footer
     = yield :scripts
