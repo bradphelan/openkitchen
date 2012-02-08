@@ -10,6 +10,7 @@ group :test, :development do
   gem 'sqlite3'
   gem 'hpricot'
   gem 'ruby_parser'
+  gem 'steak'
 end
 
 
@@ -76,3 +77,5 @@ gem "omniauth-facebook"
 
 gem 'gmaps4rails', :git => 'https://github.com/apneadiving/Google-Maps-for-Rails.git'
 
+
+gem 'vimeo'
