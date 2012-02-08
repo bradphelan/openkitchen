@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
 
 
   # Returns the invitation
-  def invite email, host
+  def invite email
 
       # Squeel notation does not work!
       # See https://github.com/ernie/squeel/issues/93
@@ -52,8 +52,10 @@ class Event < ActiveRecord::Base
       unless invitation
         self.invitees << u
         invitation = self.invitations.where{user_id==my{u.id}}.first
-        InviteMailer.invite_email(invitation, host).deliver
+        InviteMailer.invite_email(invitation).deliver
       end
+
+      invitation
 
   end
 

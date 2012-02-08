@@ -1,0 +1,12 @@
+- @event = event
+- disabled_hash = { :disabled => disabled }
+= f.inputs do
+  = f.input :name, :input_html => disabled_hash
+  = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]) }.merge(disabled_hash)
+  = f.input :timezone, :as => :time_zone, :input_html => disabled_hash
+  = f.input :street, :as => :string, :input_html => disabled_hash
+  = f.input :city, :as => :string, :input_html => disabled_hash
+  = f.input :country, :as => :string, :input_html => disabled_hash
+  
+-if not disabled 
+  = f.buttons

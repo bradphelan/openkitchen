@@ -22,6 +22,8 @@ class EventsController < ApplicationController
 
     @event = current_user.events_as_owner.create params[:event]
     if @event.valid?
+      # TODO i18n this
+      flash[:notice] = "Event '#{@event.name}' has been created"
       redirect_to events_path
     else
       render :new

@@ -1,5 +1,4 @@
 - @event = _event
-- disabled = { :disabled => ( cannot? :edit, @event ) }
 
 .edit_event
   - if  @event.owner == current_user
@@ -9,16 +8,8 @@
   = semantic_form_for @event do |f|
     .row
       .span4
-        = f.inputs do
-          = f.input :name, :input_html => disabled
-          = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]) }.merge(disabled)
-          = f.input :timezone, :as => :time_zone, :input_html => disabled
-          = f.input :street, :as => :string, :input_html => disabled
-          = f.input :city, :as => :string, :input_html => disabled
-          = f.input :country, :as => :string, :input_html => disabled
-          
-        -if can? :edit, @event
-          = f.buttons
+        - disabled = cannot? :edit, @event
+        = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => disabled }
       .span3
         - if can? :edit, @event
           %ul.tabs.nav.nav-tabs#event_description_editor
