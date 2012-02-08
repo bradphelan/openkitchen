@@ -12,6 +12,7 @@ group :test, :development do
   gem 'ruby_parser'
   gem 'steak'
   gem 'email_spec'
+  gem 'rspec-example_steps'
 end
 
 

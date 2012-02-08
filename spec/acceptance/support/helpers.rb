@@ -13,29 +13,12 @@ module HelperMethods
     end
   end
 
-  def sign_up_on_home_page options
-    user = options.delete :user
-    password = options.delete :password
-    visit homepage
-    click_on 'Sign up'
-    within ".devise" do
-      fill_in 'Email'                 , :with => "joe@bigman.com"
-      fill_in 'Password'              , :with => "xxxxxx"
-      fill_in 'Password confirmation' , :with => "xxxxxx"
-      click_on 'Sign up'
-    end
-  end
-
   def change_password_to password
     within ".devise" do
       fill_in "New password", :with => password
       fill_in "Confirm new password", :with => password
       click_on "Change my password"
     end
-  end
-
-  def user_should_be_signed_in_successfully
-    page.should have_content 'Signed in successfully'
   end
 
   def user_should_not_be_signed_in_successfully

@@ -195,6 +195,8 @@ GEM
       rspec-expectations (~> 2.8.0)
       rspec-mocks (~> 2.8.0)
     rspec-core (2.8.0)
+    rspec-example_steps (0.2.0)
+      rspec-core (> 2.0.0)
     rspec-expectations (2.8.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
@@ -276,6 +278,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   rails (~> 3.2.0)
+  rspec-example_steps
   rspec-rails (>= 2.0.1)
   ruby_parser
   shoulda-matchers
