@@ -21,7 +21,8 @@
               -else
                 %li#complete_registration=button_to "Complete Registration", users_register_path, :method => :post
             -else
-              %li=link_to "Sign in", new_user_session_path
+              %li.sign_in=link_to "Sign in", new_user_session_path
+              %li.sign_up=link_to "Sign up", new_user_registration_path
     
 
     #page
