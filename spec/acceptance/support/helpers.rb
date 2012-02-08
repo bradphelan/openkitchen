@@ -26,6 +26,14 @@ module HelperMethods
     end
   end
 
+  def change_password_to password
+    within ".devise" do
+      fill_in "New password", :with => password
+      fill_in "Confirm new password", :with => password
+      click_on "Change my password"
+    end
+  end
+
   def user_should_be_signed_in_successfully
     page.should have_content 'Signed in successfully'
   end

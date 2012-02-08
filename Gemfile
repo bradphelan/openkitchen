@@ -11,6 +11,7 @@ group :test, :development do
   gem 'hpricot'
   gem 'ruby_parser'
   gem 'steak'
+  gem 'email_spec'
 end
 
 
@@ -79,3 +80,4 @@ gem 'gmaps4rails', :git => 'https://github.com/apneadiving/Google-Maps-for-Rails
 
 
 gem 'vimeo'
+

@@ -5,4 +5,4 @@
 
   #{@invitation.event.name}
 
-= link_to "Goto invitation", token_invitations_url(:id => @invitation.token, :host => @hostname)
+= link_to "Goto invitation", token_invitations_url(:id => @invitation.token, :host => @hostname), :id => "invitation_link"
