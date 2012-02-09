@@ -16,4 +16,17 @@ module EventsHelper
             "disableDefaultUI" => true})
   end
 
+  def link_to_markdown
+    link_to("Edit with markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", :class => "markdown_popover")
+
+  end
+
+  def santized_description_html event
+    sanitize event.description_unsanitzed_html
+  end
+
+  def email_typeahead form
+    form.input :email, :label => 'email',  :as => :email, :input_html => { :value => "", :placeholder => "email address", "data-provide" => "typeahead", "data-source"=> current_user.friends_emails.to_json, :autocomplete => 'off' }
+  end
+
 end

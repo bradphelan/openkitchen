@@ -1,12 +1,11 @@
 .well
   = render :partial => 'edit', :locals => { _event: @event }
 
-.well
-  = render :partial => 'invite_guests', :locals => { _event: @event }
+= render :partial => 'invite_guests', :locals => { _event: @event }
 
 .well
   = render :partial => 'guests', :locals => { _event: @event }
 
 .well
-  = render :partial => 'things_to_bring', :locals => { _event: @event }
+  = render :partial => 'catering', :locals => { _event: @event }
 

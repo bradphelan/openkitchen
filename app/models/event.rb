@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
   end
 
   def datetime
-    self[:datetime] || Time.now
+    self[:datetime].in_time_zone timezone
   end
 
   # Owner should be implicityly

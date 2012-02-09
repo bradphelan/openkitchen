@@ -1,11 +1,14 @@
 
-%h2 Invite a guest
-
 - @event = _event
 
 - if can? :edit, @event
-  = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked invite-guest" } do |f|
-    = f.inputs do
-      = f.input :email, :label => 'email',  :as => :email, :input_html => { :value => "", :placeholder => "email address", "data-provide" => "typeahead", "data-source"=> current_user.friends_emails.to_json, :autocomplete => 'off' }
-    = f.buttons do
-      = f.commit_button :label => "Send!"
+
+  .well
+
+    %h2 Invite a guest
+
+    = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked invite-guest" } do |f|
+      = f.inputs do
+        = email_typeahead f
+      = f.buttons do
+        = f.commit_button :label => "Send!"
