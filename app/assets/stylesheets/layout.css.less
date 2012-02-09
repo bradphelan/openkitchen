@@ -1,9 +1,4 @@
-@baseFontSize: 22px;
-@baseLineHeight: 18px;
-
-@import "twitter/bootstrap";
-@import "twitter/bootstrap/responsive";
-@import "defaults.css.less";
+@import "openkitchen/bootstrap.less";
 
 @brand-width: 320px;
 @brand-height: 46px;
@@ -28,6 +23,9 @@ a.brand {
 }
 
 #page {
+  .content {
+    margin-top: @brand-padding;
+  }
   padding-top: @brand-height + @brand-padding*2;
 }
 
@@ -40,14 +38,6 @@ label {
       background-attachment: scroll;
 
   }}
-
-
-
-
-
-form {
-  input {
-    font-size: 16px }}
 
 li#complete_registration {
   form {

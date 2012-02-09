@@ -1,0 +1,47 @@
+@import "openkitchen/bootstrap-bootstrap.less";
+@import "openkitchen/colors.less";
+
+// BOOTSTRAP FIXES
+
+
+h1 {
+  font-size: @baseFontSize * 2;
+  small {
+    font-size: @baseFontSize * 1.5 * 18 / 30;
+  }
+}
+
+h2 {
+  font-size: @baseFontSize * 2 * 24 / 30;
+  small {
+    font-size: @baseFontSize * 1.5 * 24 / 30;
+  }
+}
+
+h3 {
+  font-size: @baseFontSize * 2 * 18 / 30;
+  small {
+    font-size: @baseFontSize * 1.5 * 18 / 30;
+  }
+
+}
+h4 {
+  font-size: @baseFontSize * 2 * 14 / 30;
+  small {
+    font-size: @baseFontSize * 1.5 * 14 / 30;
+  }
+}
+h5 {
+  font-size: @baseFontSize * 2 * 12 / 30;
+}
+h6 {
+  font-size: @baseFontSize * 2 * 11 / 30;
+}
+
+select, input[type="file"] {
+  height: @baseLineHeight !important;
+  *margin-top: 4px; /* For IE7, add top margin to align select with labels */
+  line-height: @baseLineHeight;
+}
+
+
