@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/bradphelan/less-rails.git
+  revision: 452628827954f753bd70175ce54a38b2af60cae5
+  specs:
+    less-rails (2.1.5)
+      actionpack (>= 3.1)
+      less (~> 2.0.7)
+
+GIT
   remote: https://github.com/apneadiving/Google-Maps-for-Rails.git
   revision: 75fc25d55f79415145c8a945cc7b4aa0f7c7a7d8
   specs:
@@ -131,9 +139,6 @@ GEM
     less (2.0.9)
       commonjs (~> 0.2.0)
       therubyracer (~> 0.9.9)
-    less-rails (2.1.5)
-      actionpack (>= 3.1)
-      less (~> 2.0.7)
     less-rails-bootstrap (2.0.2)
       less-rails (~> 2.1.0)
     libv8 (3.3.10.4)
@@ -274,6 +279,7 @@ DEPENDENCIES
   hpricot
   jquery-rails
   koala
+  less-rails!
   less-rails-bootstrap
   omniauth-facebook
   pg

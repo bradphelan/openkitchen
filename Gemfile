@@ -21,6 +21,7 @@ end
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'less-rails', :git => "git://github.com/bradphelan/less-rails.git"
   gem 'less-rails-bootstrap'
 end
 
