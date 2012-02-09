@@ -4,7 +4,7 @@
 
 $(document).ready =>
   wrapper = $('.home #teaser-wrapper')
-  if wrapper?
+  if not wrapper.empty
     video_id = wrapper.attr('data-video')
 
     player = null
