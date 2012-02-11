@@ -20,3 +20,4 @@ err.txt
 .sass-cache
 public/stylesheets/*.css
 .sendgrid
+vars
