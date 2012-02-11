@@ -2,9 +2,9 @@
 %html
   %head
     %title Open Kitchen
-    = javascript_include_tag "http://a.vimeocdn.com/js/froogaloop2.min.js"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
+    = yield :scripts
     = csrf_meta_tags
     <meta name="viewport" content="width=320"> 
 
