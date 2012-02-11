@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: resources
+#
+#  id         :integer         primary key
+#  name       :string(255)
+#  quantity   :integer
+#  units      :string(255)
+#  event_id   :integer
+#  created_at :timestamp
+#  updated_at :timestamp
+#
+
 class Resource < ActiveRecord::Base
   belongs_to :event
   has_many :resource_producers, :dependent => :destroy

@@ -13,6 +13,8 @@ group :test, :development do
   gem 'steak'
   gem 'email_spec'
   gem 'rspec-example_steps'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  
 end
 
 

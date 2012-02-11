@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id          :integer         primary key
+#  owner_id    :integer
+#  created_at  :timestamp
+#  updated_at  :timestamp
+#  name        :string(255)
+#  datetime    :timestamp
+#  timezone    :string(255)
+#  street      :string(255)
+#  city        :string(255)
+#  country     :string(255)
+#  latitude    :float
+#  longitude   :float
+#  gmaps       :boolean
+#  description :text
+#
+
 class Event < ActiveRecord::Base
 
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id

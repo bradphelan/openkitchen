@@ -1,10 +1,13 @@
 GIT
   remote: git://github.com/bradphelan/less-rails.git
   revision: 452628827954f753bd70175ce54a38b2af60cae5
+  remote: git://github.com/ctran/annotate_models.git
+  revision: a43c08f0eb4d69a48c6830630ebb60e35ccb2d2d
   specs:
     less-rails (2.1.5)
       actionpack (>= 3.1)
       less (~> 2.0.7)
+    annotate (2.4.1.beta1)
 
 GIT
   remote: https://github.com/apneadiving/Google-Maps-for-Rails.git
@@ -262,6 +265,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   bluecloth
   cancan
   capybara
