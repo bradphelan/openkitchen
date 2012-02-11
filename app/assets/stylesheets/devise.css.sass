@@ -1,0 +1,34 @@
+.devise
+  margin-top: 2em
+  h2
+    margin-bottom: 1em
+
+  a
+    display: block
+
+  // Kill the devise line break and let
+  // bootstrap format the form
+  br
+    display: none
+
+  form.user_edit, form.new_user
+    label
+      float: none !important
+      display: block
+      text-align: left !important
+    input
+      float: none !important
+      display: block
+      text-align: left !important
+      margin-bottom: 1em
+    input[type='checkbox']
+      clear: none
+      display: inline
+      margin-top: 1.5em
+    label[for='user_remember_me']
+      display: inline
+      margin-left: 1em
+    input[type='submit']
+      .btn
+    div
+      display: block

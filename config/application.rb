@@ -65,12 +65,7 @@ module Gobbq
     # Needed for heroku
     config.assets.initialize_on_precompile = false
 
-    if config.respond_to? :less
-      config.app_generators.stylesheet_engine :less
-      config.less.paths << File.join(Rails.root, 'app', 'assets', 'frameworks')
-      config.less.paths << File.join(Rails.root, 'app', 'assets', 'stylesheets', 'frameworks')
-      config.less.compress = false
-    end
+    config.app_generators.stylesheet_engine :sass
 
     if Rails.env == "production"
       config.action_mailer.default_url_options = {:host => "openkitchenapp.herokuapp.com"}
