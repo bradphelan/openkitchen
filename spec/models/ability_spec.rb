@@ -16,9 +16,18 @@ describe Ability do
     @resource0 = @event0.resources.create! :name => "xxx"
     @resource1 = @event1.resources.create! :name => "yyy"
 
-    @resource_producer0 = ResourceProducer.new :resource => @resource0, :invitation => @invitation0
-    @resource_producer1 = ResourceProducer.new :resource => @resource0, :invitation => @invitation1
-    @resource_producer2 = ResourceProducer.new :resource => @resource1, :invitation => @invitation0
+    @resource_producer0 = ResourceProducer.new do |rp|
+      rp.resource = @resource0 
+      rp.invitation = @invitation0
+    end
+    @resource_producer1 = ResourceProducer.new do |rp| 
+      rp.resource = @resource0 
+      rp.invitation = @invitation1
+    end
+    @resource_producer2 = ResourceProducer.new do |rp|
+      rp.resource = @resource1
+      rp.invitation = @invitation0
+    end
   end
 
   subject { Ability.new(@user0) }

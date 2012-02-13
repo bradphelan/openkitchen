@@ -59,7 +59,9 @@ class Invitation < ActiveRecord::Base
   attr_accessible 
 
   def self.generate_token
-    SecureRandom.hex(32)
+    # See http://stackoverflow.com/questions/7437944/sqlite3-varchar-matching-with-like-but-not for
+    # why we need force_encoding
+    SecureRandom.hex(32).force_encoding('UTF-8')
   end
 
   def self.generate_unique_token
