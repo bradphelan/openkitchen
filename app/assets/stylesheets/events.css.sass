@@ -66,26 +66,29 @@ input.resource_quantity_button
         @extend .icon-fire
 
 .comments
-  .comment
-    border-bottom: solid 1px $grayLighter
-    border-top: solid 1px $white
-    border-left: none
-    border-right: none
+  textarea
+    width: 100%
+    height: 5em
 
-    padding-top: 0.5em
-    padding-left: 0.5em
-    margin-left: -0.5em
+  ul
+    @extend .unstyled
+    li.comment
+      border-bottom: solid 1px $grayLighter
+      border-top: solid 1px $white
+      border-left: none
+      border-right: none
 
-    textarea
-      width: 100%
+      padding-top: 0.5em
+      padding-left: 0.5em
+      margin-left: -0.5em
 
 
-    .author
-      font-size: $baseFontSize * 0.8
-      color: $blue
-      float: left
-      margin-right: 1em
-    .date
-      font-size: $baseFontSize * 0.6
+      .author
+        font-size: $baseFontSize * 0.8
+        color: $blue
+        float: left
+        margin-right: 1em
+      .date
+        font-size: $baseFontSize * 0.6
 
-    
+      
