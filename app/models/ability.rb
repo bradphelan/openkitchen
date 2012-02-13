@@ -44,7 +44,7 @@ class Ability
 
     # Can create a resource for the event I am invited to
     can [:show], Resource do |resource|
-      resource.event.invitations.where{user_id==my{user.id}}.count > 0
+      resource.event.invited? user
     end
 
     # Can update an invitation if the user owns it
@@ -63,6 +63,14 @@ class Ability
 
     # Can complete registration for self
     can [:register], User, :id => user.id
+
+    can [:comment_on], Event do |event|
+      event.invited? user
+    end
+
+    can [:create, :read], Comment do |comment|
+      comment.user_id == user.id and can?(:comment_on, comment.commentable)
+    end
 
   end
 end

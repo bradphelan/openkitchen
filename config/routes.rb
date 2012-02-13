@@ -6,7 +6,12 @@ Gobbq::Application.routes.draw do
 
   resources :resources
 
-  resources :events
+  resources :events do
+    resources :comments
+    member do
+      post :invite, :controller => :events, :action => :invite
+    end
+  end
 
   resources :invitations do
     collection do
@@ -17,11 +22,6 @@ Gobbq::Application.routes.draw do
     end
   end
 
-  resources :events do
-    member do
-      post :invite, :controller => :events, :action => :invite
-    end
-  end
 
   match "home" => "home#show"
 

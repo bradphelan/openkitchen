@@ -34,6 +34,8 @@ gem 'formtastic', :git => 'https://github.com/justinfrench/formtastic.git'
 gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => "2.0"
 
 gem "cancan"
+gem "inherited_resources"
+
 # gem "compass", '0.12.alpha.4'
 # gem "compass-bootstrap"
 # gem "compass-susy-plugin", :require => "susy"
@@ -86,3 +88,4 @@ gem 'gmaps4rails', :git => 'https://github.com/apneadiving/Google-Maps-for-Rails
 
 gem 'vimeo'
 
+gem 'acts_as_commentable_with_threading', :git => 'https://github.com/elight/acts_as_commentable_with_threading.git'

@@ -32,10 +32,14 @@ class Event < ActiveRecord::Base
 
   acts_as_gmappable
 
-  #acts_as_commentable
+  acts_as_commentable
 
   def description_unsanitzed_html
     BlueCloth.new(description).to_html
+  end
+
+  def invited? user
+      invitations.where{user_id==user.id}.count > 0
   end
 
   def gmaps4rails_address
