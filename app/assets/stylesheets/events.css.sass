@@ -67,16 +67,25 @@ input.resource_quantity_button
 
 .comments
   .comment
+    border-bottom: solid 1px $grayLighter
+    border-top: solid 1px $white
+    border-left: none
+    border-right: none
+
     padding-top: 0.5em
     padding-left: 0.5em
     margin-left: -0.5em
 
-    &:nth-child(odd)
-      background-color: $grayLighter
-      textarea
-        width: 100%
-        height: 5em
-  .attribution
-    font-size: $baseFontSize * 0.6
+    textarea
+      width: 100%
+
+
+    .author
+      font-size: $baseFontSize * 0.8
+      color: $blue
+      float: left
+      margin-right: 1em
+    .date
+      font-size: $baseFontSize * 0.6
 
     

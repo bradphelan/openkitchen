@@ -3,14 +3,12 @@
 
 .comments
   %h2 Discussion
-  - @comments.each do |comment|
-    .comment
-      %p.body=simple_format h(comment.body)
-      %p.attribution
-        %span.author=comment.user.name
-        %span.date=comment.updated_at.in_time_zone Time.zone
+  %ul
+    - @comments.each do |comment|
+      %li.comment
+        = render :partial => "comment", :locals => { :comment => comment }
   .new
-    = semantic_form_for [@event, Comment.build_from(@event, current_user, "")] do |f|
+    = semantic_form_for [@event, Comment.build_from(@event, current_user, "")], :remote => true do |f|
       .form
         = f.inputs do
           = f.input :body, :label => false
