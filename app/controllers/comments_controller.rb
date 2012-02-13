@@ -9,13 +9,19 @@ class CommentsController < InheritedResources::Base
   belongs_to :event
   actions :create, :destroy
 
+  load_and_authorize_resource :only => :destroy
+
 
   def create
     @event = parent
     @comment = Comment.build_from parent, 
       current_user.id, 
       params[:comment][:body]
+
+    authorize! :create, @comment
     @comment.save
+
+
 
     create! do |format|
       html = render_to_string :partial => "events/comment", :locals => { :event => parent, :comment => @comment }
@@ -25,6 +31,8 @@ class CommentsController < InheritedResources::Base
   end
 
   def destroy
+
+    authorize! :destroy, @comment
     # Why is this necessary
     destroy! do |format|
       format.json { render :json => @comment }

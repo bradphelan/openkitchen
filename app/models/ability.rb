@@ -72,8 +72,6 @@ class Ability
       comment.user_id == user.id and can?(:comment_on, comment.commentable)
     end
 
-    # These are only valid for event based comments. Migt
-    # need to rework if I use comments on other models
     can [:destroy], Comment, :user_id => user.id
     can [:destroy], Comment do |comment|
       comment.commentable.owner_id == user.id
