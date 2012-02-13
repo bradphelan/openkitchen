@@ -1,4 +1,6 @@
 %li.comment
   %span.author=comment.user.name
   %span.body=simple_format h(comment.body)
-  %span.date=comment.updated_at.in_time_zone Time.zone
+  %span.date
+    =distance_of_time_in_words_to_now comment.updated_at, true
+    ago
