@@ -10,6 +10,7 @@ class CommentsController < InheritedResources::Base
   actions :create, :destroy
 
   load_and_authorize_resource :only => :destroy
+  load_and_authorize_resource :comment, :through => :event, :only => :destroy
 
 
   def create
@@ -21,8 +22,6 @@ class CommentsController < InheritedResources::Base
     authorize! :create, @comment
     @comment.save
 
-
-
     create! do |format|
       html = render_to_string :partial => "events/comment", :locals => { :event => parent, :comment => @comment }
       format.js { render :js => html, :content_type => "html" }
@@ -32,7 +31,6 @@ class CommentsController < InheritedResources::Base
 
   def destroy
 
-    authorize! :destroy, @comment
     # Why is this necessary
     destroy! do |format|
       format.json { render :json => @comment }

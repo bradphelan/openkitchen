@@ -25,6 +25,8 @@ class Comment < ActiveRecord::Base
   validates_presence_of :user
 
   validates_length_of :body, :minimum => 1, :allow_blank => false
+
+  attr_accessible :body
   
   # NOTE: install the acts_as_votable plugin if you 
   # want user to vote on the quality of comments.

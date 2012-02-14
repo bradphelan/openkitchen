@@ -5,7 +5,7 @@ class InvitationsController < ApplicationController
   skip_before_filter :authenticate_user!
 
   # Does not need authorisation
-  check_authorization :except => :token
+  skip_authorization_check :only => :token
 
   load_and_authorize_resource :except => :token
 
