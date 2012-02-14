@@ -1,9 +1,16 @@
 class EventsController < ApplicationController
   respond_to :html, :js
 
-  load_and_authorize_resource :except => [:index, :create, :edit]
+  has_widgets do |root|
+    root << panel = widget("comments/panel", :comments, :event => @event)
+    root << panel = widget("comments/comment", :comment, :event => @event)
+  end
+  
 
-  check_authorization
+  load_and_authorize_resource :except => [:index, :create, :edit, :render_event_response]
+
+  # Apotomo entry point
+  load_resource :only => :render_event_response
 
   def index
     authorize! :index, Event

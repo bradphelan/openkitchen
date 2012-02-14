@@ -7,7 +7,6 @@ Gobbq::Application.routes.draw do
   resources :resources
 
   resources :events do
-    resources :comments
     member do
       post :invite, :controller => :events, :action => :invite
     end

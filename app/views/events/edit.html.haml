@@ -7,7 +7,7 @@
   = render :partial => 'guests', :locals => { _event: @event }
 
 .well
-  = render :partial => 'comments', :locals => { _event: @event }
+  = render_widget :comments
 
 .well
   = render :partial => 'catering', :locals => { _event: @event }

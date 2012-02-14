@@ -63,6 +63,7 @@ gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"
 gem "squeel"
+gem "apotomo"
 
 gem "heroku"
 #gem "activeadmin"
@@ -71,6 +72,7 @@ group :test do
   gem "factory_girl_rails"
   gem "forgery"
   gem "shoulda-matchers"
+  gem "rspec-apotomo"
 end
 
 gem 'tabulous'
