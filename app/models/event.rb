@@ -36,6 +36,18 @@ class Event < ActiveRecord::Base
 
   acts_as_commentable
 
+  validates_presence_of :timezone, :name, :datetime
+
+  validates_length_of :name, :maximum => 80
+
+  validates_length_of :street, :maximum => 80
+  validates_length_of :city, :maximum => 80
+  validates_length_of :country, :maximum => 80
+
+  validates_numericality_of :latitude
+  validates_numericality_of :longitude
+  validates_length_of :description, :maximum => 4096 # characters
+
   #
   # Ensure the date of the event is always in the
   # timezone of the event
