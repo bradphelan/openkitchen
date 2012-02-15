@@ -1,8 +1,14 @@
-require 'openkitchen/authorizable_widget'
-
-class Comments::PanelWidget < OpenKitchen::AuthorizableWidget
+class Comments::PanelWidget < ApplicationWidget
 
   responds_to_event :comment
+
+  has_widgets do
+    @event = options[:event]
+    @comments = @event.root_comments
+    @comments.each do |comment|
+      self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
+    end
+  end
   
   #
   # Events
@@ -26,19 +32,30 @@ class Comments::PanelWidget < OpenKitchen::AuthorizableWidget
     authorize! :create, @comment
     @comment.save
 
+    #
+    # Append the comment to the list and clear the form
+    #
 
-    update({:state => :display}, @event)
+    render :text => <<-EOF
+      var w = $("##{widget_id}");
+      var m = "#{render_comment_for_js! @comment}";
+
+      // Append child
+      w.find("ul").append(m);
+      w.find("ul div:last-child").hide().fadeIn(500);
+
+      // Clear form
+      w.find("textarea").val("");
+    EOF
+    
   end
+
+
 
   #
   # Views
   #
-  def display(event = options[:event])
-    @event = event
-    @comments = @event.root_comments
-    @comments.each do |comment|
-      self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
-    end
+  def display
     render
   end
 
@@ -46,5 +63,10 @@ class Comments::PanelWidget < OpenKitchen::AuthorizableWidget
     render locals: { comments: comments}
   end
 
+  private
+
+  def render_comment_for_js! comment
+    render_widget_for_js! "comments/comment", "comment-#{comment.id}", :comment => comment
+  end
 
 end

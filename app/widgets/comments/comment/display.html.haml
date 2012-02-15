@@ -7,7 +7,7 @@
         =distance_of_time_in_words_to_now comment.created_at, true
         ago
     - if can? :destroy, comment
-      = link_to url_for_event(:destroy, :source => :comment, :comment_id => comment.id),
+      = link_to url_for_event(:destroy, :source => widget_id, :comment_id => comment.id),
         remote: true, 
         class: "destroy", 
         title: t('comment.remove'), 

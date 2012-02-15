@@ -1,6 +1,4 @@
-require 'openkitchen/authorizable_widget'
-
-class Comments::CommentWidget < OpenKitchen::AuthorizableWidget
+class Comments::CommentWidget < ApplicationWidget
 
   responds_to_event :destroy
 
@@ -15,7 +13,10 @@ class Comments::CommentWidget < OpenKitchen::AuthorizableWidget
     authorize! :destroy, @comment
     @comment.destroy
 
-    replace "#comment-#{@comment.id}", :text => '', 
+    render :text => <<-EOF
+      var w = $("##{widget_id}");
+      w.fadeOut(500).remove();
+    EOF
   end
 
   #
@@ -23,7 +24,7 @@ class Comments::CommentWidget < OpenKitchen::AuthorizableWidget
   #
   
   def display(comment=options[:comment])
-    render locals: { comment: comment }
+    render locals: { event: @event, comment: comment }
   end
 
 end

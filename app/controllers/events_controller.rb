@@ -3,7 +3,6 @@ class EventsController < ApplicationController
 
   has_widgets do |root|
     root << panel = widget("comments/panel", :comments, :event => @event)
-    root << panel = widget("comments/comment", :comment, :event => @event)
   end
   
 
