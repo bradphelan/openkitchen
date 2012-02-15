@@ -38,6 +38,83 @@ feature 'Sign in as an unregistered user' do
 
 end
 
+feature "Creating an event" do
+  background do
+    @password = "xxxxxx"
+    @create_event_selector = "Create New Event"
+    visit homepage
+  end
+
+  Steps do
+    Given "An unregistered user" do
+      @user = Factory :user, :password => @password
+    end
+
+    include_steps "login", @user.email, @password
+
+    When "I click on 'events'" do
+      click_on "Events"
+    end
+
+    Then "I should be on the events page" do
+      page.should have_content "Welcome to your events"
+    end
+
+    Then "There should be no 'create new event' button" do
+      page.should_not have_link @create_event_selector
+    end
+  end
+
+  Steps  do
+
+    Given "A registered user" do
+      @user = Factory :registered_user, :password => @password
+    end
+
+    include_steps "login", @user.email, @password
+
+    When "I click on 'events'" do
+      click_on "Events"
+    end
+
+    Then "I should be on the events page" do
+      page.should have_content "Welcome to your events"
+    end
+
+    Then "there should be a 'create new event' button" do
+      page.should have_link @create_event_selector
+    end
+
+    When "I click on 'create new event'" do
+      click_on @create_event_selector
+    end
+
+    Then "I am presented with a form to create the event" do
+      page.should have_content "Create an event"
+    end
+
+    When "I fill in the form" do
+      within "form" do
+        fill_in "Name", :with => "My Party"
+        fill_in "Date", :with => "09/02/2012"
+        select "(GMT+01:00) Vienna", :from => "Timezone"
+        fill_in "Street", :with => "6 Astolat Ave"
+        fill_in "City", :with => "Melbourne"
+        fill_in "Country", :with => "Australia"
+      end
+    end
+
+    And "click 'Create Event'" do
+      click_on "Create Event"
+    end
+
+    Then "the event will have been created" do
+      page.should have_content "Event 'My Party' has been created"
+    end
+  end
+
+
+end
 
 feature 'Completing registration' do
   background do
@@ -86,55 +163,6 @@ feature 'Completing registration' do
 
 end
 
-feature "Creating an event" do
-  background do
-    @password = "xxxxxx"
-    @user = Factory :registered_user, :password => @password
-    visit homepage
-  end
-
-  Steps do
-
-    include_steps "login", @user.email, @password
-
-    When "I click on 'events'" do
-      click_on "Events"
-    end
-
-    Then "I should be on the events page" do
-      page.should have_content "Welcome to your events"
-    end
-
-    When "I click on 'create new event'" do
-      click_on "Create New Event"
-    end
-
-    Then "I am presented with a form to create the event" do
-      page.should have_content "Create an event"
-    end
-
-    When "I fill in the form" do
-      within "form" do
-        fill_in "Name", :with => "My Party"
-        fill_in "Date", :with => "09/02/2012"
-        select "(GMT+01:00) Vienna", :from => "Timezone"
-        fill_in "Street", :with => "6 Astolat Ave"
-        fill_in "City", :with => "Melbourne"
-        fill_in "Country", :with => "Australia"
-      end
-    end
-
-    And "click 'Create Event'" do
-      click_on "Create Event"
-    end
-
-    Then "the event will have been created" do
-      page.should have_content "Event 'My Party' has been created"
-    end
-  end
-
-
-end
 
 feature "Inviting somebody to an event" do
   background do

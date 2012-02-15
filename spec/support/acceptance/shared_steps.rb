@@ -58,3 +58,18 @@ shared_steps "login" do |email, password|
     page.should have_content 'Signed in successfully'
   end
 end
+
+shared_steps "logout" do |email, password|
+
+  When "I visit my account page" do
+    page.visit edit_users_path
+  end
+
+  When "I go to click 'sign in'" do
+    click_on 'Sign out'
+  end
+  
+  Then "I should be logged out" do
+    page.should have_content 'Signed out successfully'
+  end
+end
