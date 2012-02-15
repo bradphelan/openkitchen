@@ -13,7 +13,8 @@ class EventsController < ApplicationController
 
   def index
     authorize! :index, Event
-    @events = Set.new(current_user.events_as_owner.all) + Set.new(current_user.events_as_guest.all)
+    @events_as_owner = current_user.events_as_owner
+    @events_as_guest = current_user.events_as_guest.where{invitations.user_id != my{current_user.id}}
     render :index
   end
 

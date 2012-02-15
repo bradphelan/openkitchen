@@ -1,24 +1,42 @@
-.event_box
-  %h1 Welcome to your events
-  - if can? :create, Event
-    = link_to "Create New Event", new_event_url 
-  - else
-    %a.popover-trigger(href="#" 
-      data-title="Event Creation Disabled" 
-      data-content='Please complete registration to create events') 
-      Create new event
+.index_events
+  .well
+    %h1 Welcome to your events
+    - if can? :create, Event
+      = link_to t("Create New Event"), new_event_url 
+    - else
+      %a.popover-trigger(href="#" 
+        data-title="Event Creation Disabled" 
+        data-content='Please complete registration to create events') 
+        = t("Create New Event")
 
 
-.event_box
-  %h2 Current Events
-  %ul.unstyled
-    - @events.each do |event|
-      %li
-        =link_to event.name, edit_event_path(event.id)
-        %p
-          hosted by
-          %b=event.owner.email
+  .well
+    %h2 I am hosting
+    %ul.unstyled
+      - @events_as_owner.each do |event|
+        %li
+          .row
+            .span2
+              =link_to event.name, edit_event_path(event.id)
+            .span2
+              = event.format_date
+            .span2
+              = event.format_time
+          .row
+            .span11
+              %small
+                = event.description
 
 
+  .well
+    %h2 I am invited to
+    %ul.unstyled
+      - @events_as_guest.each do |event|
+        %li
+          =link_to event.name, edit_event_path(event.id)
+          %p
+            %small
+              hosted by
+              %b=event.owner.name
 
 
