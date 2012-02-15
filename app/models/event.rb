@@ -59,11 +59,15 @@ class Event < ActiveRecord::Base
     ActiveSupport::TimeZone[tz].parse dt.try(:strftime, format)
   end
   before_save do
-    self[:datetime] = Event.convert_to_timezone timezone, self[:datetime]
+    tz = timezone || "UTC"
+    self[:datetime] = Event.convert_to_timezone tz, self[:datetime]
   end
 
   def datetime
-    self[:datetime].in_time_zone(self.timezone)
+    if self[:datetime]
+      tz = timezone || "UTC"
+      self[:datetime].in_time_zone(tz)
+    end
   end
 
   def description_unsanitzed_html
