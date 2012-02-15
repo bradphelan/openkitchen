@@ -23,13 +23,9 @@ RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -41,5 +37,20 @@ RSpec.configure do |config|
 
   config.before :each do
     ActionMailer::Base.deliveries.clear
+  end
+
+  Capybara.javascript_driver = :selenium
+  config.use_transactional_fixtures = false
+  config.before do
+    if example.metadata[:js]
+      puts "Truncating DB"
+      DatabaseCleaner.strategy = :truncation
+    else
+      DatabaseCleaner.strategy = :transaction
+    end
+    DatabaseCleaner.start
+  end
+  config.after do
+    DatabaseCleaner.clean
   end
 end

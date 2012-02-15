@@ -1,5 +1,11 @@
 require 'acceptance/acceptance_helper'
 
+shared_steps "show me the page" do
+  Then "show me the page" do
+    save_and_open_page
+  end
+end
+
 shared_steps "sign up" do |email, password|
 
   When "I goto the the home page" do
