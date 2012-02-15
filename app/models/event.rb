@@ -30,9 +30,29 @@ class Event < ActiveRecord::Base
 
   attr_accessible  :name, :datetime, :timezone, :street, :city, :country, :description
 
+  #skip_time_zone_conversion_for_attributes = [ :datetime ]
+    
   acts_as_gmappable
 
   acts_as_commentable
+
+  #
+  # Ensure the date of the event is always in the
+  # timezone of the event
+  #
+  # TODO test this code. Scary!
+  #
+  def self.convert_to_timezone tz, dt
+    format = '%d/%m/%Y %l:%M %p'
+    ActiveSupport::TimeZone[tz].parse dt.try(:strftime, format)
+  end
+  before_save do
+    self[:datetime] = Event.convert_to_timezone timezone, self[:datetime]
+  end
+
+  def datetime
+    self[:datetime].in_time_zone(self.timezone)
+  end
 
   def description_unsanitzed_html
     BlueCloth.new(description).to_html
@@ -50,9 +70,6 @@ class Event < ActiveRecord::Base
     "http://maps.google.com/maps?q=#{gmaps4rails_address.gsub /\s/, '+'}"
   end
 
-  def datetime
-    self[:datetime].in_time_zone timezone
-  end
 
   # Owner should be implicityly
   # invited
@@ -86,16 +103,14 @@ class Event < ActiveRecord::Base
   end
 
 
+
   def format_date
     datetime.try(:strftime, Date::DATE_FORMATS[:default])
   end
 
-  def number_of_half_hour_intervals_since_midnight
-    datetime.seconds_since_midnight / 60 / 30
+  def format_time
+    datetime.try(:strftime, Date::DATE_FORMATS[:time_default])
   end
 
-  def time
-    datetime.to_time
-  end
 
 end

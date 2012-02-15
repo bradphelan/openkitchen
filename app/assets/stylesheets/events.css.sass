@@ -33,6 +33,23 @@ $small_map_height: 480 / 640 * $small_map_width
   textarea
     width: 100%
 
+  fieldset.datetime
+    .date
+      select
+        &:first-child
+          width: 35%
+        &:nth-child(2)
+          width: 40%
+        &:last-child
+          width: 20%
+        clear: none
+
+    .time
+      select
+        clear: none
+        width: 47%
+
+
 input.resource_quantity_button
   width: 10% !important
 

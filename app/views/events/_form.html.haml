@@ -2,10 +2,24 @@
 - disabled_hash = { :disabled => disabled }
 = f.inputs do
   = f.input :name, :input_html => disabled_hash
-  = f.input :datetime, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]) }.merge(disabled_hash)
+  -# = f.input :date, :label => "Date", :as => :string, :input_html => { :class => :datepicker, :value => @event.datetime.strftime(Date::DATE_FORMATS[:default]) }.merge(disabled_hash)
 
   - autofill = @event.timezone ? nil : 'autofill'
+
   = f.input :timezone, :as => :time_zone, :input_html => disabled_hash, :input_html => { :class => "timezone #{autofill}" }
+
+  -# Manually rolling this as formtastic-bootstrap just
+  -# puts text fields in here which is not what I want.
+  -# TODO extract the code into a helper
+  %fieldset.datetime.control-group
+    %label(for="event_datetime") Date
+    .controls
+      .controls
+        .date
+          = f.date_select :datetime, :label => "date",  :use_short_month => true, :start_year => Time.zone.now.year
+        .time
+          = f.time_select :datetime, :label => "time", :ignore_date => true, :ampm => true
+
 
   = f.input :street, :as => :string, :input_html => disabled_hash
   = f.input :city, :as => :string, :input_html => disabled_hash
