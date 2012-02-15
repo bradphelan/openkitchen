@@ -35,7 +35,7 @@ describe Event do
   end
   describe "creating" do
     before do
-      @event = @user.events_as_owner.create!
+      @event = @user.events_as_owner.create! :timezone => "UTC", :datetime => Time.zone.now, :name => "Foo", :description => "Bar"
     end
     it "should create the event and assign the user as owner" do
       @event.owner.should == @user

@@ -8,7 +8,7 @@ describe InvitationsController do
     
     @owner = Factory :user
     @guest = Factory :user
-    @event = @owner.events_as_owner.create!
+    @event = @owner.events_as_owner.create! :timezone => "UTC", :name => "foo", :datetime => Time.zone.now
     @invite = @event.invite @guest.email
   end
   describe "GET bad token" do

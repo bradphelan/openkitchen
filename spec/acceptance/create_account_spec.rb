@@ -101,7 +101,15 @@ feature "Creating an event" do
     When "I fill in the form" do
       within "form" do
         fill_in "Name", :with => "My Party"
-        fill_in "Date", :with => "09/02/2012"
+        within ".date" do
+          select "2017", :from => "event_datetime_1i"
+          select "Jul", :from => "event_datetime_2i"
+          select "12", :from => "event_datetime_3i"
+        end
+        within ".time" do
+          select "08 PM", :from => "event_datetime_4i"
+          select "57", :from => "event_datetime_5i"
+        end
         select "(GMT+01:00) Vienna", :from => "Timezone"
         fill_in "Street", :with => "6 Astolat Ave"
         fill_in "City", :with => "Melbourne"
