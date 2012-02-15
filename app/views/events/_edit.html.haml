@@ -12,22 +12,9 @@
         = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => disabled }
       .span7
         - if can? :edit, @event
-
-          .tabbable
-
-            %ul.nav.nav-tabs#event_description_editor
-              %li.active
-                %a(href="#description_edit" data-toggle="pill") edit
-              %li
-                %a.show(href="#description_show" data-toggle="pill") show
-
-            .tab-content
-              #description_edit.tab-pane.active
-                = f.input :description, :as => :text, :hint => link_to_markdown
-              #description_show.tab-pane
-                = sanitize @event.description_unsanitzed_html
+          = f.input :description, :as => :text
         - else
-          = sanitize @event.description_unsanitzed_html
+          = simple_format h(@event.description)
     .row
       .span11
         -if @event.latitude and @event.longitude
