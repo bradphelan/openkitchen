@@ -16,6 +16,7 @@ a.brand
       padding-bottom: $brand-padding
       height: $brand-height
 
+// Below is a load of CSS Voodoo
 #page
   @media (min-width: 980px)
     padding-top: $brand-height + $brand-padding*2
@@ -25,10 +26,14 @@ a.brand
     background-color: lighten($blue, 50%)
     padding-bottom: $brand-padding
     padding-top: $brand-padding
+    @extend .container
+    @media (max-width: 480px)
+      padding-left: 0
+      padding-right: 0
     @media (min-width: 480px)
       padding-left: 2em
       padding-right: 2em 
-      +border-radius(0px 0px 10px 10px)
+    +border-radius(0px 0px 10px 10px)
 
 label
   padding-bottom: 5px
