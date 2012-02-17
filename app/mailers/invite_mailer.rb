@@ -5,7 +5,9 @@ class InviteMailer < ActionMailer::Base
     @invitation = invitation
     @host = @invitation.event.owner
     @guest = @invitation.user
-    mail(:to => @guest.email, :subject => "BBQ Invitation from #{@host.email}")
+    mail(:to => @guest.email, 
+         :subject => "OPENKITCHEN Invitation from #{@host.email}",
+         :from => "concierge@openkitchen.at" )
   end
 
 end
