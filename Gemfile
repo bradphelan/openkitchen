@@ -93,3 +93,5 @@ gem 'gmaps4rails', :git => 'https://github.com/apneadiving/Google-Maps-for-Rails
 gem 'vimeo'
 
 gem 'acts_as_commentable_with_threading', :git => 'https://github.com/elight/acts_as_commentable_with_threading.git'
+
+gem 'paperclip'

@@ -77,5 +77,10 @@ class Ability
       comment.commentable.owner_id == user.id
     end
 
+    # Profile
+    can [:edit, :update, :show], Profile, :user_id => user.id
+
+    can [:edit], User, :user_id => user.id
+
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120213122831) do
+ActiveRecord::Schema.define(:version => 20120217091020) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(:version => 20120213122831) do
     t.datetime "updated_at"
     t.string   "token"
     t.string   "status",     :default => "pending"
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "cookstars",           :default => 1
+    t.string   "timezone",            :default => "UTC", :null => false
+    t.string   "street"
+    t.string   "city"
+    t.string   "country"
+    t.string   "postcode"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "resource_producers", :force => true do |t|

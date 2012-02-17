@@ -94,6 +94,7 @@ GEM
       railties (~> 3.0)
     childprocess (0.3.0)
       ffi (~> 1.0.6)
+    cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -183,6 +184,11 @@ GEM
       omniauth (~> 1.0)
     onfire (0.2.0)
     orm_adapter (0.0.6)
+    paperclip (2.6.0)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
+      cocaine (>= 0.0.2)
+      mime-types
     pg (0.12.2)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -314,6 +320,7 @@ DEPENDENCIES
   jquery-rails
   koala
   omniauth-facebook
+  paperclip
   pg
   rails (~> 3.2.0)
   rspec-apotomo

@@ -9,6 +9,10 @@ Gobbq::Application.routes.draw do
 
   resources :resources
 
+  resources :users, :only => [] do
+    resource :profile, :only => [:edit, :show, :update]
+  end
+
   resources :events do
     member do
       post :invite, :controller => :events, :action => :invite
