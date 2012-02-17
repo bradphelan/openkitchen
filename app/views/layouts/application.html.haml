@@ -28,16 +28,22 @@
                   %li=link_to "Profile", edit_user_profile_path(current_user)
                 -else
                   %li#complete_registration=button_to "Complete Registration", users_register_path, :method => :post
+                %li=link_to "Sign out", destroy_user_session_path, :method => :delete
 
               -else
                 %li.sign_in=link_to "Sign in", new_user_session_path
                 %li.sign_up=link_to "Sign up", new_user_registration_path
+
+              = yield :navigation
     
 
     #page
       .content
         .container
           = render :partial=> 'common/flashes'
-          = yield
+          - if content_for? :content
+            = yield :content
+          - else
+            = yield
   %footer
     = yield :scripts
