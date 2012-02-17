@@ -60,4 +60,3 @@ Gobbq::Application.configure do
 
 end
 
-Paperclip.options[:storage] = :s3

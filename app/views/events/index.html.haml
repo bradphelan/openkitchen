@@ -14,7 +14,7 @@
     %h2
       .avatar
         - if current_user.profile.avatar.file?
-          = image_tag current_user.profile.avatar.url(:thumb)
+          = image_tag current_user.profile.avatar.expiring_url(120, :thumb)
         - else
           = image_tag "chef.jpg"
       I am hosting
@@ -43,7 +43,7 @@
             .img.span1
               .avatar
                 - if event.owner.profile.avatar.file?
-                  = image_tag event.owner.profile.avatar.url(:thumb)
+                  = image_tag event.owner.profile.avatar.expiring_url(120, :thumb)
                 - else
                   = image_tag "chef.jpg"
 

@@ -95,3 +95,5 @@ gem 'vimeo'
 gem 'acts_as_commentable_with_threading', :git => 'https://github.com/elight/acts_as_commentable_with_threading.git'
 
 gem 'paperclip'
+gem 'aws-sdk'
+
