@@ -1,0 +1,22 @@
+.well.profile.edit
+  %h2 Profile
+
+
+  = semantic_form_for @profile, :url => user_profile_path(@user), :html => { :multipart => true } do |f|
+    .row
+      = f.inputs do 
+        .span5
+          = f.input :street
+          = f.input :city
+          = f.input :postcode
+          = f.input :cookstars, :as => :select, :collection => 1..5
+        .span5
+          %span.avatar
+            - if @profile.avatar.file?
+              = image_tag @profile.avatar.url(:medium)
+            - else
+              = image_tag "chef.jpg"
+            = f.input :avatar
+    .row
+      .span11
+        = f.buttons

@@ -25,8 +25,10 @@
                 %li=link_to "Events", events_path
                 -if current_user.registration_completed?
                   %li=link_to "Account", edit_user_registration_path
+                  %li=link_to "Profile", edit_user_profile_path(current_user)
                 -else
                   %li#complete_registration=button_to "Complete Registration", users_register_path, :method => :post
+
               -else
                 %li.sign_in=link_to "Sign in", new_user_session_path
                 %li.sign_up=link_to "Sign up", new_user_registration_path

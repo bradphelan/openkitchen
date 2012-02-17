@@ -36,4 +36,7 @@ Gobbq::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
 end
+
+Paperclip.options[:storage] = :filesystem

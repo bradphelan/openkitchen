@@ -35,11 +35,10 @@ class User < ActiveRecord::Base
 
   has_many :invitations, :dependent => :destroy
 
-  has_one :profile
-  before_save do
-    unless profile
-      self.create_profile!
-    end
+  has_one :profile, :dependent => :destroy
+
+  after_create do
+    self.create_profile!
   end
 
   def name
