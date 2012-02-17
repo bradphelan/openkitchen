@@ -15,6 +15,11 @@ a.brand
       padding-top: $brand-padding
       padding-bottom: $brand-padding
       height: $brand-height
+      .nav-collapse
+        background-color: $grayDarker
+        &.in
+          border: 1px solid $gray
+        +border-radius(10px 10px 10px 10px)
 
 // Below is a load of CSS Voodoo
 #page
@@ -37,16 +42,4 @@ a.brand
 
 label
   padding-bottom: 5px
-
-li#complete_registration
-  form
-    .nav
-    margin: 0px
-    margin-top: 0.5em
-    input[type='submit']
-      .btn
-      .btn-primary
-      .btn-small
-
-
 
