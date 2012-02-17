@@ -128,5 +128,9 @@ class Event < ActiveRecord::Base
     datetime.try(:strftime, Date::DATE_FORMATS[:time_default])
   end
 
+  def format_datetime
+    "#{format_date} #{format_time}"
+  end
+
 
 end

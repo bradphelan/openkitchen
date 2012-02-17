@@ -24,10 +24,7 @@
               :minute_step => 15
   - else
 
-    %fieldset.datetime.control-group
-      %label Date
-      .controls
-        %input(disabled="disabled" value="#{@event.format_date} #{@event.format_time}")
+    = f.input :datetime, :label => t("Date"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
 
 
   = f.input :street, :as => :string, :input_html => disabled_hash
