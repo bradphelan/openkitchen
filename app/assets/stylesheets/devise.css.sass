@@ -1,34 +1,25 @@
 .devise
-  margin-top: 2em
-  h2
-    margin-bottom: 1em
+  label
+    margin-bottom: 0px !important
+    padding-bottom: 0px !important
+    margin-top: 0.5em
 
-  a
+  input
+    margin-top: 0px
+    margin-bottom: 0px
+    clear: left !important
     display: block
 
-  // Kill the devise line break and let
-  // bootstrap format the form
-  br
-    display: none
+  input[type="submit"], input[type="checkbox"]
+    margin-top: 0.5em
+    @extend .btn
+    @extend .btn-primary
 
-  form.user_edit, form.new_user
-    label
-      float: none !important
-      display: block
-      text-align: left !important
-    input
-      float: none !important
-      display: block
-      text-align: left !important
-      margin-bottom: 1em
-    input[type='checkbox']
-      clear: none
-      display: inline
-      margin-top: 1.5em
-    label[for='user_remember_me']
-      display: inline
-      margin-left: 1em
-    input[type='submit']
-      .btn
-    div
-      display: block
+
+  br
+    margin: 0px
+    padding: 0px
+    line-height: 0px
+    display: none
+    clear: both
+    
