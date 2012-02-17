@@ -3,11 +3,16 @@ $brand-height: 46px
 $brand-padding: 10px
 
 a.brand
-  background-image: image-url('logo.png')
+  @media (min-width: 480px)
+    background-image: image-url('logo.png')
+    height: $brand-height
+    width: $brand-width
+  @media (max-width: 480px)
+    background-image: image-url('logo-small.png')
+    height: $brand-height / 2
+    width: $brand-width / 2
   padding: 0px !important
   margin: 0px !important
-  height: $brand-height
-  width: $brand-width
 
 .navbar
   .navbar-inner
