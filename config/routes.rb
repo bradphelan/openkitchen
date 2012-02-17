@@ -16,6 +16,7 @@ Gobbq::Application.routes.draw do
   resources :events do
     member do
       post :invite, :controller => :events, :action => :invite
+      get  :ical, :controller => :events, :action => :ical
     end
   end
 

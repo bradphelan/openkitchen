@@ -24,6 +24,10 @@
               :minute_step => 15
   - else
 
+    %a{:href=>ical_event_path(event)}
+      %small
+        %i.icon-calendar
+        iCal
     = f.input :datetime, :label => t("Date"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
 
 

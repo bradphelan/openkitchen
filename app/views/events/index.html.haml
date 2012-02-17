@@ -51,6 +51,10 @@
               = link_to event.name, edit_event_path(event.id)
             .date.span2
               = event.format_date
+              %a{:href=>ical_event_path(event)}
+                %small
+                  %i.icon-calendar
+                  iCal
             .time.span2
               = event.format_time
           .row

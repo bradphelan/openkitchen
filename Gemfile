@@ -97,3 +97,4 @@ gem 'acts_as_commentable_with_threading', :git => 'https://github.com/elight/act
 gem 'paperclip'
 gem 'aws-sdk'
 
+gem 'icalendar'

@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   end
   
 
-  load_and_authorize_resource :except => [:index, :create, :edit, :render_event_response]
+  load_and_authorize_resource :except => [:index, :ical, :create, :edit, :render_event_response]
 
   # Apotomo entry point
   load_resource :only => :render_event_response
@@ -43,6 +43,10 @@ class EventsController < ApplicationController
     redirect_to edit_event_path
   end
 
+  def show
+    redirect_to :action => :edit
+  end
+
   def edit
     @event = Event.find params[:id]
     authorize! :read, @event
@@ -50,14 +54,31 @@ class EventsController < ApplicationController
     @mapping_data = [@event].to_gmaps4rails
   end
 
-  def show
-    render :edit
-  end
-
   def invite
     @invitation = @event.invite params[:invite][:email]
     redirect_to edit_event_path(@event)
   end
 
+  # TODO spec this.
+  def ical
+    require 'icalendar'
+    @event = Event.find params[:id]
+
+    authorize! :read, @event
+
+    @calendar = Icalendar::Calendar.new
+    event = Icalendar::Event.new
+    event.start = @event.datetime.strftime("%Y%m%dT%H%M%S")
+    event.end = (@event.datetime+5.hours).strftime("%Y%m%dT%H%M%S")
+    event.url = event_url(@event)
+    event.summary = @event.name
+    event.description = @event.description
+    event.location = @event.gmaps4rails_address
+    @calendar.add event
+    @calendar.publish
+    headers['Content-Type'] = "text/calendar; charset=UTF-8"
+    render :layout=>false, :text => @calendar.to_ical
+
+  end
 
 end
