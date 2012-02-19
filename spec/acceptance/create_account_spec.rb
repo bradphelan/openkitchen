@@ -108,7 +108,7 @@ feature "Creating an event" do
         end
         within ".time" do
           select "08 PM", :from => "event_datetime_4i"
-          select "57", :from => "event_datetime_5i"
+          select "15", :from => "event_datetime_5i"
         end
         select "(GMT+01:00) Vienna", :from => "Timezone"
         fill_in "Street", :with => "6 Astolat Ave"
