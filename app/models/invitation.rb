@@ -49,6 +49,10 @@ class Invitation < ActiveRecord::Base
     status == "rejected"
   end
 
+  def subscribed_for_comments?
+    true
+  end
+
 
   validate :status, :inclusion => {
     :in => STATUSES
