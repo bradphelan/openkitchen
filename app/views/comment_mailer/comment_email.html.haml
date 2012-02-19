@@ -1,0 +1,20 @@
+:markdown
+
+  #{@event.name}
+
+  #{@event.description}
+
+  #{@event.format_date} #{@invitation.event.format_time}
+
+%hl
+:markdown
+  Comment By : '#{@invitation.user.name}'
+%hl
+%hl
+
+= simple_format h(@comment.body)
+
+%hl
+%hl
+
+= link_to "Goto invitation", event_url(@invitation.event)

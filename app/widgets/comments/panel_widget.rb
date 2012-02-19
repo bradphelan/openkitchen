@@ -33,6 +33,16 @@ class Comments::PanelWidget < ApplicationWidget
     @comment.save
 
     #
+    # Send email notification to all who need to be notified
+    #
+
+    @event.invitations.each do |invitation|
+      if invitation.subscribed_for_comments? and @comment.user != invitation.user
+        CommentMailer.comment_email(@comment, invitation).deliver
+      end
+    end
+
+    #
     # Append the comment to the list and clear the form
     #
 
