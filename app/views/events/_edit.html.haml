@@ -17,8 +17,7 @@
           = simple_format h(@event.description)
     .row
       .span11
-        -if @event.latitude and @event.longitude
-          = render :partial => "map", :locals => { :mapping_data => @mapping_data }
+        = render :partial => "map", :locals => { :mapping_data => @mapping_data }
 
 
 

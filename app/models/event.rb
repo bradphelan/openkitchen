@@ -32,7 +32,6 @@ class Event < ActiveRecord::Base
 
   #skip_time_zone_conversion_for_attributes = [ :datetime ]
     
-  acts_as_gmappable
 
   acts_as_commentable
 
@@ -44,8 +43,8 @@ class Event < ActiveRecord::Base
   validates_length_of :city, :maximum => 80
   validates_length_of :country, :maximum => 80
 
-  validates_numericality_of :latitude
-  validates_numericality_of :longitude
+  validates_numericality_of :latitude, :allow_blank => true
+  validates_numericality_of :longitude, :allow_blank => true
   validates_length_of :description, :maximum => 4096 # characters
 
   #
@@ -80,6 +79,10 @@ class Event < ActiveRecord::Base
 
   def gmaps4rails_address
   "#{self.street}, #{self.city}, #{self.country}" 
+  end
+
+  def map_location
+   MapLocation.new :address => gmaps4rails_address
   end
 
   def google_maps_link

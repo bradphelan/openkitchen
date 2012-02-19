@@ -12,3 +12,9 @@ en:
     resend: "Resend invitation."
     sent: "Invitation sent to %{name}."
     removed: "%{name} is no longer invited."
+
+  maps:
+    external_link: "external map"
+
+  event: 
+    updated: "Event updated"

@@ -88,6 +88,7 @@ gem "omniauth-facebook"
 
 
 gem 'gmaps4rails', :git => 'https://github.com/apneadiving/Google-Maps-for-Rails.git'
+gem 'googlestaticmap'
 
 
 gem 'vimeo'

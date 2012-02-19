@@ -2,5 +2,6 @@
 -#
 -#  mapping_data - Google maps for rails mapping data
 
-= small_gmap @mapping_data
-= link_to "external map", @event.google_maps_link
+= link_to @event.google_maps_link, :target => "_blank", :class => "map" do
+  = image_tag @map.url
+  = t("maps.external_link")

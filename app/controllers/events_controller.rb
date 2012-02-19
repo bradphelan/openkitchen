@@ -39,8 +39,17 @@ class EventsController < ApplicationController
 
   def update
     @event.gmaps = false
-    @event.update_attributes params[:event]
-    redirect_to edit_event_path
+    if @event.update_attributes params[:event]
+      flash[:info] = t("event.updated")
+      redirect_to edit_event_path(@event)
+    else
+      flash[:error] = @event.errors.full_messages.to_sentence
+      @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
+
+      @map = GoogleStaticMap.new(:zoom => 13, :center => @event.map_location)
+      @map.markers << MapMarker.new(:color => "blue", :location => @event.map_location)
+      render :edit
+    end
   end
 
   def show
@@ -51,7 +60,9 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
     authorize! :read, @event
     @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
-    @mapping_data = [@event].to_gmaps4rails
+
+    @map = GoogleStaticMap.new(:zoom => 13, :center => @event.map_location)
+    @map.markers << MapMarker.new(:color => "blue", :location => @event.map_location)
   end
 
   def invite
