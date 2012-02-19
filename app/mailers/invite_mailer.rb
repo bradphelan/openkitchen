@@ -1,5 +1,5 @@
 class InviteMailer < ActionMailer::Base
-  default from: "bbqinvite@xtargets.com"
+  default from: "concierge@openkitchen.at"
 
   def invite_email invitation
     @invitation = invitation
