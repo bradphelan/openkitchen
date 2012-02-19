@@ -1,10 +1,11 @@
 :markdown
   Comment By : '#{@comment.user.name}'
-For event "
-= link_to @event.name, event_url(@invitation.event)
+%p
+  For event
+  = link_to @event.name, event_url(@invitation.event)
 
------------------------------------------------------------
-= simple_format h(@comment.body)
------------------------------------------------------------
+%p -----------------------------------------------------------
+%p= simple_format h(@comment.body)
+%p -----------------------------------------------------------
 
 = link_to "Goto event", event_url(@invitation.event) + "#comments"
