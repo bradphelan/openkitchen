@@ -16,12 +16,16 @@ class InvitationsController < ApplicationController
   end
 
   def mail
-    InviteMailer.invite_email(@invitation, request.host_with_port).deliver
+    InviteMailer.invite_email(@invitation).deliver
+    flash[:notice] = t("invitation.sent", :name => @invitation.user.name)
+    flash.keep
     redirect_to edit_event_path(@invitation.event)
   end
 
   def destroy
     @invitation.destroy
+    flash[:notice] = t("invitation.removed", :name => @invitation.user.name)
+    flash.keep
     respond_with @invitation, :location => edit_event_path(@invitation.event)
   end
 

@@ -29,10 +29,6 @@
                   
                 -if current_user.registration_completed?
                   %li
-                    = link_to edit_user_registration_path do
-                      %i.icon-lock.icon-white
-                      Account
-                  %li
                     = link_to edit_user_profile_path(current_user) do
                       %i.icon-info-sign.icon-white
                       Profile

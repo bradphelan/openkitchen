@@ -3,18 +3,20 @@
 
 - @event = _event
 
-%ul.unstyled
-  - @event.invitations.each do |invitation|
-    %li
-      .guest_buttons
-        - if can? :destroy, invitation
-          - disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
-          = form_for invitation, :method => :delete, :html => {:class => "delete"}  do |f|
-            = f.hidden_field :id, :value => invitation.id
-            = f.submit "", :disabled => disabled, :confirm => "Are you sure? All items being brought by the guest will be removed", :title => "Remove guest!", :class => "remove"
+%ul.guests
+  - @event.invitations.each_slice(3) do |slice|
+    .row-fluid
+      - slice.each do |invitation|
+        .span4
+          %li
+            = profile_avatar_image(invitation.user.profile, :thumb)
+            .email
+              = mail_to invitation.user.email, invitation.user.name
+            .buttons
+              - if can? :destroy, invitation
+                = button_to_remove_invitation invitation do
+                  %i.icon-fire
 
-        - if can? :edit, @invitation.event
-          = form_for invitation, :url => mail_invitation_url(invitation), :method => :post, :html => {:class => "invite"}  do |f|
-            = f.hidden_field :id, :value => invitation.id
-            = f.submit "", :confirm => "Are you sure? Another email will be sent to the guest!", :title => "Send invite again!", :class => "email"
-      = mail_to invitation.user.email, invitation.user.email
+              - if can? :edit, @invitation.event
+                = button_to_remail_invitation(invitation) do
+                  %i.icon-envelope

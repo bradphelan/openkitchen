@@ -17,8 +17,15 @@ $small_map_height: 480 / 640 * $small_map_width
 
 .things_to_bring
 
-.guests
-  form.invite-guest
+ul.guests
+  li
+    margin-bottom: 1em
+      
+  @extend .unstyled
+  .email
+    @extend p
+  .guest_buttons
+    display: block-inline 
 
 .edit_event
   // These are not really disabled but they are
@@ -64,6 +71,8 @@ $small_map_height: 480 / 640 * $small_map_width
       height: 50px 
       +box-shadow
       +border-radius
+  .ical
+    display: block
   .description
     color: $grayLight
 
@@ -88,11 +97,9 @@ input.resource_quantity_button
     input[type="submit"]
       display: inline
       float: none
-      width: 16px !important
-      height: 16px !important
       margin-left: 8px
       margin-right: 8px
-      @extend .icon
+      @extend .btn-danger
       &.email
         @extend .icon-envelope
 

@@ -22,19 +22,19 @@
       - @events_as_owner.each do |event|
         %li
           .row
-            .name.span3
-              = link_to event.name, edit_event_path(event.id)
-            .date.span2
-              = event.format_date
-              %a{:href=>ical_event_path(event)}
-                %small
-                  %i.icon-calendar
-                  iCal
-            .time.span2
-              = event.format_time
-          .row.description
-            .span10
-              = event.description
+            .span3
+              .name
+                = link_to event.name, edit_event_path(event.id)
+              .date
+                = event.format_date
+                = event.format_time
+                %a.ical{:href=>ical_event_path(event)}
+                  %small
+                    %i.icon-calendar
+                    iCal
+            .span8
+              .description
+                = event.description
 
 
   .well
