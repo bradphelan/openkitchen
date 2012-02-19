@@ -8,6 +8,7 @@
 
 .well
   = render_widget :comments
+  %a(name="comments")
 
 .well
   = render :partial => 'catering', :locals => { _event: @event }
