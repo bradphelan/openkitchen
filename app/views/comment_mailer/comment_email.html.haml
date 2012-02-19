@@ -8,7 +8,7 @@
 
 %hl
 :markdown
-  Comment By : '#{@invitation.user.name}'
+  Comment By : '#{@comment.user.name}'
 %hl
 %hl
 
@@ -17,4 +17,4 @@
 %hl
 %hl
 
-= link_to "Goto invitation", event_url(@invitation.event)
+= link_to "Goto event", event_url(@invitation.event)
