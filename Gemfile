@@ -99,3 +99,5 @@ gem 'paperclip'
 gem 'aws-sdk'
 
 gem 'icalendar'
+
+gem "girl_friday", "~> 0.9.7"
