@@ -16,8 +16,6 @@ class CommentMailer < ActionMailer::Base
         end
       end
        
-      puts "XXXXXXXXXXXXXXXXXXXX"
-      pp COMMENT_EMAIL_QUEUE.status
   end
 
   def comment_email comment, invitation
