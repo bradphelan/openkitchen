@@ -71,24 +71,23 @@ gem "heroku"
 #gem "activeadmin"
 
 group :test do
-  gem "factory_girl_rails"
-  gem "forgery"
   gem "shoulda-matchers"
   gem "rspec-apotomo"
 end
 
+group :test, :development do
+  gem "forgery"
+  gem "factory_girl_rails"
+end
 
 group :production do
   gem "pg"
 end
 
-
 gem "omniauth-facebook"
-
 
 gem 'gmaps4rails', :git => 'https://github.com/apneadiving/Google-Maps-for-Rails.git'
 gem 'googlestaticmap'
-
 
 gem 'vimeo'
 
