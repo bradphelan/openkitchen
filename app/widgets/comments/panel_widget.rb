@@ -31,7 +31,7 @@ class Comments::PanelWidget < ApplicationWidget
     #
 
     s = @invitation.subscribed_for_comments?
-    replace "##{widget_id} a.subscribe", :view => :comment_button
+    replace "##{widget_id} .subscribe", :view => :comment_button
   end
 
   # Add a comment
@@ -49,12 +49,20 @@ class Comments::PanelWidget < ApplicationWidget
       current_user.id, 
       params[:comment][:body]
 
+
     authorize! :create, @comment
     @comment.save
     
+    # This needs to be done or the subscription state is
+    # not reloaded automatically
+    @invitation.reload
+
     #
     # Append the comment to the list and clear the form
+    # and set the state on the watch button
     #
+
+    button = escape_javascript render :view => :comment_button
 
     render :text => <<-EOF
       var w = $("##{widget_id}");
@@ -66,6 +74,8 @@ class Comments::PanelWidget < ApplicationWidget
 
       // Clear form
       w.find("textarea").val("");
+
+      w.find(".subscribe").replaceWith("#{button}");
     EOF
     
   end
