@@ -36,8 +36,12 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   after_create do
-    CommentMailer.async_mail_subscribers self
     commentable.invitation_for_user(user).update_comment_subscription_state!
+  end
+  after_commit :on => :create do
+    # This has to be done here. If done in the after_create block
+    # then it is possible that transactions are screwed up.
+    CommentMailer.async_mail_subscribers self
   end
 
   #
