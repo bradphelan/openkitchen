@@ -100,24 +100,31 @@ class Event < ActiveRecord::Base
 
 
   # Returns the invitation
-  def invite email
+  # 
+  # Guest can be a User object or an
+  # email address
+  def invite guest
 
-      # Squeel notation does not work!
-      # See https://github.com/ernie/squeel/issues/93
-      unless u = User.where(:email => email).first
-        u = User.create! :email => email, :password => SecureRandom.hex(16)
+    unless guest.instance_of? User
+
+      email = guest
+
+      unless guest = User.where(:email => email).first
+        guest = User.create! :email => email, :password => SecureRandom.hex(16)
       end
 
-      invitation = self.invitations.where{user_id==my{u.id}}.first
+    end
 
-      # Don't invite twice
-      unless invitation
-        self.invitees << u
-        invitation = self.invitations.where{user_id==my{u.id}}.first
-        InviteMailer.invite_email(invitation).deliver
+    # Don't invite twice
+    unless invitation = self.invitations.where{user_id==my{guest.id}}.first
+      invitation = Invitation.create! do |i|
+       i.event = self
+       i.user = guest
       end
+      InviteMailer.invite_email(invitation).deliver
+    end
 
-      invitation
+    invitation
 
   end
 
