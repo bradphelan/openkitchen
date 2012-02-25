@@ -6,10 +6,10 @@
     = javascript_include_tag "application"
     = yield :scripts
     = csrf_meta_tags
-    <meta name="viewport" content="width=320"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  %body
-    .navbar.navbar-fixed-top(data-scrollspy="scrollspy")
+  %body(data-spy="scroll" data-target=".subnavbar" data-offset="-140")
+    .navbar.navbar-fixed-top
       .navbar-inner
         .container
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")

@@ -22,19 +22,28 @@ a.brand
         padding-right: 2em
       padding-top: $brand-padding
       padding-bottom: $brand-padding
-      height: $brand-height
       .nav-collapse
         background-color: $grayDarker
         &.in
           border: 1px solid $gray
         +border-radius(10px 10px 10px 10px)
 
+.subnavbar-fixed-top
+  @extend .navbar-fixed-top
+  top: $brand-height + $brand-padding*2
+  height: $brand-height
+
+.subnavbar
+  @media (max-width: 980px)
+    display: none
+  
+
 // Below is a load of CSS Voodoo
 #page
   @media (min-width: 980px)
     padding-top: $brand-height + $brand-padding*2
   @media (max-width: 980px)
-    margin-top: -24px !important
+    margin-top: -18px !important
   .content
     background-color: lighten($blue, 50%)
     padding-bottom: $brand-padding

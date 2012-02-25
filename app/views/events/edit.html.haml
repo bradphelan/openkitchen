@@ -1,15 +1,65 @@
-.well
-  = render :partial => 'edit', :locals => { _event: @event }
+%header.jumbotron.subhead#overview
+  %h1=@event.name.capitalize
+  .navbar.subnavbar
+    .navbar-inner
+      .container
+        %ul.nav
+          %li 
+            %a(href="#edit")=t("edit")
+          %li 
+            %a(href="#invite")=t("invite")
+          %li 
+            %a(href="#guests")=t("guests")
+          %li 
+            %a(href="#comments")=t("comments")
+          %li 
+            %a(href="#catering")=t("catering")
 
-= render :partial => 'invite_guests', :locals => { _event: @event }
+.event_edit_page
+  .sections
+    %section.well#edit
+      = render :partial => 'edit', :locals => { _event: @event }
 
-.well
-  = render :partial => 'guests', :locals => { _event: @event }
+    %section#invite
+    = render :partial => 'invite_guests', :locals => { _event: @event }
 
-.well
-  = render_widget :comments
-  %a(name="comments")
+    %section.well#guests
+      = render :partial => 'guests', :locals => { _event: @event }
 
-.well
-  = render :partial => 'catering', :locals => { _event: @event }
+    %section.well#comments
+      = render_widget :comments
+      %a(name="comments")
 
+    %section.well#catering
+      = render :partial => 'catering', :locals => { _event: @event }
+
+    :javascript
+      function goToByScroll(id, offset){
+        $('html,body').animate({scrollTop: $(id).offset().top + offset},'slow', function(){
+          // This second fast scroll is needed when the subnav bar is not fixed
+          // at the beginning of the animation and the calculation is wrong.
+          $('html,body').animate({scrollTop: $(id).offset().top + offset},0);
+        });
+      }
+
+      $(".subnavbar").on("click", "a", function(){
+        id = $(this).attr("href");
+        console.log(id);
+        goToByScroll(id, -120);
+      });
+
+      $(document).scroll(function(){
+        // If has not activated (has no attribute "data-top"
+        if (!$('.subnavbar').attr('data-top')) {
+            // If already fixed, then do nothing
+            if ($('.subnavbar').hasClass('navbar-fixed-top')) return;
+            // Remember top position
+            var offset = $('.subnavbar').offset()
+            $('.subnavbar').attr('data-top', offset.top);
+        }
+
+        if ($('.subnavbar').attr('data-top') - $('.subnavbar').outerHeight() <= $(this).scrollTop())
+            $('.subnavbar').addClass('subnavbar-fixed-top');
+        else
+            $('.subnavbar').removeClass('subnavbar-fixed-top');
+      });
