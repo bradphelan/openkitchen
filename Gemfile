@@ -77,7 +77,6 @@ group :test do
   gem "rspec-apotomo"
 end
 
-gem 'tabulous'
 
 group :production do
   gem "pg"
