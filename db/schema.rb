@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120217091020) do
+ActiveRecord::Schema.define(:version => 20120220152607) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -52,7 +52,8 @@ ActiveRecord::Schema.define(:version => 20120217091020) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
-    t.string   "status",     :default => "pending"
+    t.string   "status",                     :default => "pending"
+    t.string   "comment_subscription_state", :default => "auto"
   end
 
   create_table "profiles", :force => true do |t|
