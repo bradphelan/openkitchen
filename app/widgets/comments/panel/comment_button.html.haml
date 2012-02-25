@@ -1,0 +1,16 @@
+- if @invitation.subscribed_for_comments?
+  = link_to *toggle_watch_link(t("comment.subscription.unwatch_title")) do
+    %i.icon-eye-open
+    %span
+      =t "comment.subscription.unwatch"
+- else
+  = link_to *toggle_watch_link(t("comment.subscription.watch_title")) do
+    %i.icon-eye-close
+    %span
+      =t "comment.subscription.watch"
+
+:javascript
+  $(".tooltip").remove();
+  $("##{widget_id} a").tooltip();
+    
+  

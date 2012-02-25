@@ -2,19 +2,68 @@
 #
 # Table name: invitations
 #
-#  id         :integer         not null, primary key
-#  event_id   :integer
-#  user_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  token      :string(255)
-#  status     :string(255)     default("pending")
+#  id                         :integer         not null, primary key
+#  event_id                   :integer
+#  user_id                    :integer
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  token                      :string(255)
+#  status                     :string(255)     default("pending")
+#  comment_subscription_state :string(255)     default("auto")
 #
 
 class Invitation < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
   has_many :resource_producers, :dependent => :destroy
+
+  #
+  #
+  # COMMENT SUBSCRIPTIONS
+  #
+  #
+  #
+
+  COMMENT_SUBSCRIPTION_STATES = %w(
+    auto
+    subscribed
+    unsubscribed
+  )
+
+  validates_inclusion_of :comment_subscription_state, :in => COMMENT_SUBSCRIPTION_STATES
+
+  def subscribed_for_comments?
+    comment_subscription_state == "subscribed"
+  end
+
+  def subscribe_for_comments!
+    self.comment_subscription_state = 'subscribed'
+    save!
+  end
+
+  def toggle_subscription!
+    if self.comment_subscription_state == 'subscribed'
+      self.comment_subscription_state = 'unsubscribed'
+    else
+      self.comment_subscription_state = 'subscribed'
+    end
+    save!
+  end
+
+  def unsubscribe_for_comments!
+    self.comment_subscription_state = 'unsubscribed'
+    save!
+  end
+
+  #
+  # If the invitation has made a comment and the comment_subscription_state is
+  # currently 'auto' then move it to 'subscribed' and save, otherwise do
+  # nothing.
+  def update_comment_subscription_state!
+    if event.root_comments.for_user(user).count > 0 and comment_subscription_state == 'auto'
+      subscribe_for_comments!
+    end
+  end
 
   attr_accessible :status
 
@@ -47,10 +96,6 @@ class Invitation < ActiveRecord::Base
 
   def rejected?
     status == "rejected"
-  end
-
-  def subscribed_for_comments?
-    true
   end
 
 

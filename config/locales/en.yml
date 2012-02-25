@@ -5,7 +5,14 @@ en:
   confirm: "Are you sure?"
 
   comment:
+    submit: Comment
     remove: "Remove comment."
+    subscription:
+      title: "Receive email notifications on new comments"
+      watch: "Watch"
+      watch_title: "Monitor this thread via email"
+      unwatch: "Unwatch"
+      unwatch_title: "Stop monitoring this thread via email"
 
   invitation:
     remove: "Remove invitation."

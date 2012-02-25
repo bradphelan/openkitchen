@@ -34,6 +34,17 @@ class Comment < ActiveRecord::Base
   
   # NOTE: Comments belong to a user
   belongs_to :user
+
+  after_create do
+    CommentMailer.async_mail_subscribers self
+    commentable.invitation_for_user(user).update_comment_subscription_state!
+  end
+
+  #
+  # Comments for a specific user
+  def self.for_user user
+    where{user_id == user.id}
+  end
   
   # Helper class method that allows you to build a comment
   # by passing a commentable object, a user_id, and comment text

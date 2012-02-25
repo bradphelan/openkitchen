@@ -1,18 +1,38 @@
 class Comments::PanelWidget < ApplicationWidget
 
   responds_to_event :comment
+  responds_to_event :toggle_watch
 
   has_widgets do
     @event = options[:event]
     @comments = @event.root_comments.order "created_at ASC"
+    @invitation = @event.invitation_for_user current_user
     @comments.each do |comment|
       self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
     end
   end
-  
+
+  def toggle_watch_link title
+    [ url_for_event(:toggle_watch), :remote=>true, :class => "btn btn-info subscribe", :title => title]
+  end
+  helper_method :toggle_watch_link
   #
   # Events
   #
+
+  def toggle_watch
+    @invitation = @event.invitation_for_user current_user
+
+    authorize! :update, @invitation
+    @invitation.toggle_subscription!
+
+    #
+    # Append the comment to the list and clear the form
+    #
+
+    s = @invitation.subscribed_for_comments?
+    replace "##{widget_id} a.subscribe", :view => :comment_button
+  end
 
   # Add a comment
   def comment(evt)
@@ -24,20 +44,14 @@ class Comments::PanelWidget < ApplicationWidget
                         end
 
     @event = commentable_type.find(params[:comment][:commentable_id])
-
+     
     @comment = Comment.build_from @event, 
       current_user.id, 
       params[:comment][:body]
 
     authorize! :create, @comment
     @comment.save
-
-    #
-    # Send email notification to all who need to be notified
-    #
-
-    CommentMailer.async_mail_comment @comment
-
+    
     #
     # Append the comment to the list and clear the form
     #

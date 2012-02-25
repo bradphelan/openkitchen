@@ -31,7 +31,6 @@ class Event < ActiveRecord::Base
   attr_accessible  :name, :datetime, :timezone, :street, :city, :country, :description
 
   #skip_time_zone_conversion_for_attributes = [ :datetime ]
-    
 
   acts_as_commentable
 
@@ -46,6 +45,15 @@ class Event < ActiveRecord::Base
   validates_numericality_of :latitude, :allow_blank => true
   validates_numericality_of :longitude, :allow_blank => true
   validates_length_of :description, :maximum => 4096 # characters
+
+  validates_presence_of :owner
+
+  # Get the invitation to this event for
+  # the specific user or nil if they are
+  # not invited
+  def invitation_for_user user
+    invitations.where{user_id==user.id}.first
+  end
 
   #
   # Ensure the date of the event is always in the
@@ -94,6 +102,7 @@ class Event < ActiveRecord::Base
   # invited
   after_create do
     invitation = invite owner.email
+    invitation.comment_subscription_state = "subscribed"
     invitation.status = "accepted"
     invitation.save!
   end
