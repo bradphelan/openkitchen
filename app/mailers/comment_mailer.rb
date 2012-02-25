@@ -1,8 +1,8 @@
 class CommentMailer < ActionMailer::Base
-  default from: "bbqinvite@xtargets.com"
+  default from: "concierge@xtargets.com"
 
   
-  def self.async_mail_comment comment
+  def self.async_mail_subscribers comment
     COMMENT_EMAIL_QUEUE << { comment_id: comment.id }
   end
 
