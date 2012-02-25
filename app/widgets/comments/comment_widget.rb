@@ -15,6 +15,7 @@ class Comments::CommentWidget < ApplicationWidget
 
     render :text => <<-EOF
       var w = $("##{widget_id}");
+      $(".tooltip").remove();
       w.fadeOut(500).remove();
     EOF
   end
