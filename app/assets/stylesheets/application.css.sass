@@ -1,5 +1,5 @@
-$baseFontSize: 20px
-$baseLineHeight: 20px
+$baseFontSize: 20px 
+$baseLineHeight: 22px
 $ok-green: rgb(102,221,63)
 
 @import "bootstrap"
@@ -15,6 +15,11 @@ small
     margin-top: ($baseLineHeight - 14) / 2 / 1.5 - 3
   font-size: ($baseFontSize / 1.5)
   line-height: $baseLineHeight / 1.5 
+
+// On firefox it seems the selects were
+// not rendering high enough.
+select
+  height: $baseFontSize * 1.8
 
 input[type="file"]
   width: 100% !important
