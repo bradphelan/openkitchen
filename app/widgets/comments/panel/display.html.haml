@@ -1,7 +1,7 @@
 = widget_div do
 
   .comments
-    %h2 Discussion
+    %h2= t "comment.comments"
     = render({:state => :list}, @comments)
 
     .new

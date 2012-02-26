@@ -2,26 +2,42 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  confirm: "Are you sure?"
+
+  time: zeit
+  confirm: "Sind Sie Sicher?"
+  open: Open
+  close: Close
+  delete: Delete
+  create: Create
 
   comment:
+    title: Comments
     submit: Comment
     remove: "Remove comment."
     subscription:
-      title: "Receive email notifications on new comments"
       watch: "Watch"
       watch_title: "Monitor this thread via email"
       unwatch: "Unwatch"
       unwatch_title: "Stop monitoring this thread via email"
 
   invitation:
+    invite_a_guest: "Invite a guest"
     remove: "Remove invitation."
     resend: "Resend invitation."
     sent: "Invitation sent to %{name}."
     removed: "%{name} is no longer invited."
+    guests: "Guests"
 
   maps:
     external_link: "external map"
 
   event: 
-    updated: "Event updated"
+    updated: "The event has been updated"
+    edit:
+      menu:
+        edit: Edit
+        invite: Invite
+        guests: Guests
+        comments: Comments
+
+

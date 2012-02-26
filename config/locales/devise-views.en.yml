@@ -1,0 +1,73 @@
+en:
+  activerecord:
+    models:
+      user: user
+    attributes:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+        current_password: Current password
+        remember_me: Remember me
+
+  devise:
+    links:
+      sign_in: Sign in!
+      sign_up: Sign up!
+      forgot_password: Forgot password?
+      sign_in_with: "Sign in with %{provider}!"
+      did_not_get_confirm_instructions: "Didn't receive confirmation instructions?"
+      did_not_get_unlock_instructions: "Didn't receive unlock instructions?"
+
+    unlocks:
+      new:
+        resend: Resend unlock instructions
+
+    confirmations:
+      new:
+        resend_confirmation_instructions: "Resend confirmation instructions"
+
+    mailer:
+      confirmation_instructions:
+        welcome: Welcome
+        message: You can confirm your account email through the link below
+        confirm_my_account: Confirm my account
+      unlock_instructions:
+        hello: Hello
+        lock_reason: Your account has been locked due to an excessive amount of unsuccessful sign in attempts
+        unlock_activity: Click the link below to unlock your account
+        unlock_my_account: Esntsperren Ihr Konto
+      reset_password_instructions:
+        hello: Hello
+        reset_instructions: Someone has requested a link to change your password, and you can do this through the link below.
+        change_my_password: Change my password
+        detailed_explanation: | 
+          If you didn't request this, please ignore this email.
+          Your password won't change until you access the link above and create a new one.
+
+    sessions:
+      new:
+        sign_in: Sign in
+          
+    registrations:
+      edit:
+        leave_blank: Leave blank if you do not wish to change your password
+        need_current_password: We require your current password before we can change it.
+        cancel_account: Cancel my account!
+        unhappy: Unhappy?
+        confirm: Are you sure?
+        back: Back
+        edit: "Edit %{user}"
+      new:
+        sign_up: Sign up
+    passwords:
+      new:
+        forgot: Forgot password?
+        send: Send password reset instructions to my email.
+      edit:
+        change_password: Change password
+        new_password: New password
+        confirm_new_password: Confirm new password
+        change_my_password: Change my password
+        
+      

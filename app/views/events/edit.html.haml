@@ -5,15 +5,13 @@
       .container
         %ul.nav
           %li 
-            %a(href="#edit")=t("edit")
+            %a(href="#edit")=t("event.edit.menu.edit")
           %li 
-            %a(href="#invite")=t("invite")
+            %a(href="#invite")=t("event.edit.menu.invite")
           %li 
-            %a(href="#guests")=t("guests")
+            %a(href="#guests")=t("event.edit.menu.guests")
           %li 
-            %a(href="#comments")=t("comments")
-          %li 
-            %a(href="#catering")=t("catering")
+            %a(href="#comments")=t("event.edit.menu.comments")
 
 .event_edit_page
   .sections
@@ -30,6 +28,9 @@
       = render_widget :comments
       %a(name="comments")
 
-    %section.well#catering
-      = render :partial => 'catering', :locals => { _event: @event }
+    -# %section.well#catering
+    -#   = render :partial => 'catering', :locals => { _event: @event }
+
+
+    %section#scroll_buffer
 

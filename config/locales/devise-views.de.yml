@@ -1,0 +1,72 @@
+de:
+  activerecord:
+    models:
+      user: Benutzer
+    attributes:
+      user:
+        email: Email
+        password: Passwort
+        password_confirmation: Passwort Bestätigung
+        current_password: Aktuelle Passwort
+        remember_me: An mich erinnern
+
+  devise:
+    links:
+      sign_in: Anmelden
+      sign_up: Registrieren
+      forgot_password: Passwort vergesson?
+      sign_in_with: Melden Sie sich mit %{provider}
+      did_not_get_confirm_instructions: Haben Sie keine Bestätigung erhalten Anweisungen?
+      did_not_get_unlock_instructions: Haben Sie nicht empfangen unlock Anleitung?
+      
+    unlocks:
+      new:
+        resend: Erneut zu entsperren Anweisungen
+
+    confirmations:
+      new:
+        resend_confirmation_instructions: "Erneutes Senden Bestätigung Anweisungen"
+
+    mailer:
+      confirmation_instructions:
+        welcome: Willkommen
+        message: Sie können Ihr Konto per E-Mail über den unten stehenden Link bestätigen
+        confirm_my_account: bestätigen mein Konto
+      unlock_instructions:
+        hello: Hallo
+        lock_reason: Ihr Konto wurde wegen einer zu hohen Menge an erfolglosen Login Versuchen gesperrt
+        unlock_activity: Klicken Sie auf den Link unten, um Ihr Konto zu entsperren
+        unlock_my_account: Esntsperren Ihr Konto
+      reset_password_instructions:
+        hello: Hallo
+        reset_instructions: Jemand hat einen Link zu Ihrem Passwort zu ändern gebeten, und Sie können dies über den Link unten tun. 
+        change_my_password: Mein Passwort ändern
+        detailed_explanation: | 
+          Wenn Sie nicht angefordert haben diese Bitte ignorieren Sie diese E-Mail.
+          Das Passwort wird sich nicht ändern, bis Sie den obigen Link zugreifen und eine neue erstellen.
+    sessions:
+      new:
+        sign_in: Anmelden
+
+
+    registrations:
+      edit:
+        leave_blank: (freilassen, wenn Sie nicht wollen, es zu ändern)
+        need_current_password: (wir brauchen Ihr aktuelles Passwort, um Ihre Änderungen zu bestätigen)
+        cancel_account: Mein Konto kündigen 
+        unhappy: unglücklich?
+        confirm: Sicher?
+        back: Zuruck
+        edit: "%{user} bearbeiten"
+      new:
+        sign_up: Registrieren
+    passwords:
+      new:
+        forgot: Password vergessen
+        send: Senden Sie mir Anweisungen Kennwort zurücksetzen
+      edit:
+        change_password: Passwort ändern
+        new_password: Neues Passwort
+        confirm_new_password: Bestätigen eines neuen Kennwortes
+        change_my_password: Mein Passwort ändern
+        

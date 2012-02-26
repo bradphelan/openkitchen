@@ -1,10 +1,6 @@
 - @event = _event
 
 .edit_event
-  - if  @event.owner == current_user
-    %h2 You are hosting
-  - else
-    %h2 You are invited to
   = semantic_form_for @event do |f|
     .row
       .span4

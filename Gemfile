@@ -99,3 +99,6 @@ gem 'aws-sdk'
 gem 'icalendar'
 
 gem "girl_friday", "~> 0.9.7"
+
+gem "rails-i18n"
+gem "devise-i18n"

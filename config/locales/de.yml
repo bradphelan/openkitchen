@@ -1,0 +1,69 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+de:
+
+  time: zeit
+  confirm: "Sind Sie Sicher?"
+  open: Öffnen
+  close: Schliesen
+  delete: Löschen
+  create: Schaffen
+
+  comment:
+    comments: Kommentare
+    submit: Kommentar
+    remove: Entfernen Kommentar
+    
+    subscription:
+      watch: "Beobachten"
+      watch_title: "Überwachen Sie diesen Thread per E-Mail"
+      unwatch: "Nicht Beobachten"
+      unwatch_title: "Stoppen Sie die Überwachung dieses Thema per E-Mail"
+
+  invitation:
+    invite_a_guest: "Laden Sie einen Gast"
+    remove: "Entfernen Einladung."
+    resend: "Einladung erneut versenden."
+    sent: "Die Einladung wurde an %{name} geschickt."
+    removed: "%{name} ist nicht mehr eingeladen."
+    guests: "Gäste"
+
+  maps:
+    external_link: "externe Karte"
+
+  event: 
+    updated: "Die Veranstaltung wurde aktualisiert."
+    edit:
+      menu:
+        edit: Bearbeiten
+        invite: Laden
+        guests: Gäste
+        comments: Kommentare
+      
+
+  activerecord:
+    models:
+      event: Veranstaltung
+      comment: Kommentar
+      invitation: Einladung
+
+  formtastic:
+    labels:
+      event:
+        name: Name
+        timezone: Zeitzone
+        datetime: Datum/Zeit
+        street: Strasse
+        city: Stadt
+        country: Lande
+        description: Beschreibung
+    hints:
+      event:
+    placeholders:
+      event:
+    actions:
+      event:
+        update: "Aktualisieren %{model}"
+      invite:
+        submit: "Einladung senden!" 

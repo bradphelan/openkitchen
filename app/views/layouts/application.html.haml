@@ -44,11 +44,11 @@
                 %li.sign_in
                   =link_to new_user_session_path do
                     %i.icon-lock.icon-white
-                    Sign in
+                    = t "devise.links.sign_in"
                 %li.sign_up
                   = link_to new_user_registration_path do
                     %i.icon-lock.icon-white
-                    Sign up
+                    = t "devise.links.sign_up"
 
               = yield :navigation
     

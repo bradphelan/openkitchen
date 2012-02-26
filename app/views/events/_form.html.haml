@@ -12,13 +12,13 @@
     - autofill = @event.timezone ? nil : 'autofill'
     = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }.merge(disabled_hash)
     %fieldset.datetime.control-group
-      %label(for="event_datetime") Date
+      %label(for="event_datetime")=t "formtastic.labels.event.datetime"
       .controls
         .controls
           .date
-            = f.date_select :datetime, :label => "date",  :use_short_month => true, :start_year => Time.zone.now.year
+            = f.date_select :datetime,  :use_short_month => true, :start_year => Time.zone.now.year, :order => [:day, :month, :year]
           .time
-            = f.time_select :datetime, :label => "time", 
+            = f.time_select :datetime, 
               :ignore_date => true, 
               :ampm => true,
               :minute_step => 15

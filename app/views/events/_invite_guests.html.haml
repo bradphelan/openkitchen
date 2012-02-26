@@ -5,10 +5,10 @@
 
   .well
 
-    %h2 Invite a guest
+    %h2=t "invitation.invite_a_guest"
 
     = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked invite-guest" } do |f|
       = f.inputs do
         = email_typeahead f
       = f.buttons do
-        = f.commit_button :label => "Send!"
+        = f.commit_button
