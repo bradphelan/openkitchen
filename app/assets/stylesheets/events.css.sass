@@ -5,10 +5,15 @@
 // Google MAPS configuration
 $small_map_width: $gridColumnWidth * 8
 $small_map_height: 480 / 640 * $small_map_width
+
+
 .event_edit_page
+
   .sections
     @media (min-width: 980px)
       margin-top: 5em
+    section#scroll_buffer
+      height: 1200px
 
   #small_map
     width: auto
