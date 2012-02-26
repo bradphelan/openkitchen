@@ -1,22 +1,24 @@
 
-%h2= t "invitation.guests"
+%section.well#guests{'data-subnav-label' => t("event.edit.menu.guests")}
 
-- @event = _event
+  %h2= t "invitation.guests"
 
-%ul.guests
-  - @event.invitations.each_slice(3) do |slice|
-    .row-fluid
-      - slice.each do |invitation|
-        .span4
-          %li
-            = profile_avatar_image(invitation.user.profile, :thumb)
-            .email
-              = mail_to invitation.user.email, invitation.user.name
-            .buttons
-              - if can? :destroy, invitation
-                = button_to_remove_invitation invitation do
-                  %i.icon-fire
+  - @event = _event
 
-              - if can? :edit, @invitation.event
-                = button_to_remail_invitation(invitation) do
-                  %i.icon-envelope
+  %ul.guests
+    - @event.invitations.each_slice(3) do |slice|
+      .row-fluid
+        - slice.each do |invitation|
+          .span4
+            %li
+              = profile_avatar_image(invitation.user.profile, :thumb)
+              .email
+                = mail_to invitation.user.email, invitation.user.name
+              .buttons
+                - if can? :destroy, invitation
+                  = button_to_remove_invitation invitation do
+                    %i.icon-fire
+
+                - if can? :edit, @invitation.event
+                  = button_to_remail_invitation(invitation) do
+                    %i.icon-envelope

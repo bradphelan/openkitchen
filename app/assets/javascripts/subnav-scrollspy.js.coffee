@@ -39,6 +39,10 @@ $(document).ready =>
 
   # Fix the subnav bar to the top when we scroll down
   $(document).scroll ->
+
+    if $(".subnavbar").length == 0
+      return
+
     unless $(".subnavbar").attr("data-top")
       return  if $(".subnavbar").hasClass("subnavbar-fixed-top")
       offset = $(".subnavbar").offset()
@@ -53,3 +57,26 @@ $(document).ready =>
       $(".subnavbar").addClass "subnavbar-fixed-top"
     else if d > st + hysterises and $(".subnavbar").hasClass "subnavbar-fixed-top"
       $(".subnavbar").removeClass "subnavbar-fixed-top"
+
+  
+$(document).ready =>
+  template = (id, label) =>
+    """
+    <li>
+      <a href="##{id}">
+        #{label}
+      </a>
+    </li>
+    """
+
+  menu_items = $('[data-subnav-label]')
+  if menu_items.length == 0
+    $("header#overview").hide()
+    $("section.scrollbuffer").hide()
+    return
+
+  menu_items.each (i,v)=>
+    id = $(v).attr("id")
+    label = $(v).attr("data-subnav-label")
+    t = template(id, label)
+    $(".subnavbar ul.nav").append t

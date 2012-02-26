@@ -1,6 +1,7 @@
 - @event = _event
 
-.edit_event
+%section.well.edit_event#edit{'data-subnav-label' => t("event.edit.menu.edit")}
+
   = semantic_form_for @event do |f|
     .row
       .span4
@@ -18,5 +19,5 @@
 
 
 
-          
+            
 

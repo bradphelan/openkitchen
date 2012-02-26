@@ -66,9 +66,24 @@
       .content
         .container
           = render :partial=> 'common/flashes'
+
           - if content_for? :content
+
             = yield :content
+
           - else
+
+            %header#overview
+              = yield :subnav_header
+              .navbar.subnavbar
+                .navbar-inner
+                  .container
+                    %ul.nav
+                      = yield :subnav_items
+
+
             = yield
+
+            %section.scroll_buffer
   %footer
     = yield :scripts

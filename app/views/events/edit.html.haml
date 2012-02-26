@@ -1,36 +1,12 @@
-%header#overview
+- content_for :subnav_header do
   %h1=@event.name.capitalize
-  .navbar.subnavbar
-    .navbar-inner
-      .container
-        %ul.nav
-          %li 
-            %a(href="#edit")=t("event.edit.menu.edit")
-          %li 
-            %a(href="#invite")=t("event.edit.menu.invite")
-          %li 
-            %a(href="#guests")=t("event.edit.menu.guests")
-          %li 
-            %a(href="#comments")=t("event.edit.menu.comments")
 
 .event_edit_page
   .sections
-    %section.well#edit
-      = render :partial => 'edit', :locals => { _event: @event }
+    = render :partial => 'edit', :locals => { _event: @event }
 
-    %section#invite
     = render :partial => 'invite_guests', :locals => { _event: @event }
 
-    %section.well#guests
-      = render :partial => 'guests', :locals => { _event: @event }
+    = render :partial => 'guests', :locals => { _event: @event }
 
-    %section.well#comments
-      = render_widget :comments
-      %a(name="comments")
-
-    -# %section.well#catering
-    -#   = render :partial => 'catering', :locals => { _event: @event }
-
-
-    %section#scroll_buffer
-
+    = render_widget :comments

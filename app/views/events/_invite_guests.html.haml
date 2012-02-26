@@ -1,9 +1,8 @@
-
 - @event = _event
 
 - if can? :edit, @event
 
-  .well
+  %section.well#invite{'data-subnav-label' => t("event.edit.menu.invite")}
 
     %h2=t "invitation.invite_a_guest"
 
