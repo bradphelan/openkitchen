@@ -43,7 +43,13 @@ $(document).ready =>
       return  if $(".subnavbar").hasClass("subnavbar-fixed-top")
       offset = $(".subnavbar").offset()
       $(".subnavbar").attr "data-top", offset.top
-    if $(".subnavbar").attr("data-top") - $(".subnavbar").outerHeight() <= $(this).scrollTop()
+
+    d = $(".subnavbar").attr("data-top") - $(".subnavbar").outerHeight()
+    st = $(this).scrollTop()
+    # Add some hysterises in so that it doesn't flicker on the
+    # boundary. #hack #win
+    hysterises = 30
+    if d <= st
       $(".subnavbar").addClass "subnavbar-fixed-top"
-    else
+    else if d > st + hysterises
       $(".subnavbar").removeClass "subnavbar-fixed-top"
