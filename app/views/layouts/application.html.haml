@@ -50,6 +50,15 @@
                     %i.icon-lock.icon-white
                     = t "devise.links.sign_up"
 
+              %li.dropdown
+                %a.dropdown-toggle(href="#" data-toggle="dropdown")
+                  %i.icon-flag.icon-white
+                %ul.dropdown-menu
+                  %li
+                    = link_to "en", url_for(:locale=>"en")
+                  %li
+                    = link_to "de", url_for(:locale=>"de")
+
               = yield :navigation
     
 
