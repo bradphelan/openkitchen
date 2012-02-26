@@ -49,7 +49,7 @@ $(document).ready =>
     # Add some hysterises in so that it doesn't flicker on the
     # boundary. #hack #win
     hysterises = 30
-    if d <= st
+    if d <= st and not $(".subnavbar").hasClass "subnavbar-fixed-top"
       $(".subnavbar").addClass "subnavbar-fixed-top"
-    else if d > st + hysterises
+    else if d > st + hysterises and $(".subnavbar").hasClass "subnavbar-fixed-top"
       $(".subnavbar").removeClass "subnavbar-fixed-top"
