@@ -74,6 +74,22 @@ de:
 
   #
   #
+  #  Mailers
+  #
+  #
+  
+  invite_mailer:
+    invite_email:
+      header: %{host} hat Sie zu einer Veranstaltung eingeladen OPENKITCHEN
+      goto_invitation: Einladung zur
+
+  comment_mailer:
+    comment_email:
+      comment_by:  Kommentar von
+      for_event: Zum event
+      goto_event: Zum Event
+  #
+  #
   # FORMTASTIC i18n
   #
   #

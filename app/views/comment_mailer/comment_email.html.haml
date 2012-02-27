@@ -1,11 +1,11 @@
 :markdown
-  Comment By : '#{@comment.user.name}'
+  #{t ".comment_by"} : '#{@comment.user.name}'
 %p
-  For event
+  = t ".for_event"
   = link_to @event.name, event_url(@invitation.event)
 
 %p -----------------------------------------------------------
 %p= simple_format h(@comment.body)
 %p -----------------------------------------------------------
 
-= link_to "Goto event", event_url(@invitation.event) + "#comments"
+= link_to t(".goto_event"), event_url(@invitation.event) + "#comments"

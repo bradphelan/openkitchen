@@ -70,6 +70,23 @@ en:
   profiles:
     edit:
       change_password: Change password
+
+  #
+  #
+  #  Mailers
+  #
+  #
+
+  comment_mailer:
+    comment_email:
+      comment_by: Comment by
+      for_event: For event
+      goto_event: Goto event
+
+  invite_mailer:
+    invite_email:
+      header: %{host} hat Sie zu einer Veranstaltung eingeladen OPENKITCHEN
+      goto_invitation: Einladung zur
   
   #
   #

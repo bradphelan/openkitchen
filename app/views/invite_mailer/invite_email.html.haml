@@ -1,5 +1,5 @@
 :markdown
-  # #{@host.email} has invited you to an OPENKITCHEN event
+  #{t ".header", :host => @host.name }
 
   #{@invitation.event.name}
 
@@ -7,4 +7,4 @@
 
   #{@invitation.event.format_date} #{@invitation.event.format_time}
 
-= link_to "Goto invitation", token_invitations_url(:id => @invitation.token), :id => "invitation_link"
+= link_to t(".goto_invitation"), token_invitations_url(:id => @invitation.token), :id => "invitation_link"
