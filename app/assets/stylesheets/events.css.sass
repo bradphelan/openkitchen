@@ -6,6 +6,28 @@
 $small_map_width: $gridColumnWidth * 8
 $small_map_height: 480 / 640 * $small_map_width
 
+.index_events
+  ul
+    @extend .unstyled
+    li
+      border-bottom: solid 1px $grayLighter
+      border-top: solid 1px $white
+      padding-top: 0.5em
+      padding-bottom: 0.5em
+      @extend .vertical-seperator
+  .avatar 
+    display: inline
+    img
+      margin-right: 0.5em
+      width: 50px 
+      height: 50px 
+      +box-shadow
+      +border-radius
+  .ical
+    display: block
+  .description
+    color: $grayLight
+
 
 .event_edit_page
 
@@ -69,25 +91,6 @@ $small_map_height: 480 / 640 * $small_map_width
           width: 47%
 
 
-  .index_events
-    li
-      border-bottom: solid 1px $grayLighter
-      border-top: solid 1px $white
-      padding-top: 0.5em
-      padding-bottom: 0.5em
-    .avatar 
-      display: inline
-      img
-        margin-right: 0.5em
-        width: 50px 
-        height: 50px 
-        +box-shadow
-        +border-radius
-    .ical
-      display: block
-    .description
-      color: $grayLight
-
   input.resource_quantity_button
     width: 10% !important
 
@@ -128,8 +131,7 @@ $small_map_height: 480 / 640 * $small_map_width
       li.comment
         padding-top: 5px
         padding-bottom: 5px
-        border-bottom: solid 1px $grayLighter
-        border-top: solid 1px $white
+        @extend .vertical-seperator
         border-left: none
         border-right: none
 
