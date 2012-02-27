@@ -10,6 +10,19 @@ en:
   delete: Delete
   create: Create
 
+  activerecord:
+    models:
+      event: 
+        one: Event
+        other: Events
+      comment:
+        one: Comment
+        other: Comments
+      invitation:
+        one: Invitation
+        other: Invitations
+      profile: Profile
+
   comment:
     title: Comments
     submit: Comment
@@ -40,4 +53,20 @@ en:
         guests: Guests
         comments: Comments
 
+  events:
+    index:
+      hostings: Hostings
+      hostings_title: Events I am hosting
 
+      invitations: Invitations
+      invitations_title: Events I am invited to
+
+      new: New event
+      new_disabled: Event creation disabled
+      new_disabled_content: Please complete registration to create events
+    new:
+      new: New event
+
+  profiles:
+    edit:
+      change_password: Change password

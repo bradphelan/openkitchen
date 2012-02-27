@@ -1,5 +1,5 @@
 .well
-  %h1 Create an event
+  %h1=t ".new"
 
   = semantic_form_for @event do |f|
     = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => false }

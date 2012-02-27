@@ -1,24 +1,18 @@
+- content_for :subnav_header do
+
+  %h1=t "activerecord.models.event", :count => 2
+
 .index_events
-  .well
-    %h1 Welcome to your events
-    - if can? :create, Event
-      = link_to t("Create New Event"), new_event_url 
-    - else
-      %a.popover-trigger(href="#" 
-        data-title="Event Creation Disabled" 
-        data-content='Please complete registration to create events') 
-        = t("Create New Event")
 
-
-  .well
+  %section#events_im_hosting.well{'data-subnav-label'=> t(".hostings")}
     %h2
       .avatar
         - if current_user.profile.avatar.file?
           = image_tag current_user.profile.avatar.expiring_url(120, :thumb)
         - else
           = image_tag "chef.jpg"
-      I am hosting
-    %ul.unstyled
+      =t ".hostings_title"
+    %ul
       - @events_as_owner.each do |event|
         %li
           .row
@@ -37,8 +31,15 @@
                 = event.description
 
 
-  .well
-    %h2 I am invited to
+    - if can? :create, Event
+      = link_to t(".new"), new_event_url 
+    - else
+      %a.popover-trigger{:href=>"#", 'data-title' => t(".new_disabled"), 'data-content' => t('.new_disabled_content') }
+        = t(".new")
+
+  %section#events_im_invited_to.well{'data-subnav-label'=> t(".invitations")}
+
+    %h2=t ".invitations_title"
     %ul.unstyled
       - @events_as_guest.each do |event|
         %li

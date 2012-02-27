@@ -10,6 +10,17 @@ de:
   delete: Löschen
   create: Schaffen
 
+  activerecord:
+    models:
+      event: 
+        one: Veranstaltung
+        other: Veranstaltungen
+      comment:
+        one: Kommentar
+        other: Kommentare
+      invitation: Einladung
+      profile: Profil
+
   comment:
     comments: Kommentare
     submit: Kommentar
@@ -42,11 +53,6 @@ de:
         comments: Kommentare
       
 
-  activerecord:
-    models:
-      event: Veranstaltung
-      comment: Kommentar
-      invitation: Einladung
 
   formtastic:
     labels:
@@ -58,6 +64,13 @@ de:
         city: Stadt
         country: Lande
         description: Beschreibung
+      profile:
+        street: Strasse
+        city: Stadt
+        country: Lande
+        cookstars: Profi Sternen
+        avatar: Personliches Foto
+
     hints:
       event:
     placeholders:
@@ -65,5 +78,28 @@ de:
     actions:
       event:
         update: "Aktualisieren %{model}"
+      profile:
+        update: "Aktualisieren %{model}"
       invite:
         submit: "Einladung senden!" 
+
+  events:
+    index:
+      hostings: Als Gastgeber
+      hostings_title: Veranstaltungen Ich bin Hosting
+
+      invitations: Als Gast
+      invitations_title: Veranstaltungen, die ich eingeladen bin
+
+      new: Neue Veranstaltung
+
+      new_disabled: Erstellen eines Veranstaltung ist deaktiviert
+      new_disabled_content: Bitte vollständige Erfassung von Ereignissen erstellen 
+    new:
+      new: Neue Veranstaltung
+
+  profiles:
+    edit:
+      change_password: Password ändern 
+
+
