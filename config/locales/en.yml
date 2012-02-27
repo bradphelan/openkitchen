@@ -70,3 +70,16 @@ en:
   profiles:
     edit:
       change_password: Change password
+  
+  #
+  #
+  # FORMTASTIC i18n
+  #
+  #
+
+  # In english the default translations from the field names
+  # are satifictory in the most part
+  formtastic:
+    labels:
+      event:
+        datetime: Date / Time
