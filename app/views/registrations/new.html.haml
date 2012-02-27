@@ -4,8 +4,8 @@
     = f.label :email
     = f.email_field :email
   %p.clearfix
-    = f.submit 'Signup'
+    = f.submit t('devise.links.sign_up')
   = link_to 'Home', root_url
   %br/ 
-  = render :partial => 'devise/shared/links'
+  = render :partial => 'devise/links'
 

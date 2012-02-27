@@ -12,9 +12,9 @@ de:
 
   devise:
     links:
-      sign_in: Anmelden!
-      sign_up: Registrieren!
-      sign_out: Abmeldung!
+      sign_in: Anmelden
+      sign_up: Registrieren
+      sign_out: Abmeldung
       forgot_password: Passwort vergesson?
       sign_in_with: Melden Sie sich mit %{provider}
       did_not_get_confirm_instructions: Haben Sie keine Bestätigung erhalten Anweisungen?

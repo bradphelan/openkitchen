@@ -14,8 +14,8 @@ feature 'Signing in as a registered user' do
 
   Steps do
     include_steps "login", @user.email, @password
-    Then "I should be fully registered" do
-      page.should_not have_selector "#complete_registration"
+    Then "I should be confirmed" do
+      page.should_not have_selector "#complete_registration_button"
     end
   end
 
@@ -31,8 +31,8 @@ feature 'Sign in as an unregistered user' do
 
   Steps do
     include_steps "login", @user.email, @password
-    Then "user should not be fully registered" do
-      page.should have_selector "#complete_registration"
+    Then "user should not be confirmed" do
+      page.should have_selector "#complete_registration_button"
     end
   end
 
@@ -142,11 +142,7 @@ feature 'Completing registration' do
     include_steps "login", @user.email, @password
 
     When "I click on complete registration" do
-      click_on "Complete Registration"
-    end
-
-    Then "I should be signed out" do
-      page.should have_content "You have been signed out to perform this action"
+      click_on "Complete registration"
     end
 
     When "I look in my email" do
@@ -158,18 +154,22 @@ feature 'Completing registration' do
     end
 
     When "I click the link to follow change my password" do
-      visit_in_email "Change my password"
+      visit_in_email "Confirm my account"
     end
 
     Then "I find myself at the password change page" do
-      page.should have_content "Change your password"
+      page.should have_content "Password confirmation"
     end
 
     When "I change my password" do
-      change_password_to "yyyyyy"
+      within ".devise" do
+        fill_in "Password", :with =>  "yyyyyy"
+        fill_in "Password confirmation", :with => "yyyyyy"
+        click_on "Confirm Account"
+      end
     end
 
-    Then "I should be fully registered" do
+    Then "I should be confirmed" do
       user_should_be_registered
     end
   end
@@ -216,8 +216,8 @@ feature "Inviting somebody to an event" do
       page.find_field("Name").value.should == "Party GAGA"
     end
 
-    And "I should not be fully registered" do
-      page.should have_selector "#complete_registration"
+    And "I should not be confirmed" do
+      page.should have_selector "#complete_registration_button"
     end
 
 

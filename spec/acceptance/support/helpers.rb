@@ -26,11 +26,11 @@ module HelperMethods
   end
 
   def user_should_be_registered
-    page.should_not have_selector "#complete_registration"
+    page.should_not have_selector "#complete_registration_button"
   end
 
   def user_should_be_unregistered
-    page.should have_selector "#complete_registration"
+    page.should have_selector "#complete_registration_button"
   end
 
 

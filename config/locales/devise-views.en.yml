@@ -12,9 +12,9 @@ en:
 
   devise:
     links:
-      sign_in: Sign in!
-      sign_up: Sign up!
-      sign_out: Sign out!
+      sign_in: Sign in
+      sign_up: Sign up
+      sign_out: Sign out
       forgot_password: Forgot password?
       sign_in_with: "Sign in with %{provider}!"
       did_not_get_confirm_instructions: "Didn't receive confirmation instructions?"

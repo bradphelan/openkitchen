@@ -36,7 +36,8 @@ Gobbq::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", 
     :confirmations => "confirmations",
     :registrations => "registrations"
-  } do
+  } 
+  devise_scope :user do
     put "confirm_user", :to => "confirmations#confirm_user"
     post "complete_registration", :to => "confirmations#complete_registration"
   end
