@@ -41,8 +41,8 @@ end
 feature "Creating an event" do
   background do
     @password = "xxxxxx"
-    @create_new_event_selector = "Create New Event"
-    @create_event_selector = "Create an event"
+    @create_new_event_selector = "New event"
+    @create_event_selector = "New event"
     visit homepage
   end
 
@@ -58,7 +58,7 @@ feature "Creating an event" do
     end
 
     Then "I should be on the events page" do
-      page.should have_content "Welcome to your events"
+      page.should have_selector ".index_events"
     end
 
     When "I click on 'create new event'" do
@@ -66,7 +66,7 @@ feature "Creating an event" do
     end
 
     Then "nothing should happen as the link is disabled" do
-      page.should_not have_content @create_event_selector
+      page.should have_selector ".index_events"
     end
   end
 
@@ -83,7 +83,7 @@ feature "Creating an event" do
     end
 
     Then "I should be on the events page" do
-      page.should have_content "Welcome to your events"
+      page.should have_selector ".index_events"
     end
 
     Then "there should be a 'create new event' button" do
@@ -195,7 +195,7 @@ feature "Inviting somebody to an event" do
     And "fill in an email address of a guest to invite and click send" do
       within "form.invite-guest" do
         fill_in "email", :with => @guest_email
-        click_on "Send!"
+        click_on "Send invitation!"
       end
     end
 
@@ -212,7 +212,7 @@ feature "Inviting somebody to an event" do
     end
 
     Then "I should be on the page for the event" do
-      page.should have_content "You are invited to"
+      page.should have_selector ".edit_event"
       page.find_field("Name").value.should == "Party GAGA"
     end
 

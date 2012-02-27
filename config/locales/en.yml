@@ -10,6 +10,12 @@ en:
   delete: Delete
   create: Create
 
+  #
+  #
+  # Models
+  #
+  #
+  
   activerecord:
     models:
       event: 
@@ -91,8 +97,8 @@ en:
 
   invite_mailer:
     invite_email:
-      header: %{host} hat Sie zu einer Veranstaltung eingeladen OPENKITCHEN
-      goto_invitation: Einladung zur
+      header: %{host} has sent you and OPENKITCHEN invitation
+      goto_invitation: Goto invitation
   
   #
   #
@@ -106,3 +112,7 @@ en:
     labels:
       event:
         datetime: Date / Time
+
+    actions:
+      invite:
+        submit: "Send invitation!" 

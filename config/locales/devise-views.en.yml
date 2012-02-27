@@ -66,7 +66,7 @@ en:
         forgot: Forgot password?
         send: Send password reset instructions to my email.
       edit:
-        change_password: Change password
+        change_password: Change your password
         new_password: New password
         confirm_new_password: Confirm new password
         change_my_password: Change my password
