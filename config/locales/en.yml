@@ -129,6 +129,13 @@ en:
     labels:
       event:
         datetime: Date / Time
+    hints:
+      event:
+        venue: The name of the venue
+        name: The name or theme of the event
+      profile:
+        venue: The name of the venue
+
 
     actions:
       invite:

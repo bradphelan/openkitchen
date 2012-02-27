@@ -11,8 +11,12 @@
     .row
       = f.inputs do 
         .span5
+          = f.input :venue
           = f.input :street
           = f.input :city
+          = f.input :country, :as => :string
+          - autofill = @profile.timezone ? nil : 'autofill'
+          = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
           = f.input :postcode
           = f.input :cookstars, :as => :select, :collection => 1..5
         .span5

@@ -20,7 +20,7 @@ class EventsController < ApplicationController
 
   def new
     Time.zone = current_user.time_zone
-    @event = Event.new :owner => current_user, :datetime => Time.zone.now
+    @event = current_user.build_event_from_profile
   end
 
   def create

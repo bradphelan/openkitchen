@@ -25,6 +25,8 @@ class Profile < ActiveRecord::Base
     :styles => { :medium => "300x300#", :thumb => "100x100#", :mini_thumb => "50x50#" },
     :default_url => "/assets/chef.jpg"
 
+  attr_accessible :venue, :street, :city, :country, :timezone, :postcode, :cookstars
+
 
   validates_presence_of :user_id
   validates_numericality_of :cookstars, 

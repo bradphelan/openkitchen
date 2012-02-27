@@ -26,6 +26,14 @@ describe Event do
   pending "add some examples to (or delete) #{__FILE__}"
   before do
     @user = Factory :user
+    @profile = @user.profile
+
+    @profile.street = "10 Fugazi"
+    @profile.city = "Bangkok"
+    @profile.country = "Thailand"
+    @profile.venue = "Mr Big Noodles"
+    @profile.save!
+
     @guest0 = Factory :user
     @guest1 = Factory :user
 
@@ -35,11 +43,21 @@ describe Event do
   end
   describe "creating" do
     before do
-      @event = @user.events_as_owner.create! :timezone => "UTC", :datetime => Time.zone.now, :name => "Foo", :description => "Bar"
+      @event = @user.build_event_from_profile :timezone => "UTC", :description => "Bar", :name => "Foo"
+      @event.save!
     end
+
     it "should create the event and assign the user as owner" do
       @event.owner.should == @user
       @event.invitations.count.should == 1
+    end
+
+    it "User#build_event_from_profile should get the address and venue info from the profile" do
+      @event.street.should == @user.profile.street
+      @event.city.should == @user.profile.city
+      @event.country.should == @user.profile.country
+      @event.venue.should == @user.profile.venue
+      @event.timezone.should == @user.profile.timezone
     end
 
     describe "#invitees" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227125312) do
+ActiveRecord::Schema.define(:version => 20120227170013) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -31,19 +31,20 @@ ActiveRecord::Schema.define(:version => 20120227125312) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "events", :force => true do |t|
-    t.integer   "owner_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "name"
-    t.timestamp "datetime"
-    t.string    "timezone"
-    t.string    "street"
-    t.string    "city"
-    t.string    "country"
-    t.float     "latitude"
-    t.float     "longitude"
-    t.boolean   "gmaps"
-    t.text      "description"
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.datetime "datetime"
+    t.string   "timezone"
+    t.string   "street"
+    t.string   "city"
+    t.string   "country"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+    t.text     "description"
+    t.string   "venue"
   end
 
   create_table "invitations", :force => true do |t|
@@ -63,13 +64,14 @@ ActiveRecord::Schema.define(:version => 20120227125312) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "cookstars",           :default => 1
-    t.string   "timezone",            :default => "UTC", :null => false
+    t.string   "timezone"
     t.string   "street"
     t.string   "city"
     t.string   "country"
     t.string   "postcode"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "venue"
   end
 
   create_table "resource_producers", :force => true do |t|

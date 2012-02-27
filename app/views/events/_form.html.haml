@@ -31,6 +31,7 @@
     = f.input :datetime, :label => t("formtastic.labels.event.datetime"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
 
 
+  = f.input :venue, :as => :string, :input_html => disabled_hash
   = f.input :street, :as => :string, :input_html => disabled_hash
   = f.input :city, :as => :string, :input_html => disabled_hash
   = f.input :country, :as => :string, :input_html => disabled_hash

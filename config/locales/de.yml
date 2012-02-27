@@ -131,6 +131,7 @@ de:
         name: Name
         timezone: Zeitzone
         datetime: Datum/Zeit
+        venue: Veranstaltungsort
         street: Strasse
         city: Stadt
         country: Lande
@@ -141,14 +142,20 @@ de:
         country: Lande
         cookstars: Profi Sternen
         avatar: Personliches Foto
+        venue: Veranstaltungsort
 
     hints:
       event:
+        venue: Der Name des Veranstaltungsortes
+        name:  Der Name oder Thema der Veranstaltung
+      profile:
+        venue: Der Name des Veranstaltungsortes
     placeholders:
       event:
     actions:
       event:
         update: "Aktualisieren %{model}"
+        create: "%{model} erstellen"
       profile:
         update: "Aktualisieren %{model}"
       invite:
