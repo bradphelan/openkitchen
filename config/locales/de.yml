@@ -53,6 +53,30 @@ de:
         comments: Kommentare
       
 
+  events:
+    index:
+      hostings: Als Gastgeber
+      hostings_title: Veranstaltungen Ich bin Hosting
+
+      invitations: Als Gast
+      invitations_title: Veranstaltungen, die ich eingeladen bin
+
+      new: Neue Veranstaltung
+
+      new_disabled: Erstellen eines Veranstaltung ist deaktiviert
+      new_disabled_content: Bitte vollständige Erfassung von Ereignissen erstellen 
+    new:
+      new: Neue Veranstaltung
+
+  profiles:
+    edit:
+      change_password: Password ändern 
+
+  #
+  #
+  # FORMTASTIC i18n
+  #
+  #
 
   formtastic:
     labels:
@@ -82,24 +106,4 @@ de:
         update: "Aktualisieren %{model}"
       invite:
         submit: "Einladung senden!" 
-
-  events:
-    index:
-      hostings: Als Gastgeber
-      hostings_title: Veranstaltungen Ich bin Hosting
-
-      invitations: Als Gast
-      invitations_title: Veranstaltungen, die ich eingeladen bin
-
-      new: Neue Veranstaltung
-
-      new_disabled: Erstellen eines Veranstaltung ist deaktiviert
-      new_disabled_content: Bitte vollständige Erfassung von Ereignissen erstellen 
-    new:
-      new: Neue Veranstaltung
-
-  profiles:
-    edit:
-      change_password: Password ändern 
-
 
