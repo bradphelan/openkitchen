@@ -4,7 +4,7 @@ FactoryGirl.define do
     password "xxxxxx"
 
     factory :registered_user do
-      registration_completed_at { Time.zone.now }
+      confirmed_at { Time.zone.now }
     end
   end
 end

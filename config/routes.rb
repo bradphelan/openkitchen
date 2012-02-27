@@ -34,9 +34,12 @@ Gobbq::Application.routes.draw do
 
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", 
-    :passwords => "passwords",
+    :confirmations => "confirmations",
     :registrations => "registrations"
-  }
+  } do
+    put "confirm_user", :to => "confirmations#confirm_user"
+    post "complete_registration", :to => "confirmations#complete_registration"
+  end
   
 
   # Complete the registration

@@ -1,5 +1,17 @@
 require 'omniauth-facebook'
 
+module Devise
+  module Models
+    module Validatable
+
+      def password_required?
+        false
+      end
+
+    end
+  end
+end
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -79,7 +91,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming his account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming his account.
-  # config.confirm_within = 2.days
+  config.confirm_within = 2.weeks
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]

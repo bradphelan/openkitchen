@@ -30,7 +30,7 @@ class Ability
       event.owner_id == user.id || event.invitations.where{user_id==my{user.id}}.count > 0
     end
 
-    if user.registration_completed?
+    if user.confirmed?
       can :create, Event
     end
 

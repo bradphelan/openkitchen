@@ -84,6 +84,9 @@ de:
     edit:
       change_password: Password ändern 
 
+  layouts:
+    application:
+      confirm_user: Registrierung abzuschließen!
   #
   #
   #  Mailers
@@ -100,6 +103,22 @@ de:
       comment_by:  Kommentar von
       for_event: Zum event
       goto_event: Zum Event
+
+  #
+  #
+  # Controllers
+  #
+  #
+  users_controller:
+    register:
+      info: |
+        Setzen Sie Ihr Passwort wird für den Abschluss Registrierung
+        erforderlich.  Hinweise wurden an die Ihnen zugeschickt. Nach
+        Abschluß der das Passwort (Wieder-) gesetzt, dann registriert werden
+        und können Ereignisse hinzufügen. Sie wurden durchgeführt, um diese
+        Aktion durchführen unterzeichnet
+        
+  
   #
   #
   # FORMTASTIC i18n

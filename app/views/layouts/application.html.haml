@@ -27,14 +27,17 @@
                     %i.icon-time.icon-white
                     = t "activerecord.models.event.other"
                   
-                -if current_user.registration_completed?
+                -if current_user.confirmed?
                   %li
                     = link_to edit_user_profile_path(current_user) do
                       %i.icon-info-sign.icon-white
                       = t "activerecord.models.profile"
 
                 -else
-                  %li#complete_registration=button_to "Complete Registration", users_register_path, :method => :post
+                  %li#complete_registration_button
+                    = form_for current_user, :method=>"post", :url=>complete_registration_path do
+                      %input{:type=>'hidden', :name=>"user[email]", :value=>current_user.email}
+                      %input{:type=>'submit', :value=>t(".confirm_user")}
 
                 %li
                   = link_to destroy_user_session_path, :method => :delete do

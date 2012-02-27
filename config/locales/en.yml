@@ -3,8 +3,8 @@
 
 en:
 
-  time: zeit
-  confirm: "Sind Sie Sicher?"
+  time: time
+  confirm: Are you sure?
   open: Open
   close: Close
   delete: Delete
@@ -83,6 +83,23 @@ en:
     edit:
       change_password: Change password
 
+
+  layouts:
+    application:
+      confirm_user: Complete registration.
+
+  #
+  #
+  # Controllers
+  #
+  #
+  users_controller:
+    register:
+      info: | 
+        (Re)setting your password is required for completing registration.
+        Instructions have been emailed to you. Once you complete the the
+        password (re)set then you will be registered and can add events. You
+        have been signed out to perform this action
   #
   #
   #  Mailers
