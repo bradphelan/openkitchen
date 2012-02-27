@@ -52,6 +52,12 @@ en:
         invite: Invite
         guests: Guests
         comments: Comments
+  
+  #
+  #
+  # Views
+  #
+  #
 
   events:
     index:

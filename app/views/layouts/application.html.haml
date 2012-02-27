@@ -25,20 +25,21 @@
                 %li
                   = link_to events_path do
                     %i.icon-time.icon-white
-                    Events
+                    = t "activerecord.models.event.other"
                   
                 -if current_user.registration_completed?
                   %li
                     = link_to edit_user_profile_path(current_user) do
                       %i.icon-info-sign.icon-white
-                      Profile
+                      = t "activerecord.models.profile"
 
                 -else
                   %li#complete_registration=button_to "Complete Registration", users_register_path, :method => :post
+
                 %li
                   = link_to destroy_user_session_path, :method => :delete do
                     %i.icon-off.icon-white
-                    Sign Out
+                    = t "devise.links.sign_out"
 
               -else
                 %li.sign_in

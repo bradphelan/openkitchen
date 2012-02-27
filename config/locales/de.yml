@@ -10,6 +10,12 @@ de:
   delete: Löschen
   create: Schaffen
 
+  #
+  #
+  # Models
+  #
+  #
+
   activerecord:
     models:
       event: 
@@ -53,6 +59,12 @@ de:
         comments: Kommentare
       
 
+  #
+  #
+  # Views
+  #
+  #
+  
   events:
     index:
       hostings: Als Gastgeber
