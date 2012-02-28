@@ -1,7 +1,7 @@
 = widget_div do
   %section.well#comments{'data-subnav-label' => t("event.edit.menu.comments")}
     .comments
-      %h2= t "comment.comments"
+      %h2= Comment.model_name.human :count => 2
       = render({:state => :list}, @comments)
 
 

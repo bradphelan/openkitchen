@@ -9,6 +9,7 @@ de:
   close: Schliesen
   delete: Löschen
   create: Schaffen
+  my_kitchen: Mein Küche
 
   #
   #
@@ -26,6 +27,9 @@ de:
         other: Kommentare
       invitation: Einladung
       profile: Profil
+      venue:
+        one: Veranstaltungsort
+        other: Veranstaltungsorte
 
   comment:
     comments: Kommentare
@@ -83,6 +87,13 @@ de:
   profiles:
     edit:
       change_password: Password ändern 
+      password: Passwort
+      edit: Bearbeiten
+
+  venues:
+    show:
+     address: Addresse 
+     photos: Fotos
 
   layouts:
     application:
@@ -129,12 +140,6 @@ de:
     labels:
       event:
         name: Name
-        timezone: Zeitzone
-        datetime: Datum/Zeit
-        venue: Veranstaltungsort
-        street: Strasse
-        city: Stadt
-        country: Lande
         description: Beschreibung
       profile:
         street: Strasse
@@ -143,6 +148,13 @@ de:
         cookstars: Profi Sternen
         avatar: Personliches Foto
         venue: Veranstaltungsort
+      venue:
+        timezone: Zeitzone
+        datetime: Datum/Zeit
+        venue: Veranstaltungsort
+        street: Strasse
+        city: Stadt
+        country: Lande
 
     hints:
       event:
@@ -157,6 +169,8 @@ de:
         update: "Aktualisieren %{model}"
         create: "%{model} erstellen"
       profile:
+        update: "Aktualisieren %{model}"
+      venue:
         update: "Aktualisieren %{model}"
       invite:
         submit: "Einladung senden!" 

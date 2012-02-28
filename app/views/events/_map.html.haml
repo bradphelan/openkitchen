@@ -1,7 +1,6 @@
 -# Parameters
 -#
--#  mapping_data - Google maps for rails mapping data
 
-= link_to @event.google_maps_link, :target => "_blank", :class => "map" do
+= link_to @venue.google_maps_link, :target => "_blank", :class => "map" do
   = image_tag @map.url
   = t("maps.external_link")

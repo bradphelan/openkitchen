@@ -2,20 +2,15 @@
 #
 # Table name: events
 #
-#  id          :integer         primary key
+#  id          :integer         not null, primary key
 #  owner_id    :integer
-#  created_at  :timestamp
-#  updated_at  :timestamp
+#  created_at  :datetime
+#  updated_at  :datetime
 #  name        :string(255)
-#  datetime    :timestamp
+#  datetime    :datetime
 #  timezone    :string(255)
-#  street      :string(255)
-#  city        :string(255)
-#  country     :string(255)
-#  latitude    :float
-#  longitude   :float
-#  gmaps       :boolean
 #  description :text
+#  venue       :string(255)
 #
 
 require 'spec_helper'

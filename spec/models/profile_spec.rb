@@ -9,11 +9,7 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  cookstars           :integer         default(1)
-#  timezone            :string(255)     default("UTC"), not null
-#  street              :string(255)
-#  city                :string(255)
-#  country             :string(255)
-#  postcode            :string(255)
+#  timezone            :string(255)
 #  created_at          :datetime        not null
 #  updated_at          :datetime        not null
 #

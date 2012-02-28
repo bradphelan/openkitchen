@@ -4,13 +4,25 @@
   = f.input :name, :input_html => disabled_hash
 
 
+
+  - if disabled
+    -if @event.venue
+      - link_to(@event.venue.name, venue_path(@event.venue), 'data-popup' => true)
+
+  - else
+    -if @event.venue
+      - hint = link_to(Venue.model_name.human, venue_path(@event.venue), 'data-popup' => true)
+    -else
+      - hint = nil
+    = f.input :venue, :collection => current_user.venues
+    
+
+
   -# Manually rolling this as formtastic-bootstrap just
   -# puts text fields in here which is not what I want.
   -# TODO extract the code into a helper
   - unless disabled
     
-    - autofill = @event.timezone ? nil : 'autofill'
-    = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }.merge(disabled_hash)
     %fieldset.datetime.control-group
       %label(for="event_datetime")=t "formtastic.labels.event.datetime"
       .controls
@@ -22,6 +34,9 @@
               :ignore_date => true, 
               :ampm => true,
               :minute_step => 15
+
+    - autofill = @event.timezone ? nil : 'autofill'
+    = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }.merge(disabled_hash)
   - else
 
     %a{:href=>ical_event_path(event)}
@@ -30,11 +45,5 @@
         iCal
     = f.input :datetime, :label => t("formtastic.labels.event.datetime"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
 
-
-  = f.input :venue, :as => :string, :input_html => disabled_hash
-  = f.input :street, :as => :string, :input_html => disabled_hash
-  = f.input :city, :as => :string, :input_html => disabled_hash
-  = f.input :country, :as => :string, :input_html => disabled_hash
-  
 -if not disabled 
   = f.buttons

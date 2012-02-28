@@ -9,6 +9,7 @@ en:
   close: Close
   delete: Delete
   create: Create
+  default_venue_name: My Kitchen
 
   #
   #
@@ -28,6 +29,9 @@ en:
         one: Invitation
         other: Invitations
       profile: Profile
+      venue:
+        one: Venue
+        other: Venues
 
   comment:
     title: Comments
@@ -87,6 +91,11 @@ en:
   layouts:
     application:
       confirm_user: Complete registration
+
+  venues:
+    show:
+     address: Address
+     photos: Photos
 
   #
   #

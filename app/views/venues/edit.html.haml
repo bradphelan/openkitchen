@@ -1,0 +1,16 @@
+%h1= Venue.model_name.human
+
+.well
+  = semantic_form_for @venue do |f|
+    = f.inputs do
+      = f.input :name
+      - autofill = @venue.timezone ? nil : 'autofill'
+      = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
+      = f.input :street
+      = f.input :city
+      = f.input :country, :as => :string
+      = f.input :postcode
+    = f.actions
+
+
+  = render :partial => "events/map"

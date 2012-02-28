@@ -1,0 +1,20 @@
+#venues_show
+
+  %section#venues_show_address{'data-subnav-label'=>t(".address")}
+    %h1=t(".address")
+    .well
+      %address
+        %strong=@venue.name
+        %br
+        =@venue.street
+        %br
+        =@venue.city
+        %br
+        =@venue.country
+        %br
+        =@venue.postcode
+
+      = render :partial => "events/map"
+
+  %section#venues_show_photos{'data-subnav-label'=>t(".photos")}
+

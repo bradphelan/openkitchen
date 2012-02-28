@@ -2,25 +2,28 @@
 #
 # Table name: events
 #
-#  id          :integer         primary key
+#  id          :integer         not null, primary key
 #  owner_id    :integer
-#  created_at  :timestamp
-#  updated_at  :timestamp
+#  created_at  :datetime
+#  updated_at  :datetime
 #  name        :string(255)
-#  datetime    :timestamp
+#  datetime    :datetime
 #  timezone    :string(255)
-#  street      :string(255)
-#  city        :string(255)
-#  country     :string(255)
-#  latitude    :float
-#  longitude   :float
-#  gmaps       :boolean
 #  description :text
+#  venue       :string(255)
 #
 
 class Event < ActiveRecord::Base
 
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id
+
+  belongs_to :venue
+  validates_presence_of :venue
+
+  # Ensure the user can only add venues they own
+  validates_inclusion_of :venue, :in => lambda { |e|
+    e.owner.venues
+  }
 
   has_many :invitations, :dependent => :destroy
 
@@ -28,9 +31,7 @@ class Event < ActiveRecord::Base
 
   has_many :resources, :dependent => :destroy
 
-  attr_accessible  :name, :datetime, :timezone, :street, :city, :country, :description
-
-  #skip_time_zone_conversion_for_attributes = [ :datetime ]
+  attr_accessible  :venue_id, :description, :timezone, :datetime
 
   acts_as_commentable
 
@@ -38,12 +39,6 @@ class Event < ActiveRecord::Base
 
   validates_length_of :name, :maximum => 80
 
-  validates_length_of :street, :maximum => 80
-  validates_length_of :city, :maximum => 80
-  validates_length_of :country, :maximum => 80
-
-  validates_numericality_of :latitude, :allow_blank => true
-  validates_numericality_of :longitude, :allow_blank => true
   validates_length_of :description, :maximum => 4096 # characters
 
   validates_presence_of :owner
@@ -65,6 +60,7 @@ class Event < ActiveRecord::Base
     format = '%d/%m/%Y %l:%M %p'
     ActiveSupport::TimeZone[tz].parse dt.try(:strftime, format)
   end
+
   before_save do
     tz = timezone || "UTC"
     self[:datetime] = Event.convert_to_timezone tz, self[:datetime]
@@ -77,26 +73,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def description_unsanitzed_html
-    BlueCloth.new(description).to_html
-  end
-
   def invited? user
       invitations.where{user_id==user.id}.count > 0
   end
-
-  def gmaps4rails_address
-  "#{self.street}, #{self.city}, #{self.country}" 
-  end
-
-  def map_location
-   MapLocation.new :address => gmaps4rails_address
-  end
-
-  def google_maps_link
-    "http://maps.google.com/maps?q=#{gmaps4rails_address.gsub /\s/, '+'}"
-  end
-
 
   # Owner should be implicityly
   # invited

@@ -35,10 +35,21 @@ class User < ActiveRecord::Base
   has_many :invitations, :dependent => :destroy
 
   has_one :profile, :dependent => :destroy
-
   after_create do
     self.create_profile!
   end
+
+  # TODO Perhapps if the last manager of a venue is destroyed then
+  # the venue should also be destroyed or it will be orphaned. This
+  # will happen more often than not if the primary venue of the user
+  # , being their kitchen is not deleted if the user account is.
+  has_many :user_venue_managements, :dependent => :destroy
+  has_many :venues, :through => :user_venue_managements
+  after_create do
+    # We need at least one primary venue
+    self.venues.create! :role => :manager, :name => I18n.t('default_venue_name')
+  end
+
 
   #
   # Fill a new event with some defaults from the

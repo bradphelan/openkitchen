@@ -1,23 +1,18 @@
-%h1=t "activerecord.models.profile"
+%h1=Profile.model_name.human
 
-.well
+%section.well.profile.password#password_edit{'data-subnav-label' => t(".password")}
   = link_to edit_user_registration_path, :class => "btn btn-danger" do
     %i.icon-lock.icon-white
     = t ".change_password"
 
-.well.profile.edit
+%section.well.profile.edit#profile_edit{'data-subnav-label' => t(".edit")}
 
   = semantic_form_for @profile, :url => user_profile_path(@user), :html => { :multipart => true } do |f|
     .row
       = f.inputs do 
         .span5
-          = f.input :venue
-          = f.input :street
-          = f.input :city
-          = f.input :country, :as => :string
           - autofill = @profile.timezone ? nil : 'autofill'
           = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
-          = f.input :postcode
           = f.input :cookstars, :as => :select, :collection => 1..5
         .span5
           %span.avatar
@@ -29,3 +24,11 @@
     .row
       .span11
         = f.buttons
+
+%section.venues.edit#venues_edit{'data-subnav-label' => (Venue.model_name.human :count => 2)}
+  %h1=Venue.model_name.human :count => 2
+  .well
+    %ul
+    - current_user.user_venue_managements.each do |uvm|
+      %li
+        %a=link_to (uvm.venue.name.nil? ? "????????": uvm.venue.name ), edit_venue_path(uvm.venue)

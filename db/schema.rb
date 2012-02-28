@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227170013) do
+ActiveRecord::Schema.define(:version => 20120228193539) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -37,15 +37,11 @@ ActiveRecord::Schema.define(:version => 20120227170013) do
     t.string   "name"
     t.datetime "datetime"
     t.string   "timezone"
-    t.string   "street"
-    t.string   "city"
-    t.string   "country"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.boolean  "gmaps"
     t.text     "description"
-    t.string   "venue"
+    t.integer  "venue_id"
   end
+
+  add_index "events", ["venue_id"], :name => "index_events_on_venue_id"
 
   create_table "invitations", :force => true do |t|
     t.integer  "event_id"
@@ -65,13 +61,8 @@ ActiveRecord::Schema.define(:version => 20120227170013) do
     t.datetime "avatar_updated_at"
     t.integer  "cookstars",           :default => 1
     t.string   "timezone"
-    t.string   "street"
-    t.string   "city"
-    t.string   "country"
-    t.string   "postcode"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-    t.string   "venue"
   end
 
   create_table "resource_producers", :force => true do |t|
@@ -89,6 +80,12 @@ ActiveRecord::Schema.define(:version => 20120227170013) do
     t.integer   "event_id"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+  end
+
+  create_table "user_venue_managements", :force => true do |t|
+    t.integer "user_id"
+    t.integer "venue_id"
+    t.string  "role"
   end
 
   create_table "users", :force => true do |t|
@@ -111,5 +108,19 @@ ActiveRecord::Schema.define(:version => 20120227170013) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "venues", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "timezone"
+    t.string   "street"
+    t.string   "city"
+    t.string   "country"
+    t.string   "postcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+  end
 
 end

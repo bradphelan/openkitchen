@@ -12,9 +12,6 @@
           = f.input :description, :as => :text
         - else
           = simple_format h(@event.description)
-    .row
-      .span11
-        = render :partial => "map", :locals => { :mapping_data => @mapping_data }
 
 
 

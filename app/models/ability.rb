@@ -31,11 +31,12 @@ class Ability
     end
 
     if user.confirmed?
-      can :create, Event
+      # Only venues which are managed by the user can be assigned to the event
+      can [:create, :update], Event, :owner_id => user.id
     end
 
     # Can edit an event I am the host for
-    can [:invite, :update, :read, :destroy, :read], Event, :owner_id => user.id
+    can [:invite, :edit, :read, :destroy, :read], Event, :owner_id => user.id
 
     # Can create a resource for the event I own
     can [:create], Resource do |resource|
@@ -81,6 +82,17 @@ class Ability
     can [:edit, :update, :show], Profile, :user_id => user.id
 
     can [:edit], User, :user_id => user.id
+
+    # Venue
+    #
+    can :read, Venue, :user_venue_managements => { :user_id => user.id }
+    can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "manager" }
+    can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "owner" }
+    can :destroy, Venue, :user_venue_managements => { :user_id => user.id, :role => :owner }
+
+    can :manage, UserVenueManagement, :user_id => user.id
+
+    can :reserve
 
   end
 end

@@ -1,5 +1,7 @@
 Gobbq::Application.routes.draw do
 
+  resources :venues
+
   root :to => 'home#show'
 
   # This is here till issue https://github.com/apotonick/apotomo/issues/67 is fixed

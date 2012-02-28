@@ -9,11 +9,7 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  cookstars           :integer         default(1)
-#  timezone            :string(255)     default("UTC"), not null
-#  street              :string(255)
-#  city                :string(255)
-#  country             :string(255)
-#  postcode            :string(255)
+#  timezone            :string(255)
 #  created_at          :datetime        not null
 #  updated_at          :datetime        not null
 #
@@ -25,8 +21,11 @@ class Profile < ActiveRecord::Base
     :styles => { :medium => "300x300#", :thumb => "100x100#", :mini_thumb => "50x50#" },
     :default_url => "/assets/chef.jpg"
 
-  attr_accessible :venue, :street, :city, :country, :timezone, :postcode, :cookstars
+  validates_attachment_content_type :avatar, 
+    :content_type => %r{image/.*}, 
+    :less_than => 1.megabyte
 
+  attr_accessible :cookstars
 
   validates_presence_of :user_id
   validates_numericality_of :cookstars, 
@@ -34,14 +33,6 @@ class Profile < ActiveRecord::Base
     :greater_than_or_equal_to => 1,
     :less_than_or_equal_to => 5
 
-  validates_length_of :street, :maximum => 80
-  validates_length_of :city, :maximum => 80
-  validates_length_of :country, :maximum => 80
-  validates_length_of :country, :maximum => 20
-    
 
-  validates_attachment_content_type :avatar, 
-    :content_type => %r{image/.*}, 
-    :less_than => 1.megabyte
 
 end
