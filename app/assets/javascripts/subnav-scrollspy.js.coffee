@@ -14,9 +14,6 @@ $(document).ready =>
     finaloffset = $(id).offset().top + offset
     currentoffset = $("body").scrollTop()
 
-    console.log finaloffset
-    console.log currentoffset
-
     animate = (speed, complete=null)->
       finaloffset = $(id).offset().top + offset
       $("html,body").animate scrollTop: finaloffset, speed, complete
@@ -33,8 +30,9 @@ $(document).ready =>
 
   $(".subnavbar").on "click", "a", ->
     id = $(this).attr("href")
-    console.log id
-    goToByScroll id, -120
+    offset = parseInt $(id).attr('data-offset')
+    offset = if isNaN(offset) then 0 else offset
+    goToByScroll id, -120 + offset
     false
 
   # Fix the subnav bar to the top when we scroll down

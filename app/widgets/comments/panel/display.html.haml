@@ -4,7 +4,8 @@
       %h2= t "comment.comments"
       = render({:state => :list}, @comments)
 
-      .new
+
+      %section.new#comments_enter{'data-subnav-label' => '@', 'data-offset' => -200 }
         = semantic_form_for Comment.build_from(@event, current_user, ""), :url => url_for_event(:comment), :remote => true do |f|
           .form
             = f.inputs do
