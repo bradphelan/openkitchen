@@ -86,11 +86,13 @@ class Ability
     # Venue
     #
     can :read, Venue, :user_venue_managements => { :user_id => user.id }
-    can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "manager" }
-    can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "owner" }
-    can :destroy, Venue, :user_venue_managements => { :user_id => user.id, :role => :owner }
-
-    can :manage, UserVenueManagement, :user_id => user.id
+    if user.confirmed?
+      can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "manager" }
+      can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "owner" }
+      can :destroy, Venue, :user_venue_managements => { :user_id => user.id, :role => :owner }
+      can :create, Venue
+    end
+ 
 
     can :reserve
 

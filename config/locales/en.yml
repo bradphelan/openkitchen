@@ -10,14 +10,24 @@ en:
   delete: Delete
   create: Create
   default_venue_name: My Kitchen
+  edit: Edit
 
   #
   #
   # Models
   #
   #
+  attributes:
+    role: Role
+    password: Password
+    address: Address
+    datetime: Date / Time
+    venue: Venue
+    timezone: Timezone
   
   activerecord:
+    attributes:
+      event:
     models:
       event: 
         one: Event
@@ -86,6 +96,7 @@ en:
   profiles:
     edit:
       change_password: Change password
+      new_venue: Create a new venue
 
 
   layouts:
@@ -135,9 +146,6 @@ en:
   # In english the default translations from the field names
   # are satifictory in the most part
   formtastic:
-    labels:
-      event:
-        datetime: Date / Time
     hints:
       event:
         venue: The name of the venue

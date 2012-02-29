@@ -24,6 +24,7 @@ class Venue < ActiveRecord::Base
 
   has_many :events
 
+  validates_length_of :name, :maximum => 24, :minimum => 2
   validates_length_of :street, :maximum => 80
   validates_length_of :city, :maximum => 80
   validates_length_of :country, :maximum => 80

@@ -44,10 +44,26 @@ class User < ActiveRecord::Base
   # will happen more often than not if the primary venue of the user
   # , being their kitchen is not deleted if the user account is.
   has_many :user_venue_managements, :dependent => :destroy
-  has_many :venues, :through => :user_venue_managements
+
+  has_many :venues, :through => :user_venue_managements do
+    def create *params, &block
+      UserVenueManagement.with_scope :create => { :role => :owner } do
+        super *params, &block
+      end
+    end
+    def create! *params, &block
+      UserVenueManagement.with_scope :create => { :role => :owner } do
+        super *params, &block
+      end
+    end
+  end
+
   after_create do
     # We need at least one primary venue
-    self.venues.create! :role => :manager, :name => I18n.t('default_venue_name')
+    self.venues.create! do |v|
+     v.role = :manager
+     v.name = I18n.t('default_venue_name')
+    end
   end
 
 

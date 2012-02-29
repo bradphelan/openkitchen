@@ -9,15 +9,44 @@ de:
   close: Schliesen
   delete: Löschen
   create: Schaffen
-  my_kitchen: Mein Küche
+  default_venue_name: Mein Küche
+  edit: Bearbeiten
 
   #
   #
   # Models
   #
   #
+  attributes:
+    role: Rolle
+    password: Passwort
+    address: Addresse
+    datetime: Datum/Zeit
+    venue: Veranstaltungsort
+    timezone: Zeitzone
 
   activerecord:
+    attributes:
+      user_venue_management:
+        role: Rolle
+      event:
+        name: Name
+        description: Beschreibung
+      profile:
+        street: Strasse
+        city: Stadt
+        country: Lande
+        cookstars: Profi Sternen
+        avatar: Personliches Foto
+        venue: Veranstaltungsort
+      venue:
+        venue: Veranstaltungsort
+        street: Strasse
+        city: Stadt
+        country: Lande
+
+      user_venue_management:
+        role: Rolle
     models:
       event: 
         one: Veranstaltung
@@ -87,9 +116,7 @@ de:
   profiles:
     edit:
       change_password: Password ändern 
-      password: Passwort
-      edit: Bearbeiten
-
+      new_venue: Neues Veranstaltungsort
   venues:
     show:
      address: Addresse 
@@ -138,23 +165,6 @@ de:
 
   formtastic:
     labels:
-      event:
-        name: Name
-        description: Beschreibung
-      profile:
-        street: Strasse
-        city: Stadt
-        country: Lande
-        cookstars: Profi Sternen
-        avatar: Personliches Foto
-        venue: Veranstaltungsort
-      venue:
-        timezone: Zeitzone
-        datetime: Datum/Zeit
-        venue: Veranstaltungsort
-        street: Strasse
-        city: Stadt
-        country: Lande
 
     hints:
       event:

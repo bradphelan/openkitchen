@@ -11,4 +11,7 @@
 class UserVenueManagement < ActiveRecord::Base
   belongs_to :manager, :foreign_key => :user_id, :class_name => "User" 
   belongs_to :venue
+
+  # Nothing is mass assignable here
+  attr_protected :id, :user_id, :venue_id, :role
 end
