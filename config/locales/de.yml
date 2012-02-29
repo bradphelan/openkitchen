@@ -5,12 +5,14 @@ de:
 
   time: zeit
   confirm: "Sind Sie Sicher?"
+  submit: 
   open: Öffnen
   close: Schliesen
   delete: Löschen
   create: Schaffen
   default_venue_name: Mein Küche
   edit: Bearbeiten
+  confirm: Sicher?
 
   #
   #

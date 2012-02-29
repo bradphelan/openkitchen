@@ -10,7 +10,7 @@
 #  datetime    :datetime
 #  timezone    :string(255)
 #  description :text
-#  venue       :string(255)
+#  venue_id    :integer
 #
 
 require 'spec_helper'

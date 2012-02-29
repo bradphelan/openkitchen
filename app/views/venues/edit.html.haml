@@ -1,7 +1,7 @@
 %h1= Venue.model_name.human
 
 .well
-  = semantic_form_for @venue do |f|
+  = semantic_form_for @venue, :multipart => true do |f|
     = f.inputs do
       = f.input :name
       - autofill = @venue.timezone ? nil : 'autofill'
@@ -12,5 +12,17 @@
       = f.input :postcode
     = f.actions
 
-
+.well
   = render :partial => "events/map"
+
+.well
+  = semantic_form_for @venue.venue_images.build do |f|
+    = f.inputs do
+      = f.input :venue_id, :as => :hidden
+      = f.input :image, :as => :file 
+    = f.actions
+
+  = render :partial => "carousel"
+
+
+

@@ -17,7 +17,7 @@
 #
 
 class Venue < ActiveRecord::Base
-  attr_accessible :name, :street, :city, :country, :timezone, :postcode
+  attr_accessible :venue_images_attributes, :name, :street, :city, :country, :timezone, :postcode
 
   has_many :user_venue_managements, :dependent => :destroy
   has_many :managers, :through => :user_venue_managements, :source => :manager, :class_name => "User"
@@ -32,6 +32,9 @@ class Venue < ActiveRecord::Base
 
   validates_numericality_of :latitude, :allow_blank => true
   validates_numericality_of :longitude, :allow_blank => true
+
+  has_many :venue_images
+  accepts_nested_attributes_for :venue_images, :allow_destroy => true
     
   def gmaps4rails_address
   "#{self.street}, #{self.city}, #{self.country}" 
