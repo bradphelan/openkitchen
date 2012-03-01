@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
 
   has_many :resources, :dependent => :destroy
 
-  attr_accessible  :venue_id, :description, :timezone, :datetime
+  attr_accessible  :name, :venue_id, :description, :timezone, :datetime
 
   acts_as_commentable
 
