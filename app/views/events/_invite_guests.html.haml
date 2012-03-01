@@ -2,12 +2,14 @@
 
 - if can? :edit, @event
 
-  %section.well#invite{'data-subnav-label' => t("event.edit.menu.invite")}
+  %section#invite{'data-subnav-label' => t("event.edit.menu.invite")}
 
     %h2=t "invitation.invite_a_guest"
 
-    = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked invite-guest" } do |f|
-      = f.inputs do
-        = email_typeahead f
-      = f.buttons do
-        = f.commit_button
+    .well
+
+      = semantic_form_for :invite, :url => invite_event_path(@event) , :html => { class: "form-stacked invite-guest" } do |f|
+        = f.inputs do
+          = email_typeahead f
+        = f.buttons do
+          = f.commit_button
