@@ -11,22 +11,23 @@ fixfonts = ->
     size =  1
     element = $(element)
     desired_width = $(element).width()
+    banner_height = 150
 
     resizer = $(element.clone())
     resizer.css
-      'font-size': "#{size}em"
+      'font-size': "#{size}px"
       'max-width': desired_width
       'display': 'inline'
       'width': 'auto'
     resizer.insertAfter(element)
 
-    while resizer.width() < desired_width
+    while resizer.width() < desired_width and size < banner_height
       size = size * scaler
       resizer.css
-        'font-size':  "#{size}em"
+        'font-size':  "#{size}px"
 
     $(element).css
-        'font-size': "#{size / scaler }em"
+        'font-size': "#{size / scaler }px"
 
     resizer.remove()
 
