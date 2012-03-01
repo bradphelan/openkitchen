@@ -3,8 +3,16 @@ $brand-height: 46px
 $brand-padding: 10px
 
 $banner-height: 150px
+
+// TODO Find out why we need to do
+// this to stop the scrolling jiggling
+// when the first element is selected
+// on the subnav
+#page_body
+  margin-top: 75px
+
 header#overview
-  margin-top: 50px
+  margin-top: 30px
   h1
     background-image: image-url('header-banner.jpg')
     min-height: $banner-height

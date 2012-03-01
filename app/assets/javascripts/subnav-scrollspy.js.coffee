@@ -51,7 +51,7 @@ $(document).ready =>
   #
   $win = $(window)
   $nav = $(".subnav")
-  navTop = $(".subnav").length and $(".subnav").offset().top - 50
+  navTop = $(".subnav").length and $(".subnav").offset().top - 40
   isFixed = 0
   processScroll = ->
     i = undefined

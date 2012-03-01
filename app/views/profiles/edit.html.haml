@@ -1,4 +1,5 @@
-%h1=Profile.model_name.human
+- content_for :subnav_header do
+  %h1.autofont=Profile.model_name.human
 
 %section.well.profile.password#profile_edit_password_edit{'data-subnav-label' => User.human_attribute_name(:password)}
   = link_to edit_user_registration_path, :class => "btn btn-danger" do
