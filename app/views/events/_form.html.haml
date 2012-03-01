@@ -7,7 +7,11 @@
 
   - if disabled
     -if @event.venue
-      - link_to(@event.venue.name, venue_path(@event.venue), 'data-popup' => true)
+      %p
+        = link_to(@event.venue.name, venue_path(@event.venue), 'data-popup' => true)
+    -else
+      %b No venue selected : DB Integrity Error
+
 
   - else
     -if @event.venue
@@ -43,7 +47,7 @@
       %small
         %i.icon-calendar
         iCal
-    = f.input :datetime, :label => t("formtastic.labels.event.datetime"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
+    = f.input :datetime, :label => t("attributes.datetime"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
 
 -if not disabled 
   = f.buttons
