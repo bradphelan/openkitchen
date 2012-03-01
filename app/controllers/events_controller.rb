@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
   
 
-  load_and_authorize_resource :except => [:index, :ical, :create, :edit, :render_event_response]
+  load_and_authorize_resource :except => [:index, :ical, :create, :render_event_response]
 
   # Apotomo entry point
   load_resource :only => :render_event_response
@@ -23,6 +23,7 @@ class EventsController < ApplicationController
     Time.zone = current_user.time_zone
     @event = current_user.build_event_from_profile
   end
+  
 
   def create
 
@@ -52,14 +53,15 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
-    redirect_to :action => :edit
+  def  edit
+    @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
   end
 
-  def edit
-    @event = Event.find params[:id]
-    authorize! :read, @event
+  def show
     @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
+    @venue = @event.venue
+    @map = GoogleStaticMap.new(:zoom => 13, :center => @venue.map_location)
+    @map.markers << MapMarker.new(:color => "blue", :location => @venue.map_location)
   end
 
   def invite

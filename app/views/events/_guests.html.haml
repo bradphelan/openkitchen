@@ -3,8 +3,6 @@
 
   %h2= t "invitation.guests"
 
-  - @event = _event
-
   %ul.guests
     - @event.invitations.each_slice(3) do |slice|
       .row-fluid

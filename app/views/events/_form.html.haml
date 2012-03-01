@@ -1,53 +1,34 @@
 - @event = event
-- disabled_hash = { :disabled => disabled }
 = f.inputs do
-  = f.input :name, :input_html => disabled_hash
+  = f.input :name
 
 
 
-  - if disabled
-    -if @event.venue
-      %p
-        = link_to(@event.venue.name, venue_path(@event.venue), 'data-popup' => true)
-    -else
-      %b No venue selected : DB Integrity Error
-
-
-  - else
-    -if @event.venue
-      - hint = link_to(Venue.model_name.human, venue_path(@event.venue), 'data-popup' => true)
-    -else
-      - hint = nil
-    = f.input :venue, :collection => current_user.venues
+  -if @event.venue
+    - hint = link_to(Venue.model_name.human, edit_venue_path(@event.venue), 'data-popup' => true)
+  -else
+    - hint = nil
+  = f.input :venue, :collection => current_user.venues, :hint => hint
     
 
 
   -# Manually rolling this as formtastic-bootstrap just
   -# puts text fields in here which is not what I want.
   -# TODO extract the code into a helper
-  - unless disabled
     
-    %fieldset.datetime.control-group
-      %label(for="event_datetime")=t "attributes.datetime"
+  %fieldset.datetime.control-group
+    %label(for="event_datetime")=t "attributes.datetime"
+    .controls
       .controls
-        .controls
-          .date
-            = f.date_select :datetime,  :use_short_month => true, :start_year => Time.zone.now.year, :order => [:day, :month, :year]
-          .time
-            = f.time_select :datetime, 
-              :ignore_date => true, 
-              :ampm => true,
-              :minute_step => 15
+        .date
+          = f.date_select :datetime,  :use_short_month => true, :start_year => Time.zone.now.year, :order => [:day, :month, :year]
+        .time
+          = f.time_select :datetime, 
+            :ignore_date => true, 
+            :ampm => true,
+            :minute_step => 15
 
-    - autofill = @event.timezone ? nil : 'autofill'
-    = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }.merge(disabled_hash)
-  - else
+  - autofill = @event.timezone ? nil : 'autofill'
+  = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
 
-    %a{:href=>ical_event_path(event)}
-      %small
-        %i.icon-calendar
-        iCal
-    = f.input :datetime, :label => t("attributes.datetime"), :as => :string, :input_html => { :disabled => "disabled", :value => event.format_datetime}
-
--if not disabled 
-  = f.buttons
+= f.buttons

@@ -1,13 +1,15 @@
-#venues_edit_images_carousel.carousel.slide
-  .carousel-inner
-    - @venue.venue_images.all.each do |image|
-      .item
-        = image_tag image.image.expiring_url(120, :large)
-        - if can? :destroy, image
-          .carousel-caption
-            = link_to t("delete"), image, :method => :delete, :confirm => t("confirm")
-  %a.carousel-control.left(href="#venues_edit_images_carousel" data-slide="prev") &lsaquo;
-  %a.carousel-control.right(href="#venues_edit_images_carousel" data-slide="next") &rsaquo;
+- images = @venue.venue_images.all
+- if images.length > 0
+  #venues_edit_images_carousel.carousel.slide
+    .carousel-inner
+      - @venue.venue_images.all.each do |image|
+        .item
+          = image_tag image.image.expiring_url(120, :large)
+          - if can? :destroy, image
+            .carousel-caption
+              = link_to t("delete"), image, :method => :delete, :confirm => t("confirm")
+    %a.carousel-control.left(href="#venues_edit_images_carousel" data-slide="prev") &lsaquo;
+    %a.carousel-control.right(href="#venues_edit_images_carousel" data-slide="next") &rsaquo;
 
 :javascript
   $(document).ready(function(){

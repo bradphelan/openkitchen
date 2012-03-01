@@ -25,6 +25,8 @@ en:
     datetime: Date / Time
     venue: Venue
     timezone: Timezone
+    top: Top
+    bottom: Bottom
   
   activerecord:
     attributes:

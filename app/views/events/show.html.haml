@@ -1,11 +1,11 @@
 - content_for :subnav_header do
+
   %h1=@event.name.capitalize
 
 #edit_event_page
-  .sections
-    = render :partial => 'edit', :locals => { _event: @event }
 
-    = render :partial => 'invite_guests', :locals => { _event: @event }
+  .sections
+    = render :partial => 'show', :locals => { _event: @event }
 
     = render :partial => 'guests', :locals => { _event: @event }
 

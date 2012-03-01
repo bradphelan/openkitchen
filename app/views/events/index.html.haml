@@ -52,7 +52,7 @@
                   = image_tag "chef.jpg"
 
             .name.span3
-              = link_to event.name, edit_event_path(event.id)
+              = link_to event.name, event_path(event.id)
             .date.span2
               = event.format_date
               %a{:href=>ical_event_path(event)}

@@ -1,0 +1,22 @@
+%section.edit_event#edit{'data-subnav-label' => t("top")}
+
+  .datetime
+
+    = @event.format_date
+    = @event.format_time
+    %a.ical{:href=>ical_event_path(@event)}
+      %small
+        %i.icon-calendar
+        iCal
+
+  %h1=Event.human_attribute_name :description
+  .well
+
+    = @event.description
+
+= render :template => "venues/show"
+
+
+
+            
+
