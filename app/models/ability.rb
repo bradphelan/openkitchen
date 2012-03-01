@@ -86,6 +86,8 @@ class Ability
     # Venue
     #
     can :read, Venue, :user_venue_managements => { :user_id => user.id }
+    can :read, Venue, :events => { :invitations => { :user_id => user.id }}
+
     if user.confirmed?
       can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "manager" }
       can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "owner" }
