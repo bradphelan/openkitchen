@@ -12,6 +12,8 @@ en:
   default_venue_name: My Kitchen
   edit: Edit
   confirm: Are you sure?
+  top: Top
+  bottom: Bottom
 
   #
   #
@@ -25,8 +27,6 @@ en:
     datetime: Date / Time
     venue: Venue
     timezone: Timezone
-    top: Top
-    bottom: Bottom
   
   activerecord:
     attributes:
