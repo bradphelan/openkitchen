@@ -20,8 +20,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    Time.zone = current_user.time_zone
-    @event = current_user.build_event_from_profile
+    @event = current_user.events_as_owner.build
+    @event.venue = current_user.venues.first
+    if @event.venue
+      @event.timezone = @event.venue.timezone
+    end
   end
   
 

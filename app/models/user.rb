@@ -67,23 +67,6 @@ class User < ActiveRecord::Base
   end
 
 
-  #
-  # Fill a new event with some defaults from the
-  # profile
-  def build_event_from_profile options = {}
-    options.merge! :datetime => (Time.zone.now + 2.weeks) 
-    event = Event.new options 
-    event.owner = self
-
-    p = self.profile
-    event.street = p.street
-    event.city = p.city
-    event.country = p.country
-    event.venue = p.venue
-    event.timezone = p.timezone
-    event
-  end
-
   def name
     email
   end
