@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   %body
-    .navbar.navbar-fixed-top
+    #navbar.navbar.navbar-fixed-top
       .navbar-inner
         .container
           %a.btn.btn-navbar(data-toggle="collapse" data-target=".nav-collapse")
@@ -77,13 +77,11 @@
 
           - else
 
-            %header#overview
+            %header.jumbotron.subhead#overview
               = yield :subnav_header
-              .navbar.subnavbar
-                .navbar-inner
-                  .container
-                    %ul.nav
-                      = yield :subnav_items
+              #subnavbar.subnav
+                %ul.nav.nav-pills
+                  = yield :subnav_items
 
 
             = yield

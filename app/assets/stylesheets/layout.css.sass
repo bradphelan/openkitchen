@@ -7,7 +7,6 @@ header#overview
     background-image: image-url('header-banner.jpg')
     white-space: nowrap
     display: block-inline
-    padding-left: 0.2em
     text-shadow: 2px 2px 2px rgba(0,0,0,0.25)
     +border-radius(5px)
 
@@ -27,45 +26,6 @@ a.brand
   padding: 0px !important
   margin: 0px !important
 
-.navbar
-  +box-shadow
-  .navbar-inner
-    .container
-      .brand
-        padding-right: 2em
-      padding-top: $brand-padding
-      padding-bottom: $brand-padding
-      .nav-collapse
-        background-color: $grayDarker
-        &.in
-          border: 1px solid $gray
-        +border-radius(10px 10px 10px 10px)
-
-.subnavbar-fixed-top
-  @extend .navbar-fixed-top
-  top: $brand-height + $brand-padding*2
-  height: $brand-height
-
-.subnavbar
-  @media (max-width: 980px)
-    display: none
-  +box-shadow(0 0 0)
-  border: none
-  .navbar-inner
-    background: none
-    border: none
-    +gradientBar($gray, transparentize($gray, 0.60))
-  ul
-    @extend .btn-group
-    li 
-      @extend .btn
-      a
-      &.active
-        a
-          background-color: rgba(0,0,0,0) !important
-          color: $black !important
-        
-      color: $black
 
 // Below is a load of CSS Voodoo
 .well, form .form-actions
@@ -74,9 +34,7 @@ a.brand
 #page
   background-color: lighten($blue, 35%)
   @media (min-width: 980px)
-    padding-top: $brand-height + $brand-padding*2
   @media (max-width: 980px)
-    margin-top: -18px !important
   .content
     background-color: lighten($blue, 30%)
     padding-bottom: $brand-padding

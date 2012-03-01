@@ -28,34 +28,42 @@ $(document).ready =>
   # Need to refresh the scroll spy after AJAX handlers
   $("body").ajaxComplete => refresh_scollspy()
 
-  $(".subnavbar").on "click", "a", ->
+  $(".subnav").on "click", "a", ->
     id = $(this).attr("href")
     offset = parseInt $(id).attr('data-offset')
     offset = if isNaN(offset) then 0 else offset
-    goToByScroll id, -120 + offset
+    o = $("#subnavbar ul").outerHeight()
+    oo = $("#navbar .container").outerHeight()
+
+    # Is the subnavbar in fixed or expanded mode. If
+    # in expanded mode we don't need the offset. It's
+    # still not a perfect check but better than nix.
+    if o < 100
+      delta = o + oo
+    else
+      delta = 0
+    goToByScroll id, -delta + offset
     false
 
-  # Fix the subnav bar to the top when we scroll down
-  $(document).scroll ->
-
-    if $(".subnavbar").length == 0
-      return
-
-    unless $(".subnavbar").attr("data-top")
-      return  if $(".subnavbar").hasClass("subnavbar-fixed-top")
-      offset = $(".subnavbar").offset()
-      $(".subnavbar").attr "data-top", offset.top
-
-    d = $(".subnavbar").attr("data-top") - $(".subnavbar").outerHeight()
-    st = $(this).scrollTop()
-    # Add some hysterises in so that it doesn't flicker on the
-    # boundary. #hack #win
-    hysterises = 30
-    if d <= st and not $(".subnavbar").hasClass "subnavbar-fixed-top"
-      $(".subnavbar").addClass "subnavbar-fixed-top"
-    else if d > st + hysterises and $(".subnavbar").hasClass "subnavbar-fixed-top"
-      $(".subnavbar").removeClass "subnavbar-fixed-top"
-
+  #
+  # Scroll magic to fix the subnavbar to 
+  # below the header
+  #
+  $win = $(window)
+  $nav = $(".subnav")
+  navTop = $(".subnav").length and $(".subnav").offset().top - 50
+  isFixed = 0
+  processScroll = ->
+    i = undefined
+    scrollTop = $win.scrollTop()
+    if scrollTop >= navTop and not isFixed
+      isFixed = 1
+      $nav.addClass "subnav-fixed"
+    else if scrollTop <= navTop and isFixed
+      isFixed = 0
+      $nav.removeClass "subnav-fixed"
+  processScroll()
+  $win.on "scroll", processScroll
   
 $(document).ready =>
   template = (id, label) =>
@@ -77,4 +85,4 @@ $(document).ready =>
     id = $(v).attr("id")
     label = $(v).attr("data-subnav-label")
     t = template(id, label)
-    $(".subnavbar ul.nav").append t
+    $(".subnav ul.nav").append t
