@@ -16,7 +16,7 @@ class VenuesController < ApplicationController
 
   def update
     @venue.update_attributes params[:venue]
-    redirect_to :action => :edit
+    respond_with @venue, :location => edit_user_profile_path(current_user)
   end
 
   def show

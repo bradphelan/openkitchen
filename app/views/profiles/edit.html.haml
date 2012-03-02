@@ -1,57 +1,59 @@
-- content_for :subnav_header do
-  %h1.autofont=Profile.model_name.human
+#page_profiles_edit
 
-%section.well.profile.password#profile_edit_password_edit{'data-subnav-label' => User.human_attribute_name(:password)}
-  = link_to edit_user_registration_path, :class => "btn btn-danger" do
-    %i.icon-lock.icon-white
-    = t ".change_password"
+  - content_for :subnav_header do
+    %h1.autofont=Profile.model_name.human
 
-%section.well.profile.edit#profile_edit_form{'data-subnav-label' => t("edit")}
+  %section.well.profile.password#profile_edit_password_edit{'data-subnav-label' => User.human_attribute_name(:password)}
+    = link_to edit_user_registration_path, :class => "btn btn-danger" do
+      %i.icon-lock.icon-white
+      = t ".change_password"
 
-  = semantic_form_for @profile, :url => user_profile_path(@user), :html => { :multipart => true } do |f|
-    .row
-      = f.inputs do 
-        .span5
-          - autofill = @profile.timezone ? nil : 'autofill'
-          = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
-          = f.input :cookstars, :as => :select, :collection => 1..5
-        .span5
-          %span.avatar
-            - if @profile.avatar.file?
-              = image_tag @profile.avatar.expiring_url(120, :medium)
-            - else
-              = image_tag "chef.jpg"
-            = f.input :avatar
-    .row
-      .span11
-        = f.buttons
+  %section.well.profile.edit#profile_edit_form{'data-subnav-label' => t("edit")}
 
-%section.venues.edit#profile_edit_venues_edit{'data-subnav-label' => (Venue.model_name.human :count => 2)}
-  %h1=Venue.model_name.human :count => 2
-  .well
-    %table.table.table-striped.table-bordered
-      %thead
-        %tr 
-          %th=Venue.human_attribute_name :name
-          %th=Venue.human_attribute_name :address
-          %th=UserVenueManagement.human_attribute_name :role
-      - current_user.user_venue_managements.each do |uvm|
-        - venue = uvm.venue
-        %tbody
-          %tr
-            %td
-              - if can? :edit, uvm.venue
-                %a=link_to uvm.venue.name, edit_venue_path(uvm.venue)
+    = semantic_form_for @profile, :url => user_profile_path(@user), :html => { :multipart => true } do |f|
+      .row
+        = f.inputs do 
+          .span5
+            - autofill = @profile.timezone ? nil : 'autofill'
+            = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
+            = f.input :cookstars, :as => :select, :collection => 1..5
+          .span5
+            %span.avatar
+              - if @profile.avatar.file?
+                = image_tag @profile.avatar.expiring_url(120, :medium)
               - else
-                %a=link_to uvm.venue.name, venue_path(uvm.venue)
-            %td= uvm.venue.gmaps4rails_address
-            %td= uvm.role
-            
+                = image_tag "chef.jpg"
+              = f.input :avatar
+      .row
+        .span11
+          = f.buttons
 
-%section#profile_edit_new_venue{'data-subnav-label' => '+', 'data-offset' => '-100'}
-  %h1=t ".new_venue"
-  .well
-    = semantic_form_for current_user.venues.build do |f|
-      = f.inputs do
-        = f.input :name
-        = f.submit
+  %section.venues.edit#profile_edit_venues_edit{'data-subnav-label' => (Venue.model_name.human :count => 2)}
+    %h1=Venue.model_name.human :count => 2
+    .well
+      %table.table.table-striped.table-bordered
+        %thead
+          %tr 
+            %th=Venue.human_attribute_name :name
+            %th=Venue.human_attribute_name :address
+            %th=UserVenueManagement.human_attribute_name :role
+        - current_user.user_venue_managements.each do |uvm|
+          - venue = uvm.venue
+          %tbody
+            %tr
+              %td
+                - if can? :edit, uvm.venue
+                  %a=link_to uvm.venue.name, edit_venue_path(uvm.venue)
+                - else
+                  %a=link_to uvm.venue.name, venue_path(uvm.venue)
+              %td= uvm.venue.gmaps4rails_address
+              %td= uvm.role
+              
+
+  %section#profile_edit_new_venue{'data-subnav-label' => '+', 'data-offset' => '-100'}
+    %h1=t ".new_venue"
+    .well
+      = semantic_form_for current_user.venues.build do |f|
+        = f.inputs do
+          = f.input :name
+          = f.submit
