@@ -26,41 +26,29 @@ class Ability
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
     # Can read an event I have been invited to
-    can :read, Event do |event|
-      event.owner_id == user.id || event.invitations.where{user_id==my{user.id}}.count > 0
-    end
+    can :read, Event, :owner_id => user.id
+    can :read, Event, :invitations => { :user_id => user.id }
 
     if user.confirmed?
-      # Only venues which are managed by the user can be assigned to the event
-      can [:create, :update], Event, :owner_id => user.id
+      can [:invite, :edit, :create, :update, :destroy], Event, :owner_id => user.id
     end
-
-    # Can edit an event I am the host for
-    can [:invite, :edit, :read, :destroy, :read], Event, :owner_id => user.id
 
     # Can create a resource for the event I own
-    can [:create], Resource do |resource|
-      resource.event.owner_id = user.id
-    end
+    can :create, Resource, :event => { :owner_id => user.id }
 
-    # Can create a resource for the event I am invited to
-    can [:show], Resource do |resource|
-      resource.event.invited? user
-    end
+    # Can show a resource for the event I am invited to
+    can :show, Resource, :event => { :invitations => { :user_id => user.id }}
 
     # Can update an invitation if the user owns it
     can [:show, :update], Invitation, :user_id => user.id
 
     # Can mail or destroy an invitation if the user is the event owner
-    can [:mail, :destroy], Invitation do |invitation|
-      invitation.event.owner.id == user.id
-    end
+    can [:mail, :destroy], Invitation, :event => { :owner_id => user.id }
 
     # Can create a resource producter for a resource whose event I am invited to
-    can [:create], ResourceProducer do |resource_producer|
-      resource_producer.invitation.user_id == user.id &&
-        resource_producer.resource.event.invitations.where{user_id==my{user.id}}.count > 0
-    end
+    can :create, ResourceProducer, 
+      :invitation => { :user_id => user.id }, 
+      :resource => { :event => { :invitations => { :user_id => user.id } } }
 
     # Can complete registration for self
     can [:register], User, :id => user.id

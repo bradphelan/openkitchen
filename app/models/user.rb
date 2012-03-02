@@ -61,7 +61,6 @@ class User < ActiveRecord::Base
   after_create do
     # We need at least one primary venue
     self.venues.create! do |v|
-     v.role = :manager
      v.name = I18n.t('default_venue_name')
     end
   end

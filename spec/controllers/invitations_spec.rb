@@ -8,7 +8,9 @@ describe InvitationsController do
     
     @owner = Factory :user
     @guest = Factory :user
-    @event = @owner.events_as_owner.create! :timezone => "UTC", :name => "foo", :datetime => Time.zone.now
+    @event = @owner.events_as_owner.create! :timezone => "UTC", :name => "foo", :datetime => Time.zone.now do |e|
+      e.venue = @owner.venues.first
+    end
     @invite = @event.invite @guest.email
   end
   describe "GET bad token" do
@@ -23,6 +25,6 @@ describe InvitationsController do
     before do
         get :token, :id => @invite.token
     end
-    it {should redirect_to edit_event_url(@invite.event)}
+    it {should redirect_to event_url(@invite.event)}
   end
 end

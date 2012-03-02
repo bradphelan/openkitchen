@@ -111,9 +111,7 @@ feature "Creating an event" do
           select "15", :from => "event_datetime_5i"
         end
         select "(GMT+01:00) Vienna", :from => "Timezone"
-        fill_in "Street", :with => "6 Astolat Ave"
-        fill_in "City", :with => "Melbourne"
-        fill_in "Country", :with => "Australia"
+        select I18n.t('default_venue_name'), :from => "Venue"
       end
     end
 
@@ -212,8 +210,9 @@ feature "Inviting somebody to an event" do
     end
 
     Then "I should be on the page for the event" do
-      page.should have_selector ".edit_event"
-      page.find_field("Name").value.should == "Party GAGA"
+      page.should have_selector "#show_event_page"
+      #page.save_and_open_page
+      page.should have_content "Party gaga"
     end
 
     And "I should not be confirmed" do

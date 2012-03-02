@@ -35,6 +35,6 @@ class InvitationsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     sign_in @invitation.user
-    redirect_to edit_event_path(@invitation.event)
+    redirect_to event_path(@invitation.event)
   end
 end

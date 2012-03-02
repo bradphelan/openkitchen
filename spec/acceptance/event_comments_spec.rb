@@ -18,7 +18,7 @@ feature "Add comment to event", :js => true do
     include_steps "login", @guest.email, @password
 
     When "I visit the event path" do
-      visit edit_event_path(@event)
+      visit event_path(@event)
     end
 
     And "Enter a comment and click on 'comment'" do

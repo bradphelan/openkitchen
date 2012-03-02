@@ -23,10 +23,6 @@ describe Event do
     @user = Factory :user
     @profile = @user.profile
 
-    @profile.street = "10 Fugazi"
-    @profile.city = "Bangkok"
-    @profile.country = "Thailand"
-    @profile.venue = "Mr Big Noodles"
     @profile.save!
 
     @guest0 = Factory :user
@@ -38,21 +34,16 @@ describe Event do
   end
   describe "creating" do
     before do
-      @event = @user.build_event_from_profile :timezone => "UTC", :description => "Bar", :name => "Foo"
+      @event = @user.events_as_owner.build :timezone => "UTC", :description => "Bar", :name => "Foo" do |e|
+        e.venue = @user.venues.first
+        e.datetime = Time.zone.now + 2.weeks
+      end
       @event.save!
     end
 
     it "should create the event and assign the user as owner" do
       @event.owner.should == @user
       @event.invitations.count.should == 1
-    end
-
-    it "User#build_event_from_profile should get the address and venue info from the profile" do
-      @event.street.should == @user.profile.street
-      @event.city.should == @user.profile.city
-      @event.country.should == @user.profile.country
-      @event.venue.should == @user.profile.venue
-      @event.timezone.should == @user.profile.timezone
     end
 
     describe "#invitees" do

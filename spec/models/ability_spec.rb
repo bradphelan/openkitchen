@@ -3,8 +3,8 @@ require 'cancan/matchers'
 
 describe Ability do
   before :each do
-    @user0 = Factory :user
-    @user1 = Factory :user
+    @user0 = Factory :registered_user
+    @user1 = Factory :registered_user
 
     @event0 = Factory :event, :owner => @user0
     @event1 = Factory :event, :owner => @user1
