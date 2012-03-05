@@ -1,7 +1,7 @@
 # myapp/config/s3.yml
 
 development: &DEFAULTS
-  bucket: openkitchen
+  bucket: openkitchen-eu
   path: ":rails_env/:class/:attachment/:id/:basename-:style.:extension"
 
   storage: s3
