@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-    #   user ||= User.new # guest user (not logged in)
+    user ||= User.new # guest user (not logged in)
     #   if user.admin?
     #     can :manage, :all
     #   else
@@ -28,6 +28,7 @@ class Ability
     # Can read an event I have been invited to
     can :read, Event, :owner_id => user.id
     can :read, Event, :invitations => { :user_id => user.id }
+    can :read, Event, :public => true
 
     if user.confirmed?
       can [:invite, :edit, :create, :update, :destroy], Event, :owner_id => user.id
@@ -53,9 +54,11 @@ class Ability
     # Can complete registration for self
     can [:register], User, :id => user.id
 
-    can [:comment_on], Event do |event|
-      event.invited? user
-    end
+    can [:comment_on], Event, { :invitations => { :user_id => user.id } } 
+    can [:comment_on], Event, { :public => true } 
+    cannot :comment_on, Event do
+      user.id.nil?
+    end 
 
     can [:create, :read], Comment do |comment|
       comment.user_id == user.id and can?(:comment_on, comment.commentable)

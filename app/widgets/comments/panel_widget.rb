@@ -6,7 +6,7 @@ class Comments::PanelWidget < ApplicationWidget
   has_widgets do
     @event = options[:event]
     @comments = @event.root_comments.order "created_at ASC"
-    @invitation = @event.invitation_for_user current_user
+    @invitation = @event.invitation_for_user current_user if current_user
     @comments.each do |comment|
       self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
     end

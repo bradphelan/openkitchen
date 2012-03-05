@@ -19,6 +19,6 @@
                     = button_to_remove_invitation invitation do
                       %i.icon-fire
 
-                  - if can? :edit, @invitation.event
+                  - if @invitation and can?(:edit, @invitation.event)
                     = button_to_remail_invitation(invitation) do
                       %i.icon-envelope

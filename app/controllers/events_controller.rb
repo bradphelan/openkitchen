@@ -60,8 +60,19 @@ class EventsController < ApplicationController
     @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
   end
 
+  skip_before_filter :authenticate_user!, :only => :show, :if => lambda { 
+    if params[:id]
+      @event = Event.find(params[:id])
+      @event and @event.public?
+    else
+      false
+    end
+  }
+  
   def show
-    @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
+    if current_user
+      @invitation = current_user.invitations.where{event_id==my{@event.id}}.first
+    end
     @venue = @event.venue
     @map = GoogleStaticMap.new(:zoom => 13, :center => @venue.map_location)
     @map.markers << MapMarker.new(:color => "blue", :location => @venue.map_location)

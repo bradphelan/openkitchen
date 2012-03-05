@@ -28,6 +28,7 @@ de:
     datetime: Datum/Zeit
     venue: Veranstaltungsort
     timezone: Zeitzone
+    public: Öffentlich
 
   activerecord:
     attributes:

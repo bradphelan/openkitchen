@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229142018) do
+ActiveRecord::Schema.define(:version => 20120305195734) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20120229142018) do
     t.string   "timezone"
     t.text     "description"
     t.integer  "venue_id"
+    t.boolean  "public",      :default => false, :null => false
   end
 
   add_index "events", ["venue_id"], :name => "index_events_on_venue_id"

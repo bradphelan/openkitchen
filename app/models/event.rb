@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
 
   has_many :resources, :dependent => :destroy
 
-  attr_accessible  :name, :venue_id, :description, :timezone, :datetime
+  attr_accessible  :name, :venue_id, :description, :timezone, :datetime, :public
 
   acts_as_commentable
 
@@ -42,6 +42,8 @@ class Event < ActiveRecord::Base
   validates_length_of :description, :maximum => 4096 # characters
 
   validates_presence_of :owner
+
+  validates_inclusion_of :public, :in => [true, false]
 
   # Get the invitation to this event for
   # the specific user or nil if they are

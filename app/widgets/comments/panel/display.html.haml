@@ -6,13 +6,14 @@
       = render({:state => :list}, @comments)
 
 
-      %section.new#comments_enter{'data-subnav-label' => '@', 'data-offset' => -200 }
-        = semantic_form_for Comment.build_from(@event, current_user, ""), :url => url_for_event(:comment), :remote => true do |f|
-          .form
-            = f.inputs do
-              = f.input :commentable_id, :as => :hidden
-              = f.input :commentable_type, :as => :hidden
-              = f.input :body, :label => false
-            = f.actions do
-              = f.action :submit, :as => :button, :label => t("comment.submit")
-              = render :view => :comment_button
+      - if can? :comment_on, @event
+        %section.new#comments_enter{'data-subnav-label' => '@', 'data-offset' => -200 }
+          = semantic_form_for Comment.build_from(@event, current_user, ""), :url => url_for_event(:comment), :remote => true do |f|
+            .form
+              = f.inputs do
+                = f.input :commentable_id, :as => :hidden
+                = f.input :commentable_type, :as => :hidden
+                = f.input :body, :label => false
+              = f.actions do
+                = f.action :submit, :as => :button, :label => t("comment.submit")
+                = render :view => :comment_button
