@@ -19,7 +19,6 @@ group :test, :development do
   
 end
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -102,3 +101,5 @@ gem "girl_friday", "~> 0.9.7"
 
 gem "rails-i18n"
 gem "devise-i18n"
+
+gem "newrelic_rpm"
