@@ -25,7 +25,7 @@ class Profile < ActiveRecord::Base
     :content_type => %r{image/.*}, 
     :less_than => 1.megabyte
 
-  attr_accessible :cookstars
+  attr_accessible :cookstars, :avatar
 
   validates_presence_of :user_id
   validates_numericality_of :cookstars, 

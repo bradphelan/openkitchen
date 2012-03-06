@@ -25,4 +25,6 @@ class VenueImage < ActiveRecord::Base
     :content_type => %r{image/.*}, 
     :less_than => 1.megabyte
 
+  attr_accessible :image
+
 end
