@@ -2,12 +2,7 @@ class CommentMailer < ActionMailer::Base
   default from: "concierge@xtargets.com"
 
   
-  def self.async_mail_subscribers comment
-    COMMENT_EMAIL_QUEUE << { comment_id: comment.id }
-  end
-
-  def self.process_email_queue info
-      comment = Comment.find info[:comment_id]
+  def self.mail_subscribers comment
       event = comment.commentable
 
       event.invitations.each do |invitation|

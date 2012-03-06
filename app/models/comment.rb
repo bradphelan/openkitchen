@@ -41,7 +41,7 @@ class Comment < ActiveRecord::Base
   after_commit :on => :create do
     # This has to be done here. If done in the after_create block
     # then it is possible that transactions are screwed up.
-    CommentMailer.async_mail_subscribers self
+    CommentMailer.mail_subscribers(self)
   end
 
   #

@@ -5,7 +5,7 @@ require File.expand_path('../application', __FILE__)
 Gobbq::Application.initialize!
 
 
-if Rails.env.production? || Rails.env.development?
+if Rails.env.production?
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
