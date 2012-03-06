@@ -21,7 +21,7 @@ class ApplicationWidget < Apotomo::Widget
   end
 
   def current_ability
-    ::Ability.new current_user
+    parent_controller.current_ability
   end
 
   def authorize! *args
