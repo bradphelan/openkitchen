@@ -1,0 +1,25 @@
+%li
+  = profile_avatar_image(invitation.user.profile, :thumb)
+  .email
+    = mail_to invitation.user.email, invitation.user.name
+  .buttons
+
+    - if can? :destroy, invitation
+
+      - disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
+
+      = link_to invitation_path(invitation), 
+        :method => :delete, 
+        :class => "btn btn-danger #{disabled}", 
+        :confirm => t("confirm"),
+        :title => t("invitation.remove") do
+        %i.icon-fire
+
+    - if invitation and can?(:edit, invitation.event)
+
+      = link_to mail_invitation_url(invitation), 
+        :method => :post, 
+        :class => "btn btn-success invite",
+        :confirm => t("confirm"),
+        :title => t("invitation.resend") do
+        %i.icon-envelope

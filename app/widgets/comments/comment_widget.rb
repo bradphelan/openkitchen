@@ -23,7 +23,7 @@ class Comments::CommentWidget < ApplicationWidget
   #
   # States
   #
-  
+
   def display(comment=options[:comment])
     render locals: { event: @event, comment: comment }
   end

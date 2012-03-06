@@ -14,6 +14,9 @@ class EventGuestsWidget < ApplicationWidget
     render
   end
 
+  def invitation i
+    render :view => :invitation, :locals => { :invitation => i }
+  end
   #
   # Events
   #
