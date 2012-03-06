@@ -111,7 +111,7 @@ class Event < ActiveRecord::Base
        i.event = self
        i.user = guest
       end
-      InviteMailer.invite_email(invitation).deliver
+      InviteMailer.deliver_invitation(invitation)
     end
 
     invitation

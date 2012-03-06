@@ -16,7 +16,7 @@ class InvitationsController < ApplicationController
   end
 
   def mail
-    InviteMailer.invite_email(@invitation).deliver
+    InviteMailer.deliver_invitation(@invitation)
     flash[:notice] = t("invitation.sent", :name => @invitation.user.name)
     flash.keep
     redirect_to edit_event_path(@invitation.event)

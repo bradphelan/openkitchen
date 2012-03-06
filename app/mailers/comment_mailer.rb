@@ -3,6 +3,14 @@ class CommentMailer < ActionMailer::Base
 
   
   def self.mail_subscribers comment
+    ActiveRecord::Base.after_transaction do
+      COMMENT_QUEUE.push :id => comment.id
+    end
+  end
+
+  def self.mail_subscribers! comment_id
+      comment = Comment.find comment_id
+
       event = comment.commentable
 
       event.invitations.each do |invitation|
