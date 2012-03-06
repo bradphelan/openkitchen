@@ -5,8 +5,6 @@
   .sections
     = render :partial => 'edit', :locals => { _event: @event }
 
-    = render :partial => 'invite_guests', :locals => { _event: @event }
-
-    = render :partial => 'guests', :locals => { _event: @event }
+    = render_widget :event_guests
 
     = render_widget :comments

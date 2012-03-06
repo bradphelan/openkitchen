@@ -5,6 +5,10 @@ class EventsController < ApplicationController
   has_widgets do |root|
     root << panel = widget("comments/panel", :comments, :event => @event)
   end
+
+  has_widgets do |root|
+    root << panel = widget(:event_guests, :event => @event )
+  end
   
 
   load_and_authorize_resource :except => [:index, :ical, :create, :render_event_response]

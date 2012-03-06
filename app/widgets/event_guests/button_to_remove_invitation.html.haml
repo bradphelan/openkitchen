@@ -1,0 +1,10 @@
+-# @param invitation
+
+- disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
+
+= link_to invitation_path(invitation), 
+  :method => :delete, 
+  :class => "btn btn-danger #{disabled}", 
+  :confirm => t("confirm"),
+  :title => t("invitation.remove") do
+    %i.icon-fire

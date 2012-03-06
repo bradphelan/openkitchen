@@ -1,0 +1,33 @@
+= widget_div do
+  %section#guests{'data-subnav-label' => t("event.edit.menu.guests")}
+
+    %h2= t "invitation.guests"
+    
+    .well
+
+      %ul.guests
+        - @event.invitations.includes({:user => :profile}, :event).each_slice(3) do |slice|
+          .row-fluid
+            - slice.each do |invitation|
+              .span4
+                %li
+                  = profile_avatar_image(invitation.user.profile, :thumb)
+                  .email
+                    = mail_to invitation.user.email, invitation.user.name
+                  .buttons
+                    - if can? :destroy, invitation
+                      = render :view => :button_to_remove_invitation, :locals => { :invitation => invitation }
+
+                    - if @invitation and can?(:edit, @invitation.event)
+                      = render :view => :button_to_remail_invitation, :locals => { :invitation => invitation }
+
+      %hr
+      - if can? :edit, @event
+
+        %section#invite{'data-subnav-label' => '+'}
+
+          = semantic_form_for :invite, :remote => true, :url => url_for_event(:invite_guest) , :html => { class: "form-stacked invite-guest" } do |f|
+            = f.inputs do
+              = render :view => :email_typeahead, :locals => { :form => f }
+            = f.buttons do
+              = f.commit_button

@@ -1,0 +1,7 @@
+-# @param invitation
+= link_to mail_invitation_url(invitation), 
+  :method => :post, 
+  :class => "btn btn-success invite",
+  :confirm => t("confirm"),
+  :title => t("invitation.resend") do
+    %i.icon-envelope
