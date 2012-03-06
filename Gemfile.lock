@@ -66,11 +66,13 @@ GEM
     activesupport (3.2.1)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.6)
+    addressable (2.2.7)
     apotomo (1.2.2)
       cells (>= 3.6.7)
       hooks (~> 0.2.0)
       onfire (~> 0.2.0)
+    ar_after_transaction (0.2.4)
+      activerecord
     arel (3.0.0)
     awesome_nested_set (2.1.2)
       activerecord (>= 3.0.0)
@@ -144,7 +146,7 @@ GEM
       railties (~> 3.0)
     has_scope (0.5.1)
     hashie (1.2.0)
-    heroku (2.19.1)
+    heroku (2.21.2)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
       rubyzip
@@ -255,7 +257,7 @@ GEM
       rspec (~> 2.8.0)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
-    rubyzip (0.9.5)
+    rubyzip (0.9.6.1)
     sass (3.1.15)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
@@ -309,6 +311,7 @@ DEPENDENCIES
   acts_as_commentable_with_threading!
   annotate!
   apotomo
+  ar_after_transaction
   aws-sdk
   bluecloth
   bootstrap-sass (~> 2.0.0)
