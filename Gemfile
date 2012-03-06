@@ -48,7 +48,8 @@ gem "bluecloth" # markdown filter for haml
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'foreman'
 
 # Deploy with Capistrano
 # gem 'capistrano'
