@@ -64,10 +64,7 @@ class Ability
       comment.user_id == user.id and can?(:comment_on, comment.commentable)
     end
 
-    can [:destroy], Comment, :user_id => user.id
-    can [:destroy], Comment do |comment|
-      comment.commentable.owner_id == user.id
-    end
+    can [:destroy], Comment, :user_id => user.id, :commentable => { :owner_id => user.id }
 
     # Profile
     can [:edit, :update, :show], Profile, :user_id => user.id
