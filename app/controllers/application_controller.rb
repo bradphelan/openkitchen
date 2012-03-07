@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
+  before_filter :configure_default_url_options!
+
   before_filter :set_locale
 
   def set_locale
