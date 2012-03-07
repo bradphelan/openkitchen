@@ -70,5 +70,16 @@ module OpenKitchen
     # Needed for Girl Friday
     config.threadsafe!
 
+    host = case Rails.env
+    when 'production'
+      "production.openkitchen.at"
+    when 'staging'
+      "staging.openkitchen.at"
+    else
+      "localhost:3000"
+    end
+
+    config.action_mailer.default_url_options = { :host => host }
+
   end
 end
