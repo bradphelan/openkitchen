@@ -37,7 +37,7 @@ class Venue < ActiveRecord::Base
   accepts_nested_attributes_for :venue_images, :allow_destroy => true
     
   def gmaps4rails_address
-  "#{self.street}, #{self.city}, #{self.country}" 
+    [self.street, self.city, self.country].reject {|e| e.nil? || e.blank?}.join ", "
   end
 
   def map_location
