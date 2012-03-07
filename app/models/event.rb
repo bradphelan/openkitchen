@@ -11,6 +11,7 @@
 #  timezone    :string(255)
 #  description :text
 #  venue_id    :integer
+#  public      :boolean         default(FALSE), not null
 #
 
 class Event < ActiveRecord::Base

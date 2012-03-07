@@ -2,14 +2,14 @@
 #
 # Table name: venue_images
 #
-#  id                  :integer         not null, primary key
-#  venue_id            :integer
-#  avatar_file_name    :string(255)
-#  avatar_content_type :string(255)
-#  avatar_file_size    :integer
-#  avatar_updated_at   :datetime
-#  created_at          :datetime        not null
-#  updated_at          :datetime        not null
+#  id                 :integer         not null, primary key
+#  venue_id           :integer
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
 #
 
 require 'spec_helper'
