@@ -1,15 +1,13 @@
-class DeviseCompletionMailer < Devise::Mailer
-  def make_record info
+class DeviseBackgroundMailer < ActionMailer::Base 
+
+  def self.make_record info
     info[:type].constantize.find info[:id]
   end
-  def complete_action! info
-    Rails.logger.info "Completing #{info[:action]} from queue"
-    record = make_record info
-    devise_mail(record, info[:action].to_sym)
-  end
-end
 
-class DeviseBackgroundMailer < ActionMailer::Base 
+  def self.complete_action info
+    Rails.logger.info "Completing #{info[:action]} from queue"
+    Devise::Mailer.send info[:action].to_sym, make_record(info)
+  end
 
   class Proxy
     def initialize &block

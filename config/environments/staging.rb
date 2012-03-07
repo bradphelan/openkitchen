@@ -45,14 +45,6 @@ OpenKitchen::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
-  # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
-  $LOAD_PATH.unshift "#{Rails.root}/app/mailers"
-  require 'queue_delivery_method'
-  $LOAD_PATH.shift
-  config.action_mailer.delivery_method = QueueDeliveryMethod
-  config.mail_queue_outbound_delivery_method = :smtp
-
   # Enable threaded mode
   # config.threadsafe!
 
