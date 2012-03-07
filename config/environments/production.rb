@@ -47,13 +47,9 @@ OpenKitchen::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  begin
-    require 'queue_delivery_method'
-    config.action_mailer.delivery_method = QueueDeliveryMethod
-    config.mail_queue_outbound_delivery_method = :smtp
-  rescue
-    puts "#{__FILE__}:#{__LINE__} WARN: Unabled to require 'queue_delivery_method'"
-  end
+  $LOAD_PATH.shift "#{Rails.root}/app/mailers"
+  require 'queue_delivery_method'
+  $LOAD_PATH.unshift
 
   # Enable threaded mode
   # config.threadsafe!
