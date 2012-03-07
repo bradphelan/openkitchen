@@ -21,7 +21,9 @@ Devise.setup do |config|
   config.mailer_sender = "concierge@openkitchen.at"
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "DeviseBackgroundMailer"
+  unless Rails.env.test?
+    config.mailer = "DeviseBackgroundMailer"
+  end
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
