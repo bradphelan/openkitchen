@@ -5,6 +5,9 @@
 $(document).ready =>
   wrapper = $('.home #teaser-wrapper')
 
+  if wrapper.length == 0
+    return
+
   video_id = wrapper.attr('data-video')
 
   player = null

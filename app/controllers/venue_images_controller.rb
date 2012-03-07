@@ -3,7 +3,9 @@ class VenueImagesController < ApplicationController
   respond_to :html
 
   def create
-    @venue_image = VenueImage.new params[:venue_image]
+    @venue_image = VenueImage.new params[:venue_image] do |vi|
+      vi[:venue_id] = params[:venue_image][:venue_id]
+    end
     authorize! :create, @venue_image
     if @venue_image.save
       respond_with @venue_image, :location => edit_venue_path(@venue_image.venue)
