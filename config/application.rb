@@ -15,7 +15,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Gobbq
+module OpenKitchen
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -67,12 +67,6 @@ module Gobbq
 
     config.app_generators.stylesheet_engine :sass
 
-    if Rails.env == "production"
-      config.action_mailer.default_url_options = {:host => "openkitchenapp.herokuapp.com"}
-    else
-      config.action_mailer.default_url_options = {:host => "localhost:3000"}
-    end
-     
     # Needed for Girl Friday
     config.threadsafe!
 

@@ -1,4 +1,4 @@
-Gobbq::Application.routes.draw do
+OpenKitchen::Application.routes.draw do
 
   resources :venues
   resources :venue_images, :only => [ :create, :destroy]

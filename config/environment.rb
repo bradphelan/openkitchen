@@ -2,7 +2,7 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-Gobbq::Application.initialize!
+OpenKitchen::Application.initialize!
 
 
 if Rails.env.production?

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Gobbq::Application.load_tasks
+OpenKitchen::Application.load_tasks
