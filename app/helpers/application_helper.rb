@@ -1,6 +1,6 @@
 module ApplicationHelper
   S3_EXPIRY = 120
-  def profile_avatar_image(profile, version)
+  def profile_avatar_image(user, version)
 
     case version
     when :medium
@@ -11,8 +11,8 @@ module ApplicationHelper
       [50, 50]
     end
 
-    if profile.avatar.file?
-      uri = profile.avatar.expiring_url(S3_EXPIRY, version)
+    if user.avatar.file?
+      uri = user.avatar.expiring_url(S3_EXPIRY, version)
     else
       uri = "chef.jpg"
     end

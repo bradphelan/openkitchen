@@ -18,6 +18,13 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  name                   :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  cookstars              :integer         default(1)
+#  timezone               :string(255)     default("UTC")
 #
 
 class User < ActiveRecord::Base
@@ -27,17 +34,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :name,  :password, :password_confirmation, :remember_me
+  attr_accessible :cookstars, :avatar, :timezone
 
   has_many :events_as_owner, :class_name => "Event", :inverse_of => :owner, :foreign_key => :owner_id, :dependent => :destroy
   has_many :events_as_guest, :through => :invitations, :source => :event
 
   has_many :invitations, :dependent => :destroy
-
-  has_one :profile, :dependent => :destroy
-  after_create do
-    self.create_profile!
-  end
 
   # TODO Perhapps if the last manager of a venue is destroyed then
   # the venue should also be destroyed or it will be orphaned. This
@@ -65,10 +68,28 @@ class User < ActiveRecord::Base
     end
   end
 
+  validates_length_of :name, :minimum => 3, :maximum => 80, :allow_blank => true
 
   def name
-    email
+    if self[:name]
+      self[:name]
+    else
+      email
+    end
   end
+
+  has_attached_file :avatar, 
+    :styles => { :medium => "300x300#", :thumb => "100x100#", :mini_thumb => "50x50#" },
+    :default_url => "/assets/chef.jpg"
+
+  validates_attachment_content_type :avatar, 
+    :content_type => %r{image/.*}, 
+    :less_than => 1.megabyte
+
+  validates_numericality_of :cookstars, 
+    :only_integer => true,
+    :greater_than_or_equal_to => 1,
+    :less_than_or_equal_to => 5
 
   # Return all my friends, ( being those who I have invited at least once to a party)
   def friends

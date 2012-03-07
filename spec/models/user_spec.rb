@@ -18,6 +18,13 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  name                   :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  cookstars              :integer         default(1)
+#  timezone               :string(255)     default("UTC")
 #
 
 require 'spec_helper'

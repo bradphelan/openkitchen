@@ -66,10 +66,8 @@ class Ability
 
     can [:destroy], Comment, :user_id => user.id, :commentable => { :owner_id => user.id }
 
-    # Profile
-    can [:edit, :update, :show], Profile, :user_id => user.id
-
-    can [:edit], User, :user_id => user.id
+    # User
+    can [:edit, :show, :update], User, :id => user.id
 
     # Venue
     #

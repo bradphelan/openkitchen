@@ -1,5 +1,5 @@
 %li
-  = profile_avatar_image(invitation.user.profile, :thumb)
+  = profile_avatar_image(invitation.user, :thumb)
   .email
     = mail_to invitation.user.email, invitation.user.name
   .buttons

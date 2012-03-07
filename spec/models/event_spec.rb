@@ -22,9 +22,6 @@ describe Event do
   pending "add some examples to (or delete) #{__FILE__}"
   before do
     @user = Factory :user
-    @profile = @user.profile
-
-    @profile.save!
 
     @guest0 = Factory :user
     @guest1 = Factory :user

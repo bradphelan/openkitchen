@@ -1,10 +1,10 @@
 class ProfilesController < ApplicationController
    
+  respond_to :html
 
   def edit
     @user = User.find(params[:user_id])
-    @profile = @user.profile
-    authorize! :edit, @profile
+    authorize! :edit, @user
   end
   
   def show
@@ -12,10 +12,9 @@ class ProfilesController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
-    @profile = @user.profile
-    authorize! :update, @profile
-    @profile.update_attributes(params[:profile])
-    redirect_to edit_user_profile_path(@user)
+    authorize! :update, @user
+    @user.update_attributes(params[:user])
+    respond_with @user, :location => edit_user_profile_path(@user)
     
   end
 

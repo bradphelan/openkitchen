@@ -6,7 +6,7 @@
     .well
 
       %ul.guests
-        - @event.invitations.includes({:user => :profile}, :event).each_slice(3) do |slice|
+        - @event.invitations.includes(:event).each_slice(3) do |slice|
           .row-fluid
             - slice.each do |invitation|
               .span4

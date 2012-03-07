@@ -15,6 +15,7 @@ de:
   confirm: Sicher?
   top: Oben
   bottom: Boden
+  profile: Profil
 
   #
   #
@@ -37,13 +38,9 @@ de:
       event:
         name: Name
         description: Beschreibung
-      profile:
-        street: Strasse
-        city: Stadt
-        country: Lande
+      user:
         cookstars: Profi Sternen
         avatar: Personliches Foto
-        venue: Veranstaltungsort
       venue:
         venue: Veranstaltungsort
         street: Strasse
@@ -60,7 +57,6 @@ de:
         one: Kommentar
         other: Kommentare
       invitation: Einladung
-      profile: Profil
       venue:
         one: Veranstaltungsort
         other: Veranstaltungsorte
