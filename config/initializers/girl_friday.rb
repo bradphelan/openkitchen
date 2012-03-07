@@ -7,7 +7,7 @@ COMMENT_QUEUE = GirlFriday::WorkQueue.new(:comment_queue, :size => 3) do |info|
 end
 
 DEVISE_QUEUE = GirlFriday::WorkQueue.new(:devise_queue, :size => 3) do |info|
-  DeviseCompletionMailer.complete_action! info
+  DeviseCompletionMailer.complete_action!(info).deliver
 end
 
 INVITE_QUEUE = GirlFriday::WorkQueue.new(:invite_queue, :size => 3) do |info|

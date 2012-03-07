@@ -3,6 +3,7 @@ class DeviseCompletionMailer < Devise::Mailer
     info[:type].constantize.find info[:id]
   end
   def complete_action! info
+    Rails.logger.info "Completing #{info[:action]} from queue"
     record = make_record info
     devise_mail(record, info[:action].to_sym)
   end
@@ -44,18 +45,21 @@ class DeviseBackgroundMailer < ActionMailer::Base
 
   def confirmation_instructions(record)
     proxy do
+      Rails.logger.info "Pushing :confirmation_instructions email to queue"
       DEVISE_QUEUE.push make_info(record, :action => :confirmation_instructions)
     end
   end
 
   def reset_password_instructions(record)
     proxy do
+      Rails.logger.info "Pushing :reset_password_instructions email to queue"
       DEVISE_QUEUE.push make_info(record, :action => :reset_password_instructions)
     end
   end
 
   def unlock_instructions(record)
     proxy do
+      Rails.logger.info "Pushing :unlock_instructions email to queue"
       DEVISE_QUEUE.push make_info(record, :action => :unlock_strategy)
     end
   end
