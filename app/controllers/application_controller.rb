@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_default_url_options!
 
+  protected
+  def configure_default_url_options!
+    DefaultUrlOptions.configure!(request)
+  end
+  public
+
+
   before_filter :set_locale
+
 
   def set_locale
     I18n.locale = params[:locale] || session[:locale] || I18n.default_locale
