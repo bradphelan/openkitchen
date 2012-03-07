@@ -4,40 +4,40 @@
 
 $(document).ready =>
   wrapper = $('.home #teaser-wrapper')
-  if not wrapper.empty
-    video_id = wrapper.attr('data-video')
 
-    player = null
+  video_id = wrapper.attr('data-video')
 
-    embed_video = =>
-      video = wrapper.find(".modal-body")
-      video.html """
-        <iframe 
-             id="teaser" 
-             frameborder = "0" 
-             height = "534" 
-             width = "949"
-             src = "http://player.vimeo.com/video/#{video_id}?autoplay=0&api=1
-        "/>
-      """
-      
-      player = wrapper.find("iframe")[0]
-      $f(player).addEvent 'ready', =>
-        alert 'ready'
+  player = null
 
-    embed_video()
+  embed_video = =>
+    video = wrapper.find(".modal-body")
+    video.html """
+      <iframe 
+           id="teaser" 
+           frameborder = "0" 
+           height = "534" 
+           width = "949"
+           src = "http://player.vimeo.com/video/#{video_id}?autoplay=0&api=1
+      "/>
+    """
+    
+    player = wrapper.find("iframe")[0]
+    $f(player).addEvent 'ready', =>
+      alert 'ready'
 
-    start_video = =>
-      $f(player).api("play")
+  embed_video()
 
-    pause_video = =>
-      $f(player).api("pause")
+  start_video = =>
+    $f(player).api("play")
 
-    wrapper.on 'hidden', =>
-      pause_video()
+  pause_video = =>
+    $f(player).api("pause")
 
-    wrapper.on 'shown', =>
-      start_video()
+  wrapper.on 'hidden', =>
+    pause_video()
+
+  wrapper.on 'shown', =>
+    start_video()
 
 
 

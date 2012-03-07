@@ -3,7 +3,10 @@ class HomeController < ApplicationController
   skip_authorization_check :only => :show
 
   def show
-    @video="26569110"
-    #@video="23264180" # openkitchen
+    if Rails.env.development? or Rails.env.test?
+      @video="26569110"
+    else
+      @video="23264180" # openkitchen
+    end
   end
 end
