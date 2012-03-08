@@ -6,10 +6,10 @@
     .well
 
       %ul.guests
-        - @event.invitations.includes(:event).each_slice(3) do |slice|
+        - @event.invitations.includes(:event).each_slice(2) do |slice|
           .row-fluid
             - slice.each do |invitation|
-              .span4
+              .span6
                 = render( { :state => :invitation }, invitation)
 
       %hr

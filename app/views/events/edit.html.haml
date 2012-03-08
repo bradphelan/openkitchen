@@ -5,6 +5,9 @@
   .sections
     = render :partial => 'edit', :locals => { _event: @event }
 
-    = render_widget :event_guests
+    .row-fluid
+      .span6
+        = render_widget :event_guests
 
-    = render_widget :comments
+      .span6
+        = render_widget :comments

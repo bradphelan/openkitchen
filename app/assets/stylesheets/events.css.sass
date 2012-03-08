@@ -62,7 +62,32 @@ $small_map_height: 480 / 640 * $small_map_width
 
   ul.guests
     li
-      margin-bottom: 1em
+      padding: 0.5em
+      background-color: $white
+      +box-shadow()
+      margin-top: 1em
+      z-index: -1
+
+      .image
+        overflow: hidden
+        white-space: nowrap
+        margin-bottom: 0.5em
+        &:hover
+          overflow: visible
+          position: relative
+          a
+            color: black
+
+        .email
+          padding-bottom: 3px
+          padding-top: 3px
+          margin-bottom: 0px
+          position: relative
+
+        img
+          height: auto
+          width: auto
+
         
     @extend .unstyled
     .email
@@ -158,6 +183,9 @@ $small_map_height: 480 / 640 * $small_map_width
           color: $blue
           float: left
           margin-right: 1em
+        .avatar
+          float: left
+          padding-right: 1em
 
     a.subscribe
       margin-top: -7px

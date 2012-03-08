@@ -11,3 +11,9 @@
     = render :partial => 'show', :locals => { _event: @event }
 
 
+    .row-fluid
+      .span6
+        = render_widget :event_guests
+
+      .span6
+        = render_widget :comments

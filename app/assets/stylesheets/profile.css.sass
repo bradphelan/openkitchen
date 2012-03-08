@@ -2,21 +2,10 @@
 // with a pretty border without moving any
 // of the other elements
 = avatar($pattern, $width, $height, $scale)
-  +border-radius(5px)
-  +box-shadow
   &.avatar.#{$pattern}
     width: $width
     height: $height
     position: relative
-    &:hover
-      z-index: 1
-      border: solid 20px $gray
-      width: 2*$width
-      height: 2*$height
-      margin-left: -$width/$scale - 20px
-      margin-top: -$height/$scale - 20px
-      margin-right: -$width/$scale - 20px
-      margin-bottom: -$width/$scale - 20px
 
 img
   +avatar(medium, 300px, 300px, 2)

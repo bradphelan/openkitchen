@@ -1,7 +1,10 @@
-%li
-  = profile_avatar_image(invitation.user, :thumb)
-  .email
-    = mail_to invitation.user.email, invitation.user.name
+%li.invitation
+  .image
+    = profile_avatar_image(invitation.user, :medium)
+    .email
+      = mail_to invitation.user.email, invitation.user.name
+    %span.status
+      = invitation.status
   .buttons
 
     - if can? :destroy, invitation

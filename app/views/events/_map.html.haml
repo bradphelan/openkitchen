@@ -3,4 +3,5 @@
 
 = link_to @venue.google_maps_link, :target => "_blank", :class => "map" do
   = image_tag @map.url
-  = t("maps.external_link")
+  .external_link
+    = t("maps.external_link")
