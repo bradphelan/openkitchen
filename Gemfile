@@ -106,3 +106,5 @@ gem "devise-i18n"
 gem "newrelic_rpm"
 
 gem "ar_after_transaction"
+
+gem "pusher_rails"

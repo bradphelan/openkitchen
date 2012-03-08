@@ -2,6 +2,7 @@ class Comments::PanelWidget < ApplicationWidget
 
   responds_to_event :comment
   responds_to_event :toggle_watch
+  responds_to_event :refresh
 
   has_widgets do
     @event = options[:event]
@@ -64,6 +65,8 @@ class Comments::PanelWidget < ApplicationWidget
 
     button = escape_javascript render :view => :comment_button
 
+    PusherQueue.trigger! "event.#{@event.id}", "event_comments", :callback => url_for_event('refresh')
+
     render :text => <<-EOF
       var w = $("##{widget_id}");
       var m = "#{render_comment_for_js! @comment}";
@@ -77,7 +80,13 @@ class Comments::PanelWidget < ApplicationWidget
 
       w.find(".subscribe").replaceWith("#{button}");
     EOF
+
     
+  end
+
+  def refresh
+    authorize! :read, @event
+    replace "##{widget_id}", :view => :display
   end
 
 
