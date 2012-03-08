@@ -29,6 +29,16 @@ $small_map_height: 480 / 640 * $small_map_width
     color: $grayLight
 
 
+#invitation_status
+  a.accepted
+    @extend .btn-success
+  a.rejected
+    @extend .btn-danger
+  a.pending
+    @extend .btn-warning
+  a.maybe
+    @extend .btn-info
+
 #edit_event_page, #show_event_page
   .datetime
     display: block

@@ -98,6 +98,13 @@ en:
     new:
       new: New event
 
+    status:
+      change_status_header: Change status
+      pending: Please accept the invitation
+      maybe: I might be going
+      accepted: I am going
+      rejected: I am not going
+
   profiles:
     edit:
       change_password: Change password

@@ -5,8 +5,9 @@
 #show_event_page
 
   .sections
+
+    = render :partial => 'status'
+
     = render :partial => 'show', :locals => { _event: @event }
 
-    = render_widget :event_guests
 
-    = render_widget :comments

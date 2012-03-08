@@ -12,7 +12,10 @@ class InvitationsController < ApplicationController
   def update
     @invitation = Invitation.find params[:id] 
     @invitation.update_attributes params[:invitation]
-    redirect_to edit_event_path(@invitation.event)
+    
+    location = params[:redirect_to] || edit_event_path(@invitation.event)
+
+    respond_with @invitation, :location => location
   end
 
   def mail

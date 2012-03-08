@@ -1,0 +1,28 @@
+
+%section#invitation_status{'data-subnav-label'=> t(".#{@invitation.status}")}
+
+  %h1=Invitation.human_attribute_name :status
+
+  .well
+
+    %a.btn{'data-toggle'=>"modal", :class=>@invitation.status, :href=>"#change_invitation_status"}=t(".#{@invitation.status}")
+
+    .modal#change_invitation_status(style="display:none")
+      .modal-header
+        %a.close(data-dismiss="modal") x
+        = t(".change_status_header")
+      .modal-body
+        .btn-group
+          - Invitation::STATUSES.each do |status|
+            - unless status == "pending"
+              - unless @invitation.status == status
+                = link_to t(".#{status}"), invitation_url(@invitation, :redirect_to => request.path, :invitation => { :status => status } ), :class => "btn #{status}", :method => :put 
+
+    %hr.datetime
+
+      = @event.format_date
+      = @event.format_time
+      %a.ical{:href=>ical_event_path(@event)}
+        %small
+          %i.icon-calendar
+          iCal

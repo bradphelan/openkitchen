@@ -114,6 +114,13 @@ de:
     new:
       new: Neue Veranstaltung
 
+    status:
+      change_status_header: Status ändern
+      pending: Bitte akzeptieren Sie die Einladung 
+      maybe: Ich könnte gehen
+      accepted: Ich werde
+      rejected: Ich bin nicht gehen
+
   profiles:
     edit:
       change_password: Password ändern 
