@@ -3,7 +3,7 @@ class InviteMailer < ActionMailer::Base
 
   def self.deliver_invitation invitation
     ActiveRecord::Base.after_transaction do
-      INVITE_QUEUE.push :id => invitation.id
+      InviteQueue.push :id => invitation.id
     end
   end
 

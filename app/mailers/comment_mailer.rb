@@ -4,7 +4,7 @@ class CommentMailer < ActionMailer::Base
   
   def self.mail_subscribers comment
     ActiveRecord::Base.after_transaction do
-      COMMENT_QUEUE.push :id => comment.id
+      CommentQueue.push :id => comment.id
     end
   end
 

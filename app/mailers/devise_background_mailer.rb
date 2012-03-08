@@ -44,21 +44,21 @@ class DeviseBackgroundMailer < ActionMailer::Base
   def confirmation_instructions(record)
     proxy do
       Rails.logger.info "Pushing :confirmation_instructions email to queue"
-      DEVISE_QUEUE.push make_info(record, :action => :confirmation_instructions)
+      DeviseQueue.push make_info(record, :action => :confirmation_instructions)
     end
   end
 
   def reset_password_instructions(record)
     proxy do
       Rails.logger.info "Pushing :reset_password_instructions email to queue"
-      DEVISE_QUEUE.push make_info(record, :action => :reset_password_instructions)
+      DeviseQueue.push make_info(record, :action => :reset_password_instructions)
     end
   end
 
   def unlock_instructions(record)
     proxy do
       Rails.logger.info "Pushing :unlock_instructions email to queue"
-      DEVISE_QUEUE.push make_info(record, :action => :unlock_strategy)
+      DeviseQueue.push make_info(record, :action => :unlock_strategy)
     end
   end
 end

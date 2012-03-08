@@ -8,7 +8,7 @@
     %h2
       .avatar
         - if current_user.avatar.file?
-          = image_tag current_user.avatar.expiring_url(120, :thumb)
+          = image_tag current_user.avatar.expiring_url(s3_expiry, :thumb)
         - else
           = image_tag "chef.jpg"
       =t ".hostings_title"
@@ -47,7 +47,7 @@
             .img.span1
               .avatar
                 - if event.owner.avatar.file?
-                  = image_tag event.owner.avatar.expiring_url(120, :thumb)
+                  = image_tag event.owner.avatar.expiring_url(s3_expiry, :thumb)
                 - else
                   = image_tag "chef.jpg"
 

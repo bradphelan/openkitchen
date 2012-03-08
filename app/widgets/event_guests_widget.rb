@@ -14,9 +14,17 @@ class EventGuestsWidget < ApplicationWidget
     render
   end
 
+  cache :invitation do |cell, invitation|
+    Rails.logger.info "XXXXXXXXXXXXXXXXXXXXXX"
+    Rails.logger.info invitation.class
+    Rails.logger.info invitation.to_json
+    invitation.updated_at
+  end
+
   def invitation i
     render :view => :invitation, :locals => { :invitation => i }
   end
+
   #
   # Events
   #

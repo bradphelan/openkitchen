@@ -4,7 +4,7 @@
     .carousel-inner
       - @venue.venue_images.all.each do |image|
         .item
-          = image_tag image.image.expiring_url(120, :large)
+          = image_tag image.image.expiring_url(s3_expiry, :large)
           - if can? :destroy, image
             .carousel-caption
               = link_to t("delete"), image, :method => :delete, :confirm => t("confirm")

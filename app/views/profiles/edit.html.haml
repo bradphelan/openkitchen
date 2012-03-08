@@ -21,7 +21,7 @@
           .span5
             %span.avatar
               - if @user.avatar.file?
-                = image_tag @user.avatar.expiring_url(120, :medium)
+                = image_tag @user.avatar.expiring_url(s3_expiry, :medium)
               - else
                 = image_tag "chef.jpg"
               = f.input :avatar
