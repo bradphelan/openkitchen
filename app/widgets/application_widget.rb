@@ -6,6 +6,8 @@ class ApplicationWidget < Apotomo::Widget
   include ::ActionView::Helpers::JavaScriptHelper
 
   helper_method :current_user # so I can call current_user in the views of my widgets
+  helper_method :signed_in?
+
   helper_method :current_site # so I can call current_site in the view of my widgets
   helper ::ApplicationHelper
 
