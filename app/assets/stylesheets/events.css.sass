@@ -30,6 +30,8 @@ $small_map_height: 480 / 640 * $small_map_width
 
 
 #invitation_status
+  display: block
+  padding-top: 1em
   a.accepted
     @extend .btn-success
   a.rejected
@@ -40,9 +42,16 @@ $small_map_height: 480 / 640 * $small_map_width
     @extend .btn-info
 
 #edit_event_page, #show_event_page
-  .datetime
+  .description 
+    img
+      float: left
+      margin-right: 1em
+      +box-shadow()
     display: block
-    margin-bottom: 1em
+
+
+  .datetime
+    display: inline-block
 
   .sections
     @media (min-width: 980px)

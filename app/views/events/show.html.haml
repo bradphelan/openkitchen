@@ -6,9 +6,32 @@
 
   .sections
 
-    = render :partial => 'status'
+    %section.edit_event#edit{'data-subnav-label' => Event.human_attribute_name(:description)}
 
-    = render :partial => 'show', :locals => { _event: @event }
+      %h1
+
+        %span.datetime
+          = @event.format_date
+          = @event.format_time
+          %a.ical{:href=>ical_event_path(@event)}
+            %small
+              %i.icon-calendar
+              iCal
+      .well
+
+        .description
+          - vi = @event.venue.venue_images.first
+          - if vi
+            = image_tag vi.image.expiring_url(s3_expiry, :thumb)
+
+          %p= @event.description
+
+        %hr
+
+        = render :partial => 'status'
+
+
+    = render :template => "venues/show"
 
 
     .row-fluid

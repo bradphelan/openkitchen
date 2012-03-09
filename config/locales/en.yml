@@ -99,11 +99,11 @@ en:
       new: New event
 
     status:
-      change_status_header: Change status
+      change_status_header: Are you going?
       pending: Please accept the invitation
-      maybe: I might be going
-      accepted: I am going
-      rejected: I am not going
+      maybe: Maybe
+      accepted: "Yes"
+      rejected: "No"
 
   profiles:
     edit:

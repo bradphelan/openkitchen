@@ -115,11 +115,11 @@ de:
       new: Neue Veranstaltung
 
     status:
-      change_status_header: Status ändern
+      change_status_header: Gehen Sie?
       pending: Bitte akzeptieren Sie die Einladung 
-      maybe: Ich könnte gehen
-      accepted: Ich werde
-      rejected: Ich bin nicht gehen
+      maybe: Veleicht
+      accepted: Ja
+      rejected: Nein
 
   profiles:
     edit:
