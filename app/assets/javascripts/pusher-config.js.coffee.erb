@@ -1,12 +1,13 @@
-<% require 'pusher' %>
 
-Pusher.log = (message) ->
-  window.console.log message  if window.console and window.console.log
+$(document).ready =>
+  Pusher.log = (message) ->
+    window.console.log message  if window.console and window.console.log
 
-WEB_SOCKET_DEBUG = true
-pusher = new Pusher("<%= Pusher.key %>")
-channel = pusher.subscribe("event.11")
+  WEB_SOCKET_DEBUG = true
+  key = $('body').attr('data-pusher-key')
+  pusher = new Pusher(key)
+  channel = pusher.subscribe("event.11")
 
-# Bind the the create
-channel.bind "event_comments", (data) ->
-  $.post(data.callback)
+  # Bind the the create
+  channel.bind "event_comments", (data) ->
+    $.post(data.callback)
