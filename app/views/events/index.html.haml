@@ -4,65 +4,80 @@
 
 .index_events
 
-  %section#events_im_hosting.well{'data-subnav-label'=> t(".hostings")}
-    %h2
+  %section#events_im_hosting{'data-subnav-label'=> t(".hostings")}
+
+    %h1
       .avatar
         - if current_user.avatar.file?
-          = image_tag current_user.avatar.expiring_url(s3_expiry, :thumb)
+          = image_tag current_user.avatar.expiring_url(s3_expiry, :medium)
         - else
           = image_tag "chef.jpg"
       =t ".hostings_title"
-    %ul
-      - @events_as_owner.each do |event|
-        %li
-          .row
-            .span3
-              .name
-                = link_to event.name, edit_event_path(event.id)
-              .date
-                = event.format_date
-                = event.format_time
-                %a.ical{:href=>ical_event_path(event)}
-                  %small
-                    %i.icon-calendar
-                    iCal
-            .span8
-              .description
-                = event.description
+
+    .well
+      %ul
+        - @events_as_owner.each do |event|
+          %li
+            .row
+              .span3
+                .name
+                  %h2.event_name= link_to event.name, edit_event_path(event.id)
+                .date
+                  = event.format_date
+                  = event.format_time
+                  %a.ical{:href=>ical_event_path(event)}
+                    %small
+                      %i.icon-calendar
+                      iCal
+              .span8
+                .description
+                  = event.description
 
 
-    - if can? :create, Event
-      = link_to t(".new"), new_event_url 
-    - else
-      %a.popover-trigger{:href=>"#", 'data-title' => t(".new_disabled"), 'data-content' => t('.new_disabled_content') }
-        = t(".new")
+      - if can? :create, Event
+        = link_to t(".new"), new_event_url, :class => "btn btn-large btn-warning"
+      - else
+        %a.popover-trigger{:href=>"#", 'data-title' => t(".new_disabled"), 'data-content' => t('.new_disabled_content') }
+          = t(".new")
 
-  %section#events_im_invited_to.well{'data-subnav-label'=> t(".invitations")}
+  %section#events_im_invited_to{'data-subnav-label'=> t(".invitations")}
 
     %h2=t ".invitations_title"
-    %ul.unstyled
-      - @events_as_guest.each do |event|
-        %li
-          .row
-            .img.span1
-              .avatar
-                - if event.owner.avatar.file?
-                  = image_tag event.owner.avatar.expiring_url(s3_expiry, :thumb)
-                - else
-                  = image_tag "chef.jpg"
 
-            .name.span3
-              = link_to event.name, event_path(event.id)
-            .date.span2
-              = event.format_date
-              %a{:href=>ical_event_path(event)}
-                %small
-                  %i.icon-calendar
-                  iCal
-            .time.span2
-              = event.format_time
-          .row.description
-            .span10
-              = event.description
+    .well
+      %ul.unstyled
+        - @events_as_guest.each do |event|
+          %li
+            .row-fluid
+
+              .span4
+                .img
+
+                  %h2.event_name= link_to event.name, event_path(event.id)
+
+                  .avatar
+                    - if event.owner.avatar.file?
+                      = image_tag event.owner.avatar.expiring_url(s3_expiry, :medium)
+                    - else
+                      = image_tag "chef.jpg"
+
+              .span8
+
+                .row-fluid
+
+                  .span12
+
+                    .datetime
+                      = event.format_date
+                      = event.format_time
+                      %a{:href=>ical_event_path(event)}
+                        %small
+                          %i.icon-calendar
+                          iCal
+                .row-fluid
+                  .span12
+
+                    .description
+                      = event.description
 
 

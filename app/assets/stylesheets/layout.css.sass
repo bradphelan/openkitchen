@@ -36,16 +36,16 @@ header#overview
   margin-top: 30px
   h1
     text-transform: capitalize
+    padding-left: 10px
     background-image: image-url('header-banner.jpg')
     min-height: $banner-height
     white-space: nowrap
     display: block-inline
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.25)
-    +border-radius(5px)
+    text-shadow: 6px 6px 6px rgba(0,0,0,0.35)
 
     font-size: 6.5em
     line-height: $banner-height
-    color: $white
+    color: transparentize($white, 0.5)
 
 a.brand
   @media (min-width: 480px)
