@@ -65,7 +65,7 @@ class Comments::PanelWidget < ApplicationWidget
 
     button = escape_javascript render :view => :comment_button
 
-    PusherQueue.trigger! "event.#{@event.id}", "event_comments", :callback => url_for_event('refresh')
+    PusherQueue.trigger! "event.#{@event.id}.comments", "new", :callback => url_for_event('refresh')
 
     render :text => <<-EOF
       var w = $("##{widget_id}");
