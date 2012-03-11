@@ -23,14 +23,16 @@ class EventsController < ApplicationController
 
 
     if Rails.env.development?
-      @address = "19a Muensterstrasse, Altmuenster, Austria"
+      @address = Geocoder.search("19a Muensterstrasse, Altmuenster, Austria").first
     else
       @address = request.location
     end
 
     @radius = params[:radius] || 100
-    @public_events = Event.near(@address, @radius)
 
+    if @address
+      @public_events = Event.near([@address.latitude, @address.longitude], @radius)
+    end
 
     render :index
   end
@@ -117,7 +119,7 @@ class EventsController < ApplicationController
     @calendar.add event
     @calendar.publish
     headers['Content-Type'] = "text/calendar; charset=UTF-8"
-    render :layout=>false, :text => @calendar.to_ical
+    render :layout=>false, :text => @calendar.to_ical, :status => :ok
 
   end
 
