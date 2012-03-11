@@ -7,8 +7,10 @@ class EventGuestsWidget < ApplicationWidget
   #
   has_widgets do
     @event = options[:event]
-    if signed_in?
-      @invitation = @event.invitation_for_user current_user
+    if @event
+      if signed_in?
+        @invitation = @event.invitation_for_user current_user
+      end
     end
   end
 

@@ -15,6 +15,7 @@
           = semantic_form_for Comment.build_from(@event, current_user, ""), :url => url_for_event(:comment), :remote => true do |f|
             .form
               = f.inputs do
+                = f.input :event_id, :as => :hidden, :input_html => {:value => @event.id }
                 = f.input :commentable_id, :as => :hidden
                 = f.input :commentable_type, :as => :hidden
                 = f.input :body, :label => false

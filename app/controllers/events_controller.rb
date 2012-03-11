@@ -3,13 +3,10 @@ class EventsController < ApplicationController
 
 
   has_widgets do |root|
-    root << panel = widget("comments/panel", :comments, :event => @event)
+    root << widget("comments/panel", :comments, :event => @event, :params => params)
+    root << widget(:event_guests, :event => @event )
+    root << widget(:public_events, :params => params)
   end
-
-  has_widgets do |root|
-    root << panel = widget(:event_guests, :event => @event )
-  end
-  
 
   load_and_authorize_resource :except => [:index, :ical, :create, :render_event_response]
 
@@ -20,19 +17,6 @@ class EventsController < ApplicationController
     authorize! :index, Event
     @events_as_owner = current_user.events_as_owner
     @events_as_guest = current_user.events_as_guest.where{owner_id != my{current_user.id}}
-
-
-    if Rails.env.development?
-      @address = Geocoder.search("19a Muensterstrasse, Altmuenster, Austria").first
-    else
-      @address = request.location
-    end
-
-    @radius = params[:radius] || 100
-
-    if @address
-      @public_events = Event.near([@address.latitude, @address.longitude], @radius)
-    end
 
     render :index
   end

@@ -6,10 +6,12 @@ class Comments::PanelWidget < ApplicationWidget
 
   has_widgets do
     @event = options[:event]
-    @comments = @event.root_comments.includes(:user, :commentable).order "created_at ASC"
-    @invitation = @event.invitation_for_user current_user if current_user
-    @comments.each do |comment|
-      self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
+    if @event
+      @comments = @event.root_comments.includes(:user, :commentable).order "created_at ASC"
+      @invitation = @event.invitation_for_user current_user if current_user
+      @comments.each do |comment|
+        self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
+      end
     end
   end
 
@@ -44,8 +46,6 @@ class Comments::PanelWidget < ApplicationWidget
                           raise "nice try!"
                         end
 
-    @event = commentable_type.find(params[:comment][:commentable_id])
-     
     @comment = Comment.build_from @event, 
       current_user.id, 
       params[:comment][:body]

@@ -85,6 +85,9 @@ class Ability
       can :destroy, VenueImage, :venue => { :user_venue_managements => { :user_id => user.id, :role => "manager" }}
       can :destroy, VenueImage, :venue => { :user_venue_managements => { :user_id => user.id, :role => "owner" }}
     end
+
+
+    can :refresh, PublicEventsWidget if user.id
  
 
   end

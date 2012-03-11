@@ -1,4 +1,5 @@
-OpenKitchen::Application.routes.draw do
+OpenKitchen::Application.routes.draw do 
+
 
   resources :venues
   resources :venue_images, :only => [ :create, :destroy]
@@ -6,7 +7,6 @@ OpenKitchen::Application.routes.draw do
   root :to => 'home#show'
 
   # This is here till issue https://github.com/apotonick/apotomo/issues/67 is fixed
-  match ":controller/:id/render_event_response", :to => "#render_event_response", :as => "apotomo_event"
 
   resources :resource_producers
 
@@ -47,6 +47,6 @@ OpenKitchen::Application.routes.draw do
   
 
   # Complete the registration
-  match "/users/register", :method => :post, :controller => :users, :action => :register
+  #match "/users/register", :method => :post, :controller => :users, :action => :register
 
 end

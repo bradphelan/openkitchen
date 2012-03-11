@@ -84,6 +84,9 @@ en:
   #
   #
 
+  public_events:
+    display:
+      public_events: Public events
   events:
     index:
       hostings: Hostings
@@ -95,7 +98,6 @@ en:
       new: New event
       new_disabled: Event creation disabled
       new_disabled_content: Please complete registration to create events
-      public_events: Public events
     new:
       new: New event
 
