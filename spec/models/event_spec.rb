@@ -26,7 +26,7 @@ describe Event do
     @guest0 = Factory :user
     @guest1 = Factory :user
 
-    Gmaps4rails.stub!(:geocode).and_return([{:lat => 33, :lng => 33, :matched_address => ""}])
+    #Gmaps4rails.stub!(:geocode).and_return([{:lat => 33, :lng => 33, :matched_address => ""}])
 
     
   end

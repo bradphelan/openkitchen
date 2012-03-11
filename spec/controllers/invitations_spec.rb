@@ -3,7 +3,7 @@ describe InvitationsController do
   
   before do
 
-    Gmaps4rails.stub!(:geocode).and_return([{:lat => 33, :lng => 33, :matched_address => ""}])
+    #Gmaps4rails.stub!(:geocode).and_return([{:lat => 33, :lng => 33, :matched_address => ""}])
 
     
     @owner = Factory :user
