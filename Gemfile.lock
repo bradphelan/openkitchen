@@ -5,13 +5,6 @@ GIT
     annotate (2.4.1.beta1)
 
 GIT
-  remote: https://github.com/apneadiving/Google-Maps-for-Rails.git
-  revision: 75fc25d55f79415145c8a945cc7b4aa0f7c7a7d8
-  specs:
-    gmaps4rails (1.4.4)
-      json
-
-GIT
   remote: https://github.com/cgunther/formtastic-bootstrap.git
   revision: f1acce518d9729e5233b85f41f91c2f06f1af215
   branch: 2.0
@@ -138,6 +131,7 @@ GEM
       term-ansicolor (~> 1.0.7)
       thor (>= 0.13.6)
     forgery (0.5.0)
+    geocoder (1.1.1)
     girl_friday (0.9.7)
       connection_pool (~> 0.1.0)
     googlestaticmap (1.1.0)
@@ -346,8 +340,8 @@ DEPENDENCIES
   forgery
   formtastic!
   formtastic-bootstrap!
+  geocoder
   girl_friday (~> 0.9.7)
-  gmaps4rails!
   googlestaticmap
   haml (>= 3.0.0)
   haml-rails

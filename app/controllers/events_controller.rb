@@ -20,6 +20,18 @@ class EventsController < ApplicationController
     authorize! :index, Event
     @events_as_owner = current_user.events_as_owner
     @events_as_guest = current_user.events_as_guest.where{owner_id != my{current_user.id}}
+
+
+    if Rails.env.development?
+      @address = "19a Muensterstrasse, Altmuenster, Austria"
+    else
+      @address = request.location
+    end
+
+    @radius = params[:radius] || 100
+    @public_events = Event.near(@address, @radius)
+
+
     render :index
   end
 
@@ -101,7 +113,7 @@ class EventsController < ApplicationController
     event.url = event_url(@event)
     event.summary = @event.name
     event.description = @event.description
-    event.location = @event.venue.gmaps4rails_address
+    event.location = @event.venue.full_address
     @calendar.add event
     @calendar.publish
     headers['Content-Type'] = "text/calendar; charset=UTF-8"

@@ -89,6 +89,15 @@ class Event < ActiveRecord::Base
     invitation.save!
   end
 
+  def self.future_events
+    where{datetime > Time.zone.now}
+  end
+
+  def self.near location, radius_km
+    venues = Venue.near(location, radius_km).map &:id
+    joins{venue}.where{venue.id.in venues}.future_events
+  end
+
 
   # Returns the invitation
   # 
@@ -132,6 +141,5 @@ class Event < ActiveRecord::Base
   def format_datetime
     "#{format_date} #{format_time}"
   end
-
 
 end

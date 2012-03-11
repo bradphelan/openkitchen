@@ -36,15 +36,18 @@ class Venue < ActiveRecord::Base
   has_many :venue_images
   accepts_nested_attributes_for :venue_images, :allow_destroy => true
     
-  def gmaps4rails_address
+  geocoded_by :full_address
+  after_validation :geocode
+
+  def full_address
     [self.street, self.city, self.country].reject {|e| e.nil? || e.blank?}.join ", "
   end
 
   def map_location
-   MapLocation.new :address => gmaps4rails_address
+   MapLocation.new :address => full_address
   end
 
   def google_maps_link
-    "http://maps.google.com/maps?q=#{gmaps4rails_address.gsub /\s/, '+'}"
+    "http://maps.google.com/maps?q=#{full_address.gsub /\s/, '+'}"
   end
 end

@@ -111,6 +111,7 @@ de:
 
       new_disabled: Erstellen eines Veranstaltung ist deaktiviert
       new_disabled_content: Bitte vollständige Erfassung von Ereignissen erstellen 
+      public_events: Öffentliche Veranstaltungen
     new:
       new: Neue Veranstaltung
 

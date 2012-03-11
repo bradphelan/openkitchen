@@ -47,7 +47,7 @@
                   %a=link_to uvm.venue.name, edit_venue_path(uvm.venue)
                 - else
                   %a=link_to uvm.venue.name, venue_path(uvm.venue)
-              %td= uvm.venue.gmaps4rails_address
+              %td= uvm.venue.full_address
               %td= uvm.role
               
 
