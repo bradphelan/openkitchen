@@ -23,6 +23,10 @@
               - [5, 10, 50, 100, 200, 500, 1000, 2000, 5000].each do |km|
                 %li
                   %a{:href=>events_url(:radius=>km), :'data-href-geolocate'=>"true"}
+                  = link_to url_for_event('refresh', :radius => km), 
+                      :remote => true, 
+                      :"data-href-geolocate"=>true, 
+                      :class => "hide" do
                     =km
                     km
         %span of
