@@ -22,6 +22,20 @@ class ApplicationWidget < Apotomo::Widget
   def setup!(*)
   end
 
+  # Make sure that all id or *_id parameters
+  # are forwarded to the event URL so that 
+  # resources are recovered correctly when 
+  # the event is executed.
+  def url_for_event type, options={}
+    p = {}
+    parent_controller.request.parameters.each do |k,v|
+      if k.end_with? "_id" or k == "id"
+        p[k] = v
+      end
+    end
+    super type, p.merge(options)
+  end
+
   def current_ability
     parent_controller.current_ability
   end
