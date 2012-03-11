@@ -1,8 +1,11 @@
 if navigator.geolocation
 
+  position_cache = null
+
   jQuery.geolocate = (cb)=>
 
     successFn = (position)->
+      position_cache = position
       cb(position)
 
     errorFn = (error)->
@@ -17,10 +20,13 @@ if navigator.geolocation
             when error.UNKNOWN_ERROR
               console.log "Geo::Unknown error"
 
-    navigator.geolocation.getCurrentPosition successFn, errorFn,
-      timeOut: 10 * 1000 * 1000
-      enableHighAccuracy: false
-      maximumAge: 0
+    if position?
+      cb(position)
+    else
+      navigator.geolocation.getCurrentPosition successFn, errorFn,
+        timeOut: 10 * 1000 * 1000
+        enableHighAccuracy: false
+        maximumAge: 0
 
 else
   console.log "Geolocation is not supported by this browser"
