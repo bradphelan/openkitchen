@@ -89,6 +89,16 @@
             #page_body
               = yield
 
+            .impressum.well
+              %small
+                = link_to "http://xtargets.com" do
+                  .link
+                    %h1
+                      %small An XTargets Production
+                    Design and coding by
+                    Brad Phelan
+
             %section.scroll_buffer
   %footer
     = yield :scripts
+
