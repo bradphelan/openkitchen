@@ -1,82 +1,117 @@
 = widget_div do
+  .public_events
 
-  = link_to "Refresh", 
-    url_for_event('refresh', :radius => @radius), 
-    :remote => true, 
-    :"data-href-geolocate"=>true, 
-    :"data-trigger-on-geolocate"=>true,
-    :class => "hide"
+    -# This is a hidden hook for the geolocator to
+    -# refresh when it has aquired the location. It
+    -# should not always run hence the condition on
+    -# @geolocate
 
-  -if @public_events
-    %section#public_events{'data-subnav-label'=> t(".public")}
-      %h1=t(".public_events")
-      .well
-        %span 
-          %strong Within
-        .btn-toolbar
-          %span.btn-group
-            %a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-              =@radius
-              km
-              %span.caret
-            %ul.dropdown-menu
-              - [5, 10, 50, 100, 200, 500, 1000, 2000, 5000].each do |km|
-                %li
-                  %a{:href=>events_url(:radius=>km), :'data-href-geolocate'=>"true"}
-                  = link_to url_for_event('refresh', :radius => km), 
-                      :remote => true, 
-                      :"data-href-geolocate"=>true, 
-                      :class => "hide" do
-                    =km
-                    km
-        %span of
-        %span=@address.address
+    = link_to "Refresh", 
+      url_for_event('refresh', :radius => @radius), 
+      :remote => true, 
+      :"data-href-geolocate"=>true, 
+      :"data-trigger-on-geolocate"=>@geolocate,
+      :class => "hide"
 
-        %ul.unstyled
-          - @public_events.each do |event|
-            %li
-              .row-fluid
+    -if @public_events
+      %section#public_events{'data-subnav-label'=> t(".public")}
 
-                .span4
-                  .img
+        %h1=t(".public_events")
+        .well
+          .inline
+            Within
 
-                    %h2.event_name= link_to event.name, event_path(event.id)
+            .btn-toolbar
 
-                    .avatar
-                      - if event.owner.avatar.file?
-                        = image_tag event.owner.avatar.expiring_url(s3_expiry, :medium)
-                      - else
-                        = image_tag "chef.jpg"
+              -# Drop down for selecting the radius of the
+              -# locality search
 
-                .span8
+              %span.btn-group
+                %a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+                  =@radius
+                  km
+                  %span.caret
+                %ul.dropdown-menu
+                  - [5, 10, 50, 100, 200, 500, 1000, 2000, 5000].each do |km|
+                    %li
+                      = link_to km, 
+                           url_for_event('refresh', :radius => km, :city=>@city), 
+                          :remote => true, 
+                          :"data-href-geolocate"=>@geolocate, 
+                          :class => "hide"
+            of
 
-                  .row-fluid
+            .btn-toolbar
 
-                    .span12
+              -# Drop down for selecting the city of the locality
+              -# search
 
-                      .datetime
-                        = event.format_date
-                        = event.format_time
-                        %a{:href=>ical_event_path(event)}
-                          %small
-                            %i.icon-calendar
-                            iCal
+              %span.btn-group
 
-                      %hr
+                -# Manually entering the city
+                %input.btn.select-on-focus{'data-param'=>'city', 'data-href'=>url_for_event('refresh', :radius=>@radius), 'href'=>"#", 'value'=>@city}
 
-                      %address.address
-                        %strong=event.venue.name
-                        %br
-                        =event.venue.street
-                        %br
-                        =event.venue.city
-                        %br
-                        =event.venue.country
-                        %br
-                        =event.venue.postcode
+                -# Pick from a dropdown of cities
+                %a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
+                  %span.caret
+                %ul.dropdown-menu
+                  - %w(London Paris NewYork Berlin Melbourne Vienna Tokyo Shanghai Moscow).each do |city|
+                    %li
+                      = link_to city, 
+                          url_for_event('refresh', :radius => @radius, :city=>city), 
+                          :remote => true, 
+                          :class => "hide"
 
-                  .row-fluid
-                    .span12
 
-                      .description
-                        = event.description
+          %hr
+
+          -# List all found public events
+
+          %ul.unstyled
+            - @public_events.each do |event|
+              %li
+                .row-fluid
+
+                  .span4
+                    .img
+
+                      %h2.event_name= link_to event.name, event_path(event.id)
+
+                      .avatar
+                        - if event.owner.avatar.file?
+                          = image_tag event.owner.avatar.expiring_url(s3_expiry, :medium)
+                        - else
+                          = image_tag "chef.jpg"
+
+                  .span8
+
+                    .row-fluid
+
+                      .span12
+
+                        .datetime
+                          = event.format_date
+                          = event.format_time
+                          %a{:href=>ical_event_path(event)}
+                            %small
+                              %i.icon-calendar
+                              iCal
+
+                        %hr
+
+                        %address.address
+                          %strong=event.venue.name
+                          %br
+                          =event.venue.street
+                          %br
+                          =event.venue.city
+                          %br
+                          =event.venue.country
+                          %br
+                          =event.venue.postcode
+
+                    .row-fluid
+                      .span12
+
+                        .description
+                          = event.description
