@@ -1,6 +1,7 @@
-$baseFontSize: 20px 
-$baseLineHeight: 22px
+$baseFontSize: 22px 
+$baseLineHeight: 22px 
 $ok-green: rgb(102,221,63)
+//$baseFontFamily: 'Quicksand', sans-serif
 
 @import "bootstrap"
 @import "bootstrap-responsive"
@@ -23,3 +24,8 @@ select
 
 input[type="file"]
   width: 100% !important
+
+// Override the twitter bootstrap declaration for
+// form font to use baseFontFamily.
+input, button, select, textarea
+  font-family: $baseFontFamily !important
