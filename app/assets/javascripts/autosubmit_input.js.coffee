@@ -1,5 +1,5 @@
 $(document).ready =>
-  $("html").on "change", "input['data-href']", ->
+  $("html").on "change", "input[data-href]", ->
     obj = $(@)
     href = obj.attr('data-href')
     params = {}
