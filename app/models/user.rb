@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
     if self[:name]
       self[:name]
     else
-      email
+      email.gsub /@.*$/, '@....'
     end
   end
 
