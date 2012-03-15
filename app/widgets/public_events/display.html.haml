@@ -74,14 +74,10 @@
 
                   .span4
                     .img
-
-                      %h2.event_name= link_to event.name, event_path(event.id)
-
                       .avatar
-                        - if event.owner.avatar.file?
-                          = image_tag event.owner.avatar.expiring_url(s3_expiry, :medium)
-                        - else
-                          = image_tag "chef.jpg"
+                        - if image = event.venue.venue_images.first
+                          = link_to event_path(event.id) do
+                            = image_tag image.image.expiring_url(s3_expiry, :medium)
 
                   .span8
 
@@ -89,7 +85,12 @@
 
                       .span12
 
-                        .datetime
+
+
+                        %h2.event_name
+                          = link_to event.name, event_path(event.id)
+
+                        %p.datetime
                           = event.format_date
                           = event.format_time
                           %a{:href=>ical_event_path(event)}
@@ -97,21 +98,12 @@
                               %i.icon-calendar
                               iCal
 
-                        %hr
-
-                        %address.address
-                          %strong=event.venue.name
-                          %br
-                          =event.venue.street
-                          %br
-                          =event.venue.city
-                          %br
-                          =event.venue.country
-                          %br
-                          =event.venue.postcode
-
-                    .row-fluid
-                      .span12
-
-                        .description
+                        %p.description
                           = event.description
+                        %p
+                          = link_to event.owner.name, user_profile_path(event.owner)
+                          @
+                          = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
+                            'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
+                            'data-title' => event.venue.name
+

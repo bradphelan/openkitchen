@@ -147,7 +147,7 @@ class Event < ActiveRecord::Base
   end
 
   def format_date
-    datetime.try(:strftime, Date::DATE_FORMATS[:default])
+    datetime.try(:strftime, Date::DATE_FORMATS[:textual])
   end
 
   def format_time
