@@ -6,5 +6,5 @@
   :input_html => { :value => "", 
     :placeholder => "email address", 
     "data-provide" => "typeahead", 
-    "data-source"=> current_user.friends_emails.to_json, 
+    "data-source"=> signed_in? ? current_user.friends_emails.to_json : [], 
     :autocomplete => 'off' }

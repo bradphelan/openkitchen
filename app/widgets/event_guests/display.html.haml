@@ -13,7 +13,7 @@
                 = render( { :state => :invitation }, invitation)
 
       %hr
-      - if can? :edit, @event
+      - if can?(:invite, @event) and not signed_in?
 
         %section#invite{'data-subnav-label' => '+'}
 
@@ -22,3 +22,13 @@
               = render :view => :email_typeahead, :locals => { :form => f }
             = f.buttons do
               = f.commit_button
+
+
+      - if can? :invite, @event and signed_in?
+
+        %section#invite{'data-subnav-label' => '+'}
+
+          = semantic_form_for :invite, :remote => true, :url => url_for_event(:invite_guest) , :html => { class: "form-stacked invite-guest" } do |f|
+            = f.buttons do
+              = f.commit_button
+

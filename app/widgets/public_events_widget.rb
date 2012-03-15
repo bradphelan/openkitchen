@@ -12,7 +12,9 @@ class PublicEventsWidget < ApplicationWidget
       @address = Geocoder.search(@city).first
       @geolocate = false
     else
-      @address = request.location
+      unless @address = request.location
+        @address = Geocoder.search "Vienna"
+      end
     end
 
     @radius = params[:radius] || session[:radius] || 100

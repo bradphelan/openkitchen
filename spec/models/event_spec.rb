@@ -2,16 +2,18 @@
 #
 # Table name: events
 #
-#  id          :integer         not null, primary key
-#  owner_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  name        :string(255)
-#  datetime    :datetime
-#  timezone    :string(255)
-#  description :text
-#  venue_id    :integer
-#  public      :boolean         default(FALSE), not null
+#  id                                   :integer         not null, primary key
+#  owner_id                             :integer
+#  created_at                           :datetime
+#  updated_at                           :datetime
+#  name                                 :string(255)
+#  datetime                             :datetime
+#  timezone                             :string(255)
+#  description                          :text
+#  venue_id                             :integer
+#  public                               :boolean         default(FALSE), not null
+#  public_seats                         :integer         default(0)
+#  automatic_public_invitation_approval :boolean         default(FALSE)
 #
 
 require 'spec_helper'

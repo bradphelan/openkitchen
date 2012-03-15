@@ -1,4 +1,4 @@
-- if signed_in?
+- if @event.invited? current_user
   - if @invitation.comment_subscription_state == 'auto'
 
     -# Just a dummy to hook the replace code later

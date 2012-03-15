@@ -10,12 +10,30 @@
 #  token                      :string(255)
 #  status                     :string(255)     default("pending")
 #  comment_subscription_state :string(255)     default("auto")
+#  public                     :boolean         default(FALSE)
+#  public_approved            :boolean         default(FALSE)
 #
 
 class Invitation < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
   has_many :resource_producers, :dependent => :destroy
+  
+  #
+  # Public event support
+  #
+  
+  # true if the invitation is a self registration
+  # in response to a public event
+  validates_inclusion_of :public,
+    :in => [true, false]
+
+  # true if the invitation has been approved by
+  # the owner. Only meaningful in context of
+  # #public? => true
+  validates_inclusion_of :public_approved, 
+    :in => [true, false]
+
 
   #
   #

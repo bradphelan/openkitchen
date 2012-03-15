@@ -1,4 +1,10 @@
-- if signed_in?
+- if @event.public?
+
+  - if @event.public_seats > 0
+    = @event.public_seats_left
+    public seats left
+
+- if @event.invited? current_user
   %span#invitation_status
     =t(".change_status_header")
 
@@ -15,4 +21,6 @@
             - unless status == "pending"
               - unless @invitation.status == status
                 = link_to t(".#{status}"), invitation_url(@invitation, :redirect_to => request.path, :invitation => { :status => status } ), :class => "btn #{status}", :method => :put 
+
+
 

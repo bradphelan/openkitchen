@@ -133,6 +133,15 @@ de:
      address: Addresse 
      photos: Fotos
 
+  event_guests_widget:
+    flash:
+      account_created:
+        Ihr Konto wurde erstellt. Sie sind nun mit der Veranstaltung
+        registriert. Sie werden eine E-Mail zu Ihrem Konto zu bestätigen und
+        mit Zustimmung Prozess Ihr Konto wurde erstellt. Sie sind nun mit der
+        Veranstaltung registriert. Sie werden eine E-Mail zu Ihrem Konto zu
+        bestätigen und mit Zustimmung Prozess
+
   layouts:
     application:
       confirm_user: Registrierung abzuschließen!
@@ -194,5 +203,5 @@ de:
       venue:
         update: "Aktualisieren %{model}"
       invite:
-        submit: "Einladung senden!" 
+        submit: "Einladen" 
 

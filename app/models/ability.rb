@@ -34,6 +34,10 @@ class Ability
       can [:invite, :edit, :create, :update, :destroy], Event, :owner_id => user.id
     end
 
+    can [:invite], Event, :public => true
+    cannot [:invite], Event, :invitations => { :user_id => user.id }
+    
+
     # Can create a resource for the event I own
     can :create, Resource, :event => { :owner_id => user.id }
 
@@ -55,6 +59,8 @@ class Ability
     can [:register], User, :id => user.id
 
     can [:comment_on], Event, { :invitations => { :user_id => user.id } } 
+
+    # TODO THE BELOW IS NOT CORRECT
     can [:comment_on], Event, { :public => true } 
     cannot :comment_on, Event do
       user.id.nil?

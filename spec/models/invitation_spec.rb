@@ -10,6 +10,8 @@
 #  token                      :string(255)
 #  status                     :string(255)     default("pending")
 #  comment_subscription_state :string(255)     default("auto")
+#  public                     :boolean         default(FALSE)
+#  public_approved            :boolean         default(FALSE)
 #
 
 require 'spec_helper'

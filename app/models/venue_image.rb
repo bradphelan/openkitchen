@@ -17,7 +17,7 @@ class VenueImage < ActiveRecord::Base
   belongs_to :venue
 
   has_attached_file :image, 
-    :styles => { :large => "1200x900#", :medium => "800x600#", :thumb=> "100x100#" }
+    :styles => { :large => "1200x900#", :medium => "800x600#",:small => "300x300#", :thumb=> "100x100#" }
 
   validates_attachment_presence :image
 

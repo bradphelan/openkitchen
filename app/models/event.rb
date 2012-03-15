@@ -2,16 +2,18 @@
 #
 # Table name: events
 #
-#  id          :integer         not null, primary key
-#  owner_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  name        :string(255)
-#  datetime    :datetime
-#  timezone    :string(255)
-#  description :text
-#  venue_id    :integer
-#  public      :boolean         default(FALSE), not null
+#  id                                   :integer         not null, primary key
+#  owner_id                             :integer
+#  created_at                           :datetime
+#  updated_at                           :datetime
+#  name                                 :string(255)
+#  datetime                             :datetime
+#  timezone                             :string(255)
+#  description                          :text
+#  venue_id                             :integer
+#  public                               :boolean         default(FALSE), not null
+#  public_seats                         :integer         default(0)
+#  automatic_public_invitation_approval :boolean         default(FALSE)
 #
 
 class Event < ActiveRecord::Base
@@ -32,7 +34,11 @@ class Event < ActiveRecord::Base
 
   has_many :resources, :dependent => :destroy
 
-  attr_accessible  :name, :venue_id, :description, :timezone, :datetime, :public
+  attr_accessible  :public_seats, :public, :name, :venue_id, :description, :timezone, :datetime
+
+  def public_seats_left
+    public_seats - invitations.where{public==true}.count
+  end
 
   acts_as_commentable
 
@@ -44,7 +50,17 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :owner
 
+  #
+  # Public event support
+  #
+
   validates_inclusion_of :public, :in => [true, false]
+
+  validates_numericality_of :public_seats, 
+    :greater_than_or_equal_to => 0, 
+    :only_integer => true
+
+  validates_inclusion_of :automatic_public_invitation_approval, :in => [true, false]
 
   # Get the invitation to this event for
   # the specific user or nil if they are
@@ -83,7 +99,7 @@ class Event < ActiveRecord::Base
   # Owner should be implicityly
   # invited
   after_create do
-    invitation = invite owner.email
+    invitation = invite owner
     invitation.comment_subscription_state = "subscribed"
     invitation.status = "accepted"
     invitation.save!
@@ -99,27 +115,46 @@ class Event < ActiveRecord::Base
   end
 
 
+  def invited? user
+    if user
+      invitations.where{user_id==user.id}.count > 0
+    end
+  end
+
+  # @param email the email of the guest to invite
+  # @param options[:create]
+  #     true  : create the user if the email is not found
+  #     false : do not create anything if the email is not found
+  # @param options[*]
+  #     attributes for invitation.create
+  #
+  # @return the guest user if the invite was successful
+  #         nil otherwise
+  def invite_by_email email, options
+    guest = User.find_by_email email
+    if not guest and options.delete(:create)
+      guest = User.create! :email => email, :password => SecureRandom.hex(16)
+    end
+    invite guest, options if guest
+  end
+
   # Returns the invitation
   # 
   # Guest can be a User object or an
   # email address
-  def invite guest
+  def invite guest, options = {}
 
-    unless guest.instance_of? User
-
-      email = guest
-
-      unless guest = User.where(:email => email).first
-        guest = User.create! :email => email, :password => SecureRandom.hex(16)
-      end
-
-    end
+    as_public = options.delete :public
+    status    = options.delete :status
 
     # Don't invite twice
     unless invitation = self.invitations.where{user_id==my{guest.id}}.first
       invitation = Invitation.create! do |i|
        i.event = self
        i.user = guest
+       i.public = as_public if as_public
+       i.public_approved = as_public if as_public
+       i.status = status if status
       end
       InviteMailer.deliver_invitation(invitation)
     end
@@ -127,8 +162,6 @@ class Event < ActiveRecord::Base
     invitation
 
   end
-
-
 
   def format_date
     datetime.try(:strftime, Date::DATE_FORMATS[:default])

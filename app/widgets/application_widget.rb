@@ -40,6 +40,10 @@ class ApplicationWidget < Apotomo::Widget
     parent_controller.current_ability
   end
 
+  def flash
+    parent_controller.flash
+  end
+
   def authorize! *args
     parent_controller.authorize! *args
   end
@@ -73,6 +77,36 @@ class ApplicationWidget < Apotomo::Widget
 
   def render_widget_for_js!(type, id, *args)
     escape render_widget!(type, id, *args)
+  end
+
+  def redirect_to path
+    render :text => "window.location = '#{path}'"
+  end
+
+
+  class WidgetRenderBuffer
+    def initialize w
+      @widget = w
+      @buffer = ""
+    end
+
+    def replace *args
+      @buffer << @widget.replace(*args)
+    end
+
+    def render *args
+      @buffer << @widget.render(@args)
+    end
+
+    def to_s
+      @buffer
+    end
+  end
+
+  def render_buffer
+    buffer = WidgetRenderBuffer.new self
+    yield buffer
+    buffer.to_s
   end
 
 end

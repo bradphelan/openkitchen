@@ -123,6 +123,13 @@ en:
      address: Address
      photos: Photos
 
+  event_guests_widget:
+    flash:
+      account_created:
+        Your account has been created. You are now registered to the event. You will
+        receive an email to confirm your account and proceed with the approval
+        process
+
   #
   #
   # Controllers
@@ -171,4 +178,4 @@ en:
 
     actions:
       invite:
-        submit: "Send invitation!" 
+        submit: "Invite" 

@@ -9,7 +9,12 @@
   -else
     - hint = nil
   = f.input :venue, :collection => current_user.venues, :hint => hint
+
   = f.input :public
+  = f.input :public_seats, 
+    :input_html      => { 'data-show-if'   => "input:[name='event[public]']:checkbox",
+                          'data-condition' => ':checked',
+                          'data-parent'    => 'fieldset' }
     
 
 
