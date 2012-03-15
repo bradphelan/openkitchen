@@ -27,7 +27,6 @@ $(document).ready =>
       # Find the trigger element
       trigger_element = form.find(element.attr('data-show-if'))
 
-
       # The parent selector for hiding
       parent_element = element.closest(element.attr('data-parent'))
 
@@ -36,7 +35,7 @@ $(document).ready =>
       condition = "#{element.attr('data-show-if')}#{trigger_element_condition}"
 
       control = do(trigger_element, condition, parent_element, form)->
-        -> parent_element.toggle(form.find(condition))
+        -> parent_element.toggle(form.find(condition).length > 0)
 
       trigger_element.on "change", =>
         control()
