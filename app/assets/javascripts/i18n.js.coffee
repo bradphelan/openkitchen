@@ -1,13 +1,14 @@
 $(document).ready =>
 
-  hide_missing_translations = =>
-    $(".translation_missing").tooltip('hide')
-
   show_missing_translations = =>
-    $(".translation_missing").tooltip('show')
-    window.setTimeout hide_missing_translations, 1000
+    tr = $(".translation_missing")
+    if tr.length > 0
+      console.log "Missing translations"
+      console.log tr
+
+  $("html").ajaxComplete ->
+    show_missing_translations()
 
 
-
-  window.setTimeout show_missing_translations, 1000
+  show_missing_translations()
     
