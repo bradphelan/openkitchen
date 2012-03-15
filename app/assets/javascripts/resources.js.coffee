@@ -4,6 +4,9 @@
 
 
 $(document).ready =>
+	# TODO remove this
+  return false
+
 	$(".resource_quantity_button.up").tooltip
 		title: -> "Increase your pledge"
 		delay: 50
