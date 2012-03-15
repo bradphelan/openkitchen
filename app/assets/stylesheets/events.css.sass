@@ -10,6 +10,12 @@ $small_map_height: 480 / 640 * $small_map_width
   h2.event_name
     font-size: $baseFontSize * 2.0
     margin-bottom: 0.5em
+    background-color: $grayLighter
+    padding: 0.5em
+    +border-radius(5px)
+    +gradientBar($grayDarker, $black)
+    a
+      color: white
   ul
     @extend .unstyled
     li
