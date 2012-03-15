@@ -71,38 +71,39 @@ $small_map_height: 480 / 640 * $small_map_width
 
   ul.guests
     li
-      padding: 0.5em
-      background-color: $white
-      +box-shadow()
-      margin-top: 1em
+      @extend hr
+      margin-top: 0px
+      margin-bottom: 0px
+      padding-bottom: 0.5em
+      padding-top: 0.5em
+      +box-shadow(green)
       z-index: -1
 
-      .image
-        overflow: hidden
-        white-space: nowrap
-        margin-bottom: 0.5em
-        &:hover
-          overflow: visible
-          position: relative
-          a
-            color: black
+      .info
+        display: inline-block
+        vertical-align: top
 
-        .email
-          padding-bottom: 3px
-          padding-top: 3px
-          margin-bottom: 0px
-          position: relative
+        .name
+          display: block
+
+        .buttons
+          display: block
+          margin-top: 0.25em
+          margin-bottom: 0.25em
+
+      .image
+        white-space: nowrap
+        display: inline
 
         img
           height: auto
           width: auto
+          border: 5px green solid
+          +border-radius(5px)
+          +box-shadow()
 
         
     @extend .unstyled
-    .email
-      @extend p
-    .guest_buttons
-      display: block-inline 
 
   .edit_event
     // These are not really disabled but they are

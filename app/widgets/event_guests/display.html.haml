@@ -6,11 +6,8 @@
     .well
 
       %ul.guests
-        - @event.invitations.includes(:event).each_slice(2) do |slice|
-          .row-fluid
-            - slice.each do |invitation|
-              .span6
-                = render( { :state => :invitation }, invitation)
+        - @event.invitations.includes(:event).each do |invitation|
+          = render( { :state => :invitation }, invitation)
 
       %hr
       - if can?(:invite, @event) and not signed_in?

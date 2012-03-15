@@ -6,7 +6,7 @@ module ApplicationHelper
 
   def profile_avatar_image(user, version)
 
-    case version
+    dim = case version
     when :medium
       [300, 300]
     when :thumb
@@ -15,12 +15,15 @@ module ApplicationHelper
       [50, 50]
     end
 
+
     if user.avatar.file?
       uri = user.avatar.expiring_url(s3_expiry, version)
+      style = nil
     else
       uri = "chef.jpg"
+      style = "width: #{dim[0]}px; height: #{dim[1]}px"
     end
 
-    image_tag uri, :class => "avatar #{version}"
+    image_tag uri, :class => "avatar #{version}", :style => style
   end
 end

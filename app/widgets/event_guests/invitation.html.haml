@@ -1,28 +1,31 @@
 %li.invitation
   .image
-    = profile_avatar_image(invitation.user, :medium)
-    .email
-      = mail_to invitation.user.email, invitation.user.name
+    = profile_avatar_image(invitation.user, :thumb)
+  .info
+
+    %span.name
+      = link_to invitation.user.name, user_profile_path(invitation.user)
+
     %span.status
       = invitation.status
-  .buttons
 
-    - if can? :destroy, invitation
+    %span.buttons
+      - if can? :destroy, invitation
 
-      - disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
+        - disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
 
-      = link_to invitation_path(invitation), 
-        :method => :delete, 
-        :class => "btn btn-danger #{disabled}", 
-        :confirm => t("confirm"),
-        :title => t("invitation.remove") do
-        %i.icon-fire
+        = link_to invitation_path(invitation), 
+          :method => :delete, 
+          :class => "btn btn-danger #{disabled}", 
+          :confirm => t("confirm"),
+          :title => t("invitation.remove") do
+          %i.icon-fire
 
-    - if invitation and can?(:edit, invitation.event)
+      - if invitation and can?(:edit, invitation.event)
 
-      = link_to mail_invitation_url(invitation), 
-        :method => :post, 
-        :class => "btn btn-success invite",
-        :confirm => t("confirm"),
-        :title => t("invitation.resend") do
-        %i.icon-envelope
+        = link_to mail_invitation_url(invitation), 
+          :method => :post, 
+          :class => "btn btn-success invite",
+          :confirm => t("confirm"),
+          :title => t("invitation.resend") do
+          %i.icon-envelope
