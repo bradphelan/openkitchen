@@ -10,8 +10,8 @@ describe Ability do
     @event1 = Factory :event, :owner => @user1
     @event2 = Factory :event, :owner => @user1
 
-    @invitation0 = @event2.invite @user0.email
-    @invitation1 = @event2.invite @user1.email
+    @invitation0 = @event2.invite @user0
+    @invitation1 = @event2.invite @user1
 
     @resource0 = @event0.resources.create! :name => "xxx"
     @resource1 = @event1.resources.create! :name => "yyy"

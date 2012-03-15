@@ -11,7 +11,7 @@ describe InvitationsController do
     @event = @owner.events_as_owner.create! :timezone => "UTC", :name => "foo", :datetime => Time.zone.now do |e|
       e.venue = @owner.venues.first
     end
-    @invite = @event.invite @guest.email
+    @invite = @event.invite @guest
   end
   describe "GET bad token" do
     it "should raise a not found exception if the token cannot be found" do

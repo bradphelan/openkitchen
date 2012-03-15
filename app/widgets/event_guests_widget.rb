@@ -1,6 +1,8 @@
 class EventGuestsWidget < ApplicationWidget 
 
-  responds_to_event :invite_guest
+  responds_to_event :register_email_for_event
+  responds_to_event :register_non_existing_user_for_event
+  responds_to_event :register_current_user_for_event
 
   #
   # Setup
@@ -27,35 +29,45 @@ class EventGuestsWidget < ApplicationWidget
   #
 
 
-  def invite_guest
-    authorize! :invite, @event
+  def register_current_user_for_event
+    authorize! :register_current_user_for_event, @event
+    invitation = @event.invite current_user
+  end
 
-    if params[:invite] && params[:invite][:email]
-      @email = params[:invite][:email] 
-    else
-      @email = current_user.email
-    end
+  def register_non_existing_user_for_event
+    authorize! :register_non_existing_user_for_event, @event
 
-    return unless @email
+    email = params[:invite][:email] 
+    if guest = User.find_by_email(email)
 
-    if signed_in?
-      # Event owner can invite and create users
-      invitation = @event.invite_by_email @email, :create => true
-      txt = ""
-      render_buffer do |b|
-        b.replace "##{widget_id}", :view => :display if invitation
-        b.replace "section#invite", :text => ""
-      end
-    elsif @guest = User.find_by_email(@email)
       # Guests with accounts get redirected to sign in
-      parent_controller.store_location "#{event_path(@event)}#invite"
-      redirect_to new_user_session_path('user[email]' => @email)
+      parent_controller.store_location event_path(@event)
+      redirect_to new_user_session_path('user[email]'=>email)
     else
+
       # Guests without accounts can create a non confirmed user
-      invitation = @event.invite_by_email @email, :create => true, :public => true, :status => :accepted
+      @guest = User.find_or_create_by_email @email
+      invitation = @event.invite @guest, :public => true, :status => :accepted
       sign_in invitation.user
       flash[:info] = t("event_guests_widget.flash.account_created")
       redirect_to event_path(@event)
+    end
+  end
+
+  def register_email_for_event
+    authorize! :register_email_for_event, @event
+
+    email = params[:invite][:email] 
+
+    return unless email
+
+    # Event owner can invite and create users
+    guest = User.find_or_create_by_email email
+    invitation = @event.invite guest
+
+    render_buffer do |b|
+      b.replace "##{widget_id}", :view => :display
+      b.replace "section#invite", :text => ""
     end
 
   end

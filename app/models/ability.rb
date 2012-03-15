@@ -31,12 +31,17 @@ class Ability
     can :read, Event, :public => true
 
     if user.confirmed?
-      can [:invite, :edit, :create, :update, :destroy], Event, :owner_id => user.id
+      can [:edit, :create, :update, :destroy], Event, :owner_id => user.id
     end
 
-    can [:invite], Event, :public => true
-    cannot [:invite], Event, :invitations => { :user_id => user.id }
-    
+    can :register_email_for_event, Event, :owner_id => user.id
+
+    if not user.id
+      can :register_non_existing_user_for_event, Event, :public => true
+    else
+      can :register_current_user_for_event, Event, :public => true
+    end
+
 
     # Can create a resource for the event I own
     can :create, Resource, :event => { :owner_id => user.id }
@@ -74,6 +79,7 @@ class Ability
 
     # User
     can [:edit, :show, :update], User, :id => user.id
+    can :sign_in, User
 
     # Venue
     #

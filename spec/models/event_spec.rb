@@ -69,23 +69,6 @@ describe Event do
       end
     end
 
-    describe "#invite_by_email" do
-      before do
-        @guest_email0 = "johnny@moocool.com"
-        @guest_email1 = "sarah@moocool.com"
-        @event.invite @guest_email0
-      end
-      it "should create a user if it does not yet exist" do
-        User.where{email==my{@guest_email0}}.count.should == 1
-      end
-      it "should add the user to the invitees" do
-        user = User.where{email==my{@guest_email0}}.first
-        @event.invitees.should include(user)
-      end
-
-
-    end
-
   end
 
 end

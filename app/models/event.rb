@@ -121,23 +121,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  # @param email the email of the guest to invite
-  # @param options[:create]
-  #     true  : create the user if the email is not found
-  #     false : do not create anything if the email is not found
-  # @param options[*]
-  #     attributes for invitation.create
-  #
-  # @return the guest user if the invite was successful
-  #         nil otherwise
-  def invite_by_email email, options
-    guest = User.find_by_email email
-    if not guest and options.delete(:create)
-      guest = User.create! :email => email, :password => SecureRandom.hex(16)
-    end
-    invite guest, options if guest
-  end
-
   # Returns the invitation
   # 
   # Guest can be a User object or an

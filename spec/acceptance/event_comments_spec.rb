@@ -7,7 +7,7 @@ feature "Add comment to event", :js => true do
     @guest = Factory :registered_user, :password => @password
     @event = Factory :event, :owner => @owner 
 
-    @event.invite @guest.email
+    @event.invite @guest
 
     @comment1 = "Hello World"
     @comment2 = "Bye World"

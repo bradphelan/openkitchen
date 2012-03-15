@@ -10,22 +10,32 @@
           = render( { :state => :invitation }, invitation)
 
       %hr
-      - if can?(:invite, @event) and not signed_in?
+      - if can?(:register_email_for_event, @event) 
 
         %section#invite{'data-subnav-label' => '+'}
 
-          = semantic_form_for :invite, :remote => true, :url => url_for_event(:invite_guest) , :html => { class: "form-stacked invite-guest" } do |f|
+          = semantic_form_for :invite, :remote => true, :url => url_for_event(:register_email_for_event) , :html => { class: "form-stacked invite-guest" } do |f|
+            = f.inputs do
+              = render :view => :email_typeahead, :locals => { :form => f }
+            = f.buttons do
+              = f.commit_button
+
+      - if can?(:register_non_existing_user_for_event, @event) 
+
+        %section#invite{'data-subnav-label' => '+'}
+
+          = semantic_form_for :invite, :remote => true, :url => url_for_event(:register_non_existing_user_for_event) , :html => { class: "form-stacked invite-guest" } do |f|
             = f.inputs do
               = render :view => :email_typeahead, :locals => { :form => f }
             = f.buttons do
               = f.commit_button
 
 
-      - if can? :invite, @event and signed_in?
+      - if can? :register_current_user_for_event, @event
 
         %section#invite{'data-subnav-label' => '+'}
 
-          = semantic_form_for :invite, :remote => true, :url => url_for_event(:invite_guest) , :html => { class: "form-stacked invite-guest" } do |f|
+          = semantic_form_for :invite, :remote => true, :url => url_for_event(:register_current_user_for_event) , :html => { class: "form-stacked invite-guest" } do |f|
             = f.buttons do
               = f.commit_button
 

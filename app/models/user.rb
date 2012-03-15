@@ -128,4 +128,12 @@ class User < ActiveRecord::Base
     password == password_confirmation and !password.blank?
   end
 
+  def self.find_or_create_by_email email
+    user = User.find_by_email email
+    if not user
+      user = User.create! :email => email, :password => SecureRandom.hex(16)
+    end
+    user
+  end
+
 end
