@@ -6,9 +6,6 @@ $(document).ready =>
   # TODO remove this code
   return false
 
-  $(".guest_buttons input.remove").tooltip()
-  $(".guest_buttons input.email").tooltip()
-
   $('#google_map').on 'shown', =>
     $("#map").height $("#map").parent().parent().height() - 80
     $("#map").width $("#map").parent().parent().width() - 10

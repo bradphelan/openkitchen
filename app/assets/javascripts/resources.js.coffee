@@ -14,6 +14,3 @@ $(document).ready =>
 		delay: 50
 		animation: false
 
-	# Handle a bug removing the twipsy on AJAX calls
-	$("body").on "click", ".resource_quantity_button", =>
-    $('.tooltip').remove()
