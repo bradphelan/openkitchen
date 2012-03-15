@@ -1,2 +1,8 @@
 $(document).ready =>
-  $("a.popover-trigger").popover()
+  pop = =>
+    $("a.popover-trigger").popover()
+
+  $(document).ajaxComplete ->
+    pop()
+
+  pop()
