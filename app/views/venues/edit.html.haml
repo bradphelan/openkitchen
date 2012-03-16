@@ -1,29 +1,43 @@
+- content_for :subnav_header do
+  %h1.autofont= Venue.model_name.human
+
 #page_venues_edit
-  %h1= Venue.model_name.human
 
-  .well
-    = semantic_form_for @venue, :multipart => true do |f|
-      = f.inputs do
-        = f.input :name
-        - autofill = @venue.timezone ? nil : 'autofill'
-        = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
-        = f.input :street
-        = f.input :city
-        = f.input :country, :as => :string
-        = f.input :postcode
-      = f.actions
+  %section#venues_show_address{'data-subnav-label'=>t(".address")}
 
-  .well
-    = render :partial => "events/map"
+    %h1=t(".address")
 
-  .well
-    = semantic_form_for @venue.venue_images.build do |f|
-      = f.inputs do
-        = f.input :venue_id, :as => :hidden
-        = f.input :image, :as => :file 
-      = f.actions
+    .well
+      = semantic_form_for @venue, :multipart => true do |f|
+        = f.inputs do
+          = f.input :name
+          - autofill = @venue.timezone ? nil : 'autofill'
+          = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
+          = f.input :street
+          = f.input :city
+          = f.input :country, :as => :string
+          = f.input :postcode
+        = f.actions
 
-    = render :partial => "carousel"
+  %section#venues_show_map{'data-subnav-label'=>t(".map")}
 
+    %h1=t(".map")
+
+    .well
+      = render :partial => "events/map"
+
+  %section#venues_show_photos{'data-subnav-label'=>t(".photos")}
+
+    .well
+
+      = render :partial => "carousel"
+
+  %section#venues_add_photos{'data-subnav-label'=>"+"}
+    .well
+      = semantic_form_for @venue.venue_images.build do |f|
+        = f.inputs do
+          = f.input :venue_id, :as => :hidden
+          = f.input :image, :as => :file 
+        = f.actions
 
 

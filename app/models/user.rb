@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :name,  :password, :password_confirmation, :remember_me
+  attr_accessible :email, :about, :name,  :password, :password_confirmation, :remember_me
   attr_accessible :cookstars, :avatar, :timezone
 
   has_many :events_as_owner, :class_name => "Event", :inverse_of => :owner, :foreign_key => :owner_id, :dependent => :destroy
@@ -69,6 +69,8 @@ class User < ActiveRecord::Base
   end
 
   validates_length_of :name, :minimum => 3, :maximum => 80, :allow_blank => true
+
+  validates_length_of :about, :maximum => 4096
 
   def name
     if self[:name]

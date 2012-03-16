@@ -18,38 +18,16 @@
             - autofill = @user.timezone ? nil : 'autofill'
             = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
             = f.input :cookstars, :as => :select, :collection => 1..5
-          .span5
             %span.avatar
-              - if @user.avatar.file?
-                = image_tag @user.avatar.expiring_url(s3_expiry, :medium)
-              - else
-                = image_tag "chef.jpg"
+              = profile_avatar_image(@user, :medium)
               = f.input :avatar
+          .span6
+            = f.input :about
       .row
         .span11
           = f.buttons
 
-  %section.venues.edit#profile_edit_venues_edit{'data-subnav-label' => (Venue.model_name.human :count => 2)}
-    %h1=Venue.model_name.human :count => 2
-    .well
-      %table.table.table-striped.table-bordered
-        %thead
-          %tr 
-            %th=Venue.human_attribute_name :name
-            %th=Venue.human_attribute_name :address
-            %th=UserVenueManagement.human_attribute_name :role
-        - current_user.user_venue_managements.each do |uvm|
-          - venue = uvm.venue
-          %tbody
-            %tr
-              %td
-                - if can? :edit, uvm.venue
-                  %a=link_to uvm.venue.name, edit_venue_path(uvm.venue)
-                - else
-                  %a=link_to uvm.venue.name, venue_path(uvm.venue)
-              %td= uvm.venue.full_address
-              %td= uvm.role
-              
+  = render :partial => 'venues', :locals => {:user => current_user }
 
   %section#profile_edit_new_venue{'data-subnav-label' => '+', 'data-offset' => '-100'}
     %h1=t ".new_venue"

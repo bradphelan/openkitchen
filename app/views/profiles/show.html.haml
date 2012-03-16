@@ -1,0 +1,16 @@
+#page_profiles_show
+
+  = content_for :subnav_header do
+    %h1.autofont=@user.name
+
+
+  %section.venues.edit#top{'data-subnav-label' => t("top")}
+    %h1=@user.name
+    .well
+      .row-fluid
+        .span4
+          = profile_avatar_image(@user, :medium)
+        .span4
+          = @user.about
+
+  = render :partial => 'venues', :locals => {:user => @user }

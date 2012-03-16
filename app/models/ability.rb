@@ -79,6 +79,12 @@ class Ability
 
     # User
     can [:edit, :show, :update], User, :id => user.id
+
+    # Can see a user profile if you are invited to the users event
+    can :show, User, :events_as_owner => { :invitations => { :user_id => user.id }}
+    # Can see a user profile if you have invited a user to your event
+    can :show, User, :invitations => { :event => { :owner_id => user.id } }
+
     can :sign_in, User
 
     # Venue
@@ -87,8 +93,8 @@ class Ability
     can :read, Venue, :events => { :invitations => { :user_id => user.id }}
 
     if user.confirmed?
-      can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "manager" }
-      can [:edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "owner" }
+      can [:show, :edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "manager" }
+      can [:show, :edit, :update], Venue, :user_venue_managements => { :user_id => user.id, :role => "owner" }
       can :destroy, Venue, :user_venue_managements => { :user_id => user.id, :role => :owner }
       can :create, Venue
 

@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
    
   respond_to :html
+  
+
 
   def edit
     @user = User.find(params[:user_id])
@@ -8,6 +10,8 @@ class ProfilesController < ApplicationController
   end
   
   def show
+    @user = User.find(params[:user_id])
+    authorize! :show, @user
   end
 
   def update

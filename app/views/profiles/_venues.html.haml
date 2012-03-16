@@ -1,0 +1,28 @@
+-# @param user
+%section.venues.edit#profile_edit_venues_edit{'data-subnav-label' => (Venue.model_name.human :count => 2)}
+  %h1=Venue.model_name.human :count => 2
+  .well
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr 
+          %th=Venue.human_attribute_name :name
+          %th=Venue.human_attribute_name :address
+          %th=UserVenueManagement.human_attribute_name :role
+      - user.user_venue_managements.each do |uvm|
+        - venue = uvm.venue
+        %tbody
+          %tr
+            %td
+              - if can? :edit, uvm.venue
+                %a=link_to uvm.venue.name, edit_venue_path(uvm.venue)
+              - elsif can? :show, uvm.venue
+                %a=link_to uvm.venue.name, venue_path(uvm.venue)
+              - else
+                =uvm.venue.name
+
+            - if can? :show, uvm.venue
+              %td= uvm.venue.full_address
+            - else
+              %td= uvm.venue.city
+            %td= uvm.role
+            
