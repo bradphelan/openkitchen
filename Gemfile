@@ -25,7 +25,8 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'sass-rails', '~> 3.1'
-  gem 'bootstrap-sass', '~> 2.0.0'
+  #gem 'bootstrap-sass', '~> 2.0.0'
+  gem 'bootstrap-sass', :git => "https://github.com/thomas-mcdonald/bootstrap-sass.git", :branch => "2.0.2"
   
 end
 

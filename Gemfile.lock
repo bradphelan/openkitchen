@@ -29,6 +29,13 @@ GIT
     formtastic (2.1.0.beta1)
       actionpack (~> 3.0)
 
+GIT
+  remote: https://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: 40bf4d14cae70c683d5e01ceeb908563906030d5
+  branch: 2.0.2
+  specs:
+    bootstrap-sass (2.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -76,7 +83,6 @@ GEM
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
     bluecloth (2.2.0)
-    bootstrap-sass (2.0.1)
     builder (3.0.0)
     cancan (1.6.7)
     capybara (1.1.2)
@@ -326,7 +332,7 @@ DEPENDENCIES
   ar_after_transaction
   aws-sdk
   bluecloth
-  bootstrap-sass (~> 2.0.0)
+  bootstrap-sass!
   cancan
   capybara
   capybara-webkit
