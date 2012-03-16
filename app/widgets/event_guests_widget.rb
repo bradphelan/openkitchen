@@ -1,6 +1,6 @@
 class EventGuestsWidget < ApplicationWidget 
 
-  responds_to_event :register_email_for_event
+  responds_to_event :register_any_email_for_event
   responds_to_event :register_non_existing_user_for_event
   responds_to_event :register_current_user_for_event
 
@@ -54,8 +54,8 @@ class EventGuestsWidget < ApplicationWidget
     end
   end
 
-  def register_email_for_event
-    authorize! :register_email_for_event, @event
+  def register_any_email_for_event
+    authorize! :register_any_email_for_event, @event
 
     email = params[:invite][:email] 
 

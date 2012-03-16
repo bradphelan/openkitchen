@@ -34,7 +34,7 @@ class Ability
       can [:edit, :create, :update, :destroy], Event, :owner_id => user.id
     end
 
-    can :register_email_for_event, Event, :owner_id => user.id
+    can :register_any_email_for_event, Event, :owner_id => user.id
 
     if not user.id
       can :register_non_existing_user_for_event, Event, :public => true
