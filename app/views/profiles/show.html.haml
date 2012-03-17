@@ -11,6 +11,6 @@
         .span4
           = profile_avatar_image(@user, :medium)
         .span4
-          = @user.about
+          = simple_format @user.about
 
   = render :partial => 'venues', :locals => {:user => @user }
