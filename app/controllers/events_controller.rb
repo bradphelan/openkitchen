@@ -13,10 +13,14 @@ class EventsController < ApplicationController
   # Apotomo entry point
   load_resource :only => :render_event_response
 
+  skip_before_filter :authenticate_user!, :only => [:index, :render_event_response]
+
   def index
     authorize! :index, Event
-    @events_as_owner = current_user.events_as_owner
-    @events_as_guest = current_user.events_as_guest.where{owner_id != my{current_user.id}}
+    if signed_in?
+      @events_as_owner = current_user.events_as_owner
+      @events_as_guest = current_user.events_as_guest.where{owner_id != my{current_user.id}}
+    end
 
     render :index
   end

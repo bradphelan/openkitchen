@@ -105,7 +105,7 @@ class Ability
     end
 
 
-    can :refresh, PublicEventsWidget if user.id
+    can :refresh, PublicEventsWidget
  
 
   end

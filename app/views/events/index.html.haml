@@ -4,104 +4,105 @@
 
 .index_events
 
-  %section#events_im_hosting{'data-subnav-label'=> t(".hostings")}
+  - if signed_in?
+    %section#events_im_hosting{'data-subnav-label'=> t(".hostings")}
 
-    %h1
-      =t ".hostings_title"
+      %h1
+        =t ".hostings_title"
 
-    .well
-      %ul
-        - @events_as_owner.each do |event|
-          %li
-            .row-fluid
+      .well
+        %ul
+          - @events_as_owner.each do |event|
+            %li
+              .row-fluid
 
-              .span4
-                .img
-                  .avatar
-                    - if image = event.venue.venue_images.first
-                      = link_to event_path(event.id) do
-                        = image_tag image.image.expiring_url(s3_expiry, :medium)
+                .span4
+                  .img
+                    .avatar
+                      - if image = event.venue.venue_images.first
+                        = link_to event_path(event.id) do
+                          = image_tag image.image.expiring_url(s3_expiry, :medium)
 
-              .span8
+                .span8
 
-                .row-fluid
+                  .row-fluid
 
-                  .span12
-
-
-
-                    %h2.event_name
-                      = link_to event.name, event_path(event.id)
-
-                    %p.datetime
-                      = event.format_date
-                      = event.format_time
-                      %a{:href=>ical_event_path(event)}
-                        %small
-                          %i.icon-calendar
-                          iCal
-
-                    %p.description
-                      = event.description
-                    %p
-                      = link_to event.owner.name, user_profile_path(event.owner)
-                      @
-                      = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
-                        'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
-                        'data-title' => event.venue.name
+                    .span12
 
 
 
-      - if can? :create, Event
-        = link_to t(".new"), new_event_url, :class => "btn btn-large btn-warning"
-      - else
-        %a.popover-trigger{:href=>"#", 'data-title' => t(".new_disabled"), 'data-content' => t('.new_disabled_content') }
-          = t(".new")
+                      %h2.event_name
+                        = link_to event.name, event_path(event.id)
 
-  %section#events_im_invited_to{'data-subnav-label'=> t(".invitations")}
+                      %p.datetime
+                        = event.format_date
+                        = event.format_time
+                        %a{:href=>ical_event_path(event)}
+                          %small
+                            %i.icon-calendar
+                            iCal
 
-    %h1=t ".invitations_title"
-
-    .well
-      %ul.unstyled
-        - @events_as_guest.each do |event|
-          %li
-            .row-fluid
-
-              .span4
-                .img
-                  .avatar
-                    - if image = event.venue.venue_images.first
-                      = link_to event_path(event.id) do
-                        = image_tag image.image.expiring_url(s3_expiry, :medium)
-
-              .span8
-
-                .row-fluid
-
-                  .span12
+                      %p.description
+                        = event.description
+                      %p
+                        = link_to event.owner.name, user_profile_path(event.owner)
+                        @
+                        = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
+                          'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
+                          'data-title' => event.venue.name
 
 
 
-                    %h2.event_name
-                      = link_to event.name, event_path(event.id)
+        - if can? :create, Event
+          = link_to t(".new"), new_event_url, :class => "btn btn-large btn-warning"
+        - else
+          %a.popover-trigger{:href=>"#", 'data-title' => t(".new_disabled"), 'data-content' => t('.new_disabled_content') }
+            = t(".new")
 
-                    %p.datetime
-                      = event.format_date
-                      = event.format_time
-                      %a{:href=>ical_event_path(event)}
-                        %small
-                          %i.icon-calendar
-                          iCal
+    %section#events_im_invited_to{'data-subnav-label'=> t(".invitations")}
 
-                    %p.description
-                      = event.description
-                    %p
-                      = link_to event.owner.name, user_profile_path(event.owner)
-                      @
-                      = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
-                        'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
-                        'data-title' => event.venue.name
+      %h1=t ".invitations_title"
+
+      .well
+        %ul.unstyled
+          - @events_as_guest.each do |event|
+            %li
+              .row-fluid
+
+                .span4
+                  .img
+                    .avatar
+                      - if image = event.venue.venue_images.first
+                        = link_to event_path(event.id) do
+                          = image_tag image.image.expiring_url(s3_expiry, :medium)
+
+                .span8
+
+                  .row-fluid
+
+                    .span12
+
+
+
+                      %h2.event_name
+                        = link_to event.name, event_path(event.id)
+
+                      %p.datetime
+                        = event.format_date
+                        = event.format_time
+                        %a{:href=>ical_event_path(event)}
+                          %small
+                            %i.icon-calendar
+                            iCal
+
+                      %p.description
+                        = event.description
+                      %p
+                        = link_to event.owner.name, user_profile_path(event.owner)
+                        @
+                        = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
+                          'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
+                          'data-title' => event.venue.name
 
 
 = render_widget :public_events

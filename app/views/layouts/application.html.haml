@@ -25,11 +25,15 @@
 
           .nav-collapse
             %ul.nav
+              %li 
+                = link_to root_path do
+                  %i.icon-home.icon-white
+                  = t("home")
+              %li
+                = link_to events_path do
+                  %i.icon-time.icon-white
+                  = t "activerecord.models.event.other"
               -if user_signed_in?
-                %li
-                  = link_to events_path do
-                    %i.icon-time.icon-white
-                    = t "activerecord.models.event.other"
                   
                 -if current_user.confirmed?
                   %li
@@ -61,6 +65,7 @@
               %li.dropdown
                 %a.dropdown-toggle(href="#" data-toggle="dropdown")
                   %i.icon-flag.icon-white
+                  = session[:locale]
                 %ul.dropdown-menu
                   %li
                     = link_to "en", url_for(:locale=>"en")
