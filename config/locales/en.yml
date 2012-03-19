@@ -127,6 +127,10 @@ en:
      address: Address
      photos: Photos
 
+  event_guests:
+    display:
+      public_seats_left: public seats left.
+
   event_guests_widget:
     flash:
       account_created:

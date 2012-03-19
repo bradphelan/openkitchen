@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
   attr_accessible  :public_seats, :public, :name, :venue_id, :description, :timezone, :datetime
 
   def public_seats_left
-    public_seats - invitations.where{public==true}.count
+    [0, public_seats - invitations.where{public==true}.count].max
   end
 
   acts_as_commentable

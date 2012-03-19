@@ -35,3 +35,11 @@
                 'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
                 'data-title' => event.venue.name
 
+          - if event.public?
+
+            - if event.public_seats > 0
+              = event.public_seats_left
+              public seats left
+            - else
+              closed to the public
+

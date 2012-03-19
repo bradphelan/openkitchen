@@ -88,10 +88,10 @@ end
 shared_steps "logout" do |email_address, password|
 
   When "I visit my account page" do
-    page.visit edit_users_path
+    page.visit homepage
   end
 
-  When "I go to click 'sign in'" do
+  When "I go to click 'sign out'" do
     click_on 'Sign out'
   end
   

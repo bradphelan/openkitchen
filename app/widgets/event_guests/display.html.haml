@@ -11,8 +11,13 @@
 
       %hr
 
+      - if @event.public?
 
-      - if can?(:register_any_email_for_event, @event) 
+        %p
+          %span.badge= @event.public_seats_left
+          = t ".public_seats_left"
+
+      - if can?(:register_any_email_for_event, @event)
 
         %section#invite{'data-subnav-label' => '+'}
 
@@ -33,7 +38,7 @@
               = f.commit_button
 
 
-      - elsif can? :register_current_user_for_event, @event
+      - elsif can?(:register_current_user_for_event, @event) and (not @event.invited?(current_user)) and @event.public_seats_left > 0
 
         %section#invite{'data-subnav-label' => '+'}
 

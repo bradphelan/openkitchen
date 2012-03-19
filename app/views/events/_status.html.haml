@@ -1,9 +1,3 @@
-- if @event.public?
-
-  - if @event.public_seats > 0
-    = @event.public_seats_left
-    public seats left
-
 - if @event.invited? current_user
   %span#invitation_status
     =t(".change_status_header")

@@ -1,5 +1,84 @@
 require 'acceptance/acceptance_helper'
 
+
+feature "Signing up to public events that have no seats left", :js => true do
+  background do
+    @password = "xxxxxx"
+    @owner = Factory :registered_user, :password => @password
+    @event_name ="Acxdadjksdfjkl"
+
+    @guests = []
+    2.times do |i|
+     @guests << Factory(:registered_user, :password => @password)
+    end
+
+    @event = Factory :event, :name => @event_name, :owner => @owner, :public => true, :public_seats => 1
+  end
+
+  Steps do
+
+    include_steps "login", @guests[0].email, @password
+
+    When "I visit the event path" do
+      visit event_path(@event)
+    end
+
+    Then "There should be 1 seat left" do
+      page.should have_content "1 public seats left."
+    end
+
+    When "I click the 'Register' button" do
+      page.should have_button("Invite")
+      within "#invite" do
+        click_on "Invite"
+      end
+    end
+
+    Then "there should be 0 seats left" do
+      page.should have_content "0 public seats left."
+    end
+
+    And "there should be no registration button anymore" do
+      page.should have_no_button("Invite")
+    end
+
+    When "I visit the event path" do
+      visit event_path(@event)
+    end
+
+    # Double check this because the AJAX response
+    # remove the invite button but I want to be sure
+    # it is really gone on a page refresh
+    Then "there should be no registration button anymore" do
+      page.should have_no_button("Invite")
+    end
+
+
+    include_steps "logout"
+
+    Then "another user starts using the system as 'I'" do end
+
+    include_steps "login", @guests[1].email, @password
+
+    When "I visit the event path" do
+      visit event_path(@event)
+    end
+
+    Then "There should be 0 seats left" do
+      page.should have_content "0 public seats left."
+    end
+
+    And "I will not be able to register" do
+      page.should have_no_button("Invite")
+    end
+
+
+  end
+
+
+
+end
+
 feature "Signing up to a public event when I am allready logged in", :js => true do
   background do
     @password = "xxxxxx"

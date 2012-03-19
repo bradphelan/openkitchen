@@ -137,6 +137,10 @@ de:
      address: Addresse 
      photos: Fotos
 
+  event_guests:
+    display:
+      public_seats_left: public seats left.
+        
   event_guests_widget:
     flash:
       account_created:
