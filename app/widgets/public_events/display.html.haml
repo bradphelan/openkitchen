@@ -1,109 +1,14 @@
-= widget_div do
-  .public_events
+= widget_div :class => "event" do
 
-    -# This is a hidden hook for the geolocator to
-    -# refresh when it has aquired the location. It
-    -# should not always run hence the condition on
-    -# @geolocate
+  %section{'id'=>"#{widget_id}_link", 'data-subnav-label'=> @title}
 
-    = link_to "Refresh", 
-      url_for_event('refresh', :radius => @radius), 
-      :remote => true, 
-      :"data-href-geolocate"=>true, 
-      :"data-trigger-on-geolocate"=>@geolocate,
-      :class => "hide"
+    %h1.events_section_title=t @title
 
-    -if @public_events
-      %section#public_events{'data-subnav-label'=> t(".public")}
+    .events.well
 
-        %h1=t(".public_events")
-        .well
-          .inline
-            Within
+      - if @geolocate
+        = render :view => :geolocate
 
-            .btn-toolbar
+      = render :view => :list
 
-              -# Drop down for selecting the radius of the
-              -# locality search
-
-              %span.btn-group
-                %a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-                  =@radius
-                  km
-                  %span.caret
-                %ul.dropdown-menu
-                  - [5, 10, 50, 100, 200, 500, 1000, 2000, 5000].each do |km|
-                    %li
-                      = link_to km, 
-                           url_for_event('refresh', :radius => km, :city=>@city), 
-                          :remote => true, 
-                          :"data-href-geolocate"=>@geolocate, 
-                          :class => "hide"
-            of
-
-            .btn-toolbar
-
-              -# Drop down for selecting the city of the locality
-              -# search
-
-              %span.btn-group
-
-                -# Manually entering the city
-                %input.btn.select-on-focus{'data-param'=>'city', 'data-href'=>url_for_event('refresh', :radius=>@radius), 'href'=>"#", 'value'=>@city}
-
-                -# Pick from a dropdown of cities
-                %a.btn.dropdown-toggle(data-toggle="dropdown" href="#")
-                  %span.caret
-                %ul.dropdown-menu
-                  - %w(London Paris NewYork Berlin Melbourne Vienna Tokyo Shanghai Moscow).each do |city|
-                    %li
-                      = link_to city, 
-                          url_for_event('refresh', :radius => @radius, :city=>city), 
-                          :remote => true, 
-                          :class => "hide"
-
-
-          %hr
-
-          -# List all found public events
-
-          %ul.unstyled
-            - @public_events.each do |event|
-              %li
-                .row-fluid
-
-                  .span4
-                    .img
-                      .avatar
-                        - if image = event.venue.venue_images.first
-                          = link_to event_path(event.id) do
-                            = image_tag image.image.expiring_url(s3_expiry, :medium)
-
-                  .span8
-
-                    .row-fluid
-
-                      .span12
-
-
-
-                        %h2.event_name
-                          = link_to event.name, event_path(event.id)
-
-                        %p.datetime
-                          = event.format_date
-                          = event.format_time
-                          %a{:href=>ical_event_path(event)}
-                            %small
-                              %i.icon-calendar
-                              iCal
-
-                        %p.description
-                          = event.description
-                        %p
-                          = link_to event.owner.name, user_profile_path(event.owner)
-                          @
-                          = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
-                            'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
-                            'data-title' => event.venue.name
 

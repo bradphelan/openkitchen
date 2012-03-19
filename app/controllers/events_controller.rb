@@ -2,10 +2,33 @@ class EventsController < ApplicationController
   respond_to :html, :js
 
 
+  my_events = proc do |events|
+    events.where{owner_id==my{current_user.id}}
+  end
+
+  public_events = proc do |events|
+    events.where{public==true}
+  end
+
+  invited_to_events = proc do |events|
+    events.joins{invitations}.where{invitations.user_id==my{current_user.id}}
+  end
+
   has_widgets do |root|
-    root << widget("comments/panel", :comments, :event => @event, :params => params)
-    root << widget(:event_guests, :event => @event )
-    root << widget(:public_events, :params => params)
+    # For /events/:id
+    if params[:id]
+      root << widget("comments/panel", :comments, :event => @event, :params => params)
+      root << widget(:event_guests, :event => @event )
+    else
+
+      # For /events
+      if current_user
+        root << widget(:public_events , 'my_events'         , :geolocate => false , :filter => my_events         , :title => "My Events")
+        root << widget(:public_events , 'invited_to_events' , :geolocate => false , :filter => invited_to_events , :title => "Invited to")
+      end
+
+      root << widget(:public_events , 'public_events'     , :geolocate => true  , :filter => public_events     , :title => "Public Events")
+    end
   end
 
   load_and_authorize_resource :except => [:index, :ical, :create, :render_event_response]

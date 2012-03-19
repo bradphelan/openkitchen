@@ -1,10 +1,11 @@
 = widget_div do
   %section.comments#comments{'data-subnav-label' => t("event.edit.menu.comments")}
 
+    %h1= Comment.model_name.human :count => 2
+
     -# Pusher hook
     .pusher{"data-pusher-key"=> Pusher.key, "data-pusher-channel"=>"event.#{@event.id}.comments", "data-pusher-event"=>"new"}
 
-    %h2= Comment.model_name.human :count => 2
     .well
 
       = render({:state => :list}, @comments)

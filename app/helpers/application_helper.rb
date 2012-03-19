@@ -7,13 +7,13 @@ module ApplicationHelper
   def profile_avatar_image(user, version)
 
     dim = case version
-    when :medium
-      [300, 300]
-    when :thumb
-      [100, 100]
-    when :mini_thumb
-      [50, 50]
-    end
+          when :medium
+            [300, 300]
+          when :thumb
+            [100, 100]
+          when :mini_thumb
+            [50, 50]
+          end
 
 
     if user.avatar.file?

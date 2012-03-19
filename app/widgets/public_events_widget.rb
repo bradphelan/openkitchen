@@ -3,34 +3,42 @@ class PublicEventsWidget < ApplicationWidget
   responds_to_event :refresh
 
   has_widgets do
-    params = options[:params]
-    @geolocate = true
+    @refresh_on_geolocate = true
+    @public = options[:public]
+    @geolocate = options[:geolocate]
+    @title = options[:title]
 
-    if params[:latitude] and params[:longitude]
-      @address = Geocoder.search([params[:latitude], params[:longitude]]).first
-    elsif @city = params[:city] || session[:city]
-      @address = Geocoder.search(@city).first
-      @geolocate = false
-    else
-      unless @address = request.location
-        @address = Geocoder.search "Vienna"
+    # Create default relation
+    @events = ::Event.where{}
+
+    if @geolocate
+      if params[:latitude] and params[:longitude]
+        @address = Geocoder.search([params[:latitude], params[:longitude]]).first
+      elsif @city = params[:city] || session[:city]
+        @address = Geocoder.search(@city).first
+        @refresh_on_geolocate = false
+      else
+        unless @address = request.location
+          @address = Geocoder.search "Vienna"
+        end
+      end
+
+      @radius = params[:radius] || session[:radius] || 100
+
+      session[:city]=@city
+      session[:radius]=@radius
+
+      if @address
+        @events = @events.near([@address.latitude, @address.longitude], @radius)
+        
+        # For some reason a search on Tokyo return a result object
+        # with city => nil, state => 'tokyo'
+        @city = @address.city || @address.state || @address.country
       end
     end
 
-    @radius = params[:radius] || session[:radius] || 100
+    @events = self.instance_exec @events, &options[:filter] if options[:filter]
 
-    session[:city]=@city
-    session[:radius]=@radius
-
-    Rails.logger.info [@address.city, @address.country].join(', ')
-
-    if @address
-      @public_events = ::Event.near([@address.latitude, @address.longitude], @radius)
-    end
-
-    # For some reason a search on Tokyo return a result object
-    # with city => nil, state => 'tokyo'
-    @city = @address.city || @address.state || @address.country
   end
 
   def display
