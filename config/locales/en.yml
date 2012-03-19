@@ -95,7 +95,8 @@ en:
       invitations: Invitations
       invitations_title: Events I am invited to
 
-      new: New event
+      new: New
+      new_title: Create a new event!
       new_disabled: Event creation disabled
       new_disabled_content: Please complete registration to create events
     new:

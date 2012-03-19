@@ -3,7 +3,18 @@
   %h1.autofont=t "activerecord.models.event", :count => 2
 
 - if current_user
+
+  - content_for :subnav_items do 
+    %li
+      - if can? :create, Event
+        = link_to t(".new"), new_event_url, :title => t(".new_title")
+      - else
+        %a{:href=>"#", 'title' => t(".new_disabled"), 'data-content' => t('.new_disabled_content') }
+          = t(".new")
+
   = render_widget :my_events
+
+
   = render_widget :invited_to_events
 
 = render_widget :public_events

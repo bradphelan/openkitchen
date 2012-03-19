@@ -111,6 +111,7 @@ de:
       invitations_title: Veranstaltungen, die ich eingeladen bin
 
       new: Neue Veranstaltung
+      new_title: Erstellen Sie ein neues Ereignis!
 
       new_disabled: Erstellen eines Veranstaltung ist deaktiviert
       new_disabled_content: Bitte vollständige Erfassung von Ereignissen erstellen 
