@@ -102,6 +102,9 @@ de:
   public_events:
     display:
       public_events: Öffentliche Veranstaltungen
+      as_host: Als Gastgeber
+      as_guest: As Gast
+      as_public: Publikum
   events:
     index:
       hostings: Als Gastgeber

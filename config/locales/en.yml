@@ -87,6 +87,9 @@ en:
   public_events:
     display:
       public_events: Public events
+      as_host: As host
+      as_guest: As guest
+      as_public: Public
   events:
     index:
       hostings: Hostings

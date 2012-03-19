@@ -21,13 +21,29 @@ class EventsController < ApplicationController
       root << widget(:event_guests, :event => @event )
     else
 
-      # For /events
-      if current_user
-        root << widget(:public_events , 'my_events'         , :geolocate => false , :filter => my_events         , :title => "as Host")
-        root << widget(:public_events , 'invited_to_events' , :geolocate => false , :filter => invited_to_events , :title => "as Guest")
-      end
+      # Note the title is looked up under 
+      #
+      #   public_event.display.*
+      #
+      # scope
+      
+      root << widget(:public_events , 
+                     'my_events', 
+                     :geolocate => false, 
+                     :filter => my_events, 
+                     :title => :as_host ) if current_user
 
-      root << widget(:public_events , 'public_events'     , :geolocate => true  , :filter => public_events     , :title => "Public Events")
+      root << widget(:public_events, 
+                     'invited_to_events', 
+                     :geolocate => false, 
+                     :filter => invited_to_events, 
+                     :title => :as_guest) if current_user
+
+      root << widget(:public_events, 
+                     'public_events',
+                     :geolocate => true,
+                     :filter => public_events, 
+                     :title => :as_public ) 
     end
   end
 
@@ -36,6 +52,7 @@ class EventsController < ApplicationController
   # Apotomo entry point
   load_resource :only => :render_event_response
 
+  # These pages have public components
   skip_before_filter :authenticate_user!, :only => [:index, :render_event_response]
 
   def index

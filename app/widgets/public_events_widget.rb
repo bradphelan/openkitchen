@@ -6,7 +6,7 @@ class PublicEventsWidget < ApplicationWidget
     @refresh_on_geolocate = true
     @public = options[:public]
     @geolocate = options[:geolocate]
-    @title = options[:title]
+    @title = t("public_events.display.#{options[:title]}")
 
     # Create default relation
     @events = ::Event.where{}
