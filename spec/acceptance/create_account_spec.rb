@@ -41,7 +41,7 @@ end
 feature "Creating an event" do
   background do
     @password = "xxxxxx"
-    @create_new_event_selector = "New event"
+    @create_new_event_selector = "New"
     @create_event_selector = "New event"
     visit homepage
   end
@@ -58,7 +58,7 @@ feature "Creating an event" do
     end
 
     Then "I should be on the events page" do
-      page.should have_selector ".index_events"
+      page.should have_selector ".events"
     end
 
     When "I click on 'create new event'" do
@@ -66,7 +66,7 @@ feature "Creating an event" do
     end
 
     Then "nothing should happen as the link is disabled" do
-      page.should have_selector ".index_events"
+      page.should have_selector ".events"
     end
   end
 
@@ -83,7 +83,7 @@ feature "Creating an event" do
     end
 
     Then "I should be on the events page" do
-      page.should have_selector ".index_events"
+      page.should have_selector ".events"
     end
 
     Then "there should be a 'create new event' button" do
