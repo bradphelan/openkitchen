@@ -60,11 +60,13 @@ a.brand
 
 // Below is a load of CSS Voodoo
 .well, form .form-actions
-  background-color: lighten($blue, 54%) !important
+  $color: transparentize($blue, 0.4)
+  background-color: lighten($color, 54%) !important
 
 #background_image
   img
     width: 100% !important
+    min-width: 2560px !important
     position: fixed
     top: 0
     left: 0
@@ -132,3 +134,6 @@ form
 // Fix bootstrap bugs
 img
   max-width: 100%
+
+a
+  color: darken($blue, 20%)

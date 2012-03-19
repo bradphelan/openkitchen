@@ -9,8 +9,8 @@ $small_map_height: 480 / 640 * $small_map_width
 $ok-green: rgb(107,	215,	19)
 
 = nice-bar($color: $ok-green)
-  $stop: transparentize($color, 0.95)
-  $start: lighten($color, 15)
+  $stop: transparentize($color, 0.8)
+  $start: lighten($stop, 15)
   +gradientBar($start, $stop)
   +border-radius(5px)
   color: $grayDarker
@@ -207,10 +207,9 @@ section
         border-right: none
 
         .destroy
-          margin-top: 0.5em
-          margin-bottom: 0.5em
           text-align: right
           margin-left: 1em
+          float: right
         .author
           font-size: $baseFontSize * 0.8
           color: $blue

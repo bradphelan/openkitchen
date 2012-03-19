@@ -1,7 +1,7 @@
 = widget_div do
   %li.comment{id: "comment_#{comment.id}"}
     = profile_avatar_image(comment.user, :mini_thumb)
-    %span.author=comment.user.name
+    %a.author{:href => user_profile_path(comment.user)}=comment.user.name
     %span.body=simple_format h(comment.body)
     %small
       %span.date
@@ -17,4 +17,3 @@
         :confirm => t('confirm') do
         %small
           %i.icon-fire
-          =t :delete
