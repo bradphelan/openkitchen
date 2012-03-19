@@ -11,12 +11,9 @@
       %h1
 
         %span.datetime
-          = @event.format_date
-          = @event.format_time
-          %a.ical{:href=>ical_event_path(@event)}
-            %small
-              %i.icon-calendar
-              iCal
+          %a.ical{:href=>ical_event_path(@event), :title => "iCal"}
+            = @event.format_date
+            = @event.format_time
       .well
 
         .description

@@ -23,8 +23,8 @@ class EventsController < ApplicationController
 
       # For /events
       if current_user
-        root << widget(:public_events , 'my_events'         , :geolocate => false , :filter => my_events         , :title => "My Events")
-        root << widget(:public_events , 'invited_to_events' , :geolocate => false , :filter => invited_to_events , :title => "Invited to")
+        root << widget(:public_events , 'my_events'         , :geolocate => false , :filter => my_events         , :title => "as Host")
+        root << widget(:public_events , 'invited_to_events' , :geolocate => false , :filter => invited_to_events , :title => "as Guest")
       end
 
       root << widget(:public_events , 'public_events'     , :geolocate => true  , :filter => public_events     , :title => "Public Events")

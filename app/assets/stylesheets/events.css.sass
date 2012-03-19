@@ -9,9 +9,17 @@ $small_map_height: 480 / 640 * $small_map_width
 $ok-green: rgb(107,	215,	19)
 
 = nice-bar($color: $ok-green)
-  +gradientBar($color, lighten($color, 5))
+  $stop: transparentize($color, 0.95)
+  $start: lighten($color, 15)
+  +gradientBar($start, $stop)
   +border-radius(5px)
-  color: transparentize($black, 0.3)
+  color: $grayDarker
+  font-size: $baseFontSize * 2
+  line-height: $baseFontSize * 2.5 
+  small
+    font-size: $baseFontSize * 1.5
+    line-height: $baseFontSize * 1.5
+
   padding-left: 0.5em
 
 

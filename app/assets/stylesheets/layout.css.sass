@@ -37,15 +37,13 @@ header#overview
   h1
     text-transform: capitalize
     padding-left: 10px
-    background-image: image-url('header-banner.jpg')
     min-height: $banner-height
     white-space: nowrap
     display: block-inline
-    text-shadow: 6px 6px 6px rgba(0,0,0,0.35)
 
     font-size: 6.5em
     line-height: $banner-height
-    color: transparentize($white, 0.5)
+    color: $white
 
 a.brand
   @media (min-width: 480px)
@@ -64,12 +62,18 @@ a.brand
 .well, form .form-actions
   background-color: lighten($blue, 54%) !important
 
+#background_image
+  img
+    width: 100% !important
+    position: fixed
+    top: 0
+    left: 0
+    z-index: -1
+
 #page
-  background-color: lighten($blue, 35%)
   @media (min-width: 980px)
   @media (max-width: 980px)
   .content
-    background-color: lighten($blue, 30%)
     padding-bottom: $brand-padding
     padding-top: $brand-padding
     @extend .container
