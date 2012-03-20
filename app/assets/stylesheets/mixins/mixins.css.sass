@@ -1,0 +1,31 @@
+= nice-bar
+  color: $grayLighter
+  text-shadow: transparentize($grayDarker, 0.2) 0px 0px 15px
+  +border-radius(5px)
+  border-bottom: 10px solid darken($ok-green, 20%)
+  font-size: $baseFontSize * 2
+  line-height: $baseFontSize * 2.5 
+  small
+    font-size: $baseFontSize * 1.5
+    line-height: $baseFontSize * 1.5
+
+  padding-left: 0.5em
+  background-image: image-url('bar-background.png')
+  +box-shadow()
+
+=nice-bar-darker
+  +nice-bar
+  background-image: image-url('bar-background-dark.png')
+  color: $white
+  text-shadow: transparentize($white, 0.2) 0px 0px 5px
+
+// A subtle horizontal seperator for lists
+=vertical-seperator
+  border-bottom: solid 1px $gray
+  border-top: solid 1px $white
+
+  &:first-child
+    border-top: none
+
+  &:last-child
+    border-bottom: none

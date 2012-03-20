@@ -25,6 +25,20 @@ $banner-height: 150px
     right: 0
     margin: auto
 
+= nice-bar($color: $ok-green)
+  $stop: transparentize($color, 0.8)
+  $start: lighten($stop, 15)
+  +gradientBar($start, $stop)
+  +border-radius(5px)
+  color: $grayDarker
+  font-size: $baseFontSize * 2
+  line-height: $baseFontSize * 2.5 
+  small
+    font-size: $baseFontSize * 1.5
+    line-height: $baseFontSize * 1.5
+
+  padding-left: 0.5em
+
 // TODO Find out why we need to do
 // this to stop the scrolling jiggling
 // when the first element is selected
@@ -98,6 +112,36 @@ form
     margin-top: -6px
     @extend .btn
     @extend .btn-primary
+  input,select
+    width: 100%
+    max-width: 20em
+
+  textarea
+    width: 100%
+
+  fieldset.datetime
+    .date
+      select
+        &:first-child
+          width: 35% !important
+        &:nth-child(2)
+          width: 35% !important
+        &:last-child
+          width: 25% !important
+        clear: none
+
+    .time
+      select
+        clear: none
+        width: 47%
+  // These are not really disabled but they are
+  // not editable
+  input[disabled="disabled"], textarea[disabled="disabled"], select[disabled="disabled"]
+    background-color: white
+    color: black
+
+  input, select
+    width: 100%
 
 section.scroll_buffer
   height: 1200px

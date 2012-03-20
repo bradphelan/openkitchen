@@ -1,20 +1,23 @@
 - @event = _event
 
-%section.well.edit_event#edit{'data-subnav-label' => t("event.edit.menu.edit")}
+%section.edit_event#edit{'data-subnav-label' => t("event.edit.menu.edit")}
 
-  = semantic_form_for @event do |f|
-    .row
-      .span4
-        - disabled = cannot? :edit, @event
-        = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => disabled }
-      .span7
-        - if can? :edit, @event
-          = f.input :description, :as => :text
-        - else
-          = simple_format h(@event.description)
+  %h1=t("event.edit.menu.edit")
+
+  .well.edit_event
+    = semantic_form_for @event do |f|
+      .row
+        .span4
+          - disabled = cannot? :edit, @event
+          = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => disabled }
+        .span7
+          - if can? :edit, @event
+            = f.input :description, :as => :text
+          - else
+            = simple_format h(@event.description)
 
 
 
 
-            
+              
 

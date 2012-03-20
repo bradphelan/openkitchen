@@ -124,8 +124,9 @@ en:
 
   venues:
     show:
-     address: Address
      photos: Photos
+    address:
+     address: Location
 
   event_guests:
     display:

@@ -8,19 +8,6 @@ $small_map_height: 480 / 640 * $small_map_width
 
 $ok-green: rgb(107,	215,	19)
 
-= nice-bar($color: $ok-green)
-  $stop: transparentize($color, 0.8)
-  $start: lighten($stop, 15)
-  +gradientBar($start, $stop)
-  +border-radius(5px)
-  color: $grayDarker
-  font-size: $baseFontSize * 2
-  line-height: $baseFontSize * 2.5 
-  small
-    font-size: $baseFontSize * 1.5
-    line-height: $baseFontSize * 1.5
-
-  padding-left: 0.5em
 
 
 section
@@ -33,12 +20,13 @@ section
     margin-bottom: 0.5em
     background-color: $grayLighter
     padding: 0.2em
-    +nice-bar($grayDarker)
+    +nice-bar-darker
     a
-      color: $yellow
+      color: $white
   ul
     @extend .unstyled
     li
+      +vertical-seperator
       padding-top: 0.5em
       padding-bottom: 0.5em
   .avatar 
@@ -49,7 +37,8 @@ section
   .ical
     display: block
   .description
-    color: $grayLight
+    color: darken($ok-green, 20%)
+    text-shadow: transparentize($yellow, 0.0) 0px 0px 2px
 
 
 #invitation_status
@@ -94,7 +83,7 @@ section
 
   ul.guests
     li
-      @extend hr
+      +vertical-seperator
       margin-top: 0px
       margin-bottom: 0px
       padding-bottom: 0.5em
@@ -121,45 +110,16 @@ section
         img
           height: auto
           width: auto
-          border: 5px green solid
           +border-radius(5px)
           +box-shadow()
 
         
     @extend .unstyled
 
-  .edit_event
-    // These are not really disabled but they are
-    // not editable
-    input[disabled="disabled"], textarea[disabled="disabled"], select[disabled="disabled"]
-      background-color: white
-      color: black
-
-    input, select
-      width: 100%
-
+  .edit_event, .new_event
     a.map
       img
         display: block
-
-    textarea
-      width: 100%
-
-    fieldset.datetime
-      .date
-        select
-          &:first-child
-            width: 35%
-          &:nth-child(2)
-            width: 35%
-          &:last-child
-            width: 25%
-          clear: none
-
-      .time
-        select
-          clear: none
-          width: 47%
 
 
   input.resource_quantity_button
@@ -195,14 +155,14 @@ section
   .comments
     textarea
       width: 100%
-      height: 5em
+      height: 1em
 
     ul
       @extend .unstyled
       li.comment
         padding-top: 5px
         padding-bottom: 5px
-        @extend .vertical-seperator
+        +vertical-seperator
         border-left: none
         border-right: none
 
