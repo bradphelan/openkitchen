@@ -10,7 +10,7 @@ class Comments::PanelWidget < ApplicationWidget
       @comments = @event.root_comments.includes(:user, :commentable).order "created_at ASC"
       @invitation = @event.invitation_for_user current_user if current_user
       @comments.each do |comment|
-        self << widget("comments/comment", "comment-#{comment.id}", :comment => comment)
+        self << widget("comments/comment", "comment_#{comment.id}", :comment => comment)
       end
     end
   end
@@ -105,7 +105,7 @@ class Comments::PanelWidget < ApplicationWidget
   private
 
   def render_comment_for_js! comment
-    render_widget_for_js! "comments/comment", "comment-#{comment.id}", :comment => comment
+    render_widget_for_js! "comments/comment", "comment_#{comment.id}", :comment => comment
   end
 
 end

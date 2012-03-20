@@ -1,19 +1,18 @@
-= widget_div do
-  %li.comment{id: "comment_#{comment.id}"}
-    = profile_avatar_image(comment.user, :mini_thumb)
-    %a.author{:href => user_profile_path(comment.user)}=comment.user.name
-    %span.body=simple_format h(comment.body)
-    %small
-      %span.date
-        =distance_of_time_in_words_to_now comment.created_at, true
-        ago
-    - if can? :destroy, comment
-      = link_to url_for_event(:destroy, 
-        :source => widget_id, 
-        :comment_id => comment.id), 
-        :remote => true, 
-        class: "destroy", 
-        title: t('comment.remove'), 
-        :confirm => t('confirm') do
-        %small
-          %i.icon-fire
+= widget_tag :li, :class => 'comment' do
+  = profile_avatar_image(comment.user, :mini_thumb)
+  %a.author{:href => user_profile_path(comment.user)}=comment.user.name
+  %span.body=simple_format h(comment.body)
+  %small
+    %span.date
+      =distance_of_time_in_words_to_now comment.created_at, true
+      ago
+  - if can? :destroy, comment
+    = link_to url_for_event(:destroy, 
+      :source => widget_id, 
+      :comment_id => comment.id), 
+      :remote => true, 
+      class: "destroy", 
+      title: t('comment.remove'), 
+      :confirm => t('confirm') do
+      %small
+        %i.icon-fire

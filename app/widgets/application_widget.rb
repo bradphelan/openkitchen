@@ -109,4 +109,12 @@ class ApplicationWidget < Apotomo::Widget
     buffer.to_s
   end
 
+  end
+
+module Apotomo::Rails::ViewHelper
+  def widget_tag(tag, options={}, &block)
+    options.reverse_merge!(:id => widget_id) 
+    content_tag(tag, options, &block)
+  end
+
 end
