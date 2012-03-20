@@ -4,10 +4,7 @@
   .info
 
     %span.name
-      - if can? :read, invitation
-        = link_to invitation.user.name, user_profile_path(invitation.user)
-      - else
-        = invitation.user.name
+      = link_to invitation.user.name, user_profile_path(invitation.user)
 
     %span.status
       = invitation.status
