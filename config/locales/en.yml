@@ -90,6 +90,9 @@ en:
       as_host: As host
       as_guest: As guest
       as_public: Public
+    geolocate:
+      refresh_html5_geolocation: Refresh browser GPS location
+      
   events:
     index:
       hostings: Hostings

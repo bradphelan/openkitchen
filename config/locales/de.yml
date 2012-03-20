@@ -105,6 +105,8 @@ de:
       as_host: Als Gastgeber
       as_guest: As Gast
       as_public: Publikum
+    geolocate:
+      refresh_html5_geolocation: Aktualisieren Browser GPS-Position
   events:
     index:
       hostings: Als Gastgeber
@@ -139,7 +141,7 @@ de:
 
   event_guests:
     display:
-      public_seats_left: public seats left.
+      public_seats_left: öffentliche Plätze frei
         
   event_guests_widget:
     flash:

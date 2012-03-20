@@ -1,9 +1,10 @@
 class PublicEventsWidget < ApplicationWidget
 
   responds_to_event :refresh
+  responds_to_event :refresh_html5_geolocation
 
   has_widgets do
-    @refresh_on_geolocate = true
+    @require_html5_geolocate = true
     @public = options[:public]
     @geolocate = options[:geolocate]
     @title = t("public_events.display.#{options[:title]}")
@@ -14,9 +15,10 @@ class PublicEventsWidget < ApplicationWidget
     if @geolocate
       if params[:latitude] and params[:longitude]
         @address = Geocoder.search([params[:latitude], params[:longitude]]).first
+        @require_html5_geolocate = false
       elsif @city = params[:city] || session[:city]
         @address = Geocoder.search(@city).first
-        @refresh_on_geolocate = false
+        @require_html5_geolocate = false
       else
         unless @address = request.location
           @address = Geocoder.search "Vienna"
@@ -25,8 +27,6 @@ class PublicEventsWidget < ApplicationWidget
 
       @radius = params[:radius] || session[:radius] || 100
 
-      session[:city]=@city
-      session[:radius]=@radius
 
       if @address
         @events = @events.near([@address.latitude, @address.longitude], @radius)
@@ -35,14 +35,29 @@ class PublicEventsWidget < ApplicationWidget
         # with city => nil, state => 'tokyo'
         @city = @address.city || @address.state || @address.country
       end
+
+      session[:city]=@city
+      session[:radius]=@radius
     end
 
     @events = self.instance_exec @events, &options[:filter] if options[:filter]
 
   end
+  
+  def setup_geolocate
+  end
 
   def display
     render
+  end
+
+  def refresh_html5_geolocation
+    authorize! :refresh, PublicEventsWidget
+    session[:city]=nil
+    @require_html5_geolocate=true
+    @city = nil
+    @events = []
+    replace "##{widget_id}", :view => :display
   end
 
   def refresh

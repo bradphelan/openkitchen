@@ -1,14 +1,13 @@
 if navigator.geolocation
 
-  position_cache = null
-
   jQuery.geolocate = (cb)=>
 
     successFn = (position)->
-      position_cache = position
       cb(position)
 
     errorFn = (error)->
+      $("#loading").hide()
+      console.log "hide err"
       (error) ->
           switch error.code
             when error.TIMEOUT
@@ -20,13 +19,11 @@ if navigator.geolocation
             when error.UNKNOWN_ERROR
               console.log "Geo::Unknown error"
 
-    if position?
-      cb(position)
-    else
-      navigator.geolocation.getCurrentPosition successFn, errorFn,
-        timeOut: 10 * 1000 * 1000
-        enableHighAccuracy: false
-        maximumAge: 0
+
+    navigator.geolocation.getCurrentPosition successFn, errorFn,
+      timeOut: 10 * 1000 * 1000
+      enableHighAccuracy: false
+      maximumAge: 10 * 60 * 1000  # 10 minutes
 
 else
   console.log "Geolocation is not supported by this browser"
@@ -46,27 +43,31 @@ add_href_params = (selector, new_params)=>
 # Unobtrusively add Geolocation information to anchor elements
 # that need it.
 geolocate = (cb = null)=>
-  $.geolocate (location)=>
-    add_href_params "a[data-href-geolocate=true]",
-      latitude: location.coords.latitude
-      longitude: location.coords.longitude
+  # Only geolocate where required
+  if $("a[data-href-geolocate=true]").length > 0
 
-    if cb?
-      cb()
+    $.geolocate (location)=>
+      add_href_params "a[data-href-geolocate=true]",
+        latitude: location.coords.latitude
+        longitude: location.coords.longitude
+
+      if cb?
+        cb()
 
 #
 # When geo locate is done find all marked anchors
 # and execute thier href
 #
 georefresh = =>
-    $("a[data-trigger-on-geolocate=true]").each (index, anchor)=>
-      $.post($(anchor).attr("href"))
+  $("a[data-trigger-on-geolocate=true]").each (index, anchor)=>
+    $.post($(anchor).attr("href"))
 
 $(document).ready =>
   geolocate =>
     georefresh()
 
-$(document).ajaxComplete ->
-  geolocate()
+$(document).ajaxComplete =>
+  geolocate =>
+    georefresh()
 
 

@@ -1,15 +1,14 @@
 -# This is a hidden hook for the geolocator to
 -# refresh when it has aquired the location. It
 -# should not always run hence the condition on
--# @refresh_on_geolocate
+-# @require_html5_geolocate
 
 = link_to "Refresh", 
   url_for_event('refresh', :radius => @radius), 
   :remote => true, 
-  :"data-href-geolocate"=>true, 
-  :"data-trigger-on-geolocate"=>@refresh_on_geolocate,
+  :"data-href-geolocate"=>@require_html5_geolocate, 
+  :"data-trigger-on-geolocate"=>@require_html5_geolocate,
   :class => "hide"
-
 
 .inline
   Within
@@ -30,7 +29,7 @@
             = link_to km, 
                  url_for_event('refresh', :radius => km, :city=>@city), 
                 :remote => true, 
-                :"data-href-refresh_on_geolocate"=>@refresh_on_geolocate, 
+                :"data-href-require_html5_geolocate"=>@require_html5_geolocate, 
                 :class => "hide"
   of
 
@@ -54,3 +53,6 @@
                 url_for_event('refresh', :radius => @radius, :city=>city), 
                 :remote => true, 
                 :class => "hide"
+
+  %a{:title=>t(".refresh_html5_geolocation"), :href=>url_for_event('refresh_html5_geolocation', :radius => @radius), 'data-remote' => "true"}
+    %i.icon-refresh()
