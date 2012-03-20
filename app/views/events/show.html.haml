@@ -1,6 +1,11 @@
 - content_for :subnav_header do
 
   %h1.autofont=@event.name.capitalize
+  .well
+    %h2
+      =link_to @event.owner.name, :url => user_profile_path(@event.owner)
+      @
+      =link_to @event.venue.name, @event.venue
 
 #show_event_page
 

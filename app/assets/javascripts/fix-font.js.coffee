@@ -26,10 +26,19 @@ fixfonts = ->
       resizer.css
         'font-size':  "#{size}px"
 
+    newSize = size/scaler
+
     $(element).css
-        'font-size': "#{size / scaler }px"
+        'font-size': "#{newSize}px"
+        'line-height': "#{newSize}px"
+        'height':"#{newSize}px"
 
     resizer.remove()
+
+    $(element).next("h2").css
+        'font-size': "#{newSize / 2}px"
+        'line-height': "#{newSize / 2}px"
+
 
 $(document).ready =>
   fixfonts()
