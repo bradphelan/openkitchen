@@ -17,7 +17,7 @@
 #
 
 class Venue < ActiveRecord::Base
-  attr_accessible :venue_images_attributes, :name, :street, :city, :country, :timezone, :postcode
+  attr_accessible :venue_images_attributes, :name, :description, :street, :city, :country, :timezone, :postcode
 
   has_many :user_venue_managements, :dependent => :destroy
   has_many :managers, :through => :user_venue_managements, :source => :manager, :class_name => "User"
@@ -29,6 +29,7 @@ class Venue < ActiveRecord::Base
   validates_length_of :city, :maximum => 80
   validates_length_of :country, :maximum => 80
   validates_length_of :country, :maximum => 20
+  validates_length_of :description, :maximum => 4096 # characters
 
   validates_numericality_of :latitude, :allow_blank => true
   validates_numericality_of :longitude, :allow_blank => true

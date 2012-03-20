@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316080852) do
+ActiveRecord::Schema.define(:version => 20120319165735) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(:version => 20120316080852) do
   end
 
   create_table "venues", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "name"
     t.string   "timezone"
     t.string   "street"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20120316080852) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
+    t.text     "description", :default => ""
   end
 
 end

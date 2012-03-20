@@ -15,5 +15,7 @@
           =@venue.country
           %br
           =@venue.postcode
+        %hr
+        = simple_format @venue.description
       .span6
         = render :partial => "events/map"
