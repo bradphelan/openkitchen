@@ -52,8 +52,12 @@ feature "Venues", :js => true do
 
     end
 
-    Then "I shall be back on the profile page and the venue should be there" do
-      page.should have_selector "#page_profiles_edit"
+    When "I visit my profile page again" do
+      click_on 'Profile'
+    end
+
+    Then "The updated venue information should be there" do
+      page.should have_content "That names sux"
     end
 
   end

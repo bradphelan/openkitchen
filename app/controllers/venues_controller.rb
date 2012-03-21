@@ -16,7 +16,7 @@ class VenuesController < ApplicationController
 
   def update
     @venue.update_attributes params[:venue]
-    respond_with @venue
+    respond_with @venue, :location => edit_venue_path(@venue)
   end
 
   def show

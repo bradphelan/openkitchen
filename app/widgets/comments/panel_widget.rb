@@ -56,7 +56,7 @@ class Comments::PanelWidget < ApplicationWidget
     
     # This needs to be done or the subscription state is
     # not reloaded automatically
-    @invitation.reload
+    @invitation.reload if @invitation
 
     #
     # Append the comment to the list and clear the form

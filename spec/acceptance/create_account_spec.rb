@@ -192,7 +192,7 @@ feature "Inviting somebody to an event" do
 
     And "fill in an email address of a guest to invite and click send" do
       within "form.invite-guest" do
-        fill_in "email", :with => @guest_email
+        fill_in "invite_guest", :with => @guest_email
         click_on "Invite"
       end
     end

@@ -1,5 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
+require 'bluecloth'
+
 module Sass
   module Rails
     class CssCompressor

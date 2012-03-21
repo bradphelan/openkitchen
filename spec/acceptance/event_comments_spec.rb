@@ -24,7 +24,9 @@ feature "Add comment to event", :js => true do
     And "Enter a comment and click on 'comment'" do
       within "#comments form" do
         fill_in "comment_body", :with => @comment1
-        click_button 'comment_submit_action'
+        wait_until {
+          find_field('comment_body').native.submit()
+        }
       end
     end
 
@@ -37,7 +39,9 @@ feature "Add comment to event", :js => true do
     And "I enter another comment and click on 'comment'" do
       within "#comments form" do
         fill_in "comment_body", :with => @comment2
-        click_button 'comment_submit_action'
+        wait_until {
+          find_field('comment_body').native.submit()
+        }
       end
     end
 

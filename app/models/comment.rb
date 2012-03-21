@@ -36,7 +36,12 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   after_create do
-    commentable.invitation_for_user(user).update_comment_subscription_state!
+    invitation = commentable.invitation_for_user(user)
+    if invitation
+      # Public events allow comments but you can't update
+      # the watch status. TODO Fix this?
+      invitation.update_comment_subscription_state!
+    end
   end
   after_commit :on => :create do
     # This has to be done here. If done in the after_create block

@@ -78,7 +78,7 @@ class Invitation < ActiveRecord::Base
   # currently 'auto' then move it to 'subscribed' and save, otherwise do
   # nothing.
   def update_comment_subscription_state!
-    if event.root_comments.for_user(user).count > 0 and comment_subscription_state == 'auto'
+    if comment_subscription_state == 'auto' and event.root_comments.for_user(user).count > 0
       subscribe_for_comments!
     end
   end
