@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319165735) do
+ActiveRecord::Schema.define(:version => 20120321164513) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20120319165735) do
     t.boolean  "automatic_public_invitation_approval", :default => false
   end
 
+  add_index "events", ["owner_id"], :name => "by_owner"
   add_index "events", ["venue_id"], :name => "index_events_on_venue_id"
 
   create_table "invitations", :force => true do |t|
@@ -57,6 +58,9 @@ ActiveRecord::Schema.define(:version => 20120319165735) do
     t.boolean  "public",                     :default => false
     t.boolean  "public_approved",            :default => false
   end
+
+  add_index "invitations", ["event_id"], :name => "by_event"
+  add_index "invitations", ["user_id", "event_id"], :name => "by_user_and_event", :unique => true
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"

@@ -42,6 +42,15 @@ class User < ActiveRecord::Base
 
   has_many :invitations, :dependent => :destroy
 
+  # The people who I have been invited to an event with
+  has_many :guest_peers,    :class_name => "User", :through => :events_as_guest, :source => :invitees, :uniq => true
+
+  # The people who have invited me to an event
+  has_many :event_hosts,    :class_name => "User", :through => :events_as_guest, :source => :owner, :uniq => true 
+
+  # The people who I have invited to an event
+  has_many :event_invitees, :class_name => "User", :through => :events_as_owner, :source => :invitees, :uniq => true
+
   # TODO Perhapps if the last manager of a venue is destroyed then
   # the venue should also be destroyed or it will be orphaned. This
   # will happen more often than not if the primary venue of the user
@@ -95,7 +104,27 @@ class User < ActiveRecord::Base
 
   # Return all my friends, ( being those who I have invited at least once to a party)
   def friends
-    User.joins{events_as_guest}.where{events_as_guest.owner_id==my{id}}.where{users.id != my{id}}
+
+
+    components = []
+
+
+    # Friends as guests
+    components << guest_peers
+
+    # Friends as hosts
+    components << event_hosts
+
+    # Friends as co-guests
+    components << event_invitees
+
+    # Combine all queries together as a disjunction over the above
+    # components
+    User.where do
+      components.map { |c| id.in c.select{id} }.inject { |s,i| s | i }
+    end
+
+
   end
 
   def friends_emails
