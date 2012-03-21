@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require bootstrap
 //= require pusher
 //= require_tree .

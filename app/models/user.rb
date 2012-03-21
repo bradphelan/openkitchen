@@ -102,6 +102,17 @@ class User < ActiveRecord::Base
     friends.map &:email
   end
 
+  def invite_typeahead_data
+    friends.map do |user|
+      {
+        :name => user.name,
+        :email => user.email,
+        :id => user.id
+      }
+    end
+
+  end
+
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     
     data = access_token.extra.raw_info

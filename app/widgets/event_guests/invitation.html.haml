@@ -14,8 +14,8 @@
 
         - disabled = invitation.user.id == @event.owner.id ? "disabled" : nil
 
-        = link_to invitation_path(invitation), 
-          :method => :delete, 
+        = link_to url_for_event(:remove_user_for_event, :guest_invitation_id => invitation.id),
+          :remote => true,
           :class => "btn btn-danger #{disabled}", 
           :confirm => t("confirm"),
           :title => t("invitation.remove") do

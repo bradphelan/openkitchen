@@ -3,6 +3,7 @@ class EventGuestsWidget < ApplicationWidget
   responds_to_event :register_any_email_for_event
   responds_to_event :register_non_existing_user_for_event
   responds_to_event :register_current_user_for_event
+  responds_to_event :remove_user_for_event
 
   #
   # Setup
@@ -20,14 +21,23 @@ class EventGuestsWidget < ApplicationWidget
     render
   end
 
-  def invitation i
-    render :view => :invitation, :locals => { :invitation => i }
-  end
 
   #
   # Events
   #
 
+
+  def remove_user_for_event
+    guest_invitation = Invitation.find params[:guest_invitation_id]
+    authorize! :destroy, guest_invitation
+    guest_invitation.destroy
+
+    render_buffer do |b|
+      b.replace "##{widget_id}", :state => :display
+
+    end
+
+  end
 
   def register_current_user_for_event
     authorize! :register_current_user_for_event, @event
@@ -69,17 +79,24 @@ class EventGuestsWidget < ApplicationWidget
   def register_any_email_for_event
     authorize! :register_any_email_for_event, @event
 
-    email = params[:invite][:email] 
+    guest_id = params[:invite][:guest_id]
 
-    return unless email
+    guest = @event.owner.friends.where{id==guest_id}.first
+
+    unless guest
+      return unless params[:invite][:guest]
+      guest = @event.owner.friends.find_or_create_by_email params[:invite][:guest] 
+    end
 
     # Event owner can invite and create users
-    guest = User.find_or_create_by_email email
     invitation = @event.invite guest
 
     render_buffer do |b|
       b.replace "##{widget_id}", :view => :display
-      b.replace "section#invite", :text => ""
+      b.render :text => %Q%
+        $("input[name='invite[guest]']").focus();
+      %
+
     end
 
   end

@@ -1,10 +1,15 @@
 -# @param form
 
-= form.input :email, 
-  :label => 'email',  
+-# The id of the selection will go here
+= form.input :guest_id, 
+  :as => :hidden
+
+= form.input :guest, 
+  :label => false,  
   :as => :email, 
   :input_html => { :value => "", 
-    :placeholder => "email address", 
-    "data-provide" => "typeahead", 
-    "data-source"=> signed_in? ? current_user.friends_emails.to_json : [], 
+    :placeholder => "name or email address", 
+    "data-provide" => "genericTypeahead", 
+    "data-source"=> signed_in? ? current_user.invite_typeahead_data.to_json : [], 
+    "data-result-input-name" => "invite[guest_id]",
     :autocomplete => 'off' }

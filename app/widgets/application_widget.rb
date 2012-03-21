@@ -27,7 +27,7 @@ class ApplicationWidget < Apotomo::Widget
   # resources are recovered correctly when 
   # the event is executed.
   def url_for_event type, options={}
-    p = {}
+    p = HashWithIndifferentAccess.new
     parent_controller.request.parameters.each do |k,v|
       if k.end_with? "_id" or k == "id"
         p[k] = v
@@ -95,7 +95,7 @@ class ApplicationWidget < Apotomo::Widget
     end
 
     def render *args
-      @buffer << @widget.render(@args)
+      @buffer << @widget.render(*args)
     end
 
     def to_s
