@@ -65,6 +65,7 @@ gem "koala"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"
+gem "underscore-rails"
 gem "squeel"
 gem "apotomo"
 
