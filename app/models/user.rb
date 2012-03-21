@@ -135,7 +135,6 @@ class User < ActiveRecord::Base
     friends.map do |user|
       {
         :name => user.name,
-        :email => user.email,
         :id => user.id
       }
     end
