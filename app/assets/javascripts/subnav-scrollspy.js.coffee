@@ -30,6 +30,8 @@ $(document).ready =>
 
   $(".subnav").on "click", "a", ->
     id = $(this).attr("href")
+    if not id.match(/^#/)
+      return true
     offset = parseInt $(id).attr('data-offset')
     offset = if isNaN(offset) then 0 else offset
     o = $("#subnavbar ul").outerHeight()
