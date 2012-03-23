@@ -9,7 +9,7 @@
             - if event.venue
               - if image = event.venue.venue_images.first
                 = link_to event_path(event.id) do
-                  = image_tag image.image.expiring_url(s3_expiry, :medium)
+                  = image_tag image.image.expiring_url(s3_expiry, :small)
 
         .span8
 

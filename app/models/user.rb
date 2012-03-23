@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   has_attached_file :avatar, 
-    :styles => { :medium => "300x300#", :thumb => "100x100#", :mini_thumb => "50x50#" },
+    :styles => ImageSizes.standard_sizes_hash,
     :default_url => "/assets/chef.jpg"
 
   validates_attachment_content_type :avatar, 
