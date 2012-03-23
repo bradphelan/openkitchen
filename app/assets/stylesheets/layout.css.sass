@@ -45,7 +45,14 @@ header#overview
     font-size: 6.5em
     line-height: $banner-height
     color: $ok-green
-    +opacity(0.5)
+    margin-left: -1000px
+    padding-left: 1000px
+    margin-right: -1000px
+    padding-right: 1000px
+    background-color: darken($ok-green, 30%)
+    border-bottom: 5px solid darken($ok-green, 25%)
+    margin-bottom: 0px
+    text-align: left
 
   h2
     text-transform: capitalize
@@ -53,8 +60,41 @@ header#overview
     white-space: nowrap
     display: block-inline
     font-size: 2.5em
-    color: $white
+    color: $grayLighter
+    a
+      color: $grayLighter
     margin-bottom: 0.2em
+    margin-left: -1000px
+    padding-left: 1000px
+    margin-right: -1000px
+    padding-right: 1000px
+    background-color: $red
+    border-top: 5px solid lighten($red, 15%)
+    border-bottom: 5px solid lighten($red, 25%)
+    margin-top: 0px
+    margin-bottom: 0px
+    text-align: right
+
+  .subnav
+    margin-left: -1000px
+    padding-left: 1000px
+    margin-right: -1000px
+    padding-right: 1000px
+    margin-top: 0px
+    +gradientBar($blue, lighten($blue, 10%))
+    border-top: 5px solid darken($blue, 15%)
+    border-bottom: 5px solid darken($blue, 10%)
+    ul
+      a
+        +gradientBar($blue, lighten($blue, 10%))
+        font-weight: bold
+        color: darken($green, 30%)
+        &:hover
+          +gradientBar($blue, lighten($blue, 20%))
+
+section
+  h1:first-child
+    +nice-bar
 
 a.brand
   @media (min-width: 480px)
@@ -154,7 +194,7 @@ form
   .help-inline
     color: $gray
     @extend small
-    margin-top: -15px
+    margin-top: -5px
     padding-top: 0px
 
 .impressum

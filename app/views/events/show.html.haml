@@ -1,11 +1,10 @@
 - content_for :subnav_header do
 
   %h1.autofont=@event.name.capitalize
-  .well
-    %h2
-      =link_to @event.owner.name, :url => user_profile_path(@event.owner)
-      @
-      =link_to @event.venue.name, @event.venue
+  %h2
+    =link_to @event.owner.name, :url => user_profile_path(@event.owner)
+    @
+    =link_to @event.venue.name, @event.venue
 
 #show_event_page
 
@@ -24,13 +23,15 @@
         .description
           - vi = @event.venue.venue_images.first
           - if vi
-            = image_tag vi.image.expiring_url(s3_expiry, :thumb)
+            = image_tag vi.image.expiring_url(s3_expiry, :small)
 
           %p= @event.description
 
         %hr
 
         = render :partial => 'status'
+
+        .clearfix
 
     = render :partial => "venues/address"
 
