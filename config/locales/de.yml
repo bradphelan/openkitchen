@@ -12,12 +12,16 @@ de:
   create: Schaffen
   default_venue_name: Mein Küche
   edit: Bearbeiten
+  show: Zeigen
   confirm: Sicher?
   top: Oben
   bottom: Boden
   profile: Profil
   subscribed: Abonniert
   not_subscribed: Nicht abonniert
+  manager:
+    one: Manager
+    other: Manager
 
   #
   #

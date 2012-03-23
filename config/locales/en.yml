@@ -19,6 +19,9 @@ en:
   profile: Profile
   subscribed: Subscribed
   not_subscribed: Not subscribed
+  manager:
+    one: Manager
+    other: Managers
 
 
   #
@@ -51,6 +54,7 @@ en:
       venue:
         one: Venue
         other: Venues
+
 
   comment:
     title: Comments

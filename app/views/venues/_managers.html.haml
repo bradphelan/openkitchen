@@ -1,0 +1,19 @@
+-# @param user
+%section.venues.edit#managers{'data-subnav-label' => t("manager", :count => 2)}
+  %h1=t("manager", :count => 2)
+  .well
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr 
+          %th=User.model_name.human
+          %th=UserVenueManagement.human_attribute_name :role
+      - @venue.user_venue_managements.each do |uvm|
+        - venue = uvm.venue
+        %tbody
+          %tr
+            %td 
+              = link_to  user_profile_path(uvm.manager) do
+                = profile_avatar_image(uvm.manager, :mini_thumb)
+                = uvm.manager.name
+            %td= uvm.role
+            
