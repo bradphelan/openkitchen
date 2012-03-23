@@ -5,7 +5,7 @@
     %table.table.table-striped.table-bordered
       %thead
         %tr 
-          %th=User.model_name.human
+          %th=User.human_attribute_name :name
           %th=UserVenueManagement.human_attribute_name :role
       - @venue.user_venue_managements.each do |uvm|
         - venue = uvm.venue
