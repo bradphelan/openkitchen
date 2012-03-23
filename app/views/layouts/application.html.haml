@@ -90,10 +90,11 @@
 
             %header.jumbotron.subhead#overview
               = yield :subnav_header
-              #subnavbar.subnav
-                %ul.nav.nav-pills
-                  = yield :subnav_items
-              #subnavbar_padding
+              - if content_for :subnav_items
+                #subnavbar.subnav
+                  %ul.nav.nav-pills
+                    = yield :subnav_items
+                #subnavbar_padding
 
 
             #page_body
