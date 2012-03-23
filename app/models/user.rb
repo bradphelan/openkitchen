@@ -57,6 +57,9 @@ class User < ActiveRecord::Base
   # , being their kitchen is not deleted if the user account is.
   has_many :user_venue_managements, :dependent => :destroy
 
+  # Delete commentable subscriptions when a user is deleted
+  has_many :commentable_subscriptions, :dependent => :destroy
+
   has_many :venues, :through => :user_venue_managements do
     def create *params, &block
       UserVenueManagement.with_scope :create => { :role => :owner } do

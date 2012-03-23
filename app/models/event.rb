@@ -41,6 +41,7 @@ class Event < ActiveRecord::Base
   end
 
   acts_as_commentable
+  include CommentSubscriber
 
   validates_presence_of :timezone, :name, :datetime
 
@@ -104,6 +105,7 @@ class Event < ActiveRecord::Base
     invitation.status = "accepted"
     invitation.save!
   end
+
 
   def self.future_events
     where{datetime > Time.zone.now}

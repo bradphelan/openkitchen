@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321164513) do
+ActiveRecord::Schema.define(:version => 20120323091357) do
+
+  create_table "commentable_subscriptions", :force => true do |t|
+    t.integer "commentable_id"
+    t.string  "commentable_type"
+    t.integer "user_id"
+    t.boolean "subscribed"
+  end
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -53,10 +60,9 @@ ActiveRecord::Schema.define(:version => 20120321164513) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
-    t.string   "status",                     :default => "pending"
-    t.string   "comment_subscription_state", :default => "auto"
-    t.boolean  "public",                     :default => false
-    t.boolean  "public_approved",            :default => false
+    t.string   "status",          :default => "pending"
+    t.boolean  "public",          :default => false
+    t.boolean  "public_approved", :default => false
   end
 
   add_index "invitations", ["event_id"], :name => "by_event"

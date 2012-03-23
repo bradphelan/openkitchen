@@ -34,55 +34,6 @@ class Invitation < ActiveRecord::Base
   validates_inclusion_of :public_approved, 
     :in => [true, false]
 
-
-  #
-  #
-  # COMMENT SUBSCRIPTIONS
-  #
-  #
-  #
-
-  COMMENT_SUBSCRIPTION_STATES = %w(
-    auto
-    subscribed
-    unsubscribed
-  )
-
-  validates_inclusion_of :comment_subscription_state, :in => COMMENT_SUBSCRIPTION_STATES
-
-  def subscribed_for_comments?
-    comment_subscription_state == "subscribed"
-  end
-
-  def subscribe_for_comments!
-    self.comment_subscription_state = 'subscribed'
-    save!
-  end
-
-  def toggle_subscription!
-    if self.comment_subscription_state == 'subscribed'
-      self.comment_subscription_state = 'unsubscribed'
-    else
-      self.comment_subscription_state = 'subscribed'
-    end
-    save!
-  end
-
-  def unsubscribe_for_comments!
-    self.comment_subscription_state = 'unsubscribed'
-    save!
-  end
-
-  #
-  # If the invitation has made a comment and the comment_subscription_state is
-  # currently 'auto' then move it to 'subscribed' and save, otherwise do
-  # nothing.
-  def update_comment_subscription_state!
-    if comment_subscription_state == 'auto' and event.root_comments.for_user(user).count > 0
-      subscribe_for_comments!
-    end
-  end
-
   attr_accessible :status
 
   STATUSES = %w(

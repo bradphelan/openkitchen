@@ -19,6 +19,10 @@
 class Comment < ActiveRecord::Base
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
 
+  # Note commentable requires a #name attribute for
+  # mailing and a routed URL that url_for(comment.commentable)
+  # will work with
+  
   belongs_to :commentable, :polymorphic => true
   
   validates_presence_of :body
@@ -36,13 +40,9 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   after_create do
-    invitation = commentable.invitation_for_user(user)
-    if invitation
-      # Public events allow comments but you can't update
-      # the watch status. TODO Fix this?
-      invitation.update_comment_subscription_state!
-    end
+    commentable.subscribe_to_comments_if_unset user
   end
+
   after_commit :on => :create do
     # This has to be done here. If done in the after_create block
     # then it is possible that transactions are screwed up.

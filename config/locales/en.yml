@@ -16,6 +16,9 @@ en:
   bottom: Bottom
   public: Public
   profile: Profile
+  subscribed: Subscribed
+  not_subscribed: Not subscribed
+
 
   #
   #

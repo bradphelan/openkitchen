@@ -27,13 +27,13 @@ class Comments::PanelWidget < ApplicationWidget
     @invitation = @event.invitation_for_user current_user
 
     authorize! :update, @invitation
-    @invitation.toggle_subscription!
+
+    @invitation.event.toggle_comment_subscription @invitation.user
 
     #
     # Append the comment to the list and clear the form
     #
 
-    s = @invitation.subscribed_for_comments?
     replace "##{widget_id} .subscribe", :view => :comment_button
   end
 

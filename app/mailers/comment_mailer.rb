@@ -10,23 +10,26 @@ class CommentMailer < ActionMailer::Base
 
   def self.mail_subscribers! comment_id
       comment = Comment.find comment_id
+      commentable = comment.commentable
 
-      event = comment.commentable
+      subscriptions = commentable.commentable_subscriptions.where{subscribed==true}
 
-      event.invitations.each do |invitation|
-        if invitation.subscribed_for_comments? and comment.user != invitation.user
-          CommentMailer.comment_email(comment, invitation).deliver
+      subscriptions.each do |subscription|
+        if comment.user != subscription.user
+          CommentMailer.comment_email(comment, subscription).deliver
         end
       end
        
   end
 
-  def comment_email comment, invitation
+  def comment_email comment, subscription
     @comment = comment
-    @invitation = invitation
-    @event = @invitation.event
-    mail(:to => @invitation.user.email, 
-         :subject => "New comment on event '#{@event.name}' from #{@comment.user.name}",
+    @commentable = comment.commentable
+    @subscription = subscription
+    @commentable_name = @commentable.class.model_name.human
+
+    mail(:to => @subscription.user.email, 
+         :subject => "New comment on #{@commentable_name}/#{@commentable.id}' from #{@comment.user.name}",
          :from => "concierge@openkitchen.at" )
   end
 
