@@ -51,6 +51,7 @@ $(document).ready =>
   #
   $win = $(window)
   $nav = $(".subnav")
+  return unless $nav.find("ul li").length > 0
   $nav_pad = $("#subnavbar_padding")
   navTop = $(".subnav").length and $(".subnav").offset().top - 40
   isFixed = 0
