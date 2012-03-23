@@ -80,7 +80,7 @@ module OpenKitchen
     config.app_generators.stylesheet_engine :sass
 
     # Needed for Girl Friday
-    # config.threadsafe!
+    config.threadsafe!
 
     host = case Rails.env
     when 'production'
