@@ -3,14 +3,15 @@
 // of the other elements
 = avatar($pattern, $width, $height, $scale)
   &.avatar.#{$pattern}
-    width: $width
-    height: $height
     position: relative
+    width: $width
 
 img
-  +avatar(medium, 300px, 300px, 2)
+  +avatar(vlarge, 1200px, 900px, 2) 
+  +avatar(medium, 800px, 600px, 2)
+  +avatar(small, 380px, 280px, 2) 
   +avatar(thumb, 100px, 100px, 2)
-  +avatar(mini_thumb, 50px, 50px, 2)
+  +avatar(minithumb,50px, 50px, 2)
 
 .profile.edit
   .avatar
