@@ -19,7 +19,7 @@
             = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
             = f.input :cookstars, :as => :select, :collection => 1..5
             %span.avatar
-              = profile_avatar_image(@user, :medium)
+              = profile_avatar_image(@user, :small)
               = f.input :avatar
           .span6
             = f.input :about
