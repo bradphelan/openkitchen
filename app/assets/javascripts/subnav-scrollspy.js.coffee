@@ -51,6 +51,7 @@ $(document).ready =>
   #
   $win = $(window)
   $nav = $(".subnav")
+  $nav_pad = $("#subnavbar_padding")
   navTop = $(".subnav").length and $(".subnav").offset().top - 40
   isFixed = 0
   processScroll = ->
@@ -59,9 +60,11 @@ $(document).ready =>
     if scrollTop >= navTop and not isFixed
       isFixed = 1
       $nav.addClass "subnav-fixed"
+      $nav_pad.height($nav.height())
     else if scrollTop <= navTop and isFixed
       isFixed = 0
       $nav.removeClass "subnav-fixed"
+      $nav_pad.height(0)
   processScroll()
   $win.on "scroll", processScroll
   
@@ -77,7 +80,7 @@ $(document).ready =>
 
   menu_items = $('[data-subnav-label]')
   if menu_items.length == 0
-    $("header#overview").hide()
+    $("header#overview #subnavbar").hide()
     $("section.scrollbuffer").hide()
     return
 
