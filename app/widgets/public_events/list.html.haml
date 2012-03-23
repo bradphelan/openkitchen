@@ -5,14 +5,17 @@
       .row-fluid
 
         .span4
-          .img
-            .avatar
-              - if event.venue
-                - if image = event.venue.venue_images.first
-                  = link_to event_path(event.id) do
-                    = image_tag image.image.expiring_url(s3_expiry, :medium)
+          .venue
+            - if event.venue
+              - if image = event.venue.venue_images.first
+                = link_to event_path(event.id) do
+                  = image_tag image.image.expiring_url(s3_expiry, :medium)
 
         .span8
+
+          .avatar
+            = profile_avatar_image event.owner, :thumb
+
 
           %h2.event_name
             = link_to event.name, event_path(event.id)
@@ -25,9 +28,8 @@
                 %i.icon-calendar
                 iCal
 
-          %p.description
-            = event.description
-          %p
+
+          %p.event_owner
             = link_to event.owner.name, user_profile_path(event.owner)
             - if event.venue
               @
@@ -35,11 +37,13 @@
                 'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
                 'data-title' => event.venue.name
 
-          - if event.public?
 
-            - if event.public_seats > 0
-              = event.public_seats_left
+          %p.description
+            = event.description
+
+          - if event.public?
+            %p.seats
+              %span.badge= event.public_seats_left
               public seats left
-            - else
-              closed to the public
+
 

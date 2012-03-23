@@ -16,29 +16,27 @@ section
 
 .event
 
+  .venue
+    img
+      border-right: solid 10px $ok-green
+  .avatar
+    img
+      @extend .hidden-tablet
+      @extend .hidden-phone
+      float: right
+      border-left: solid 10px $ok-green
+      margin-left: 1em
+
   h2.event_name
-    margin-bottom: 0.5em
-    background-color: $grayLighter
-    padding: 0.2em
-    +nice-bar-darker
-    a
-      color: $white
+    margin-top: 0px
+    padding-top: 0px
+
   ul
     @extend .unstyled
     li
       +vertical-seperator
       padding-top: 0.5em
       padding-bottom: 0.5em
-  .avatar 
-    display: inline
-    img
-      +box-shadow
-      +border-radius
-  .ical
-    display: block
-  .description
-    color: darken($ok-green, 20%)
-    text-shadow: transparentize($yellow, 0.0) 0px 0px 2px
 
 
 #invitation_status
