@@ -1,6 +1,11 @@
 - content_for :subnav_header do
   %h1.autofont= Venue.model_name.human
 
+-if can? :show, @venue
+  - content_for :subnav_items do
+    %li
+      = link_to t("show"), venue_path(@venue)
+
 #page_venues_edit
 
   %section#venues_show_address{'data-subnav-label'=>t(".address")}
