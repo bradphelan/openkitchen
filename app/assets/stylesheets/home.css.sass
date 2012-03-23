@@ -1,3 +1,7 @@
+= ccedborder($color)
+  background-color: $color
+  border: 10px solid darken($color, 20%)
+
 .home
 
   .teaser
@@ -19,17 +23,22 @@
     .modal-footer
       background-color: rgb(51,51,51)
 
+
   .cookchateatdrink
+    padding-top: 1em
     .cook
-      background-color: lighten($red, 20%)
+      +ccedborder(lighten($red, 20%))
+      margin-bottom: 1em
     .chat
-      background-color: $green
+      +ccedborder(lighten($green, 20%))
+      margin-bottom: 1em
     .eat
-      background-color: $blue
+      +ccedborder(lighten($blue, 20%))
+      margin-bottom: 1em
     .drink
-      background-color: $yellow
+      +ccedborder(lighten($yellow, 20%))
+      margin-bottom: 1em
     .cook,.chat,.eat,.drink
       padding: 1em
-      margin: 1em
 
 
