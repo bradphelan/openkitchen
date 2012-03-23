@@ -1,74 +1,80 @@
 - content_for :scripts do
   = javascript_include_tag "http://a.vimeocdn.com/js/froogaloop2.min.js"
 
+- content_for :subnav_header do
+  %h1.autofont=OPENKITCHEN
+
+
 .home
-  .row
-    .span12
-      .teaser
-        %a(data-toggle="modal" data-target="#teaser-wrapper" href="#")
-          = image_tag "front_image_block_teaser.png"
+  -#   .row
+  -#     .span12
+  -#       .teaser
+  -#         %a(data-toggle="modal" data-target="#teaser-wrapper" href="#")
+  -#           = image_tag "front_image_block_teaser.png"
 
 
   -# Note all the below columns are made the same height
   -# with some js and css magic.
 
-  .row
-    .span3
-      .well
-        = image_tag "cook.jpg"
-        :markdown
-          # Cook
 
-          Tis an ill cook that cannot lick his own fingers.
-        %small
-          %i William Shakespeare
+  .cookchateatdrink
+    .row
+      .span6
+        .cook
+          = image_tag "cook.jpg"
+          :markdown
+            # Cook
 
-    .span3
-      .well
-        = image_tag "chat.jpg"
-        :markdown
-          # Chat
+            Tis an ill cook that cannot lick his own fingers.
+          %small
+            %i William Shakespeare
 
-          Unquiet meals make ill digestions.
-        %small
-          %i William Shakespeare
+      .span6
+        .chat
+          = image_tag "chat.jpg"
+          :markdown
+            # Chat
 
-    .span3
-      .well
-        = image_tag "eat.jpg"
-        :markdown
-          # Eat
+            Unquiet meals make ill digestions.
+          %small
+            %i William Shakespeare
 
-          What say you to a piece of meat and mustard?
-        %small
-          %i William Shakespeare
+    .row
+      .span6
+        .eat
+          = image_tag "eat.jpg"
+          :markdown
+            # Eat
 
-    .span3
-      .well
-        = image_tag "drink.jpg"
-        :markdown
-          # Drink
+            What say you to a piece of meat and mustard?
+          %small
+            %i William Shakespeare
 
-          I drink to the general joy o' the whole table.
-        %small
-          %i William Shakespeare
+      .span6
+        .drink
+          = image_tag "drink.jpg"
+          :markdown
+            # Drink
+
+            I drink to the general joy o' the whole table.
+          %small
+            %i William Shakespeare
 
   .row
     .span12
-      .well
-        :markdown
-          The OPENKITCHEN will help you to organize and find events where you
-          can **cook**, **chat**, **eat** and **drink** whilst in the company
-          of creative, genuine people who realize that there is so much more to
-          being social than just sharing data.
+      :markdown
+        The OPENKITCHEN will help you to organize and find events where you
+        can **cook**, **chat**, **eat** and **drink** whilst in the company
+        of creative, genuine people who realize that there is so much more to
+        being social than just sharing data.
 
-          We want you to meet new people, spill some wine together, break a few
-          eggs, whip up a noodle salad or blaze down a plate of chilli fried
-          pork.  Do it together. Do it slow or do it fast. Make friends that
-          will last.  Join us and you will never look back.
+        We want you to meet new people, spill some wine together, break a few
+        eggs, whip up a noodle salad or blaze down a plate of chilli fried
+        pork.  Do it together. Do it slow or do it fast. Make friends that
+        will last.  Join us and you will never look back.
 
-          All that being said you can still find us on
-          [facebook](http://www.facebook.com/openkitchen.at)
+        All that being said you can still find us on
+        [facebook](http://www.facebook.com/openkitchen.at)
 
 
   #teaser-wrapper.modal.hide.fade(data-video=@video)
