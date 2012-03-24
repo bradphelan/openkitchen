@@ -1,6 +1,8 @@
 - content_for :subnav_header do
 
-  %h1.autofont=@event.name.capitalize
+  %h1.autofont
+    = profile_avatar_image @event.owner, :thumb
+    =@event.name.capitalize
   %h2
     =link_to @event.owner.name, :url => user_profile_path(@event.owner)
     @

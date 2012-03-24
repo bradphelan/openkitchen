@@ -36,6 +36,11 @@ $banner-height: 150px
 header#overview
   margin-top: 30px
   h1
+    img
+      vertical-align: middle
+      margin-bottom: 0.2em
+      +border-radius(50px)
+      +box-shadow()
     text-transform: capitalize
     padding-left: 10px
     white-space: nowrap
@@ -49,8 +54,8 @@ header#overview
     padding-left: 1000px
     margin-right: -1000px
     padding-right: 1000px
-    background-color: darken($ok-green, 30%)
-    border-bottom: 5px solid darken($ok-green, 25%)
+    background-color: darken($ok-green, 15%)
+    border-bottom: 5px solid mix($blue, darken($ok-green, 15%), 35%)
     margin-bottom: 0px
     text-align: left
 
@@ -69,8 +74,8 @@ header#overview
     margin-right: -1000px
     padding-right: 1000px
     background-color: $red
-    border-top: 5px solid lighten($red, 15%)
-    border-bottom: 5px solid lighten($red, 25%)
+    border-top: 5px solid mix($red, darken($ok-green, 15%), 35%)
+    border-bottom: 5px solid mix($red, darken($blue, 15%), 35%)
     margin-top: 0px
     margin-bottom: 0px
     text-align: right
@@ -82,8 +87,7 @@ header#overview
     padding-right: 1000px
     margin-top: 0px
     +gradientBar($blue, lighten($blue, 10%))
-    border-top: 5px solid darken($blue, 15%)
-    border-bottom: 5px solid darken($blue, 10%)
+    border-top: 5px solid mix($blue, darken($ok-green, 30%), 65%)
     ul
       a
         +gradientBar($blue, lighten($blue, 10%))
