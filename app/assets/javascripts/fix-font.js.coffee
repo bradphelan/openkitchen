@@ -30,14 +30,15 @@ fixfonts = ->
 
     $(element).css
         'font-size': "#{newSize}px"
-        'line-height': "#{newSize}px"
-        'height':"#{newSize}px"
+        'line-height': "#{newSize * 1.5}px"
+        'height':"#{newSize * 1.5}px"
 
     resizer.remove()
 
     $(element).next("h2").css
         'font-size': "#{newSize / 3}px"
         'line-height': "#{newSize / 3 * 1.5}px"
+        'height': "#{newSize / 3 * 1.5}px"
 
 
 $(document).ready =>
