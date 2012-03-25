@@ -22,6 +22,9 @@ en:
   manager:
     one: Manager
     other: Managers
+  future: Future
+  past: Past
+
 
 
   #

@@ -12,6 +12,8 @@ class PublicEventsWidget < ApplicationWidget
     # Create default relation
     @events = ::Event.where{}
 
+    @past = params[:past]
+
     if @geolocate
       if params[:latitude] and params[:longitude]
         @address = Geocoder.search([params[:latitude], params[:longitude]]).first
@@ -41,6 +43,12 @@ class PublicEventsWidget < ApplicationWidget
     end
 
     @events = self.instance_exec @events, &options[:filter] if options[:filter]
+    if @past
+      @events = @events.where{datetime < Time.zone.now  }
+    else
+      # Events might run for a day
+      @events = @events.where{datetime > (Time.zone.now - 1.day) }
+    end
 
   end
   
