@@ -35,7 +35,10 @@ class ApplicationWidget < Apotomo::Widget
       @options_with_state = super
       if params[:state]
         if params[:state][widget_id]
-          @options_with_state = @options_with_state.with_indifferent_access.merge params[:state][widget_id].with_indifferent_access
+          @state = params[:state][widget_id].each do |k,v|
+            # The stateful options need to be marked as stateful
+            @options_with_state[k.to_sym] = Apotomo::StatefulOption.new(v)
+          end
         end
       end
     end
