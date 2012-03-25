@@ -1,15 +1,19 @@
 - content_for :subnav_header do
 
-  %h1.autofont
+  %h1.autofont(data-min-font-size=20 data-max-font-size=50)
     = profile_avatar_image @event.owner, :thumb
     =@event.name.capitalize
 
 - content_for :subnav_header2 do
-  %h2.inline
-    %span
-      =link_to @event.owner.name, :url => user_profile_path(@event.owner)
-    %span
-      =link_to "@ #{@event.venue.name}", @event.venue
+  %h2.autofont(data-min-font-size=20 data-max-font-size=50)
+    =link_to @event.owner.name, :url => user_profile_path(@event.owner)
+    =link_to "@ #{@event.venue.name}", @event.venue
+
+-if can? :edit, @event
+  - content_for :subnav_items do
+    %li
+      = link_to t("edit"), edit_event_path(@event)
+
 
 #show_event_page
 

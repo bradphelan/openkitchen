@@ -18,7 +18,10 @@
 
 
           %h2.event_name
-            = link_to event.name, event_path(event.id)
+            - if can? :edit, event
+              = link_to event.name, edit_event_path(event.id)
+            - else
+              = link_to event.name, event_path(event.id)
 
           %p.datetime
             = event.format_date

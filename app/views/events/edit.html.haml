@@ -1,6 +1,10 @@
 - content_for :subnav_header do
   %h1.autofont=@event.name.capitalize
 
+- content_for :subnav_items do
+  %li
+    = link_to t("show"), event_path(@event)
+
 #edit_event_page
   .sections
     = render :partial => 'edit', :locals => { _event: @event }
