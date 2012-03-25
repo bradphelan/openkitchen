@@ -6,20 +6,18 @@
     -# Pusher hook
     .pusher{"data-pusher-key"=> Pusher.key, "data-pusher-channel"=>"event.#{@event.id}.comments", "data-pusher-event"=>"new"}
 
-    .well
-
-      = render({:state => :list}, @comments)
+    = render({:state => :list}, @comments)
 
 
-      - if can? :comment_on, @event
-        %section.new#comments_enter{'data-subnav-label' => '@', 'data-offset' => -200 }
-          = semantic_form_for Comment.build_from(@event, current_user, ""), :url => url_for_event(:comment), :remote => true do |f|
-            .form
-              = f.inputs do
-                = f.input :event_id, :as => :hidden, :input_html => {:value => @event.id }
-                = f.input :commentable_id, :as => :hidden
-                = f.input :commentable_type, :as => :hidden
-                = f.input :body, :label => false, :placeholder => "Enter comment ....", :input_html => {'data-submit-on-enter' => true}
-                = render :view => :comment_button
-              -#= f.actions do
-                -#= f.action :submit, :as => :button, :label => t("comment.submit")
+    - if can? :comment_on, @event
+      %section.new#comments_enter{'data-subnav-label' => '@', 'data-offset' => -200 }
+        = semantic_form_for Comment.build_from(@event, current_user, ""), :url => url_for_event(:comment), :remote => true do |f|
+          .form
+            = f.inputs do
+              = f.input :event_id, :as => :hidden, :input_html => {:value => @event.id }
+              = f.input :commentable_id, :as => :hidden
+              = f.input :commentable_type, :as => :hidden
+              = f.input :body, :label => false, :placeholder => "Enter comment ....", :input_html => {'data-submit-on-enter' => true}
+              = render :view => :comment_button
+            -#= f.actions do
+              -#= f.action :submit, :as => :button, :label => t("comment.submit")

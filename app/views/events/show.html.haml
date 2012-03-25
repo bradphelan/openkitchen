@@ -3,10 +3,13 @@
   %h1.autofont
     = profile_avatar_image @event.owner, :thumb
     =@event.name.capitalize
-  %h2
-    =link_to @event.owner.name, :url => user_profile_path(@event.owner)
-    @
-    =link_to @event.venue.name, @event.venue
+
+- content_for :subnav_header2 do
+  %h2.inline
+    %span
+      =link_to @event.owner.name, :url => user_profile_path(@event.owner)
+    %span
+      =link_to "@ #{@event.venue.name}", @event.venue
 
 #show_event_page
 
@@ -20,20 +23,21 @@
           %a.ical{:href=>ical_event_path(@event), :title => "iCal"}
             = @event.format_date
             = @event.format_time
-      .well
 
-        .description
-          - vi = @event.venue.venue_images.first
-          - if vi
-            = image_tag vi.image.expiring_url(s3_expiry, :small)
+      .description
+        - vi = @event.venue.venue_images.first
+        - if vi
+          = image_tag vi.image.expiring_url(s3_expiry, :small)
 
-          %p= @event.description
+      %p= @event.description
 
-        %hr
+      %hr
 
-        = render :partial => 'status'
+      = render :partial => 'status'
 
-        .clearfix
+      .clearfix
+
+      %br
 
     = render :partial => "venues/address"
 

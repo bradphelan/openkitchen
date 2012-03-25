@@ -1,22 +1,21 @@
 %section#venues_show_address{'data-subnav-label'=>t(".address")}
   %h1=t(".address")
-  .well
-    .row-fluid
-      .span6
-        %address
-          %a{:href => venue_path(@venue)}
-            %strong=@venue.name
-            %i.icon-zoom-in
-    
-          %br
-          =@venue.street
-          %br
-          =@venue.city
-          %br
-          =@venue.country
-          %br
-          =@venue.postcode
-        %hr
-        = simple_format @venue.description
-      .span6
-        = render :partial => "events/map"
+  .row-fluid
+    .span6
+      %address
+        %a{:href => venue_path(@venue)}
+          %strong=@venue.name
+          %i.icon-zoom-in
+  
+        %br
+        =@venue.street
+        %br
+        =@venue.city
+        %br
+        =@venue.country
+        %br
+        =@venue.postcode
+      %hr
+      = simple_format @venue.description
+    .span6
+      = render :partial => "events/map"

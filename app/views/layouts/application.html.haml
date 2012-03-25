@@ -76,40 +76,53 @@
 
               = yield :navigation
     
+    %header.jumbotron.subhead#overview
+      - if content_for :subnav_header
+        #subnav_header
+          .container
+            .row
+              .span12
+                = yield :subnav_header
+
+      - if content_for :subnav_header2
+        #subnav_header2
+          .container
+            .row
+              .span12
+                = yield :subnav_header2
+
+      - if content_for :subnav_items
+        #subnavbar.subnav
+          .container
+            .row
+              .span12
+                %ul.nav.nav-pills
+                  = yield :subnav_items
+        #subnavbar_padding
 
     #page
-      .content
-        .container
-          = render :partial=> 'common/flashes'
+      .container
+        = render :partial=> 'common/flashes'
 
-          - if content_for? :content
+        - if content_for? :content
 
-            = yield :content
+          = yield :content
 
-          - else
+        - else
 
-            %header.jumbotron.subhead#overview
-              = yield :subnav_header
-              - if content_for :subnav_items
-                #subnavbar.subnav
-                  %ul.nav.nav-pills
-                    = yield :subnav_items
-                #subnavbar_padding
+          #page_body
+            = yield
 
+          .impressum.well
+            %small
+              = link_to "http://xtargets.com" do
+                .link
+                  %h1
+                    %small An XTargets Production
+                  Design and coding by
+                  Brad Phelan
 
-            #page_body
-              = yield
-
-            .impressum.well
-              %small
-                = link_to "http://xtargets.com" do
-                  .link
-                    %h1
-                      %small An XTargets Production
-                    Design and coding by
-                    Brad Phelan
-
-            %section.scroll_buffer
+          %section.scroll_buffer
   %footer
     = yield :scripts
 
