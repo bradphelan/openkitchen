@@ -7,11 +7,15 @@ fixfonts = ->
   scaler = 1.2
 
   for element in $('.autofont')
+
+    maxSize = $(element).data('max-font-size') || 100 # px
+    minSize = $(element).data('min-font-size') || 10 # px
     
-    size =  1
+    size = minSize
     element = $(element)
     desired_width = $(element).width()
-    banner_height = 150
+    banner_height = maxSize || 150
+    white_space = "nowrap"
 
     resizer = $(element.clone())
     resizer.css
@@ -19,27 +23,40 @@ fixfonts = ->
       'max-width': desired_width
       'display': 'inline'
       'width': 'auto'
+      'white-space': white_space
     resizer.insertAfter(element)
 
+    match = false
     while resizer.width() < desired_width and size < banner_height
+      match = true
       size = size * scaler
       resizer.css
         'font-size':  "#{size}px"
 
+    unless match
+      white_space = "normal"
+
     newSize = size/scaler
 
     $(element).css
+        'white-space': white_space
         'font-size': "#{newSize}px"
         'line-height': "#{newSize * 1.5}px"
-        'height':"#{newSize * 1.5}px"
+
+    # Ensure any inline images are also scaled
+    # so that they don't mess up the flow.
+    element.find("img").height(newSize*1.6)
+    element.find("img").width("auto")
+
+    if match
+      $(element).css
+        'height': "#{newSize * 1.5}px"
+    else
+      $(element).css
+        'height': "auto"
+        'line-height': "#{newSize}px"
 
     resizer.remove()
-
-    $(element).next("h2").css
-        'font-size': "#{newSize / 3}px"
-        'line-height': "#{newSize / 3 * 1.5}px"
-        'height': "#{newSize / 3 * 1.5}px"
-
 
 $(document).ready =>
   fixfonts()
