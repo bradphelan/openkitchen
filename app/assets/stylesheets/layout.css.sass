@@ -4,6 +4,11 @@ $brand-padding: 10px
 
 $banner-height: 150px
 
+// See subnav-scrollspy.js.coffee
+#subnavbar_padding
+  @extend .hidden-phone
+  @extend .hidden-tablet
+
 #loading
   display: none
   background-color: rgba(250, 250, 250, 0.1)
@@ -34,6 +39,9 @@ $banner-height: 150px
   margin-top: 1em
 
 header#overview
+
+  @media (min-width: 980px)
+    margin-top: 30px
 
   // Bootstrap responsive adds a 20px border
   // when going to tablet mode but we want the
