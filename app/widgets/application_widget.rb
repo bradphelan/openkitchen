@@ -22,18 +22,39 @@ class ApplicationWidget < Apotomo::Widget
   def setup!(*)
   end
 
+
+  def stateful_options
+    options.select do |k,v|
+      v.is_a? Apotomo::StatefulOption 
+    end
+  end
+  helper_method :stateful_options
+
+  def options
+    unless @options_with_state
+      @options_with_state = super
+      if params[:state]
+        if params[:state][widget_id]
+          @options_with_state = @options_with_state.with_indifferent_access.merge params[:state][widget_id].with_indifferent_access
+        end
+      end
+    end
+    @options_with_state
+  end
+
   # Make sure that all id or *_id parameters
   # are forwarded to the event URL so that 
   # resources are recovered correctly when 
   # the event is executed.
-  def url_for_event type, options={}
+  def url_for_event type, opts={}
     p = HashWithIndifferentAccess.new
     parent_controller.request.parameters.each do |k,v|
       if k.end_with? "_id" or k == "id"
         p[k] = v
       end
     end
-    super type, p.merge(options)
+
+    super type, p.merge(opts)
   end
 
   def current_ability
@@ -109,12 +130,24 @@ class ApplicationWidget < Apotomo::Widget
     buffer.to_s
   end
 
-  end
+
+end
 
 module Apotomo::Rails::ViewHelper
   def widget_tag(tag, options={}, &block)
+    if options[:class]
+      options[:class] = "#{options[:class]} widget"
+      options['data-state'] = stateful_options.to_json
+    else
+      options[:class] = "widget"
+    end
+
     options.reverse_merge!(:id => widget_id) 
     content_tag(tag, options, &block)
+  end
+
+  def widget_div(options={}, &block)
+    widget_tag "div", options, &block
   end
 
 end
