@@ -8,7 +8,7 @@ class Comments::CommentWidget < ApplicationWidget
   
   # Destroy a comment
   def destroy(evt)
-    @comment = Comment.find params[:comment_id]
+    @comment = Comment.find evt[:comment_id]
     @event = @comment.commentable
     authorize! :destroy, @comment
     @comment.destroy

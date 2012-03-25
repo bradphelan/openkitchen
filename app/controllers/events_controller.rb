@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   has_widgets do |root|
     # For /events/:id
     if params[:id]
-      root << widget("comments/panel", :comments, :event => @event, :params => params)
+      root << widget("comments/panel", :comments, :event => @event)
       root << widget(:event_guests, :event => @event )
     else
 

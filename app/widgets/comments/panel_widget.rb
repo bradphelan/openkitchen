@@ -39,7 +39,7 @@ class Comments::PanelWidget < ApplicationWidget
 
   # Add a comment
   def comment(evt)
-    commentable_type = case params[:comment][:commentable_type]
+    commentable_type = case evt[:comment][:commentable_type]
                         when 'Event'
                           ::Event
                         else
@@ -48,7 +48,7 @@ class Comments::PanelWidget < ApplicationWidget
 
     @comment = Comment.build_from @event, 
       current_user.id, 
-      params[:comment][:body]
+      evt[:comment][:body]
 
 
     authorize! :create, @comment
