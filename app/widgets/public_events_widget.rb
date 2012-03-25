@@ -3,6 +3,11 @@ class PublicEventsWidget < ApplicationWidget
   responds_to_event :refresh
   responds_to_event :refresh_html5_geolocation
 
+  # Maintain state for url_for_event
+  def url_for_event type, options={}
+    super type, options.merge({ :past => @past })
+  end
+
   has_widgets do
     @require_html5_geolocate = true
     @public = options[:public]
@@ -12,7 +17,7 @@ class PublicEventsWidget < ApplicationWidget
     # Create default relation
     @events = ::Event.where{}
 
-    @past = params[:past]
+    @past = options[:past]
 
     if @geolocate
       if params[:latitude] and params[:longitude]

@@ -31,19 +31,22 @@ class EventsController < ApplicationController
                      'my_events', 
                      :geolocate => false, 
                      :filter => my_events, 
-                     :title => :as_host ) if current_user
+                     :title => :as_host,
+                     :past => params[:past] ) if current_user
 
       root << widget(:public_events, 
                      'invited_to_events', 
                      :geolocate => false, 
                      :filter => invited_to_events, 
-                     :title => :as_guest) if current_user
+                     :title => :as_guest,
+                     :past => params[:past] ) if current_user
 
       root << widget(:public_events, 
                      'public_events',
                      :geolocate => true,
                      :filter => public_events, 
-                     :title => :as_public ) 
+                     :title => :as_public,
+                     :past => params[:past] ) 
     end
   end
 
