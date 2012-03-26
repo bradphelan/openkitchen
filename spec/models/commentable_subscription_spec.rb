@@ -5,7 +5,6 @@ describe CommentableSubscription do
     @owner = Factory :registered_user
     @guest = Factory :registered_user
     @event = Factory :event, :owner => @owner
-    @guest_invitation = @event.invite @guest
     LazyWorkQueue.stub :push do |*args|
       # We don't want email errors
     end

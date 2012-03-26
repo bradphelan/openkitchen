@@ -8,26 +8,29 @@ module CommentSubscriber
 
   # Returns a subscription ( or nil ) for the :user
   def subscription_on_comments user
-    commentable_subscriptions.where{:user_id == user.id}.first 
+    commentable_subscriptions.where{user_id == user.id}.first 
   end
 
   # Returns true if the :user is subscribed for email notifications
   # on the comments
   def subscribed_on_comments? user
     s = subscription_on_comments user
-    return s.subscribed? if s
-    false
+    if s
+      return s.subscribed?
+    else
+      false
+    end
   end
 
   # Build a new comment subscription for the user
   def build_comment_subscription user
-    commentable_subscriptions.where{:user_id == user.id}.build
+    commentable_subscriptions.where{user_id == user.id}.build
   end
 
   # Find a subscription or build a new one
   def find_or_build_comment_subscription user
     unless subscription = subscription_on_comments(user) 
-      subscription = commentable_subscriptions.where{:user_id == user.id}.build
+      subscription = commentable_subscriptions.where{user_id == user.id}.build
     end
     subscription
   end
