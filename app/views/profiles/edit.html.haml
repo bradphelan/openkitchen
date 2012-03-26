@@ -20,7 +20,9 @@
             = f.input :cookstars, :as => :select, :collection => 1..5
             %span.avatar
               = profile_avatar_image(@user, :small)
-              = f.input :avatar
+              - @user.build_avatar unless @user.avatar
+              = f.inputs :attachment, :for => :avatar do |a|
+                = a.input :attachment, :as => :file
           .span6
             = f.input :about
       .row

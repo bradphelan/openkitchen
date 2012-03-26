@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :about, :name,  :password, :password_confirmation, :remember_me
-  attr_accessible :cookstars, :avatar, :timezone
+  attr_accessible :cookstars, :timezone
 
   has_many :events_as_owner, :class_name => "Event", :inverse_of => :owner, :foreign_key => :owner_id, :dependent => :destroy
   has_many :events_as_guest, :through => :invitations, :source => :event
@@ -92,13 +92,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_attached_file :avatar, 
-    :styles => ImageSizes.standard_sizes_hash,
-    :default_url => "/assets/chef.jpg"
+  has_one :avatar, :as => :assetable, :class_name => "ImageAsset", :dependent => :destroy
 
-  validates_attachment_content_type :avatar, 
-    :content_type => %r{image/.*}, 
-    :less_than => 1.megabyte
+  accepts_nested_attributes_for :avatar, :allow_destroy => true
+  attr_accessible :avatar_attributes
+
 
   validates_numericality_of :cookstars, 
     :only_integer => true,

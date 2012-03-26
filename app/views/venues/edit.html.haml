@@ -43,10 +43,13 @@
 
   %section#venues_add_photos{'data-subnav-label'=>"+"}
     .well
-      = semantic_form_for @venue.venue_images.build do |f|
+      = semantic_form_for [@venue], :html => { :mutltipart => true } do |f|
         = f.inputs do
-          = f.input :venue_id, :as => :hidden
-          = f.input :image, :as => :file 
-        = f.actions
+          - j = 0
+          = f.inputs :attachment, :for => :venue_images do |a|
+            - if a.object.new_record?
+              = a.input :attachment, :label => "Image #{j}", :as => :file
+              - j+=1
+          = f.actions
 
 

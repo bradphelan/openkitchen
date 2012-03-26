@@ -12,6 +12,9 @@ class VenuesController < ApplicationController
   def edit
     @map = GoogleStaticMap.new(:zoom => 13, :center => @venue.map_location)
     @map.markers << MapMarker.new(:color => "blue", :location => @venue.map_location)
+
+    # We only want one image at the moment in the nested form
+    @venue.venue_images.build
   end
 
   def update

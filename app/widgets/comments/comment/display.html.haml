@@ -1,5 +1,5 @@
 = widget_tag :li, :class => 'comment' do
-  = profile_avatar_image(comment.user, :mini_thumb)
+  = profile_avatar_image(comment.user, :minithumb)
   %span.watch
     - if comment.commentable.subscribed_on_comments? comment.user
       %i.icon-eye-open{:title => t("subscribed")}   

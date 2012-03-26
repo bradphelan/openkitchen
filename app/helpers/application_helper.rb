@@ -11,12 +11,14 @@ module ApplicationHelper
             [300, 300]
           when :thumb
             [100, 100]
-          when :mini_thumb
+          when :minithumb
+            [50, 50]
+          else
             [50, 50]
           end
 
 
-    if user.avatar.file?
+    if user.avatar
       uri = user.avatar.expiring_url(s3_expiry, version)
       style = nil
     else

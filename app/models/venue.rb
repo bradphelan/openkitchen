@@ -34,8 +34,10 @@ class Venue < ActiveRecord::Base
   validates_numericality_of :latitude, :allow_blank => true
   validates_numericality_of :longitude, :allow_blank => true
 
-  has_many :venue_images
+  has_many :venue_images, :as => :assetable, :class_name => "ImageAsset", :dependent => :destroy
+
   accepts_nested_attributes_for :venue_images, :allow_destroy => true
+  attr_accessible :venue_images
     
   geocoded_by :full_address
   after_validation :geocode

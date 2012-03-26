@@ -31,7 +31,7 @@
       .description
         - vi = @event.venue.venue_images.first
         - if vi
-          = image_tag vi.image.expiring_url(s3_expiry, :small)
+          = image_tag vi.attachment.expiring_url(s3_expiry, :small)
 
       %p= @event.description
 

@@ -101,9 +101,9 @@ class Event < ActiveRecord::Base
   # invited
   after_create do
     invitation = invite owner
-    invitation.comment_subscription_state = "subscribed"
     invitation.status = "accepted"
     invitation.save!
+    invitation.event.subscribe_to_comments owner
   end
 
 
