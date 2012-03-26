@@ -1,3 +1,5 @@
+require 'delayed_paperclip/jobs/girl_friday'
+
 class ImageAsset < Asset
 
   has_attached_file :attachment, 
@@ -7,4 +9,5 @@ class ImageAsset < Asset
     :content_type => %r{image/.*}, 
     :less_than => 1.megabyte
 
+  process_in_background :attachment
 end

@@ -1,5 +1,7 @@
 $(document).ready =>
 
+  return
+
   show_missing_translations = =>
     tr = $(".translation_missing")
     if tr.length > 0

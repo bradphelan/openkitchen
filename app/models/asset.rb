@@ -6,4 +6,5 @@ class Asset < ActiveRecord::Base
   validates_attachment_presence :attachment
 
   attr_accessible :attachment
+
 end

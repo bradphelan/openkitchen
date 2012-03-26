@@ -1,3 +1,33 @@
+class ImageLoader
+  @setup : ->
+      $(".carousel_nav img").error (e)->
+        console.log "Error trigger for"
+        console.log $(@)
+        new ImageLoader $(@)
+
+
+  constructor: (@elem)->
+    @elem.hide()
+    @timeout()
+
+  timeout: ->
+    window.setTimeout ( => @check() ), 1000
+
+  check: ->
+    @elem.show()
+    src = @elem.attr 'src'
+    @elem.attr 'src', src
+
+# Do nice scrolly effect when we click on the sub-nav bar
+goToByScroll = (id) ->
+  strip = id.closest(".strip")
+  finaloffset = id.position().left + strip.scrollLeft()
+
+  animate = (speed, complete=null)->
+    strip.animate scrollLeft: finaloffset, speed, complete
+
+  animate "slow"
+
 $(document).ready =>
 
   apply = =>
@@ -14,6 +44,7 @@ $(document).ready =>
       widget.find("a").removeClass("active")
       a.addClass("active")
       caro.carousel(index)
+      caro.carousel("pause")
       false
 
     markActive = (carousel)=>
@@ -21,7 +52,9 @@ $(document).ready =>
       id = active.attr('data-image_id')
       widget = active.closest(".widget")
       widget.find("a").removeClass("active")
-      widget.find(".strip [data-image_id=#{id}]").addClass("active")
+      active = widget.find(".strip [data-image_id=#{id}]")
+      active.addClass("active")
+      goToByScroll active
 
     $("body").on "slid", ".carousel", (e) =>
       markActive($(e.target))
@@ -32,11 +65,14 @@ $(document).ready =>
     $(document).ajaxStop =>
       markActive($(".carousel"))
 
+
+    $(document).ajaxStop ->
+      ImageLoader.setup()
+
+
   window.setTimeout apply, 500
 
 
-
-  fakeFileSet = $("fieldset.fake_file_field")
   $("body").on "click", "fieldset.fake_file_field a.clicker", (e)=>
     fieldset = $(e.target).closest("fieldset")
     fieldset.find("[type=file]").click()

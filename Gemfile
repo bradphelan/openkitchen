@@ -112,3 +112,10 @@ gem "pusher_rails"
 # Geocoding Gems
 gem "geocoder"
 gem 'googlestaticmap'
+
+gem 'remotipart'
+
+# Use git until 
+# https://github.com/jstorimer/delayed_paperclip/pull/62
+# is merged
+gem 'delayed_paperclip', :git => 'https://github.com/tommeier/delayed_paperclip.git', :branch => 'fix_27_cleaned'

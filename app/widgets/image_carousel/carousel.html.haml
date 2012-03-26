@@ -5,7 +5,7 @@
       - @images.all.each do |image|
         %a.item{:href=>"#", 'data-image_id'=>image.id}
           = image_tag image.attachment.expiring_url(s3_expiry, :thumb)
-    #venues_edit_images_carousel.carousel.slide{'data-interval' => nil}
+    #venues_edit_images_carousel.carousel.slide
       .carousel-inner
         - @images.all.each do |image|
           .item{'data-image_id'=>image.id}
