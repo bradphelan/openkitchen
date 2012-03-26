@@ -1,5 +1,6 @@
 $(document).ready =>
   $("#loading").ajaxStart ->
     $(@).show()
-  $("#loading").ajaxComplete ->
+  $("#loading").ajaxStop ->
     $(@).hide()
+  $("#loading")

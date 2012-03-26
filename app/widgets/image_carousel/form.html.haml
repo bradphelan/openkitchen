@@ -1,19 +1,6 @@
 %section.form{'id' => "#{widget_id}_form", 'data-subnav-label'=>"+"}
-  .well
-    = semantic_form_for [@assetable], :html => { :mutltipart => true } do |f|
-      = f.inputs do
-        - j = 0
-        = f.inputs :attachment, :for => @resource do |a|
-          - if a.object.new_record?
-            = a.input :attachment, :label => "Image #{j}", :as => :file
-            - j+=1
-        = f.actions
+  = form_for @assetable.send(@resource).build, :as => @resource, :remote => true,  :url => url_for_event(:upload) do |a|
+    %fieldset.fake_file_field
+      = a.file_field :attachment
+      %a.clicker.btn{:href => "#"} +
 
-:javascript
-  $(document).ready(function(){
-    $(".carousel .item:first-child").addClass("active");
-    $(".carousel").carousel();
-    $(".carousel").carousel('pause')
-    
-  }
-  );

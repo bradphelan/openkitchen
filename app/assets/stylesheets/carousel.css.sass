@@ -1,5 +1,35 @@
 .carousel_nav
+  .carousel
+    border: 5px solid $grayLight
   .strip
+    border: 5px solid $grayLight
     white-space: nowrap
-    overflow: scroll
     overflow-y: hidden !important
+    overflow-x: scroll
+    background-color: $gray
+    a
+      margin: 0px
+      padding: 0px
+      img
+        border: 5px solid $gray
+        margin: 0px
+        padding: 0px
+      &:hover
+        text-decoration: none
+        img
+          border: 5px solid $blue
+          +box-shadow()
+      &.active
+        img
+          border: 5px solid $ok-green
+
+  .carousel-caption
+    a
+      color: $white
+
+fieldset.fake_file_field
+  input[type=file]
+    width: 0px !important
+    height: 0px !important
+    margin: 0px !important
+    padding: 0px !important

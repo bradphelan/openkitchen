@@ -5,7 +5,7 @@
       - @images.all.each do |image|
         %a.item{:href=>"#", 'data-image_id'=>image.id}
           = image_tag image.attachment.expiring_url(s3_expiry, :thumb)
-    #venues_edit_images_carousel.carousel.slide
+    #venues_edit_images_carousel.carousel.slide{'data-interval' => nil}
       .carousel-inner
         - @images.all.each do |image|
           .item{'data-image_id'=>image.id}
@@ -21,3 +21,9 @@
 
       %a.carousel-control.left(href="#venues_edit_images_carousel" data-slide="prev") &lsaquo;
       %a.carousel-control.right(href="#venues_edit_images_carousel" data-slide="next") &rsaquo;
+
+:javascript
+  $(document).ready(function(){
+    $(".carousel .item:first-child").addClass("active");
+  }
+  );

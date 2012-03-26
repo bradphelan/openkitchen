@@ -1,6 +1,7 @@
 class ImageCarouselWidget < ApplicationWidget
 
   responds_to_event :delete_image
+  responds_to_event :upload
 
   has_widgets do |root|
     @images = options[:images]
@@ -24,6 +25,15 @@ class ImageCarouselWidget < ApplicationWidget
     @images.reload
 
     @assetable.send(@resource).build
+    render_buffer do |b|
+      b.replace "##{widget_id} .carousel_nav", :view => :carousel
+      b.replace "##{widget_id} .form", :view => :form
+    end
+  end
+
+  def upload(evt)
+    authorize! :edit, @assetable
+    @assetable.send(@resource).create evt[@resource.to_sym]
     render_buffer do |b|
       b.replace "##{widget_id} .carousel_nav", :view => :carousel
       b.replace "##{widget_id} .form", :view => :form
