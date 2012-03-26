@@ -13,8 +13,8 @@
       ago
   - if can? :destroy, comment
     = link_to url_for_event(:destroy, 
-      :source => widget_id, 
-      :comment_id => comment.id), 
+        :source => widget_id, 
+        :comment_id => comment.id), 
       :remote => true, 
       class: "destroy", 
       title: t('comment.remove'), 

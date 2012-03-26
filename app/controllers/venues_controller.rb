@@ -2,6 +2,14 @@ class VenuesController < ApplicationController
   load_and_authorize_resource
   respond_to :html
 
+  skip_authorize_resource :only => :render_event_response
+
+  has_widgets do |root|
+    if params[:id]
+      root << widget(:image_carousel, :venue_images, :assetable => @venue, :resource => :venue_images)
+    end
+  end
+
   def create
     @venue = current_user.venues.create params[:venue]
     authorize! :create, @venue

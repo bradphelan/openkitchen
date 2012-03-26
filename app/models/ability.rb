@@ -98,10 +98,6 @@ class Ability
       can :destroy, Venue, :user_venue_managements => { :user_id => user.id, :role => :owner }
       can :create, Venue
 
-      can :create, VenueImage, :venue => { :user_venue_managements => { :user_id => user.id, :role => "manager" }}
-      can :create, VenueImage, :venue => { :user_venue_managements => { :user_id => user.id, :role => "owner" }}
-      can :destroy, VenueImage, :venue => { :user_venue_managements => { :user_id => user.id, :role => "manager" }}
-      can :destroy, VenueImage, :venue => { :user_venue_managements => { :user_id => user.id, :role => "owner" }}
     end
 
 

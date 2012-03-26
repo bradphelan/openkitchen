@@ -1,0 +1,23 @@
+- if @images.length > 0
+
+  .carousel_nav
+    .strip
+      - @images.all.each do |image|
+        %a.item{:href=>"#", 'data-image_id'=>image.id}
+          = image_tag image.attachment.expiring_url(s3_expiry, :thumb)
+    #venues_edit_images_carousel.carousel.slide
+      .carousel-inner
+        - @images.all.each do |image|
+          .item{'data-image_id'=>image.id}
+            = image_tag image.attachment.expiring_url(s3_expiry, :large)
+            - if can? :edit, image.assetable
+              .carousel-caption
+
+                = link_to url_for_event(:delete_image, :asset_id => image.id),
+                  :method => :delete, 
+                  :remote => true,
+                  :confirm => t("confirm") do
+                  =t "delete"
+
+      %a.carousel-control.left(href="#venues_edit_images_carousel" data-slide="prev") &lsaquo;
+      %a.carousel-control.right(href="#venues_edit_images_carousel" data-slide="next") &rsaquo;
