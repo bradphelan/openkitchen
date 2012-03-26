@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120326102155) do
+ActiveRecord::Schema.define(:version => 20120326114729) do
 
   create_table "assets", :force => true do |t|
     t.integer  "assetable_id"
@@ -22,7 +22,11 @@ ActiveRecord::Schema.define(:version => 20120326102155) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.string   "type"
   end
+
+  add_index "assets", ["assetable_id", "assetable_type"], :name => "by_assetable_id_and_assetable_type"
+  add_index "assets", ["id", "type"], :name => "by_id_and_type"
 
   create_table "commentable_subscriptions", :force => true do |t|
     t.integer "commentable_id"
