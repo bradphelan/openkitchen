@@ -1,20 +1,51 @@
 class ImageLoader
   @setup : ->
-      $(".carousel_nav img").error (e)->
-        console.log "Error trigger for"
-        console.log $(@)
-        new ImageLoader $(@)
+    $(".carousel_nav img").error (e)->
+      (new ImageLoader $(@)).timeout()
 
+    $(".carousel_nav img").load (e)->
+      (new ImageLoader $(@)).success()
+
+  pulse: (start=true)->
+    loadCountSpan = @widget.find("span.load-count")
+    if start
+      if not loadCountSpan.data('pulse')
+        console.log "pulse #{start}"
+        pulsar = =>
+          loadCountSpan.data('pulse', true)
+          loadCountSpan.animate { opacity: 0.5}, =>
+            loadCountSpan.animate { opacity: 1}, =>
+              pulsar()
+        pulsar()
+    else
+      loadCountSpan.data('pulse', false)
+
+  updateLoadingCount: ->
+    loading = @widget.find(".strip img[data-loading=true]").length
+    loadCountSpan = @widget.find("span.load-count")
+    if loading > 0
+      loadCountSpan.show()
+      @pulse()
+    else
+      @pulse(false)
+      loadCountSpan.hide()
+    loadCountSpan.text("processing ... #{loading}")
 
   constructor: (@elem)->
-    @elem.hide()
-    @timeout()
+    @widget = @elem.closest(".widget")
+
+  success: ->
+    @elem.fadeIn(500)
+    @elem.attr('data-loading', false)
+    @updateLoadingCount()
 
   timeout: ->
+    @elem.attr('data-loading', true)
+    @updateLoadingCount(@widget)
+    @elem.hide()
     window.setTimeout ( => @check() ), 1000
 
   check: ->
-    @elem.show()
     src = @elem.attr 'src'
     @elem.attr 'src', src
 
