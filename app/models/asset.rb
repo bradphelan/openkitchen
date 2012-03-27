@@ -7,4 +7,17 @@ class Asset < ActiveRecord::Base
 
   attr_accessible :attachment
 
+  DeleteAssetQueue = LazyWorkQueue.define :delete_asset_queue, :size => 1 do |info|
+    Asset.where{terminated==true}.destroy_all
+  end
+
+  def background_destroy
+    self.terminated = true
+    self.save!
+    after_transaction do
+      DeleteAssetQueue.push ({})
+    end
+  end
+
+
 end

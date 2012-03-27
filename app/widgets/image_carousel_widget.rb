@@ -4,10 +4,13 @@ class ImageCarouselWidget < ApplicationWidget
   responds_to_event :upload
 
   has_widgets do |root|
-    @images = options[:images]
     @assetable = options[:assetable]
     @resource = options[:resource]
-    @images = @assetable.send @resource
+    load_images
+  end
+
+  def load_images
+    @images = @assetable.send(@resource).order("created_at DESC").where{terminated==false}
   end
 
   def display
@@ -21,8 +24,8 @@ class ImageCarouselWidget < ApplicationWidget
   def delete_image(evt)
     @image = Asset.find(evt[:asset_id])
     authorize! :edit, @image.assetable
-    @image.destroy
-    @images.reload
+    @image.background_destroy
+    load_images
 
     @assetable.send(@resource).build
     render_buffer do |b|
