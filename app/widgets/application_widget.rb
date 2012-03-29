@@ -114,12 +114,8 @@ class ApplicationWidget < Apotomo::Widget
       @buffer = ""
     end
 
-    def replace *args
-      @buffer << @widget.replace(*args)
-    end
-
-    def render *args
-      @buffer << @widget.render(*args)
+    def method_missing *args
+      @buffer << @widget.send(*args)
     end
 
     def to_s
@@ -153,4 +149,30 @@ module Apotomo::Rails::ViewHelper
     widget_tag "div", options, &block
   end
 
+end
+
+
+module Apotomo
+  module JavascriptMethods
+    def append(*args)
+      wrap_in_javascript_for(:append, *args)
+    end
+    def prepend(*args)
+      wrap_in_javascript_for(:prepend, *args)
+    end
+  end
+  class JavascriptGenerator
+    module Jquery
+      def append(id, markup)
+        %Q%
+        #{element(id)}.append("#{escape(markup)}");
+        %
+      end
+      def prepend(id, markup)
+        %Q%
+        #{element(id)}.prepend("#{escape(markup)}");
+        %
+      end
+    end
+  end
 end
