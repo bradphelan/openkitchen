@@ -7,7 +7,7 @@ class ImageAsset < Asset
 
   validates_attachment_content_type :attachment, 
     :content_type => %r{image/.*}, 
-    :less_than => 1.megabyte
+    :less_than => 5.megabyte
 
   process_in_background :attachment
 end
