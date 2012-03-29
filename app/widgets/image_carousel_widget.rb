@@ -38,12 +38,23 @@ class ImageCarouselWidget < ApplicationWidget
   def upload(evt)
     authorize! :edit, @assetable
     image = @assetable.send(@resource).create evt[@resource.to_sym]
-    render_buffer do |b|
-      b.prepend "##{widget_id} .strip", :view => "thumb", :locals => { :image => image }
-      b.prepend "##{widget_id} .carousel-inner", :view => "item", :locals => { :image => image }
-      b.render :text => %Q%
-        $(".carousel_nav").data("widget").fixCarousel();
-      %
+    if image.valid?
+      render_buffer do |b|
+        b.prepend "##{widget_id} .strip", :view => "thumb", :locals => { :image => image }
+        b.prepend "##{widget_id} .carousel-inner", :view => "item", :locals => { :image => image }
+        b.render :text => %Q%
+          $(".carousel_nav").data("widget").fixCarousel();
+        %
+      end
+    else
+      render_buffer do |b|
+        js = image.errors.full_messages.map do |msg|
+          %Q%
+            alert("#{msg}");
+          %
+        end
+        b.render :text => js.join
+      end
     end
   end
 
