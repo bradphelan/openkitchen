@@ -1,0 +1,10 @@
+.item{'data-image_id'=>image.id}
+  = image_tag image.attachment.expiring_url(s3_expiry, :large)
+  - if can? :edit, image.assetable
+    .carousel-caption
+
+      = link_to url_for_event(:delete_image, :asset_id => image.id),
+        :method => :delete, 
+        :remote => true,
+        :class => "delete inline-confirm" do
+        =t "delete"

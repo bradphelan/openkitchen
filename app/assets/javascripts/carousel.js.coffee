@@ -10,12 +10,12 @@ class ImageLoader
     loadCountSpan = @widget.find("span.load-count")
     if start
       if not loadCountSpan.data('pulse')
-        console.log "pulse #{start}"
         pulsar = =>
           loadCountSpan.data('pulse', true)
           loadCountSpan.animate { opacity: 0.5}, =>
             loadCountSpan.animate { opacity: 1}, =>
-              pulsar()
+              if loadCountSpan.data('pulse')
+                pulsar()
         pulsar()
     else
       loadCountSpan.data('pulse', false)
@@ -49,60 +49,12 @@ class ImageLoader
     src = @elem.attr 'src'
     @elem.attr 'src', src
 
-# Do nice scrolly effect when we click on the sub-nav bar
-goToByScroll = (id) ->
-  strip = id.closest(".strip")
-  finaloffset = id.position().left + strip.scrollLeft()
+$(document).ajaxStop ->
+  ImageLoader.setup()
 
-  animate = (speed, complete=null)->
-    strip.animate scrollLeft: finaloffset, speed, complete
 
-  animate "slow"
-
+# Hide ugly file load buttons if marked so
 $(document).ready =>
-
-  apply = =>
-
-    nav = $(".carousel_nav")
-    strip = nav.find(".strip")
-    caro = nav.find(".carousel")
-
-    $("body").on "click", ".carousel_nav a.item", (e) =>
-      a = $(e.target).closest("a")
-      index = a.index()
-      widget = a.closest(".widget")
-      caro = widget.find(".carousel")
-      widget.find("a").removeClass("active")
-      a.addClass("active")
-      caro.carousel(index)
-      caro.carousel("pause")
-      false
-
-    markActive = (carousel)=>
-      active = carousel.find(".active")
-      id = active.attr('data-image_id')
-      widget = active.closest(".widget")
-      widget.find("a").removeClass("active")
-      active = widget.find(".strip [data-image_id=#{id}]")
-      active.addClass("active")
-      goToByScroll active
-
-    $("body").on "slid", ".carousel", (e) =>
-      markActive($(e.target))
-
-
-    markActive($(".carousel"))
-
-    $(document).ajaxStop =>
-      markActive($(".carousel"))
-
-
-    $(document).ajaxStop ->
-      ImageLoader.setup()
-
-
-  window.setTimeout apply, 500
-
 
   $("body").on "click", "fieldset.fake_file_field a.clicker", (e)=>
     fieldset = $(e.target).closest("fieldset")
@@ -114,5 +66,129 @@ $(document).ready =>
     fieldset.closest("form").submit()
     true
 
-carouselFunction = $.carousel
+class FilmStripCarousel
+
+  constructor: (@elem) ->
+
+    # Attach the instance to the DOM
+    $(@elem).data('widget', @)
+
+    @caro = @elem.find(".carousel")
+    @strip = @elem.find(".strip")
+
+    if @caro.find(".active").length == 0
+      @caro.find(".item").first().addClass("active")
+
+    @setupEvents()
+
+    # Trigger the twitter bootstrap carousel
+    @caro.carousel
+      pause: 'nohover'
+      interval: 1000000
+    @caro.carousel('pause')
+
+  goToByScroll: (id) ->
+    return unless id.length > 0
+    strip = id.closest(".strip")
+    finaloffset = id.position().left + strip.scrollLeft()
+
+    animate = (speed, complete=null)->
+      strip.animate scrollLeft: finaloffset, speed, complete
+
+    animate "slow"
+
+  click: (e)->
+    a = $(e.target).closest("a.item")
+    index = a.index()
+    @elem.find("a").removeClass("active")
+    a.addClass("active")
+
+    console.log "foo"
+    console.log @idOfActiveThumb()
+    console.log @imageWithId(@idOfActiveThumb())
+    console.log @imageWithId(@idOfActiveThumb()).index()
+
+    index=@imageWithId(@idOfActiveThumb()).index()
+
+    # Fix for bug in carousel which refuses
+    # to navigate anywhere if none of the
+    # children are active
+    @fixCarousel()
+
+    @caro.carousel(index)
+    false
+
+  idOfActiveThumb: ()->
+    active = @strip.find(".active")
+    return null unless active.length > 0
+    active.attr('data-image_id')
+
+  idOfActiveImage: ()->
+    active = @caro.find(".active")
+    return null unless active.length > 0
+    active.attr('data-image_id')
+
+  imageWithId: (id)->
+    @caro.find(".item[data-image_id=#{id}]")
+
+  activeThumb: ()->
+    @strip.find("[data-image_id=#{@idOfActiveImage()}]")
+
+  # The bootstrap carousel goes all poo faced if
+  # there are no active elements. This just fixes
+  # it.
+  fixCarousel: ()->
+    if @caro.find(".active").length == 0
+      @caro.find(".item").first().addClass("active")
+    if @strip.find(".active").length == 0
+      @strip.find(".item").first().addClass("active")
+
+  makeActiveForId: (id)->
+    @strip.find(".item[data-image_id=#{id}]").click()
+
+  markActiveThumb: ->
+    @strip.find(".item").removeClass("active")
+    active = @activeThumb().addClass("active")
+    @goToByScroll active
+
+  setupEvents: ->
+
+    @strip.on "click", "a.item", (e) => @click(e)
+    @caro.on "slid", (e) => @markActiveThumb()
+
+
+    @markActiveThumb($(".carousel_nav"))
+
+  next: ->
+    current = @strip.find(".active")
+    next = current.next()
+    if next.length == 0
+      next = @strip.children().first()
+    current.removeClass("active")
+    next.addClass("active")
+    @caro.carousel("next")
+
+  rmActive: ()->
+    a = @strip.find(".active")
+    b = @caro.find(".active")
+
+    b.animate {opacity: 0.5}
+    a.animate {opacity: 0.0}, =>
+      rm =  =>
+        a.remove()
+        b.remove()
+      if @strip.children().length > 1
+        @next()
+        @caro.one 'slid', => 
+          rm()
+          true
+      else
+        rm()
+
+
+
+
+$(document).ready =>
+  new FilmStripCarousel($(".carousel_nav"))
+
 

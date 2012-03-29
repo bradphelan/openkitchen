@@ -1,0 +1,2 @@
+%a.item{:href=>"#", 'data-image_id'=>image.id}
+  = image_tag image.attachment.expiring_url(s3_expiry, :thumb)

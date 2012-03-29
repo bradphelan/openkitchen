@@ -29,17 +29,21 @@ class ImageCarouselWidget < ApplicationWidget
 
     @assetable.send(@resource).build
     render_buffer do |b|
-      b.replace "##{widget_id} .carousel_nav", :view => :carousel
-      b.replace "##{widget_id} .form", :view => :form
+      b.render :text => %Q%
+        $(".carousel_nav").data("widget").rmActive();
+      %
     end
   end
 
   def upload(evt)
     authorize! :edit, @assetable
-    @assetable.send(@resource).create evt[@resource.to_sym]
+    image = @assetable.send(@resource).create evt[@resource.to_sym]
     render_buffer do |b|
-      b.replace "##{widget_id} .carousel_nav", :view => :carousel
-      b.replace "##{widget_id} .form", :view => :form
+      b.prepend "##{widget_id} .strip", :view => "thumb", :locals => { :image => image }
+      b.prepend "##{widget_id} .carousel-inner", :view => "item", :locals => { :image => image }
+      b.render :text => %Q%
+        $(".carousel_nav").data("widget").fixCarousel();
+      %
     end
   end
 

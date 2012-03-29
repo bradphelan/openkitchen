@@ -1,0 +1,3 @@
+.strip
+  - @images.all.each do |image|
+    = render :view => 'thumb', :locals => { :image => image }
