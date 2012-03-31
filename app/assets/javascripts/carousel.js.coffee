@@ -1,10 +1,7 @@
 class ImageLoader
   @setup : ->
-    $(".carousel_nav img").error (e)->
-      (new ImageLoader $(@)).timeout()
-
-    $(".carousel_nav img").load (e)->
-      (new ImageLoader $(@)).success()
+    $(".carousel_nav img").map (i,e)=>
+      new ImageLoader($(e))
 
   pulse: (start=true)->
     loadCountSpan = @widget.find("span.load-count")
@@ -32,11 +29,17 @@ class ImageLoader
     loadCountSpan.text("processing ... #{loading}")
 
   constructor: (@elem)->
+    @elem.data('image-load', @)
     @widget = @elem.closest(".widget")
+    @elem.on "error.xt.image_loader", (e) => @timeout()
+    @elem.on "load.xt.image_loader", (e) => @success()
 
   success: ->
     @elem.fadeIn(500)
     @elem.attr('data-loading', false)
+    @elem.attr('image-load', null)
+    @elem.off "error.xt.image_loader"
+    @elem.off "load.xt.image_loader"
     @updateLoadingCount()
 
   timeout: ->
