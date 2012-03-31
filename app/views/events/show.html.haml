@@ -45,6 +45,10 @@
 
     = render :partial => "venues/address"
 
+    %section#venues_show_photos{'data-subnav-label'=>t(".photos")}
+      %h1=t(".photos")
+      .well
+        = render_widget :event_images
 
     .row-fluid
       .span6
@@ -52,3 +56,4 @@
 
       .span6
         = render_widget :comments
+

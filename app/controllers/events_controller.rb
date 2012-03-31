@@ -19,6 +19,8 @@ class EventsController < ApplicationController
     if params[:id]
       root << widget("comments/panel", :comments, :event => @event)
       root << widget(:event_guests, :event => @event )
+
+      root << widget(:image_carousel, :event_images, :assetable => @event, :resource => :event_images)
     else
 
       # Note the title is looked up under 

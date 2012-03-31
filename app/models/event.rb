@@ -20,6 +20,10 @@ class Event < ActiveRecord::Base
 
   belongs_to :owner, :class_name => "User", :foreign_key => :owner_id
 
+  has_many :event_images, :as => :assetable, :class_name => "ImageAsset", :dependent => :destroy
+  accepts_nested_attributes_for :event_images, :allow_destroy => true
+  attr_accessible :event_images
+
   belongs_to :venue
   validates_presence_of :venue
 
