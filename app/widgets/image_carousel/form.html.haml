@@ -1,7 +1,8 @@
-%section.form{'id' => "#{widget_id}_form", 'data-subnav-label'=>"+"}
-  = form_for @assetable.send(@resource).build, :as => @resource, :remote => true, :url => url_for_event(:upload) do |a|
-    %fieldset.fake_file_field
-      = a.file_field :attachment
-      %a.clicker.btn{:href => "#"} +
-      %span.load-count.badge.badge-warning.hide
+-if can? :upload_image_for, @assetable
+  %section.form{'id' => "#{widget_id}_form", 'data-subnav-label'=>"+"}
+    = form_for @assetable.send(@resource).build, :as => @resource, :remote => true, :url => url_for_event(:upload) do |a|
+      %fieldset.fake_file_field
+        = a.file_field :attachment
+        %a.clicker.btn{:href => "#"} +
+        %span.load-count.badge.badge-warning.hide
 

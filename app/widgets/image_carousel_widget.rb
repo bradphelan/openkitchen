@@ -36,7 +36,7 @@ class ImageCarouselWidget < ApplicationWidget
   end
 
   def upload(evt)
-    authorize! :edit, @assetable
+    authorize! :upload_image_for, @assetable
     image = @assetable.send(@resource).create evt[@resource.to_sym]
     if image.valid?
       render_buffer do |b|
