@@ -11,7 +11,12 @@ class Asset < ActiveRecord::Base
     Asset.where{terminated==true}.destroy_all
   end
 
-  AssetPath = ":rails_env/assets/:id/:style.:extension"
+  if Rails.env.development?
+    username = `whoami`.chomp
+    AssetPath = ":rails_env-#{username}/assets/:id/:style.:extension"
+  else
+    AssetPath = ":rails_env/assets/:id/:style.:extension"
+  end
 
   def self.configure_attachment options = {}
     options.merge! :path => AssetPath
