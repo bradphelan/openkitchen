@@ -6,11 +6,10 @@
 
   %section.venues.edit#top{'data-subnav-label' => t("top")}
     %h1=@user.name
-    .well
-      .row-fluid
-        .span4
-          = profile_avatar_image(@user, :medium)
-        .span4
-          = simple_format @user.about
+    .row-fluid
+      .span4
+        = profile_avatar_image(@user, :medium)
+      .span4
+        = simple_format @user.about
 
   = render :partial => 'venues', :locals => {:user => @user }

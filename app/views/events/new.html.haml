@@ -1,7 +1,6 @@
-.well
-  %h1=t ".new"
+%h1=t ".new"
 
-  .new_event.row-fluid
-    .span5
-      = semantic_form_for @event do |f|
-        = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => false }
+.new_event.row-fluid
+  .span5
+    = semantic_form_for @event do |f|
+      = render :partial => "form", :locals => { :f => f, :event => @event, :disabled => false }

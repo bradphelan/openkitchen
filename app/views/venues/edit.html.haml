@@ -12,31 +12,27 @@
 
     %h1=t(".address")
 
-    .well
-      = semantic_form_for @venue, :multipart => true do |f|
-        = f.inputs do
-          .row-fluid
-            .span5
-              = f.input :name
-              - autofill = @venue.timezone ? nil : 'autofill'
-              = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
-              = f.input :street
-              = f.input :city
-              = f.input :country, :as => :string
-              = f.input :postcode
-            .span5
-              = f.input :description
-        = f.actions
+    = semantic_form_for @venue, :multipart => true do |f|
+      = f.inputs do
+        .row-fluid
+          .span5
+            = f.input :name
+            - autofill = @venue.timezone ? nil : 'autofill'
+            = f.input :timezone, :as => :time_zone, :input_html => { :class => "timezone #{autofill}" }
+            = f.input :street
+            = f.input :city
+            = f.input :country, :as => :string
+            = f.input :postcode
+          .span5
+            = f.input :description
+      = f.actions
 
   %section#venues_show_map{'data-subnav-label'=>t(".map")}
 
     %h1=t(".map")
 
-    .well
-      = render :partial => "events/map"
+    = render :partial => "events/map"
 
   %section#venues_show_photos{'data-subnav-label'=>t(".photos")}
 
-    .well
-
-      = render :partial => "carousel"
+    = render :partial => "carousel"

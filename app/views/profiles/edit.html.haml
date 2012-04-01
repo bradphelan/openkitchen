@@ -3,12 +3,12 @@
   - content_for :subnav_header do
     %h1.autofont=t('profile')
 
-  %section.well.profile.password#profile_edit_password_edit{'data-subnav-label' => User.human_attribute_name(:password)}
+  %section.profile.password#profile_edit_password_edit{'data-subnav-label' => User.human_attribute_name(:password)}
     = link_to edit_user_registration_path, :class => "btn btn-danger" do
       %i.icon-lock.icon-white
       = t ".change_password"
 
-  %section.well.profile.edit#profile_edit_form{'data-subnav-label' => t("edit")}
+  %section.profile.edit#profile_edit_form{'data-subnav-label' => t("edit")}
 
     = semantic_form_for @user, :url => user_profile_path(@user), :html => { :multipart => true } do |f|
       .row
@@ -33,8 +33,7 @@
 
   %section#profile_edit_new_venue{'data-subnav-label' => '+', 'data-offset' => '-100'}
     %h1=t ".new_venue"
-    .well
-      = semantic_form_for current_user.venues.build do |f|
-        = f.inputs do
-          = f.input :name
-          = f.submit
+    = semantic_form_for current_user.venues.build do |f|
+      = f.inputs do
+        = f.input :name
+        = f.submit
