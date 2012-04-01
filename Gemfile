@@ -11,11 +11,12 @@ group :test, :development do
   gem 'hpricot'
   gem 'ruby_parser'
   gem 'steak'
-  gem 'capybara-webkit'
+  #gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'rspec-example_steps'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  gem 'heroku_san'
   
 end
 
