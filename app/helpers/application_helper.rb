@@ -22,7 +22,7 @@ module ApplicationHelper
       uri = user.avatar.expiring_url(s3_expiry, version)
       style = nil
     else
-      uri = "chef.jpg"
+      uri = "chef.png"
       style = "width: #{dim[0]}px; height: #{dim[1]}px"
     end
 
