@@ -1,52 +1,8 @@
 -# List all found public events
 %ul.unstyled
-  - @events.each do |event|
-    %li
-      .row-fluid
 
+  - @events.each_slice(3) do |list|
+    .row
+      - list.each do |event|
         .span4
-          .venue
-            - if event.venue
-              - if image = event.venue.venue_images.first
-                = link_to event_path(event.id) do
-                  = image_tag image.attachment.expiring_url(s3_expiry, :small)
-
-        .span8
-
-          .avatar
-            = profile_avatar_image event.owner, :thumb
-
-
-          %h2.event_name
-            - if can? :edit, event
-              = link_to event.name, edit_event_path(event.id)
-            - else
-              = link_to event.name, event_path(event.id)
-
-          %p.datetime
-            = event.format_date
-            = event.format_time
-            %a{:href=>ical_event_path(event)}
-              %small
-                %i.icon-calendar
-                iCal
-
-
-          %p.event_owner
-            = link_to event.owner.name, user_profile_path(event.owner)
-            - if event.venue
-              @
-              = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
-                'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
-                'data-title' => event.venue.name
-
-
-          %p.description
-            = event.description
-
-          - if event.public?
-            %p.seats
-              %span.badge= event.public_seats_left
-              public seats left
-
-
+          = render :view => "item", :locals => { :event => event }
