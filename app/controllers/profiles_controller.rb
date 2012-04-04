@@ -16,8 +16,17 @@ class ProfilesController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
+
     authorize! :update, @user
-    @user.update_attributes(params[:user])
+    @user.transaction do
+      @user.update_attributes(params[:user])
+#       if avatar_params = params[:user][:avatar]
+#         @user.build_assetable_asset do |aa|
+#           aa.asset = ImageAsset.new avatar_params        
+#         end
+#         @user.save!
+#       end
+    end
     respond_with @user, :location => edit_user_profile_path(@user)
     
   end

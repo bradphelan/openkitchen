@@ -92,10 +92,26 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_one :avatar, :as => :assetable, :class_name => "ImageAsset", :dependent => :destroy
-
-  accepts_nested_attributes_for :avatar, :allow_destroy => true
+  has_one :assetable_asset, :as => :assetable, :dependent => :destroy
+  has_one :avatar, :source => :asset, :through => :assetable_asset, :class_name => "ImageAsset"
   attr_accessible :avatar_attributes
+  accepts_nested_attributes_for :avatar
+
+  def build_avatar attributes={}, opts={}
+    asset = ::ImageAsset.new attributes, opts
+    build_assetable_asset :asset => asset
+    self.avatar = asset
+  end
+
+  def avatar_with_build
+    a = avatar_without_build
+    unless a
+      return build_avatar
+    end
+    a
+  end
+  alias_method_chain :avatar, :build
+  
 
 
   validates_numericality_of :cookstars, 

@@ -2,10 +2,12 @@ class Asset < ActiveRecord::Base
   belongs_to :assetable, :polymorphic => true
   delegate :url, :to => :attachment
   delegate :expiring_url, :to => :attachment
+  delegate :present?, :to => :attachment
 
   validates_attachment_presence :attachment
 
-  attr_accessible :attachment
+  has_many :assetable_assets, :dependent => :destroy
+  has_many :assetables, :through => :assetable_assets, :as => :assetable
 
   DeleteAssetQueue = LazyWorkQueue.define :delete_asset_queue, :size => 1 do |info|
     Asset.where{terminated==true}.destroy_all

@@ -19,6 +19,8 @@ class Invitation < ActiveRecord::Base
   belongs_to :user
   has_many :resource_producers, :dependent => :destroy
   
+  has_many :event_images, :as => :assetable, :class_name => "ImageAsset", :dependent => :destroy
+
   #
   # Public event support
   #

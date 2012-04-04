@@ -11,11 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327184313) do
+ActiveRecord::Schema.define(:version => 20120404090046) do
 
-  create_table "assets", :force => true do |t|
+  create_table "assetable_assets", :force => true do |t|
     t.integer  "assetable_id"
     t.string   "assetable_type"
+    t.integer  "asset_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "assetable_assets", ["assetable_id", "assetable_type", "asset_id"], :name => "assetable_assets_link", :unique => true
+
+  create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -27,9 +35,8 @@ ActiveRecord::Schema.define(:version => 20120327184313) do
     t.boolean  "terminated",              :default => false
   end
 
-  add_index "assets", ["assetable_id", "assetable_type"], :name => "by_assetable_id_and_assetable_type"
-  add_index "assets", ["id", "type"], :name => "by_id_and_type"
   add_index "assets", ["terminated"], :name => "index_assets_on_terminated"
+  add_index "assets", ["type", "id"], :name => "by_type_and_id"
 
   create_table "commentable_subscriptions", :force => true do |t|
     t.integer "commentable_id"
@@ -138,10 +145,6 @@ ActiveRecord::Schema.define(:version => 20120327184313) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "name"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.integer  "cookstars",                             :default => 1
     t.string   "timezone",                              :default => "UTC"
     t.text     "about",                                 :default => ""

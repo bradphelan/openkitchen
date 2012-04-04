@@ -18,7 +18,7 @@ module ApplicationHelper
           end
 
 
-    if user.avatar
+    if user.avatar.present?
       uri = user.avatar.expiring_url(s3_expiry, version)
       style = nil
     else
