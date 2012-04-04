@@ -7,7 +7,6 @@ gem 'rails', '~> 3.2.0'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 group :test, :development do
-  gem 'sqlite3'
   gem 'hpricot'
   gem 'ruby_parser'
   gem 'steak'
@@ -83,9 +82,10 @@ group :test, :development do
   gem "factory_girl_rails"
 end
 
-group :production do
-  gem "pg"
+group :development do
+  gem 'lunchy' # Process controll
 end
+gem "pg"
 
 gem "omniauth-facebook"
 
