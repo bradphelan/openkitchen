@@ -1,26 +1,21 @@
 = nice-bar
   color: $gray
-  //text-shadow: transparentize($grayDarker, 0.2) 0px 0px 15px
-  border-top: 10px solid darken($ok-green, 15%)
-  border-bottom: 5px solid darken($ok-green, 15%)
-  border-top: 10px solid $grayLighter
-  border-bottom: 5px solid $grayLighter
+  border-top: 8px solid $grayLighter
+  border-bottom: 4px solid $grayLighter
   margin-top: 0.5em
   margin-bottom: 0.5em
   font-size: $baseFontSize * 2
-  line-height: $baseFontSize * 2.5 
+  line-height: $baseFontSize * 2.2 
   small
     font-size: $baseFontSize * 1.5
     line-height: $baseFontSize * 1.5
 
-  padding-left: 0.5em
+  //padding-left: 0.5em
   //background-image: image-url('bar-background.png')
   //+box-shadow()
 
 =nice-bar-darker
   +nice-bar
-  border-top: 8px solid darken($ok-green, 20%)
-  border-bottom: 3px solid darken($ok-green, 20%)
   margin-bottom: 5px
   font-size: $baseFontSize * 1.2
   line-height: $baseFontSize * 1.2
