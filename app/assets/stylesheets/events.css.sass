@@ -5,26 +5,46 @@
 $ok-green: rgb(107,	215,	19)
 
 
-img
-  +box-shadow()
+.well
+  +border-radius(1px)
+  padding: 12px
 
+.events
+  .well
+    padding-top: 0px
 
 .event
 
   .venue
     img
-      border-right: solid 10px $ok-green
+      margin-top: 0.5em
+
   .avatar
     img
       @extend .hidden-tablet
       @extend .hidden-phone
-      float: right
-      border-left: solid 10px $ok-green
-      margin-left: 1em
+      float: left 
+      margin-right: 1em
 
-  h2.event_name
+  h3
     margin-top: 0px
     padding-top: 0px
+    background-color: $grayDarker
+    color: $white
+    font-weight: normal
+    a
+      color: $white
+    margin-left: -12px
+    padding-left: 12px
+    margin-right: -12px
+    padding-right: 12px
+
+  .datetime
+    margin-top: 0.5em
+    @extend small
+
+  .event_owner
+    margin-bottom: 0.5em
 
   ul
     @extend .unstyled
