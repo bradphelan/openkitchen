@@ -2,13 +2,13 @@
 #
 # Table name: resources
 #
-#  id         :integer         primary key
+#  id         :integer         not null, primary key
 #  name       :string(255)
 #  quantity   :integer
 #  units      :string(255)
 #  event_id   :integer
-#  created_at :timestamp
-#  updated_at :timestamp
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 require 'spec_helper'

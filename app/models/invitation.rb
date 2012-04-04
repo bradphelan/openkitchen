@@ -2,16 +2,15 @@
 #
 # Table name: invitations
 #
-#  id                         :integer         not null, primary key
-#  event_id                   :integer
-#  user_id                    :integer
-#  created_at                 :datetime
-#  updated_at                 :datetime
-#  token                      :string(255)
-#  status                     :string(255)     default("pending")
-#  comment_subscription_state :string(255)     default("auto")
-#  public                     :boolean         default(FALSE)
-#  public_approved            :boolean         default(FALSE)
+#  id              :integer         not null, primary key
+#  event_id        :integer
+#  user_id         :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  token           :string(255)
+#  status          :string(255)     default("pending")
+#  public          :boolean         default(FALSE)
+#  public_approved :boolean         default(FALSE)
 #
 
 class Invitation < ActiveRecord::Base

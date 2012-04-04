@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: commentable_subscriptions
+#
+#  id               :integer         not null, primary key
+#  commentable_id   :integer
+#  commentable_type :string(255)
+#  user_id          :integer
+#  subscribed       :boolean
+#
+
 require 'spec_helper'
 
 describe CommentableSubscription do

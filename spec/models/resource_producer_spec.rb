@@ -2,12 +2,12 @@
 #
 # Table name: resource_producers
 #
-#  id            :integer         primary key
+#  id            :integer         not null, primary key
 #  invitation_id :integer
 #  resource_id   :integer
 #  quantity      :integer
-#  created_at    :timestamp
-#  updated_at    :timestamp
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 
 require 'spec_helper'
