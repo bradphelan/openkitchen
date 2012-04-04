@@ -23,7 +23,7 @@ class ImageCarouselWidget < ApplicationWidget
 
   def delete_image(evt)
     @image = Asset.find(evt[:asset_id])
-    authorize! :edit, @image.assetable
+    authorize! :edit, @assetable
     @assetable.send(@resource).destroy(@image)
     load_images
 
