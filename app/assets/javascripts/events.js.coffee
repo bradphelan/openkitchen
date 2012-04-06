@@ -17,7 +17,7 @@ $(document).ready =>
 			detect()
 
 		container.masonry
-			itemSelector: ".span4"
+			itemSelector: ".span3"
 			isAnimated: true
 
 			animationOptions:
