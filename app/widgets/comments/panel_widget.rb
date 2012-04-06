@@ -86,7 +86,7 @@ class Comments::PanelWidget < ApplicationWidget
 
   def refresh
     authorize! :read, @event
-    replace "##{widget_id}", :view => :display
+    replace "##{widget_id} .list", :view => :list
   end
 
 
