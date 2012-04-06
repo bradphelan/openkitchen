@@ -50,6 +50,9 @@ class PublicEventsWidget < ApplicationWidget
       @events = @events.where{datetime > (Time.zone.now - 1.day) }
     end
 
+    # Sort by date
+    @events = @events.order("datetime ASC")
+
   end
   
   def setup_geolocate

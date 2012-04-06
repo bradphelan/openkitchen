@@ -1,44 +1,43 @@
-%li.well
-
-  %h3.event_name
-    - if can? :edit, event
-      = link_to event.name, edit_event_path(event.id)
-    - else
-      = link_to event.name, event_path(event.id)
-
-  .venue
-    - if event.venue
-      - if image = event.venue.venue_images.first
-        = link_to event_path(event.id) do
-          = image_tag image.attachment.expiring_url(s3_expiry, :small)
+.span4
+  .event
+    %p.datetime
+      = event.format_date
+      = event.format_time
+      %a{:href=>ical_event_path(event)}
+        %i.icon-calendar
 
 
+    .venue
+      - if event.venue
+        - if image = event.venue.venue_images.first
+          = link_to event_path(event.id) do
+            = image_tag image.attachment.expiring_url(s3_expiry, :small)
 
-  %p.datetime
-    = event.format_date
-    = event.format_time
-    %a{:href=>ical_event_path(event)}
-      %i.icon-calendar
+    %h3.event_name
+      - if can? :edit, event
+        = link_to event.name, edit_event_path(event.id)
+      - else
+        = link_to event.name, event_path(event.id)
 
+    %p.event_owner
+      = link_to event.owner.name, user_profile_path(event.owner)
+      - if event.venue
+        @
+        = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
+          'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
+          'data-title' => event.venue.name
 
+    .avatar
+      = profile_avatar_image event.owner, :minithumb
 
-  %h3.event_owner
-    = link_to event.owner.name, user_profile_path(event.owner)
-    - if event.venue
-      @
-      = link_to event.venue.name, venue_path(event.venue), :class => 'popover-trigger', 
-        'data-content' => event.venue.full_address.gsub(/,/,"</br>"),
-        'data-title' => event.venue.name
+    %p.description
+      = event.description
 
-  .avatar
-    = profile_avatar_image event.owner, :thumb
+    .clearfix
 
-  %p.description
-    = event.description
-
-  - if event.public?
-    %p.seats
-      %span.badge= event.public_seats_left
-      public seats left
+    - if event.public?
+      %p.seats
+        %span.badge= event.public_seats_left
+        public seats left
 
 

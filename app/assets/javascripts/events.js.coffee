@@ -3,21 +3,29 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready =>
 
-  # TODO remove this code
-  return false
+	container = $(".events .list")
+	detector = container.children().first().next()
+	curWidth = detector.outerWidth(true)
+	container.imagesLoaded =>
 
-  $('#google_map').on 'shown', =>
-    $("#map").height $("#map").parent().parent().height() - 80
-    $("#map").width $("#map").parent().parent().width() - 10
+		detect = =>
+			if detector.outerWidth(true)!=curWidth
+				curWidth = detector.outerWidth(true)
+				container.masonry()
 
-    $("#map").parent().height $("#map").parent().parent().height()
-    $("#map").parent().width $("#map").parent().parent().width()
+		$(window).resize =>
+			detect()
 
-    google.maps.event.trigger(Gmaps.map.map, 'resize')
-    Gmaps.map.adjustMapToBounds()
-    console.log 'done'
+		container.masonry
+			itemSelector: ".span4"
+			isAnimated: true
 
-  $("#event_description_editor a.show").popover
-    title: "HTML"
-    content: "Update event to refresh"
+			animationOptions:
+				duration: 400
+				complete: (e)->
+					if @ == container[0]
+						detect()
+						console.log e, @
+
+
 

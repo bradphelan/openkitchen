@@ -9,49 +9,43 @@ $ok-green: rgb(107,	215,	19)
   +border-radius(1px)
   padding: 12px
 
-.events
-  .well
-    padding-top: 0px
+.events .list 
+  .span4
+    @media (max-width: 768px)
+      width: 100%
 
-.event
+  .event
+    margin-top: 5px
+    padding: 0.2em
+    +gradientBar($grayLighter, darken($grayLighter, 5))
+    border: 2px solid $grayLighter
+    +border-radius(5px)
 
-  .venue
-    img
-      margin-top: 0.5em
+    .venue
 
-  .avatar
-    img
-      @extend .hidden-tablet
-      @extend .hidden-phone
-      float: left 
-      margin-right: 1em
+    .avatar
+      img
+        @extend .hidden-tablet
+        @extend .hidden-phone
+        float: left 
+        margin-right: 0.5em
+        margin-top: 0.2em
 
-  h3
-    margin-top: 0px
-    padding-top: 0px
-    background-color: $grayDarker
-    color: $white
-    font-weight: normal
-    a
-      color: $white
-    margin-left: -12px
-    padding-left: 12px
-    margin-right: -12px
-    padding-right: 12px
+    .event_owner
+      @extend small
+      color: $grayDarker
+      a
+        color: $grayDarker
 
-  .datetime
-    margin-top: 0.5em
-    @extend small
+    .datetime
+      @extend small
 
-  .event_owner
-    margin-bottom: 0.5em
-
-  ul
-    @extend .unstyled
-    li
-      +vertical-seperator
-      padding-top: 0.5em
-      padding-bottom: 0.5em
+    ul
+      @extend .unstyled
+      li
+        +vertical-seperator
+        padding-top: 0.5em
+        padding-bottom: 0.5em
 
 
 #invitation_status

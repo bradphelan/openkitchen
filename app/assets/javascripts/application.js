@@ -10,4 +10,5 @@
 //= require underscore
 //= require bootstrap
 //= require pusher
+//= require jquery.masonry.min
 //= require_tree .

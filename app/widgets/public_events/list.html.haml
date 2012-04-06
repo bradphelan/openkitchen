@@ -1,8 +1,4 @@
 -# List all found public events
-%ul.unstyled.events
-
-  - @events.each_slice(3) do |list|
-    .row
-      - list.each do |event|
-        .span4
-          = render :view => "item", :locals => { :event => event }
+.row.list
+  - @events.each do |event|
+    = render :view => "item", :locals => { :event => event }
