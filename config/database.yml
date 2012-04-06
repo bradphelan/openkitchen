@@ -9,6 +9,7 @@ development:
   database: openkitchen_development
   username: rails
   host: localhost
+  pool: 10
   password:
 
 
