@@ -3,7 +3,7 @@ class PublicEventsWidget < ApplicationWidget
   responds_to_event :refresh
   responds_to_event :refresh_html5_geolocation
 
-  has_widgets do
+  has_widgets do |root|
     @require_html5_geolocate = true
     @public = options[:public]
     @geolocate = options[:geolocate]
@@ -40,6 +40,7 @@ class PublicEventsWidget < ApplicationWidget
 
       session[:city]=@city
       session[:radius]=@radius
+
     end
 
     @events = self.instance_exec @events, &options[:filter] if options[:filter]
@@ -53,6 +54,9 @@ class PublicEventsWidget < ApplicationWidget
     # Sort by date
     @events = @events.order("datetime ASC")
 
+    @events.each do |event|
+      root << widget("comments/panel", "events_#{event.id}_comments" , :event => event)
+    end
   end
   
   def setup_geolocate

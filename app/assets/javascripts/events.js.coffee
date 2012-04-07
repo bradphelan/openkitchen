@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready =>
 
-	container = $(".events .list")
+	container = $(".events > .list")
 	detector = container.children().first().next()
 	curWidth = detector.outerWidth(true)
 	container.imagesLoaded =>

@@ -98,8 +98,8 @@ class Comments::PanelWidget < ApplicationWidget
     render
   end
 
-  def list(comments)
-    render locals: { comments: comments}
+  def list
+    render locals: {}
   end
 
   private

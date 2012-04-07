@@ -33,11 +33,13 @@
     %p.description
       = event.description
 
-    .clearfix
 
     - if event.public?
       %p.seats
         %span.badge= event.public_seats_left
         public seats left
 
+    .comments
+      = render_widget "events_#{event.id}_comments", :list
 
+    .clearfix

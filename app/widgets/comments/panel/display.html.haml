@@ -6,7 +6,7 @@
     -# Pusher hook
     .pusher{"data-pusher-key"=> Pusher.key, "data-pusher-channel"=>"event.#{@event.id}.comments", "data-pusher-event"=>"new"}
 
-    = render({:state => :list}, @comments)
+    = render({:state => :list})
 
 
     - if can? :comment_on, @event

@@ -5,9 +5,6 @@
 $ok-green: rgb(107,	215,	19)
 
 
-.well
-  +border-radius(1px)
-  padding: 12px
 
 .events .list 
   .span3
@@ -15,12 +12,13 @@ $ok-green: rgb(107,	215,	19)
       width: 100%
 
   .event
-    margin-top: 5px
+    margin-top: 15px
     padding: 0.2em
-    +gradientBar($grayLighter, darken($grayLighter, 5))
-    border: 2px solid $grayLighter
-    +border-radius(5px)
+    +gradientBar($white, darken($white, 0.2))
+    +box-shadow()
 
+    .event_name
+      font-weight: normal
     .venue
 
     .avatar
@@ -36,6 +34,10 @@ $ok-green: rgb(107,	215,	19)
       color: $grayDarker
       a
         color: $grayDarker
+
+    .description
+      font-size: 0.75em
+      color: $gray
 
     .datetime
       @extend small
@@ -142,36 +144,38 @@ $ok-green: rgb(107,	215,	19)
         &.remove
           @extend .icon-fire
 
-  .comments
-    textarea
-      width: 100%
-      height: 1em
+.comments
+  textarea
+    width: 100%
+    height: 1em
 
-    ul
-      @extend .unstyled
-      li.comment
-        padding-top: 5px
-        padding-bottom: 5px
-        +vertical-seperator
-        border-left: none
-        border-right: none
+  ul
+    @extend .unstyled
+    li.comment
+      padding-top: 5px
+      padding-bottom: 5px
+      +vertical-seperator
+      border-left: none
+      border-right: none
 
-        .watch
-          text-align: right
-          margin-left: 1em
-          float: right
-        .destroy
-          text-align: right
-          margin-left: 1em
-          float: right
-        .author
-          font-size: $baseFontSize * 0.8
-          color: $blue
-          float: left
-          margin-right: 1em
-        .avatar
-          float: left
-          margin-right: 0.5em
+      .body p
+        font-size: $baseFontSize * 0.8 !important
+      .watch
+        text-align: right
+        margin-left: 1em
+        float: right
+      .destroy
+        text-align: right
+        margin-left: 1em
+        float: right
+      .author
+        font-size: $baseFontSize * 0.8
+        color: $blue
+        float: left
+        margin-right: 0.5em
+      .avatar
+        float: left
+        margin-right: 0.5em
 
-    a.subscribe
-      margin-top: -7px
+  a.subscribe
+    margin-top: -7px
