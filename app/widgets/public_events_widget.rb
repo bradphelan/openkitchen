@@ -55,7 +55,10 @@ class PublicEventsWidget < ApplicationWidget
     @events = @events.order("datetime ASC")
 
     @events.each do |event|
-      root << widget("comments/panel", "events_#{event.id}_comments" , :event => event)
+      root << widget("comments/panel", 
+                     "events_#{event.id}_comments" , 
+                     :event => event, 
+                     :limit => 10) 
     end
   end
   
