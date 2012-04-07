@@ -30,17 +30,14 @@ $ok-green: rgb(107,	215,	19)
         margin-top: 0.2em
 
     .event_owner
-      @extend small
       color: $grayDarker
       a
         color: $grayDarker
 
     .description
-      font-size: 0.75em
       color: $gray
 
     .datetime
-      @extend small
 
     ul
       @extend .unstyled
@@ -156,9 +153,6 @@ $ok-green: rgb(107,	215,	19)
       padding: 0.5em
       +box-shadow()
 
-      .body p, .author, .watch, .date
-        font-size: $baseFontSize * 0.6 !important
-        line-height: $baseFontSize * 0.7 !important
       .watch
         text-align: right
         margin-left: 1em
