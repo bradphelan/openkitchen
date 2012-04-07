@@ -39,7 +39,8 @@
         %span.badge= event.public_seats_left
         public seats left
 
-    .comments
-      = render_widget "events_#{event.id}_comments", :list
 
     .clearfix
+
+  .comments
+    = render_widget "events_#{event.id}_comments", :list

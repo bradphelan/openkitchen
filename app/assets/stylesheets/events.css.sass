@@ -152,14 +152,13 @@ $ok-green: rgb(107,	215,	19)
   ul
     @extend .unstyled
     li.comment
-      padding-top: 5px
-      padding-bottom: 5px
-      +vertical-seperator
-      border-left: none
-      border-right: none
+      +gradientBar($grayLighter, darken($grayLighter, 5))
+      padding: 0.5em
+      +box-shadow()
 
-      .body p
-        font-size: $baseFontSize * 0.8 !important
+      .body p, .author, .watch, .date
+        font-size: $baseFontSize * 0.6 !important
+        line-height: $baseFontSize * 0.7 !important
       .watch
         text-align: right
         margin-left: 1em
@@ -169,7 +168,6 @@ $ok-green: rgb(107,	215,	19)
         margin-left: 1em
         float: right
       .author
-        font-size: $baseFontSize * 0.8
         color: $blue
         float: left
         margin-right: 0.5em
